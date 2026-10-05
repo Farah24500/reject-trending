@@ -84,7 +84,9 @@ button{
   font-weight:bold;
 }
 
-button:hover{opacity:.88}
+button:hover{
+  opacity:.88;
+}
 
 .btn-pink{background:#ff4f9a;color:white}
 .btn-purple{background:#8b5cf6;color:white}
@@ -301,6 +303,7 @@ tr:hover{
 }
 
 @media(max-width:600px){
+
   .scan-row{
     grid-template-columns:1fr;
   }
@@ -312,6 +315,7 @@ tr:hover{
   header h1{
     font-size:22px;
   }
+
 }
 </style>
 </head>
@@ -458,12 +462,12 @@ ADD SN
 
 <div>
 
-<label>Operator</label>
+<label>Badge ID</label>
 
 <input
 id="operator"
 type="text"
-placeholder="Operator ID">
+placeholder="Enter Badge ID">
 
 </div>
 
@@ -507,7 +511,7 @@ Import previous reject records directly into this tracker.
 Required columns:
 <br>
 <b>
-Component SN | Component PN | Defect | Defect Class | Operator | Date Time
+Component SN | Component PN | Defect | Defect Class | Badge ID / Operator | Date Time
 </b>
 </p>
 
@@ -718,7 +722,7 @@ BACKUP JSON
 <th>Component PN</th>
 <th>Defect</th>
 <th>Defect Class</th>
-<th>Operator</th>
+<th>Badge ID</th>
 <th>Date Time</th>
 <th class="admin-only">Admin Action</th>
 
@@ -836,6 +840,7 @@ let rows = [];
 let scannedSNs = [];
 let filteredRows = [];
 let trendChart = null;
+let currentAdmin = false;
 
 
 /* =====================================================
@@ -882,15 +887,21 @@ async function loadRows(){
   const { data,error } =
     await supabaseClient
       .from("rejects")
-      .select("*")
-      .order("date_time",{ascending:false});
+      .select(
+        "id,component_sn,component_pn,defect,defect_class,operator_id,date_time"
+      )
+      .order(
+        "date_time",
+        {ascending:false}
+      );
 
   if(error){
 
     console.error(error);
 
     showMessage(
-      "Unable to load database: " + error.message,
+      "Unable to load database: " +
+      error.message,
       "red"
     );
 
@@ -1108,7 +1119,7 @@ async function saveReject(){
   if(!operator){
 
     showMessage(
-      "Please enter Operator.",
+      "Please enter Badge ID.",
       "red"
     );
 
@@ -1119,6 +1130,11 @@ async function saveReject(){
   const now =
     new Date().toISOString();
 
+
+  /*
+    IMPORTANT:
+    Database column = operator_id
+  */
 
   const records =
     scannedSNs.map(sn=>({
@@ -1131,7 +1147,7 @@ async function saveReject(){
 
       defect_class:defectClass,
 
-      operator:operator,
+      operator_id:operator,
 
       date_time:now
 
@@ -1158,7 +1174,8 @@ async function saveReject(){
     }else{
 
       showMessage(
-        "Save failed: " + error.message,
+        "Save failed: " +
+        error.message,
         "red"
       );
 
@@ -1417,20 +1434,33 @@ function renderTable(){
 
     tr.innerHTML=`
 
-      <td>${escapeHTML(row.component_sn)}</td>
+      <td>
+        ${escapeHTML(row.component_sn)}
+      </td>
 
-      <td>${escapeHTML(row.component_pn)}</td>
+      <td>
+        ${escapeHTML(row.component_pn)}
+      </td>
 
-      <td>${escapeHTML(row.defect)}</td>
+      <td>
+        ${escapeHTML(row.defect)}
+      </td>
 
-      <td>${escapeHTML(row.defect_class)}</td>
+      <td>
+        ${escapeHTML(row.defect_class)}
+      </td>
 
-      <td>${escapeHTML(row.operator)}</td>
+      <td>
+        ${escapeHTML(row.operator_id)}
+      </td>
 
-      <td>${formatDateTime(row.date_time)}</td>
+      <td>
+        ${formatDateTime(row.date_time)}
+      </td>
 
-      <td class="admin-only"
-          style="${isAdmin() ? "" : "display:none"}">
+      <td
+        class="admin-only"
+        style="${isAdmin() ? "" : "display:none"}">
         ${actions}
       </td>
 
@@ -1460,7 +1490,9 @@ async function editRow(id){
 
   const row =
     rows.find(
-      x => String(x.id) === String(id)
+      x =>
+      String(x.id) ===
+      String(id)
     );
 
 
@@ -1510,8 +1542,8 @@ async function editRow(id){
 
   const operator =
     prompt(
-      "Operator:",
-      row.operator || ""
+      "Badge ID:",
+      row.operator_id || ""
     );
 
   if(operator===null)
@@ -1523,15 +1555,20 @@ async function editRow(id){
       .from("rejects")
       .update({
 
-        component_sn:sn.trim(),
+        component_sn:
+          sn.trim(),
 
-        component_pn:pn.trim(),
+        component_pn:
+          pn.trim(),
 
-        defect:defect.trim(),
+        defect:
+          defect.trim(),
 
-        defect_class:defectClass.trim(),
+        defect_class:
+          defectClass.trim(),
 
-        operator:operator.trim()
+        operator_id:
+          operator.trim()
 
       })
       .eq("id",id);
@@ -1560,7 +1597,9 @@ async function editRow(id){
 
   await loadRows();
 
-  alert("Record updated successfully.");
+  alert(
+    "Record updated successfully."
+  );
 
 }
 
@@ -1581,7 +1620,9 @@ async function deleteRow(id){
 
   const row =
     rows.find(
-      x => String(x.id) === String(id)
+      x =>
+      String(x.id) ===
+      String(id)
     );
 
 
@@ -1676,16 +1717,20 @@ async function clearAll(){
 
 
 /* =====================================================
-   IMPORT EXCEL
+   IMPORT EXCEL / CSV
 ===================================================== */
 
 async function importExcel(){
 
   const file =
-    document.getElementById("excelFile").files[0];
+    document
+      .getElementById("excelFile")
+      .files[0];
 
   const msg =
-    document.getElementById("importMsg");
+    document.getElementById(
+      "importMsg"
+    );
 
 
   if(!file){
@@ -1699,6 +1744,12 @@ async function importExcel(){
   }
 
 
+  msg.style.color="#555";
+
+  msg.textContent =
+    "Importing data...";
+
+
   try{
 
     const buffer =
@@ -1708,8 +1759,23 @@ async function importExcel(){
     const workbook =
       XLSX.read(
         buffer,
-        {type:"array"}
+        {
+          type:"array",
+          cellDates:true
+        }
       );
+
+
+    if(
+      !workbook.SheetNames ||
+      !workbook.SheetNames.length
+    ){
+
+      throw new Error(
+        "No worksheet found."
+      );
+
+    }
 
 
     const sheet =
@@ -1721,7 +1787,10 @@ async function importExcel(){
     const data =
       XLSX.utils.sheet_to_json(
         sheet,
-        {defval:""}
+        {
+          defval:"",
+          raw:true
+        }
       );
 
 
@@ -1736,13 +1805,40 @@ async function importExcel(){
 
     const records=[];
 
+    const duplicateSNs=[];
+
+    const fileSNs=new Set();
+
 
     data.forEach(row=>{
 
+      /*
+        Accept these column names:
+
+        Component SN
+        SN
+
+        Component PN
+        PN
+
+        Defect
+
+        Defect Class
+
+        Badge ID
+        Operator
+        Operator ID
+
+        Date Time
+      */
+
+
       const sn =
         String(
-          row["Component SN"] ||
-          row["SN"] ||
+          row["Component SN"] ??
+          row["component_sn"] ??
+          row["SN"] ??
+          row["sn"] ??
           ""
         ).trim();
 
@@ -1751,38 +1847,82 @@ async function importExcel(){
         return;
 
 
+      const snKey =
+        sn.toLowerCase();
+
+
+      /*
+        Prevent duplicates inside
+        the Excel file itself.
+      */
+
+      if(fileSNs.has(snKey)){
+
+        duplicateSNs.push(sn);
+
+        return;
+
+      }
+
+
+      fileSNs.add(snKey);
+
+
+      /*
+        IMPORTANT:
+        Database column is operator_id.
+      */
+
+      const badgeID =
+        String(
+          row["Badge ID"] ??
+          row["badge_id"] ??
+          row["Operator ID"] ??
+          row["operator_id"] ??
+          row["Operator"] ??
+          row["operator"] ??
+          ""
+        ).trim();
+
+
       records.push({
 
-        component_sn:sn,
+        component_sn:
+          sn,
 
         component_pn:
           String(
-            row["Component PN"] ||
-            row["PN"] ||
+            row["Component PN"] ??
+            row["component_pn"] ??
+            row["PN"] ??
+            row["pn"] ??
             ""
           ).trim(),
 
         defect:
           String(
-            row["Defect"] ||
+            row["Defect"] ??
+            row["defect"] ??
             ""
           ).trim(),
 
         defect_class:
           String(
-            row["Defect Class"] ||
+            row["Defect Class"] ??
+            row["defect_class"] ??
             ""
           ).trim(),
 
-        operator:
-          String(
-            row["Operator"] ||
-            ""
-          ).trim(),
+        operator_id:
+          badgeID,
 
         date_time:
           parseImportDate(
-            row["Date Time"]
+            row["Date Time"] ??
+            row["date_time"] ??
+            row["Date"] ??
+            row["date"] ??
+            ""
           )
 
       });
@@ -1799,23 +1939,105 @@ async function importExcel(){
     }
 
 
+    /*
+      Check duplicates against
+      currently loaded database data.
+    */
+
+    const existingSNs =
+      new Set(
+        rows.map(row =>
+          String(
+            row.component_sn || ""
+          )
+          .trim()
+          .toLowerCase()
+        )
+      );
+
+
+    const newRecords =
+      records.filter(record => {
+
+        const key =
+          String(
+            record.component_sn
+          )
+          .trim()
+          .toLowerCase();
+
+        return !existingSNs.has(key);
+
+      });
+
+
+    const existingCount =
+      records.length -
+      newRecords.length;
+
+
+    if(!newRecords.length){
+
+      throw new Error(
+        "All SN in this file already exist in the database."
+      );
+
+    }
+
+
+    /*
+      Insert using operator_id.
+    */
+
     const {error} =
       await supabaseClient
         .from("rejects")
-        .insert(records);
+        .insert(newRecords);
 
 
     if(error){
 
+      console.error(error);
+
+
       if(error.code==="23505"){
 
         throw new Error(
-          "Import stopped because duplicate Component SN exists in the database."
+          "Import stopped because one or more Component SN already exist in the database."
         );
 
       }
 
-      throw error;
+
+      throw new Error(
+        error.message ||
+        "Database insert failed."
+      );
+
+    }
+
+
+    let successMessage =
+      newRecords.length +
+      " records imported successfully.";
+
+
+    if(existingCount > 0){
+
+      successMessage +=
+        " " +
+        existingCount +
+        " duplicate SN skipped.";
+
+    }
+
+
+    if(duplicateSNs.length > 0){
+
+      successMessage +=
+        " " +
+        duplicateSNs.length +
+        " duplicate SN inside the file skipped.";
 
     }
 
@@ -1823,11 +2045,15 @@ async function importExcel(){
     msg.style.color="green";
 
     msg.textContent =
-      records.length +
-      " records imported successfully.";
+      successMessage;
 
 
-    document.getElementById("excelFile").value="";
+    document
+      .getElementById(
+        "excelFile"
+      )
+      .value="";
+
 
     await loadRows();
 
@@ -1840,7 +2066,10 @@ async function importExcel(){
 
     msg.textContent =
       "Import failed: " +
-      error.message;
+      (
+        error.message ||
+        "Unknown error"
+      );
 
   }
 
@@ -1860,8 +2089,11 @@ function renderChart(){
 
     const key =
       formatDateKey(
-        new Date(row.date_time)
+        new Date(
+          row.date_time
+        )
       );
+
 
     counts[key] =
       (counts[key] || 0)+1;
@@ -1870,18 +2102,22 @@ function renderChart(){
 
 
   const labels =
-    Object.keys(counts).sort();
+    Object.keys(counts)
+      .sort();
 
 
   const values =
     labels.map(
-      x=>counts[x]
+      x =>
+      counts[x]
     );
 
 
   const ctx =
     document
-      .getElementById("trendChart")
+      .getElementById(
+        "trendChart"
+      )
       .getContext("2d");
 
 
@@ -1947,7 +2183,9 @@ function renderDailyTopDefect(){
 
     const date =
       formatDateKey(
-        new Date(row.date_time)
+        new Date(
+          row.date_time
+        )
       );
 
 
@@ -1956,17 +2194,23 @@ function renderDailyTopDefect(){
 
 
     const defect =
-      row.defect || "Unknown";
+      row.defect ||
+      "Unknown";
 
 
     dates[date][defect] =
-      (dates[date][defect] || 0)+1;
+      (
+        dates[date][defect] ||
+        0
+      ) + 1;
 
   });
 
 
   const dateKeys =
-    Object.keys(dates).sort().reverse();
+    Object.keys(dates)
+      .sort()
+      .reverse();
 
 
   if(!dateKeys.length){
@@ -1975,6 +2219,7 @@ function renderDailyTopDefect(){
       "<p>No data available.</p>";
 
     return;
+
   }
 
 
@@ -1984,8 +2229,12 @@ function renderDailyTopDefect(){
   dateKeys.forEach(date=>{
 
     const sorted =
-      Object.entries(dates[date])
-        .sort((a,b)=>b[1]-a[1]);
+      Object.entries(
+        dates[date]
+      )
+      .sort(
+        (a,b)=>b[1]-a[1]
+      );
 
 
     const top =
@@ -2001,12 +2250,14 @@ function renderDailyTopDefect(){
         background:#fff5f9;
         border-radius:12px">
 
-        <b>${date}</b>
+        <b>${escapeHTML(date)}</b>
 
         <br>
 
         Top Defect:
-        <strong>${escapeHTML(top[0])}</strong>
+        <strong>
+          ${escapeHTML(top[0])}
+        </strong>
 
         — ${top[1]} reject(s)
 
@@ -2017,20 +2268,23 @@ function renderDailyTopDefect(){
   });
 
 
-  container.innerHTML=html;
+  container.innerHTML =
+    html;
 
 }
 
 
 /* =====================================================
-   EXPORT CSV
+   EXPORT CSV / EXCEL
 ===================================================== */
 
 function exportCSV(){
 
   if(!filteredRows.length){
 
-    alert("No data to export.");
+    alert(
+      "No data to export."
+    );
 
     return;
   }
@@ -2051,11 +2305,13 @@ function exportCSV(){
       "Defect Class":
         row.defect_class,
 
-      "Operator":
-        row.operator,
+      "Badge ID":
+        row.operator_id,
 
       "Date Time":
-        formatDateTime(row.date_time)
+        formatDateTime(
+          row.date_time
+        )
 
     }));
 
@@ -2093,26 +2349,45 @@ function backupJSON(){
 
   const blob =
     new Blob(
-      [JSON.stringify(rows,null,2)],
-      {type:"application/json"}
+      [
+        JSON.stringify(
+          rows,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+        "application/json"
+      }
     );
 
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
 
   const a =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
+
 
   a.href=url;
+
 
   a.download =
     "Reject_Trending_Backup.json";
 
+
   a.click();
 
-  URL.revokeObjectURL(url);
+
+  URL.revokeObjectURL(
+    url
+  );
 
 }
 
@@ -2126,6 +2401,7 @@ function openAdminLogin(){
   document.getElementById(
     "adminModal"
   ).style.display="flex";
+
 
   document.getElementById(
     "adminError"
@@ -2172,17 +2448,20 @@ async function adminLogin(){
       "Please enter email and password.";
 
     return;
+
   }
 
 
   const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
+    await supabaseClient
+      .auth
+      .signInWithPassword({
 
-      email:email,
+        email:email,
 
-      password:password
+        password:password
 
-    });
+      });
 
 
   if(error){
@@ -2191,6 +2470,7 @@ async function adminLogin(){
       error.message;
 
     return;
+
   }
 
 
@@ -2199,18 +2479,22 @@ async function adminLogin(){
     data.user.id !== ADMIN_UID
   ){
 
-    await supabaseClient.auth.signOut();
+    await supabaseClient
+      .auth
+      .signOut();
+
 
     errorBox.textContent =
       "This account is not authorised as admin.";
 
     return;
+
   }
 
 
   closeAdminLogin();
 
-  updateAdminUI();
+  await updateAdminUI();
 
   renderTable();
 
@@ -2223,9 +2507,12 @@ async function adminLogin(){
 
 async function adminLogout(){
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient
+    .auth
+    .signOut();
 
-  updateAdminUI();
+
+  await updateAdminUI();
 
   renderTable();
 
@@ -2239,32 +2526,21 @@ async function adminLogout(){
 async function checkAdmin(){
 
   const {data} =
-    await supabaseClient.auth.getUser();
+    await supabaseClient
+      .auth
+      .getUser();
 
 
-  updateAdminUI(
+  await updateAdminUI(
     data.user || null
   );
 
 }
 
 
-async function isAdminAsync(){
-
-  const {data} =
-    await supabaseClient.auth.getUser();
-
-
-  return !!(
-    data.user &&
-    data.user.id === ADMIN_UID
-  );
-
-}
-
-
-let currentAdmin=false;
-
+/* =====================================================
+   ADMIN STATUS
+===================================================== */
 
 function isAdmin(){
 
@@ -2278,10 +2554,14 @@ async function updateAdminUI(user=null){
   if(!user){
 
     const result =
-      await supabaseClient.auth.getUser();
+      await supabaseClient
+        .auth
+        .getUser();
+
 
     user =
-      result.data.user || null;
+      result.data.user ||
+      null;
 
   }
 
@@ -2322,35 +2602,50 @@ async function updateAdminUI(user=null){
     status.textContent =
       "ADMIN MODE";
 
+
     status.style.background =
       "#dcfce7";
+
 
     status.style.color =
       "#166534";
 
-    loginBtn.style.display="none";
 
-    logoutBtn.style.display="inline-block";
+    loginBtn.style.display =
+      "none";
 
-    management.style.display="block";
 
+    logoutBtn.style.display =
+      "inline-block";
+
+
+    management.style.display =
+      "block";
 
   }else{
 
     status.textContent =
       "VIEWER MODE";
 
+
     status.style.background =
       "#f3e8ff";
+
 
     status.style.color =
       "#6b21a8";
 
-    loginBtn.style.display="inline-block";
 
-    logoutBtn.style.display="none";
+    loginBtn.style.display =
+      "inline-block";
 
-    management.style.display="none";
+
+    logoutBtn.style.display =
+      "none";
+
+
+    management.style.display =
+      "none";
 
   }
 
@@ -2364,42 +2659,75 @@ async function updateAdminUI(user=null){
    SUPABASE AUTH STATE
 ===================================================== */
 
-supabaseClient.auth.onAuthStateChange(
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    async function(){
+
+      setTimeout(
+        async function(){
+
+          await updateAdminUI();
+
+        },
+        0
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   AUTO REFRESH
+===================================================== */
+
+setInterval(
   async function(){
 
-    setTimeout(
-      async function(){
+    await loadRows();
 
-        await updateAdminUI();
-
-      },
-      0
-    );
-
-  }
+  },
+  30000
 );
 
 
 /* =====================================================
-   HELPERS
+   DATE HELPERS
 ===================================================== */
 
 function formatDateKey(date){
 
-  if(!date || isNaN(date.getTime()))
+  if(
+    !date ||
+    isNaN(
+      date.getTime()
+    )
+  )
     return "Unknown";
 
 
   return (
+
     date.getFullYear() +
+
     "-" +
+
     String(
       date.getMonth()+1
-    ).padStart(2,"0") +
+    ).padStart(
+      2,
+      "0"
+    ) +
+
     "-" +
+
     String(
       date.getDate()
-    ).padStart(2,"0")
+    ).padStart(
+      2,
+      "0"
+    )
+
   );
 
 }
@@ -2411,7 +2739,11 @@ function formatDateTime(value){
     new Date(value);
 
 
-  if(isNaN(date.getTime()))
+  if(
+    isNaN(
+      date.getTime()
+    )
+  )
     return value || "";
 
 
@@ -2420,63 +2752,150 @@ function formatDateTime(value){
 }
 
 
+/* =====================================================
+   IMPORT DATE
+===================================================== */
+
 function parseImportDate(value){
 
   if(!value)
     return new Date().toISOString();
 
 
+  /*
+    Excel date serial number
+  */
+
   if(typeof value === "number"){
 
     const excelEpoch =
       new Date(
-        Date.UTC(1899,11,30)
+        Date.UTC(
+          1899,
+          11,
+          30
+        )
       );
+
 
     const date =
       new Date(
         excelEpoch.getTime() +
-        value * 86400000
+        value *
+        86400000
       );
+
 
     return date.toISOString();
 
   }
 
 
-  const date =
-    new Date(value);
+  /*
+    XLSX cellDates:true
+    may return a Date object
+  */
+
+  if(value instanceof Date){
+
+    if(
+      !isNaN(
+        value.getTime()
+      )
+    ){
+
+      return value.toISOString();
+
+    }
+
+  }
 
 
-  if(isNaN(date.getTime()))
+  const text =
+    String(value).trim();
+
+
+  if(!text)
     return new Date().toISOString();
 
 
-  return date.toISOString();
+  /*
+    Try normal date parsing
+  */
+
+  const date =
+    new Date(text);
+
+
+  if(
+    !isNaN(
+      date.getTime()
+    )
+  ){
+
+    return date.toISOString();
+
+  }
+
+
+  return new Date().toISOString();
 
 }
 
 
+/* =====================================================
+   HTML HELPERS
+===================================================== */
+
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
 function escapeAttr(value){
 
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  );
 
 }
 
+
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(
   text,
@@ -2484,18 +2903,21 @@ function showMessage(
 ){
 
   const msg =
-    document.getElementById("msg");
+    document.getElementById(
+      "msg"
+    );
 
 
-  msg.textContent=text;
+  msg.textContent =
+    text;
+
 
   msg.style.color =
-    color==="green"
+    color === "green"
     ? "#16a34a"
     : "#dc2626";
 
 }
-
 
 </script>
 
