@@ -884,38 +884,66 @@ async function(){
 
 async function loadRows(){
 
-  const { data,error } =
-    await supabaseClient
-      .from("rejects")
-      .select(
-        "id,component_sn,component_pn,defect,defect_class,operator_id,date_time"
-      )
-      .order(
-        "date_time",
-        {ascending:false}
+  console.log("Loading reject data...");
+
+  let allData = [];
+  let from = 0;
+  const batchSize = 1000;
+
+  while(true){
+
+    const { data, error } =
+      await supabaseClient
+        .from("rejects")
+        .select(
+          "id,component_sn,component_pn,defect,defect_class,operator_id,date_time"
+        )
+        .order(
+          "date_time",
+          { ascending:false }
+        )
+        .range(
+          from,
+          from + batchSize - 1
+        );
+
+    if(error){
+
+      console.error("SUPABASE LOAD ERROR:", error);
+
+      rows = [];
+
+      showMessage(
+        "Database error: " + error.message,
+        "red"
       );
 
-  if(error){
+      document.getElementById("total").textContent = "ERROR";
 
-    console.error(error);
+      return;
+    }
 
-    showMessage(
-      "Unable to load database: " +
-      error.message,
-      "red"
-    );
+    if(!data || data.length === 0){
+      break;
+    }
 
-    rows=[];
+    allData = allData.concat(data);
 
-    render();
+    if(data.length < batchSize){
+      break;
+    }
 
-    return;
+    from += batchSize;
   }
 
-  rows = data || [];
+  rows = allData;
+
+  console.log(
+    "Reject records loaded:",
+    rows.length
+  );
 
   render();
-
 }
 
 
