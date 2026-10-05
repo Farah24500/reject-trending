@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reject Trending</title>
+
+<!-- Excel reader -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- Chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#fff0f6,#f7f7ff);
+  color:#333;
+}
+
+header{
+  background:linear-gradient(135deg,#ff4f9a,#8b5cf6);
+  color:white;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:1px;
+}
+
+.container{
+  width:95%;
+  max-width:1400px;
+  margin:25px auto;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.card h2{
+  margin-top:0;
+  color:#8b3d70;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+label{
+  font-weight:bold;
+  display:block;
+  margin-bottom:6px;
+}
+
+input,
+select,
+button{
+  width:100%;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
+
+input:focus,
+select:focus{
+  outline:none;
+  border-color:#ff4f9a;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn-pink{
+  background:#ff4f9a;
+  color:white;
+}
+
+.btn-purple{
+  background:#8b5cf6;
+  color:white;
+}
+
+.btn-green{
+  background:#22c55e;
+  color:white;
+}
+
+.btn-blue{
+  background:#3b82f6;
+  color:white;
+}
+
+.btn-red{
+  background:#ef4444;
+  color:white;
+}
+
+.btn-gray{
+  background:#6b7280;
+  color:white;
+}
+
+button:hover{
+  opacity:.88;
+}
+
+.scan-row{
+  display:grid;
+  grid-template-columns:1fr 130px;
+  gap:10px;
+}
+
+.scan-list{
+  margin-top:15px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.sn-tag{
+  background:#ffe0ef;
+  color:#9d174d;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:13px;
+}
+
+.sn-tag button{
+  width:auto;
+  padding:0 5px;
+  background:none;
+  color:#dc2626;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.actions button{
+  width:auto;
+  min-width:150px;
+}
+
+.msg{
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.stat{
+  padding:20px;
+  border-radius:15px;
+  background:#fafafa;
+  border:1px solid #eee;
+}
+
+.stat-title{
+  font-size:13px;
+  color:#777;
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:5px;
+  color:#8b3d70;
+}
+
+.summary{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.badge{
+  padding:9px 13px;
+  border-radius:20px;
+  background:#f3e8ff;
+  color:#6b21a8;
+  font-size:13px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:800px;
+}
+
+th,
+td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  font-size:13px;
+}
+
+th{
+  background:#faf0f6;
+  color:#7a315c;
+}
+
+tr:hover{
+  background:#fff8fb;
+}
+
+.import-box{
+  border:2px dashed #ff8cbd;
+  border-radius:15px;
+  padding:20px;
+  background:#fff8fb;
+  text-align:center;
+}
+
+.import-box p{
+  margin-top:0;
+  color:#666;
+}
+
+.file-input{
+  margin:10px auto;
+  max-width:500px;
+}
+
+.chart-container{
+  position:relative;
+  width:100%;
+  height:350px;
+}
+
+.top-defect-box{
+  margin-top:20px;
+  padding:15px;
+  background:#fff5f9;
+  border-radius:12px;
+}
+
+@media(max-width:600px){
+  .scan-row{
+    grid-template-columns:1fr;
+  }
+
+  .actions button{
+    width:100%;
+  }
+
+  header h1{
+    font-size:22px;
+  }
+}
+
+/* ================= ADMIN ACCESS ================= */
+.admin-lock{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+.admin-only{display:none;}
+.admin-badge{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#f3e8ff;
+  color:#6b21a8;
+  font-size:13px;
+  font-weight:bold;
+}
+#adminModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+#adminModal .modal-box{
+  background:white;
+  width:100%;
+  max-width:400px;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+#adminModal h3{margin-top:0;color:#8b3d70;}
+.admin-error{color:#dc2626;font-weight:bold;margin-top:10px;min-height:20px;}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>REJECT TRENDING</h1>
+  <p>Reject Monitoring & Daily Analytics</p>
+  <div class="admin-lock">
+    <span id="adminStatus" class="admin-badge">VIEWER MODE</span>
+    <button id="adminButton" class="btn-gray" style="width:auto;" onclick="openAdminLogin()">ADMIN LOGIN</button>
+    <button id="adminLogoutButton" class="btn-red admin-only" style="width:auto;" onclick="adminLogout()">LOGOUT ADMIN</button>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ================= SCAN ================= -->
+
+<div class="card">
+
+<h2>🔎 Scan Reject</h2>
+
+<div class="scan-row">
+
+<div>
+<label>Component SN</label>
+<input
+  id="sn"
+  type="text"
+  placeholder="Scan / enter Component SN"
+  autocomplete="off">
+</div>
+
+<div style="align-self:end;">
+<button class="btn-pink" onclick="addSN()">ADD SN</button>
+</div>
+
+</div>
+
+<div style="margin-top:10px;">
+  <b>Current Batch:</b>
+  <span id="scanCount">0</span> SN
+</div>
+
+<div id="scanList" class="scan-list"></div>
+
+<br>
+
+<div class="grid">
+
+<div>
+<label>Component PN</label>
+<select id="pn">
+<option value="">-- Select PN --</option>
+<option value="1670826">1670826</option>
+<option value="1649167">1649167</option>
+</select>
+</div>
+
+<div>
+<label>Defect</label>
+<select id="defect">
+<option value="">-- Select Defect --</option>
+<option>P2 SHELL ABRASIVE</option>
+<option>P2 SHELL BENT</option>
+<option>P2 SHELL DENTED</option>
+<option>P2 SHELL CONTAM</option>
+<option>P2 SHELL DAMAGED</option>
+<option>P2 SHELL BLISTER</option>
+<option>P2 SHELL EXPOSED COPPER</option>
+<option>P2 SHELL LINEAR SCRATCHED</option>
+<option>P2 SHELL PEEL OFF</option>
+<option>P2 SHELL SCRATCHED</option>
+<option>P2 SHELL DISCOLORATION</option>
+<option>P2 MPO CONNECTOR DAMAGE</option>
+</select>
+</div>
+
+<div>
+<label>Defect Class</label>
+<select id="defectClass">
+<option value="">-- Select Class --</option>
+<option value="Cosmetic">Cosmetic</option>
+<option value="Eeprom">Eeprom</option>
+<option value="Eefail">Eefail</option>
+</select>
+</div>
+
+<div>
+<label>Operator</label>
+<input
+  id="operator"
+  type="text"
+  placeholder="Operator ID">
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn-green" onclick="saveReject()">
+SUBMIT ALL REJECT
+</button>
+
+<button class="btn-gray" onclick="clearForm()">
+CLEAR
+</button>
+
+</div>
+
+<div id="msg" class="msg"></div>
+
+</div>
+
+
+<!-- ================= IMPORT ================= -->
+
+<div class="card">
+
+<h2>📥 Import Existing Excel Data</h2>
+
+<div class="import-box">
+
+<p>
+Import your previous reject records directly into this tracker.
+</p>
+
+<p>
+Required columns:
+<br>
+<b>
+Component SN | Component PN | Defect | Defect Class | Operator | Date Time
+</b>
+</p>
+
+<input
+  class="file-input"
+  id="excelFile"
+  type="file"
+  accept=".xlsx,.xls,.csv">
+
+<div class="actions" style="justify-content:center;">
+
+<button
+  class="btn-blue"
+  onclick="importExcel()">
+IMPORT EXCEL / CSV
+</button>
+
+</div>
+
+<div id="importMsg" class="msg"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="card">
+
+<h2>📊 Dashboard</h2>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-title">TOTAL REJECT</div>
+<div class="stat-value" id="total">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">REJECT TODAY</div>
+<div class="stat-value" id="qtyToday">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-title">TOP DEFECT</div>
+<div class="stat-value" id="topDefect">-</div>
+</div>
+
+</div>
+
+<div id="summary" class="summary"></div>
+
+</div>
+
+
+<!-- ================= ANALYTICS ================= -->
+
+<div class="card">
+
+<h2>📈 Reject Analytics</h2>
+
+<div class="grid">
+
+<div>
+<label>From Date</label>
+<input type="date" id="fromDate" onchange="applyFilters()">
+</div>
+
+<div>
+<label>To Date</label>
+<input type="date" id="toDate" onchange="applyFilters()">
+</div>
+
+<div>
+<label>Defect Filter</label>
+<select id="filterDefect" onchange="applyFilters()">
+<option value="">All Defects</option>
+<option>P2 SHELL ABRASIVE</option>
+<option>P2 SHELL BENT</option>
+<option>P2 SHELL DENTED</option>
+<option>P2 SHELL CONTAM</option>
+<option>P2 SHELL DAMAGED</option>
+<option>P2 SHELL BLISTER</option>
+<option>P2 SHELL EXPOSED COPPER</option>
+<option>P2 SHELL LINEAR SCRATCHED</option>
+<option>P2 SHELL PEEL OFF</option>
+<option>P2 SHELL SCRATCHED</option>
+<option>P2 SHELL DISCOLORATION</option>
+<option>P2 MPO CONNECTOR DAMAGE</option>
+</select>
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn-gray" onclick="clearFilters()">
+CLEAR FILTER
+</button>
+
+<button class="btn-blue" onclick="exportCSV()">
+EXPORT CSV
+</button>
+
+<button class="btn-purple" onclick="backupJSON()">
+BACKUP JSON
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= DAILY TREND ================= -->
+
+<div class="card">
+
+<h2>📈 Daily Reject Trend</h2>
+
+<div class="chart-container">
+<canvas id="trendChart"></canvas>
+</div>
+
+</div>
+
+
+<!-- ================= DAILY TOP DEFECT ================= -->
+
+<div class="card">
+
+<h2>🔍 Daily Top Defect</h2>
+
+<div id="dailyTopDefect"></div>
+
+</div>
+
+
+<!-- ================= RECORDS ================= -->
+
+<div class="card">
+
+<h2>📋 Reject Records</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Component SN</th>
+<th>Component PN</th>
+<th>Defect</th>
+<th>Defect Class</th>
+<th>Operator</th>
+<th>Date Time</th>
+<th class="admin-only">Admin Action</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- ================= DATA MANAGEMENT ================= -->
+
+<div class="card">
+
+<h2>⚙️ Data Management</h2>
+
+<div class="actions">
+
+<button class="btn-red" onclick="clearAll()">
+CLEAR ALL DATA
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const storageKey = "rejectScanTracker_v1";
+
+let rows = [];
+let scannedSNs = [];
+let filteredRows = [];
+let trendChart = null;
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadRows(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(storageKey) || "[]"
+      );
+
+    rows = Array.isArray(saved) ? saved : [];
+
+  }catch(error){
+
+    rows = [];
+
+  }
+
+  normalizeRows();
+
+}
+
+
+/* =====================================================
+   NORMALIZE OLD DATA
+===================================================== */
+
+function normalizeRows(){
+
+  rows = rows.map(row => ({
+
+    "Component SN":
+      row["Component SN"] ||
+      row["SN"] ||
+      "",
+
+    "Component PN":
+      row["Component PN"] ||
+      row["PN"] ||
+      "",
+
+    "Defect":
+      row["Defect"] ||
+      "",
+
+    "Defect Class":
+      row["Defect Class"] ||
+      "",
+
+    "Operator":
+      row["Operator"] ||
+      "",
+
+    "Date Time":
+      row["Date Time"] ||
+      ""
+
+  }));
+
+  saveRows();
+
+}
+
+
+/* =====================================================
+   SAVE STORAGE
+===================================================== */
+
+function saveRows(){
+
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify(rows)
+  );
+
+}
+
+
+/* =====================================================
+   ADD SN
+===================================================== */
+
+function addSN(){
+
+  const input =
+    document.getElementById("sn");
+
+  const sn =
+    input.value.trim();
+
+  if(!sn){
+
+    showMessage(
+      "Please enter / scan Component SN.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  const existsCurrent =
+    scannedSNs.some(
+      x => x.toLowerCase() === sn.toLowerCase()
+    );
+
+  if(existsCurrent){
+
+    showMessage(
+      "This SN is already in the current batch.",
+      "red"
+    );
+
+    input.select();
+
+    return;
+
+  }
+
+  const existsSaved =
+    rows.some(
+      row =>
+        String(row["Component SN"]).toLowerCase()
+        === sn.toLowerCase()
+    );
+
+  if(existsSaved){
+
+    showMessage(
+      "This SN already exists in saved records.",
+      "red"
+    );
+
+    input.select();
+
+    return;
+
+  }
+
+  scannedSNs.push(sn);
+
+  input.value = "";
+
+  renderScanList();
+
+  input.focus();
+
+  showMessage(
+    "SN added.",
+    "green"
+  );
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document
+  .getElementById("sn")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        addSN();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   RENDER CURRENT BATCH
+===================================================== */
+
+function renderScanList(){
+
+  const list =
+    document.getElementById("scanList");
+
+  const count =
+    document.getElementById("scanCount");
+
+  count.textContent =
+    scannedSNs.length;
+
+  list.innerHTML = "";
+
+  scannedSNs.forEach(
+    (sn,index) => {
+
+      const tag =
+        document.createElement("div");
+
+      tag.className =
+        "sn-tag";
+
+      tag.innerHTML =
+        `${escapeHTML(sn)}
+        <button onclick="removeSN(${index})">×</button>`;
+
+      list.appendChild(tag);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   REMOVE SN
+===================================================== */
+
+function removeSN(index){
+
+  scannedSNs.splice(index,1);
+
+  renderScanList();
+
+}
+
+
+/* =====================================================
+   SAVE REJECT
+===================================================== */
+
+function saveReject(){
+
+  const pn =
+    document.getElementById("pn").value;
+
+  const defect =
+    document.getElementById("defect").value;
+
+  const defectClass =
+    document.getElementById("defectClass").value;
+
+  const operator =
+    document.getElementById("operator").value.trim();
+
+  if(scannedSNs.length === 0){
+
+    showMessage(
+      "Please scan / add at least one SN.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  if(!pn){
+
+    showMessage(
+      "Please select Component PN.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  if(!defect){
+
+    showMessage(
+      "Please select Defect.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  if(!defectClass){
+
+    showMessage(
+      "Please select Defect Class.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  if(!operator){
+
+    showMessage(
+      "Please enter Operator.",
+      "red"
+    );
+
+    return;
+
+  }
+
+  const now =
+    new Date().toLocaleString();
+
+  const existingSNs = new Set(
+    rows.map(row => String(row["Component SN"] || "").trim().toLowerCase())
+  );
+
+  const duplicateInBatch = scannedSNs.filter(
+    sn => existingSNs.has(String(sn).trim().toLowerCase())
+  );
+
+  if(duplicateInBatch.length > 0){
+    showMessage(
+      "Cannot save. Duplicate SN found: " + duplicateInBatch.join(", "),
+      "red"
+    );
+    return;
+  }
+
+  scannedSNs.forEach(sn => {
+
+    rows.push({
+
+      "Component SN": sn,
+      "Component PN": pn,
+      "Defect": defect,
+      "Defect Class": defectClass,
+      "Operator": operator,
+      "Date Time": now
+
+    });
+
+  });
+
+  saveRows();
+
+  scannedSNs = [];
+
+  renderScanList();
+
+  clearForm(false);
+
+  render();
+
+  showMessage(
+    "All reject records saved successfully.",
+    "green"
+  );
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(clearBatch = true){
+
+  document.getElementById("sn").value = "";
+
+  document.getElementById("pn").value = "";
+
+  document.getElementById("defect").value = "";
+
+  document.getElementById("defectClass").value = "";
+
+  document.getElementById("operator").value = "";
+
+  if(clearBatch){
+
+    scannedSNs = [];
+
+    renderScanList();
+
+  }
+
+}
+
+
+/* =====================================================
+   TODAY CHECK
+===================================================== */
+
+function isToday(dateValue){
+
+  const date =
+    new Date(dateValue);
+
+  if(isNaN(date.getTime()))
+    return false;
+
+  const today =
+    new Date();
+
+  return (
+    date.getFullYear() === today.getFullYear() &&
+    date.getMonth() === today.getMonth() &&
+    date.getDate() === today.getDate()
+  );
+
+}
+
+
+/* =====================================================
+   DATE KEY
+===================================================== */
+
+function getDateKey(dateValue){
+
+  const date =
+    new Date(dateValue);
+
+  if(isNaN(date.getTime()))
+    return "Unknown";
+
+  return (
+    date.getFullYear() +
+    "-" +
+    String(date.getMonth()+1).padStart(2,"0") +
+    "-" +
+    String(date.getDate()).padStart(2,"0")
+  );
+
+}
+
+
+/* =====================================================
+   RENDER DASHBOARD
+===================================================== */
+
+function render(){
+
+  document.getElementById("total")
+    .textContent = rows.length;
+
+  const todayCount =
+    rows.filter(
+      row => isToday(row["Date Time"])
+    ).length;
+
+  document.getElementById("qtyToday")
+    .textContent = todayCount;
+
+
+  /* TOP DEFECT */
+
+  const defectCounts = {};
+
+  rows.forEach(row => {
+
+    const defect =
+      row["Defect"] || "Unknown";
+
+    defectCounts[defect] =
+      (defectCounts[defect] || 0) + 1;
+
+  });
+
+  let topDefect = "-";
+  let topCount = 0;
+
+  Object.entries(defectCounts)
+    .forEach(([defect,count]) => {
+
+      if(count > topCount){
+
+        topDefect = defect;
+        topCount = count;
+
+      }
+
+    });
+
+  document.getElementById("topDefect")
+    .textContent =
+      topDefect === "-"
+      ? "-"
+      : `${topDefect} (${topCount})`;
+
+
+  /* SUMMARY */
+
+  const summary =
+    document.getElementById("summary");
+
+  summary.innerHTML = "";
+
+  Object.entries(defectCounts)
+    .sort((a,b)=>b[1]-a[1])
+    .forEach(([defect,count]) => {
+
+      const badge =
+        document.createElement("div");
+
+      badge.className =
+        "badge";
+
+      badge.textContent =
+        `${defect}: ${count}`;
+
+      summary.appendChild(badge);
+
+    });
+
+
+  renderTable();
+
+  applyFilters();
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function applyFilters(){
+
+  const from =
+    document.getElementById("fromDate").value;
+
+  const to =
+    document.getElementById("toDate").value;
+
+  const defect =
+    document.getElementById("filterDefect").value;
+
+  filteredRows =
+    rows.filter(row => {
+
+      const rowDate =
+        getDateKey(row["Date Time"]);
+
+      if(from && rowDate !== "Unknown"
+        && rowDate < from){
+
+        return false;
+
+      }
+
+      if(to && rowDate !== "Unknown"
+        && rowDate > to){
+
+        return false;
+
+      }
+
+      if(defect &&
+        row["Defect"] !== defect){
+
+        return false;
+
+      }
+
+      return true;
+
+    });
+
+  renderTable(filteredRows);
+
+  renderChart(filteredRows);
+
+  renderDailyTopDefect(filteredRows);
+
+}
+
+
+/* =====================================================
+   CLEAR FILTERS
+===================================================== */
+
+function clearFilters(){
+
+  document.getElementById("fromDate").value = "";
+
+  document.getElementById("toDate").value = "";
+
+  document.getElementById("filterDefect").value = "";
+
+  applyFilters();
+
+}
+
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+function renderTable(data = rows){
+
+  const tbody =
+    document.getElementById("tbody");
+
+  tbody.innerHTML = "";
+
+  [...data]
+    .reverse()
+    .forEach(row => {
+
+      const tr =
+        document.createElement("tr");
+
+      tr.innerHTML = `
+
+        <td>${escapeHTML(row["Component SN"])}</td>
+
+        <td>${escapeHTML(row["Component PN"])}</td>
+
+        <td>${escapeHTML(row["Defect"])}</td>
+
+        <td>${escapeHTML(row["Defect Class"])}</td>
+
+        <td>${escapeHTML(row["Operator"])}</td>
+
+        <td>${escapeHTML(row["Date Time"])}</td>
+        <td class="admin-only">
+          <button class="btn-blue" style="width:auto;padding:7px 10px;"
+                  onclick="editRecord(${rows.indexOf(row)})">EDIT</button>
+          <button class="btn-red" style="width:auto;padding:7px 10px;"
+                  onclick="deleteRecord(${rows.indexOf(row)})">DELETE</button>
+        </td>
+
+      `;
+
+      tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* =====================================================
+   DAILY TREND CHART
+===================================================== */
+
+function renderChart(data){
+
+  const counts = {};
+
+  data.forEach(row => {
+
+    const date =
+      getDateKey(row["Date Time"]);
+
+    if(date !== "Unknown"){
+
+      counts[date] =
+        (counts[date] || 0) + 1;
+
+    }
+
+  });
+
+  const labels =
+    Object.keys(counts).sort();
+
+  const values =
+    labels.map(
+      date => counts[date]
+    );
+
+
+  if(trendChart){
+
+    trendChart.destroy();
+
+  }
+
+  const ctx =
+    document
+      .getElementById("trendChart")
+      .getContext("2d");
+
+  trendChart =
+    new Chart(ctx,{
+
+      type:"line",
+
+      data:{
+
+        labels:labels,
+
+        datasets:[{
+
+          label:"Daily Reject Qty",
+
+          data:values,
+
+          borderWidth:2,
+
+          tension:.3,
+
+          fill:false
+
+        }]
+
+      },
+
+      options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        scales:{
+
+          y:{
+
+            beginAtZero:true,
+
+            ticks:{
+              precision:0
+            }
+
+          }
+
+        }
+
+      }
+
+    });
+
+}
+
+
+/* =====================================================
+   DAILY TOP DEFECT
+===================================================== */
+
+function renderDailyTopDefect(data){
+
+  const container =
+    document.getElementById(
+      "dailyTopDefect"
+    );
+
+  container.innerHTML = "";
+
+  const daily = {};
+
+  data.forEach(row => {
+
+    const date =
+      getDateKey(row["Date Time"]);
+
+    const defect =
+      row["Defect"] || "Unknown";
+
+    if(date === "Unknown")
+      return;
+
+    if(!daily[date])
+      daily[date] = {};
+
+    daily[date][defect] =
+      (daily[date][defect] || 0) + 1;
+
+  });
+
+
+  const dates =
+    Object.keys(daily).sort().reverse();
+
+  if(dates.length === 0){
+
+    container.innerHTML =
+      "<p>No data available.</p>";
+
+    return;
+
+  }
+
+
+  dates.forEach(date => {
+
+    const defects =
+      daily[date];
+
+    let top =
+      null;
+
+    Object.entries(defects)
+      .forEach(([defect,count]) => {
+
+        if(!top || count > top.count){
+
+          top = {
+            defect:defect,
+            count:count
+          };
+
+        }
+
+      });
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "top-defect-box";
+
+    box.innerHTML = `
+
+      <b>${escapeHTML(date)}</b>
+
+      <br>
+
+      Top Defect:
+      <b>${escapeHTML(top.defect)}</b>
+
+      — ${top.count} reject
+
+    `;
+
+    container.appendChild(box);
+
+  });
+
+}
+
+
+/* =====================================================
+   IMPORT EXCEL / CSV
+===================================================== */
+
+function importExcel(){
+
+  const fileInput =
+    document.getElementById("excelFile");
+
+  const file =
+    fileInput.files[0];
+
+  if(!file){
+
+    showImportMessage(
+      "Please select an Excel or CSV file.",
+      "red"
+    );
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(event){
+
+    try{
+
+      const data =
+        new Uint8Array(
+          event.target.result
+        );
+
+      const workbook =
+        XLSX.read(
+          data,
+          {type:"array"}
+        );
+
+      const sheetName =
+        workbook.SheetNames[0];
+
+      const worksheet =
+        workbook.Sheets[sheetName];
+
+      const imported =
+        XLSX.utils.sheet_to_json(
+          worksheet,
+          {
+            defval:"",
+            raw:false
+          }
+        );
+
+
+      if(imported.length === 0){
+
+        showImportMessage(
+          "The Excel file has no records.",
+          "red"
+        );
+
+        return;
+
+      }
+
+
+      let added = 0;
+      let duplicate = 0;
+      let invalid = 0;
+
+
+      imported.forEach(item => {
+
+        const normalized =
+          normalizeImportedRow(item);
+
+
+        if(!normalized["Component SN"]){
+
+          invalid++;
+
+          return;
+
+        }
+
+
+        const exists =
+          rows.some(
+            row =>
+              String(row["Component SN"])
+                .trim()
+                .toLowerCase()
+              ===
+              String(normalized["Component SN"])
+                .trim()
+                .toLowerCase()
+          );
+
+
+        if(exists){
+
+          duplicate++;
+
+          return;
+
+        }
+
+
+        rows.push(normalized);
+
+        added++;
+
+      });
+
+
+      saveRows();
+
+      render();
+
+      fileInput.value = "";
+
+
+      showImportMessage(
+
+        `Import complete. Added: ${added} | Duplicate SN: ${duplicate} | Invalid: ${invalid}`,
+
+        "green"
+
+      );
+
+    }
+
+    catch(error){
+
+      console.error(error);
+
+      showImportMessage(
+        "Unable to read this file. Please check the Excel format.",
+        "red"
+      );
+
+    }
+
+  };
+
+
+  reader.readAsArrayBuffer(file);
+
+}
+
+
+/* =====================================================
+   NORMALIZE IMPORTED EXCEL ROW
+===================================================== */
+
+function normalizeImportedRow(item){
+
+  return {
+
+    "Component SN":
+      getExcelValue(
+        item,
+        [
+          "Component SN",
+          "component sn",
+          "SN",
+          "sn",
+          "Serial Number",
+          "Serial No",
+          "Serial"
+        ]
+      ),
+
+    "Component PN":
+      getExcelValue(
+        item,
+        [
+          "Component PN",
+          "component pn",
+          "PN",
+          "pn",
+          "Part Number",
+          "Part No"
+        ]
+      ),
+
+    "Defect":
+      getExcelValue(
+        item,
+        [
+          "Defect",
+          "defect"
+        ]
+      ),
+
+    "Defect Class":
+      getExcelValue(
+        item,
+        [
+          "Defect Class",
+          "defect class",
+          "Class",
+          "class"
+        ]
+      ),
+
+    "Operator":
+      getExcelValue(
+        item,
+        [
+          "Operator",
+          "operator",
+          "Operator ID",
+          "operator id"
+        ]
+      ),
+
+    "Date Time":
+      getExcelValue(
+        item,
+        [
+          "Date Time",
+          "date time",
+          "DateTime",
+          "Datetime",
+          "Date",
+          "date"
+        ]
+      )
+
+  };
+
+}
+
+
+/* =====================================================
+   EXCEL VALUE FINDER
+===================================================== */
+
+function getExcelValue(
+  item,
+  possibleNames
+){
+
+  const keys =
+    Object.keys(item);
+
+  for(
+    const name of possibleNames
+  ){
+
+    const exact =
+      keys.find(
+        key =>
+          key.trim().toLowerCase()
+          ===
+          name.trim().toLowerCase()
+      );
+
+    if(exact !== undefined){
+
+      return String(
+        item[exact] ?? ""
+      ).trim();
+
+    }
+
+  }
+
+  return "";
+
+}
+
+
+/* =====================================================
+   CSV EXPORT
+===================================================== */
+
+function exportCSV(){
+
+  const active =
+    hasActiveFilters();
+
+  const data =
+    active
+    ? filteredRows
+    : rows;
+
+  if(data.length === 0){
+
+    alert(
+      "No data available to export."
+    );
+
+    return;
+
+  }
+
+
+  const headers = [
+
+    "Component SN",
+    "Component PN",
+    "Defect",
+    "Defect Class",
+    "Operator",
+    "Date Time"
+
+  ];
+
+
+  const lines = [
+
+    headers.join(","),
+
+    ...data.map(row =>
+
+      headers.map(
+        header =>
+          csvEscape(
+            row[header] || ""
+          )
+      ).join(",")
+
+    )
+
+  ];
+
+
+  const blob =
+    new Blob(
+      [lines.join("\n")],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
+    );
+
+
+  downloadBlob(
+    blob,
+    "Reject_Scan_Report.csv"
+  );
+
+}
+
+
+/* =====================================================
+   JSON BACKUP
+===================================================== */
+
+function backupJSON(){
+
+  const blob =
+    new Blob(
+      [JSON.stringify(rows,null,2)],
+      {
+        type:"application/json"
+      }
+    );
+
+  downloadBlob(
+    blob,
+    "Reject_Scan_Backup.json"
+  );
+
+}
+
+
+/* =====================================================
+   DOWNLOAD
+===================================================== */
+
+function downloadBlob(
+  blob,
+  filename
+){
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download = filename;
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+}
+
+
+/* =====================================================
+   ACTIVE FILTER
+===================================================== */
+
+function hasActiveFilters(){
+
+  return (
+
+    document.getElementById("fromDate").value ||
+    document.getElementById("toDate").value ||
+    document.getElementById("filterDefect").value
+
+  );
+
+}
+
+
+
+/* =====================================================
+   EDIT / DELETE RECORDS
+===================================================== */
+
+function editRecord(index){
+  if(!requireAdmin()) return;
+
+  const row = rows[index];
+  if(!row) return;
+
+  const pn = prompt("Component PN:", row["Component PN"] || "");
+  if(pn === null) return;
+
+  const defect = prompt("Defect:", row["Defect"] || "");
+  if(defect === null) return;
+
+  const defectClass = prompt("Defect Class:", row["Defect Class"] || "");
+  if(defectClass === null) return;
+
+  const operator = prompt("Operator:", row["Operator"] || "");
+  if(operator === null) return;
+
+  rows[index] = {
+    "Component SN": row["Component SN"],
+    "Component PN": pn.trim(),
+    "Defect": defect.trim(),
+    "Defect Class": defectClass.trim(),
+    "Operator": operator.trim(),
+    "Date Time": row["Date Time"]
+  };
+
+  saveRows();
+  render();
+  showMessage("Record updated successfully.", "green");
+}
+
+function deleteRecord(index){
+  if(!requireAdmin()) return;
+
+  const row = rows[index];
+  if(!row) return;
+
+  const ok = confirm(
+    "Delete this reject record?\n\nSN: " +
+    row["Component SN"] +
+    "\nDefect: " +
+    row["Defect"]
+  );
+
+  if(!ok) return;
+
+  rows.splice(index, 1);
+  saveRows();
+  render();
+  showMessage("Record deleted successfully.", "red");
+}
+
+
+/* =====================================================
+   CLEAR ALL
+===================================================== */
+
+function clearAll(){
+
+  const confirmDelete =
+    confirm(
+      "Are you sure you want to delete ALL reject data? This cannot be undone."
+    );
+
+  if(!confirmDelete)
+    return;
+
+  rows = [];
+
+  scannedSNs = [];
+
+  saveRows();
+
+  renderScanList();
+
+  render();
+
+  showMessage(
+    "All data has been cleared.",
+    "red"
+  );
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+  message,
+  type
+){
+
+  const el =
+    document.getElementById("msg");
+
+  el.textContent =
+    message;
+
+  el.style.color =
+    type === "green"
+    ? "#16a34a"
+    : "#dc2626";
+
+}
+
+
+function showImportMessage(
+  message,
+  type
+){
+
+  const el =
+    document.getElementById(
+      "importMsg"
+    );
+
+  el.textContent =
+    message;
+
+  el.style.color =
+    type === "green"
+    ? "#16a34a"
+    : "#dc2626";
+
+}
+
+
+/* =====================================================
+   CSV ESCAPE
+===================================================== */
+
+function csvEscape(value){
+
+  const text =
+    String(value);
+
+  if(
+    text.includes(",") ||
+    text.includes('"') ||
+    text.includes("\n")
+  ){
+
+    return '"' +
+      text.replace(/"/g,'""') +
+      '"';
+
+  }
+
+  return text;
+
+}
+
+
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   AUTO REFRESH
+===================================================== */
+
+function autoRefresh(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(storageKey) || "[]"
+      );
+
+    if(
+      JSON.stringify(saved)
+      !==
+      JSON.stringify(rows)
+    ){
+
+      rows =
+        Array.isArray(saved)
+        ? saved
+        : [];
+
+      normalizeRows();
+
+      render();
+
+    }
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+
+/* =====================================================
+   ADMIN ACCESS CONTROL
+===================================================== */
+
+/*
+  IMPORTANT:
+  This is a client-side HTML app using localStorage.
+  The password below is only a UI/access barrier, not
+  server-side security. For stronger protection, host
+  the app behind real authentication.
+*/
+const adminPassword = "Admin@123";
+const adminSessionKey = "rejectScanTracker_admin";
+
+function isAdmin(){
+  return sessionStorage.getItem(adminSessionKey) === "true";
+}
+
+function updateAdminUI(){
+  const status = document.getElementById("adminStatus");
+  const loginBtn = document.getElementById("adminButton");
+  const logoutBtn = document.getElementById("adminLogoutButton");
+  const adminCards = document.querySelectorAll(".admin-only");
+
+  if(isAdmin()){
+    status.textContent = "ADMIN MODE";
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    adminCards.forEach(el => el.style.display = "block");
+  }else{
+    status.textContent = "VIEWER MODE";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+    adminCards.forEach(el => el.style.display = "none");
+  }
+}
+
+function openAdminLogin(){
+  document.getElementById("adminModal").style.display = "flex";
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("adminError").textContent = "";
+  setTimeout(() => document.getElementById("adminPassword").focus(), 50);
+}
+
+function closeAdminLogin(){
+  document.getElementById("adminModal").style.display = "none";
+}
+
+function adminLogin(){
+  const password = document.getElementById("adminPassword").value;
+
+  if(password === adminPassword){
+    sessionStorage.setItem(adminSessionKey, "true");
+    closeAdminLogin();
+    updateAdminUI();
+    showMessage("Admin access unlocked.", "green");
+  }else{
+    document.getElementById("adminError").textContent = "Incorrect admin password.";
+  }
+}
+
+function adminLogout(){
+  sessionStorage.removeItem(adminSessionKey);
+  updateAdminUI();
+  showMessage("Admin mode locked.", "green");
+}
+
+function requireAdmin(){
+  if(!isAdmin()){
+    alert("Admin access required.");
+    openAdminLogin();
+    return false;
+  }
+  return true;
+}
+
+/* Protect destructive action */
+const originalClearAll = clearAll;
+clearAll = function(){
+  if(!requireAdmin()) return;
+  originalClearAll();
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    loadRows();
+
+    render();
+    updateAdminUI();
+
+    document
+      .getElementById("sn")
+      .focus();
+
+  }
+);
+
+
+/* Refresh every 30 seconds */
+
+setInterval(
+  autoRefresh,
+  30000
+);
+
+</script>
+
+
+<!-- ================= ADMIN LOGIN ================= -->
+<div id="adminModal">
+  <div class="modal-box">
+    <h3>🔐 Admin Login</h3>
+    <p>Enter the administrator password to unlock edit/delete controls.</p>
+    <input id="adminPassword" type="password" placeholder="Admin password"
+           onkeydown="if(event.key==='Enter') adminLogin()">
+    <div class="actions">
+      <button class="btn-purple" onclick="adminLogin()">LOGIN</button>
+      <button class="btn-gray" onclick="closeAdminLogin()">CANCEL</button>
+    </div>
+    <div id="adminError" class="admin-error"></div>
+  </div>
+</div>
+
+</body>
+</html>
