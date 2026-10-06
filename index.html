@@ -9,9 +9,9 @@
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -19,10 +19,7 @@
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:
-    radial-gradient(circle at top left,#ffe1ef 0%,transparent 35%),
-    radial-gradient(circle at top right,#e8ddff 0%,transparent 35%),
-    linear-gradient(135deg,#fff0f6,#f7f7ff);
+  background:linear-gradient(135deg,#fff0f6,#f7f7ff);
   color:#333;
 }
 
@@ -41,7 +38,7 @@ header h1{
 }
 
 header p{
-  margin:8px 0 0;
+  margin:8px 0 15px;
 }
 
 .container{
@@ -51,12 +48,11 @@ header p{
 }
 
 .card{
-  background:rgba(255,255,255,.96);
-  border-radius:20px;
+  background:white;
+  border-radius:18px;
   padding:22px;
   margin-bottom:22px;
-  box-shadow:0 8px 30px rgba(100,60,120,.10);
-  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 .card h2{
@@ -90,27 +86,47 @@ input:focus,
 select:focus{
   outline:none;
   border-color:#ff4f9a;
-  box-shadow:0 0 0 3px rgba(255,79,154,.10);
 }
 
 button{
   border:none;
   cursor:pointer;
   font-weight:bold;
-  transition:.2s;
 }
 
 button:hover{
   opacity:.88;
-  transform:translateY(-1px);
 }
 
-.btn-pink{background:#ff4f9a;color:white}
-.btn-purple{background:#8b5cf6;color:white}
-.btn-green{background:#22c55e;color:white}
-.btn-blue{background:#3b82f6;color:white}
-.btn-red{background:#ef4444;color:white}
-.btn-gray{background:#6b7280;color:white}
+.btn-pink{
+  background:#ff4f9a;
+  color:white;
+}
+
+.btn-purple{
+  background:#8b5cf6;
+  color:white;
+}
+
+.btn-green{
+  background:#22c55e;
+  color:white;
+}
+
+.btn-blue{
+  background:#3b82f6;
+  color:white;
+}
+
+.btn-red{
+  background:#ef4444;
+  color:white;
+}
+
+.btn-gray{
+  background:#6b7280;
+  color:white;
+}
 
 .scan-row{
   display:grid;
@@ -165,20 +181,21 @@ button:hover{
 
 .stat{
   padding:20px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#fff7fb,#faf8ff);
+  border-radius:15px;
+  background:#fafafa;
   border:1px solid #eee;
   transition:.2s;
 }
 
 .stat:hover{
   transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,.07);
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .stat-title{
   font-size:13px;
   color:#777;
+  font-weight:bold;
 }
 
 .stat-value{
@@ -186,13 +203,14 @@ button:hover{
   font-weight:bold;
   margin-top:5px;
   color:#8b3d70;
+  word-break:break-word;
 }
 
 .summary{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:15px;
+  margin-top:20px;
 }
 
 .badge{
@@ -201,6 +219,7 @@ button:hover{
   background:#f3e8ff;
   color:#6b21a8;
   font-size:13px;
+  font-weight:bold;
 }
 
 .table-wrap{
@@ -252,37 +271,28 @@ tr:hover{
   position:relative;
   width:100%;
   height:430px;
-  padding:10px;
-  border-radius:18px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,79,154,.035),
-      rgba(139,92,246,.035)
-    );
+  margin-top:15px;
 }
 
-.chart-header{
+.chart-info{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
   flex-wrap:wrap;
+  gap:10px;
   margin-bottom:15px;
 }
 
-.chart-title-small{
-  color:#777;
-  font-size:13px;
-}
-
-.chart-total{
+.chart-badge{
+  background:#fce7f3;
+  color:#9d174d;
   padding:8px 14px;
   border-radius:20px;
-  background:linear-gradient(135deg,#ffe0ef,#eee5ff);
-  color:#7a315c;
+  font-size:12px;
   font-weight:bold;
-  font-size:13px;
+}
+
+.chart-badge.purple{
+  background:#f3e8ff;
+  color:#6b21a8;
 }
 
 .admin-only{
@@ -371,6 +381,45 @@ tr:hover{
   text-align:center;
 }
 
+.top-defect-box{
+  margin-top:18px;
+  padding:18px;
+  border-radius:15px;
+  background:linear-gradient(
+    135deg,
+    #fff0f6,
+    #f3e8ff
+  );
+  border:1px solid #f5d0e5;
+}
+
+.top-defect-title{
+  color:#777;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.top-defect-name{
+  color:#8b3d70;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.daily-box{
+  padding:12px;
+  margin-bottom:10px;
+  background:#fff5f9;
+  border-radius:12px;
+  border-left:4px solid #ff4f9a;
+}
+
+.empty-chart{
+  text-align:center;
+  color:#888;
+  padding:80px 20px;
+}
+
 @media(max-width:600px){
 
   .scan-row{
@@ -386,11 +435,15 @@ tr:hover{
   }
 
   .chart-container{
-    height:350px;
-    padding:5px;
+    height:500px;
+  }
+
+  .stat-value{
+    font-size:24px;
   }
 
 }
+
 </style>
 </head>
 
@@ -428,9 +481,13 @@ LOGOUT ADMIN
 
 </header>
 
+
 <div class="container">
 
-<!-- SCAN -->
+
+<!-- =====================================================
+     SCAN REJECT
+===================================================== -->
 
 <div class="card">
 
@@ -483,12 +540,19 @@ ADD SN
 <select id="pn">
 
 <option value="">-- Select PN --</option>
-<option value="1670826">1670826</option>
-<option value="1649167">1649167</option>
+
+<option value="1670826">
+1670826
+</option>
+
+<option value="1649167">
+1649167
+</option>
 
 </select>
 
 </div>
+
 
 <div>
 
@@ -496,7 +560,9 @@ ADD SN
 
 <select id="defect">
 
-<option value="">-- Select Defect --</option>
+<option value="">
+-- Select Defect --
+</option>
 
 <option>P2 SHELL ABRASIVE</option>
 <option>P2 SHELL BENT</option>
@@ -515,20 +581,33 @@ ADD SN
 
 </div>
 
+
 <div>
 
 <label>Defect Class</label>
 
 <select id="defectClass">
 
-<option value="">-- Select Class --</option>
-<option value="Cosmetic">Cosmetic</option>
-<option value="Eeprom">Eeprom</option>
-<option value="Eefail">Eefail</option>
+<option value="">
+-- Select Class --
+</option>
+
+<option value="Cosmetic">
+Cosmetic
+</option>
+
+<option value="Eeprom">
+Eeprom
+</option>
+
+<option value="Eefail">
+Eefail
+</option>
 
 </select>
 
 </div>
+
 
 <div>
 
@@ -542,6 +621,7 @@ placeholder="Enter Badge ID">
 </div>
 
 </div>
+
 
 <div class="actions">
 
@@ -564,7 +644,9 @@ CLEAR
 </div>
 
 
-<!-- IMPORT -->
+<!-- =====================================================
+     IMPORT
+===================================================== -->
 
 <div class="card">
 
@@ -580,7 +662,8 @@ Import previous reject records directly into this tracker.
 Required columns:
 <br>
 <b>
-Component SN | Component PN | Defect | Defect Class | Badge ID / Operator | Date Time
+Component SN | Component PN | Defect |
+Defect Class | Badge ID / Operator | Date Time
 </b>
 </p>
 
@@ -607,13 +690,16 @@ IMPORT EXCEL / CSV
 </div>
 
 
-<!-- DASHBOARD -->
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
 
 <div class="card">
 
 <h2>📊 Dashboard</h2>
 
 <div class="stats">
+
 
 <div class="stat">
 
@@ -627,6 +713,7 @@ TOTAL REJECT
 
 </div>
 
+
 <div class="stat">
 
 <div class="stat-title">
@@ -639,34 +726,73 @@ REJECT TODAY
 
 </div>
 
+
 <div class="stat">
 
 <div class="stat-title">
-TOP DEFECT
+COSMETIC REJECT
 </div>
 
 <div
 class="stat-value"
-id="topDefect">
+id="cosmeticTotal">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-title">
+TOP COSMETIC REJECT
+</div>
+
+<div
+class="stat-value"
+id="topDefect"
+style="font-size:20px">
 -
 </div>
 
 </div>
 
+
 </div>
+
+
+<div
+class="top-defect-box"
+id="topDefectBox">
+
+<div class="top-defect-title">
+TOP COSMETIC REJECT
+</div>
+
+<div
+class="top-defect-name"
+id="topDefectDashboard">
+-
+</div>
+
+</div>
+
 
 <div id="summary" class="summary"></div>
 
 </div>
 
 
-<!-- ANALYTICS -->
+<!-- =====================================================
+     ANALYTICS FILTER
+===================================================== -->
 
 <div class="card">
 
-<h2>📈 Reject Analytics</h2>
+<h2>🔎 Analytics Filter</h2>
 
 <div class="grid">
+
 
 <div>
 
@@ -679,6 +805,7 @@ onchange="applyFilters()">
 
 </div>
 
+
 <div>
 
 <label>To Date</label>
@@ -690,6 +817,7 @@ onchange="applyFilters()">
 
 </div>
 
+
 <div>
 
 <label>Defect Filter</label>
@@ -698,7 +826,9 @@ onchange="applyFilters()">
 id="filterDefect"
 onchange="applyFilters()">
 
-<option value="">All Defects</option>
+<option value="">
+All Defects
+</option>
 
 <option>P2 SHELL ABRASIVE</option>
 <option>P2 SHELL BENT</option>
@@ -717,7 +847,37 @@ onchange="applyFilters()">
 
 </div>
 
+
+<div>
+
+<label>Defect Class</label>
+
+<select
+id="filterClass"
+onchange="applyFilters()">
+
+<option value="">
+All Classes
+</option>
+
+<option value="Cosmetic">
+Cosmetic
+</option>
+
+<option value="Eeprom">
+Eeprom
+</option>
+
+<option value="Eefail">
+Eefail
+</option>
+
+</select>
+
 </div>
+
+</div>
+
 
 <div class="actions">
 
@@ -730,7 +890,7 @@ CLEAR FILTER
 <button
 class="btn-blue"
 onclick="exportCSV()">
-EXPORT CSV
+EXPORT EXCEL
 </button>
 
 <button
@@ -744,31 +904,49 @@ BACKUP JSON
 </div>
 
 
-<!-- TREND -->
+<!-- =====================================================
+     BAR CHART
+===================================================== -->
 
 <div class="card">
 
-<div class="chart-header">
+<div class="chart-title">
 
-<div>
-
-<h2 style="margin-bottom:5px">
-📊 Daily Reject Trend
+<h2>
+📊 Cosmetic Reject by Defect
 </h2>
 
-<div class="chart-title-small">
-Daily reject quantity by date
+<div class="chart-info">
+
+<span class="chart-badge">
+COSMETIC ONLY
+</span>
+
+<span class="chart-badge purple">
+HIGH → LOW
+</span>
+
 </div>
 
 </div>
+
+<p style="color:#777;margin-top:-5px">
+
+Reject quantity based on
+<b>Reject Name / Defect</b>
+
+</p>
+
 
 <div
-id="chartTotal"
-class="chart-total">
-TOTAL: 0
-</div>
+id="chartEmpty"
+class="empty-chart"
+style="display:none">
+
+No Cosmetic Reject data available.
 
 </div>
+
 
 <div class="chart-container">
 
@@ -779,7 +957,9 @@ TOTAL: 0
 </div>
 
 
-<!-- DAILY TOP DEFECT -->
+<!-- =====================================================
+     DAILY TOP DEFECT
+===================================================== -->
 
 <div class="card">
 
@@ -790,7 +970,9 @@ TOTAL: 0
 </div>
 
 
-<!-- RECORDS -->
+<!-- =====================================================
+     RECORDS
+===================================================== -->
 
 <div class="card">
 
@@ -804,12 +986,29 @@ TOTAL: 0
 
 <tr>
 
-<th>Component SN</th>
-<th>Component PN</th>
-<th>Defect</th>
-<th>Defect Class</th>
-<th>Badge ID</th>
-<th>Date Time</th>
+<th>
+Component SN
+</th>
+
+<th>
+Component PN
+</th>
+
+<th>
+Defect
+</th>
+
+<th>
+Defect Class
+</th>
+
+<th>
+Badge ID
+</th>
+
+<th>
+Date Time
+</th>
 
 <th
 id="adminActionHeader"
@@ -830,7 +1029,9 @@ Admin Action
 </div>
 
 
-<!-- DATA MANAGEMENT -->
+<!-- =====================================================
+     DATA MANAGEMENT
+===================================================== -->
 
 <div
 class="card"
@@ -851,10 +1052,13 @@ CLEAR ALL DATA
 
 </div>
 
+
 </div>
 
 
-<!-- ADMIN LOGIN MODAL -->
+<!-- =====================================================
+     ADMIN LOGIN MODAL
+===================================================== -->
 
 <div id="adminModal">
 
@@ -906,6 +1110,7 @@ LOGIN
 
 <script>
 
+
 /* =====================================================
    SUPABASE CONFIG
 ===================================================== */
@@ -919,6 +1124,7 @@ const SUPABASE_KEY =
 const ADMIN_UID =
 "199986ab-800f-4c85-8f25-9b3bf28984fb";
 
+
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
@@ -930,11 +1136,15 @@ window.supabase.createClient(
    GLOBAL
 ===================================================== */
 
-let rows=[];
-let scannedSNs=[];
-let filteredRows=[];
-let trendChart=null;
-let currentAdmin=false;
+let rows = [];
+
+let scannedSNs = [];
+
+let filteredRows = [];
+
+let trendChart = null;
+
+let currentAdmin = false;
 
 
 /* =====================================================
@@ -951,7 +1161,7 @@ async function(){
       "keydown",
       function(event){
 
-        if(event.key==="Enter"){
+        if(event.key === "Enter"){
 
           event.preventDefault();
 
@@ -961,6 +1171,7 @@ async function(){
 
       }
     );
+
 
   await checkAdmin();
 
@@ -981,13 +1192,19 @@ async function(){
 
 async function loadRows(){
 
-  let allData=[];
-  let from=0;
-  const batchSize=1000;
+  let allData = [];
+
+  let from = 0;
+
+  const batchSize = 1000;
+
 
   while(true){
 
-    const {data,error} =
+    const {
+      data,
+      error
+    } =
       await supabaseClient
         .from("rejects")
         .select(
@@ -995,12 +1212,15 @@ async function loadRows(){
         )
         .order(
           "date_time",
-          {ascending:false}
+          {
+            ascending:false
+          }
         )
         .range(
           from,
-          from+batchSize-1
+          from + batchSize - 1
         );
+
 
     if(error){
 
@@ -1009,35 +1229,41 @@ async function loadRows(){
         error
       );
 
-      rows=[];
+      rows = [];
 
       showMessage(
-        "Database error: "+error.message,
+        "Database error: " +
+        error.message,
         "red"
       );
 
       document
         .getElementById("total")
-        .textContent="ERROR";
+        .textContent = "ERROR";
 
       return;
 
     }
 
-    if(!data || data.length===0)
+
+    if(!data || data.length === 0)
       break;
 
-    allData=
+
+    allData =
       allData.concat(data);
 
-    if(data.length<batchSize)
+
+    if(data.length < batchSize)
       break;
 
-    from+=batchSize;
+
+    from += batchSize;
 
   }
 
-  rows=allData;
+
+  rows = allData;
 
   render();
 
@@ -1050,11 +1276,12 @@ async function loadRows(){
 
 function addSN(){
 
-  const input=
+  const input =
     document.getElementById("sn");
 
-  const sn=
+  const sn =
     input.value.trim();
+
 
   if(!sn){
 
@@ -1067,12 +1294,14 @@ function addSN(){
 
   }
 
-  const existsCurrent=
+
+  const existsCurrent =
     scannedSNs.some(
       x =>
-      x.toLowerCase()===
-      sn.toLowerCase()
+        x.toLowerCase() ===
+        sn.toLowerCase()
     );
+
 
   if(existsCurrent){
 
@@ -1087,14 +1316,18 @@ function addSN(){
 
   }
 
-  const existsSaved=
+
+  const existsSaved =
     rows.some(
       row =>
-      String(row.component_sn||"")
-      .trim()
-      .toLowerCase()===
-      sn.toLowerCase()
+        String(
+          row.component_sn || ""
+        )
+        .trim()
+        .toLowerCase() ===
+        sn.toLowerCase()
     );
+
 
   if(existsSaved){
 
@@ -1109,9 +1342,10 @@ function addSN(){
 
   }
 
+
   scannedSNs.push(sn);
 
-  input.value="";
+  input.value = "";
 
   renderScanList();
 
@@ -1131,28 +1365,41 @@ function addSN(){
 
 function renderScanList(){
 
-  const list=
-    document.getElementById("scanList");
+  const list =
+    document.getElementById(
+      "scanList"
+    );
 
-  const count=
-    document.getElementById("scanCount");
+  const count =
+    document.getElementById(
+      "scanCount"
+    );
 
-  count.textContent=
+
+  count.textContent =
     scannedSNs.length;
 
-  list.innerHTML="";
+
+  list.innerHTML = "";
+
 
   scannedSNs.forEach(
-    (sn,index)=>{
+    (sn,index) => {
 
-      const tag=
+      const tag =
         document.createElement("div");
 
-      tag.className="sn-tag";
+      tag.className =
+        "sn-tag";
 
-      tag.innerHTML=
+
+      tag.innerHTML =
         `${escapeHTML(sn)}
-        <button onclick="removeSN(${index})">×</button>`;
+        <button
+        onclick="removeSN(${index})">
+        ×
+        </button>`;
+
 
       list.appendChild(tag);
 
@@ -1164,7 +1411,10 @@ function renderScanList(){
 
 function removeSN(index){
 
-  scannedSNs.splice(index,1);
+  scannedSNs.splice(
+    index,
+    1
+  );
 
   renderScanList();
 
@@ -1177,21 +1427,25 @@ function removeSN(index){
 
 async function saveReject(){
 
-  const pn=
+  const pn =
     document.getElementById("pn").value;
 
-  const defect=
+  const defect =
     document.getElementById("defect").value;
 
-  const defectClass=
-    document.getElementById("defectClass").value;
+  const defectClass =
+    document.getElementById(
+      "defectClass"
+    ).value;
 
-  const operator=
+  const operator =
     document
       .getElementById("operator")
-      .value.trim();
+      .value
+      .trim();
 
-  if(scannedSNs.length===0){
+
+  if(scannedSNs.length === 0){
 
     showMessage(
       "Please scan / add at least one SN.",
@@ -1201,6 +1455,7 @@ async function saveReject(){
     return;
 
   }
+
 
   if(!pn){
 
@@ -1213,6 +1468,7 @@ async function saveReject(){
 
   }
 
+
   if(!defect){
 
     showMessage(
@@ -1223,6 +1479,7 @@ async function saveReject(){
     return;
 
   }
+
 
   if(!defectClass){
 
@@ -1235,6 +1492,7 @@ async function saveReject(){
 
   }
 
+
   if(!operator){
 
     showMessage(
@@ -1246,29 +1504,40 @@ async function saveReject(){
 
   }
 
-  const now=
+
+  const now =
     new Date().toISOString();
 
-  const records=
-    scannedSNs.map(sn=>({
 
-      component_sn:sn,
-      component_pn:pn,
-      defect:defect,
-      defect_class:defectClass,
-      operator_id:operator,
-      date_time:now
+  const records =
+    scannedSNs.map(
+      sn => ({
 
-    }));
+        component_sn:sn,
 
-  const {error}=
+        component_pn:pn,
+
+        defect:defect,
+
+        defect_class:defectClass,
+
+        operator_id:operator,
+
+        date_time:now
+
+      })
+    );
+
+
+  const {error} =
     await supabaseClient
       .from("rejects")
       .insert(records);
 
+
   if(error){
 
-    if(error.code==="23505"){
+    if(error.code === "23505"){
 
       showMessage(
         "Save failed: one or more SN already exist.",
@@ -1278,11 +1547,13 @@ async function saveReject(){
     }else{
 
       showMessage(
-        "Save failed: "+error.message,
+        "Save failed: " +
+        error.message,
         "red"
       );
 
     }
+
 
     await loadRows();
 
@@ -1290,7 +1561,8 @@ async function saveReject(){
 
   }
 
-  scannedSNs=[];
+
+  scannedSNs = [];
 
   renderScanList();
 
@@ -1310,17 +1582,24 @@ async function saveReject(){
    CLEAR FORM
 ===================================================== */
 
-function clearForm(clearBatch=true){
+function clearForm(
+  clearBatch = true
+){
 
-  document.getElementById("sn").value="";
-  document.getElementById("pn").value="";
-  document.getElementById("defect").value="";
-  document.getElementById("defectClass").value="";
-  document.getElementById("operator").value="";
+  document.getElementById("sn").value = "";
+
+  document.getElementById("pn").value = "";
+
+  document.getElementById("defect").value = "";
+
+  document.getElementById("defectClass").value = "";
+
+  document.getElementById("operator").value = "";
+
 
   if(clearBatch){
 
-    scannedSNs=[];
+    scannedSNs = [];
 
     renderScanList();
 
@@ -1348,39 +1627,78 @@ function render(){
 
 function applyFilters(){
 
-  const from=
-    document.getElementById("fromDate").value;
+  const from =
+    document.getElementById(
+      "fromDate"
+    ).value;
 
-  const to=
-    document.getElementById("toDate").value;
 
-  const defect=
-    document.getElementById("filterDefect").value;
+  const to =
+    document.getElementById(
+      "toDate"
+    ).value;
 
-  filteredRows=
-    rows.filter(row=>{
 
-      const d=
-        new Date(row.date_time);
+  const defect =
+    document.getElementById(
+      "filterDefect"
+    ).value;
 
-      if(isNaN(d.getTime()))
-        return false;
 
-      const day=
-        formatDateKey(d);
+  const defectClass =
+    document.getElementById(
+      "filterClass"
+    ).value;
 
-      if(from && day<from)
-        return false;
 
-      if(to && day>to)
-        return false;
+  filteredRows =
+    rows.filter(
+      row => {
 
-      if(defect && row.defect!==defect)
-        return false;
+        const d =
+          new Date(
+            row.date_time
+          );
 
-      return true;
 
-    });
+        if(isNaN(d.getTime()))
+          return false;
+
+
+        const day =
+          formatDateKey(d);
+
+
+        if(from && day < from)
+          return false;
+
+
+        if(to && day > to)
+          return false;
+
+
+        if(
+          defect &&
+          row.defect !== defect
+        )
+          return false;
+
+
+        if(
+          defectClass &&
+          String(
+            row.defect_class || ""
+          ).toLowerCase() !==
+          defectClass.toLowerCase()
+        )
+          return false;
+
+
+        return true;
+
+      }
+    );
+
 
   renderTable();
 
@@ -1391,11 +1709,31 @@ function applyFilters(){
 }
 
 
+/* =====================================================
+   CLEAR FILTER
+===================================================== */
+
 function clearFilters(){
 
-  document.getElementById("fromDate").value="";
-  document.getElementById("toDate").value="";
-  document.getElementById("filterDefect").value="";
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "filterDefect"
+  ).value = "";
+
+
+  document.getElementById(
+    "filterClass"
+  ).value = "";
+
 
   applyFilters();
 
@@ -1408,67 +1746,157 @@ function clearFilters(){
 
 function updateDashboard(){
 
-  document.getElementById("total").textContent=
+  /* TOTAL */
+
+  document.getElementById(
+    "total"
+  ).textContent =
     rows.length;
 
-  const today=
+
+  /* TODAY */
+
+  const today =
     new Date();
 
-  const todayKey=
+
+  const todayKey =
     formatDateKey(today);
 
-  const todayRows=
+
+  const todayRows =
     rows.filter(
       row =>
-      formatDateKey(
-        new Date(row.date_time)
-      )===todayKey
+        formatDateKey(
+          new Date(
+            row.date_time
+          )
+        ) === todayKey
     );
 
-  document.getElementById("qtyToday").textContent=
+
+  document.getElementById(
+    "qtyToday"
+  ).textContent =
     todayRows.length;
 
-  const counts={};
 
-  rows.forEach(row=>{
+  /* COSMETIC */
 
-    const defect=
-      row.defect||"Unknown";
+  const cosmeticRows =
+    rows.filter(
+      row =>
+        String(
+          row.defect_class || ""
+        )
+        .trim()
+        .toLowerCase() ===
+        "cosmetic"
+    );
 
-    counts[defect]=
-      (counts[defect]||0)+1;
 
-  });
+  document.getElementById(
+    "cosmeticTotal"
+  ).textContent =
+    cosmeticRows.length;
 
-  const sorted=
-    Object.entries(counts)
-      .sort((a,b)=>b[1]-a[1]);
 
-  document.getElementById("topDefect").textContent=
-    sorted.length
-    ? sorted[0][0]
-    : "-";
+  /* TOP COSMETIC */
 
-  const summary=
-    document.getElementById("summary");
+  const cosmeticCounts = {};
 
-  summary.innerHTML="";
 
-  sorted.slice(0,10).forEach(
-    ([defect,count])=>{
+  cosmeticRows.forEach(
+    row => {
 
-      const badge=
-        document.createElement("div");
+      const defect =
+        String(
+          row.defect ||
+          "Unknown"
+        ).trim();
 
-      badge.className="badge";
 
-      badge.textContent=
-        defect+": "+count;
-
-      summary.appendChild(badge);
+      cosmeticCounts[defect] =
+        (
+          cosmeticCounts[defect] ||
+          0
+        ) + 1;
 
     }
   );
+
+
+  const sorted =
+    Object.entries(
+      cosmeticCounts
+    )
+    .sort(
+      (a,b) =>
+        b[1] - a[1]
+    );
+
+
+  const topName =
+    sorted.length
+      ? sorted[0][0]
+      : "-";
+
+
+  document.getElementById(
+    "topDefect"
+  ).textContent =
+    topName;
+
+
+  document.getElementById(
+    "topDefectDashboard"
+  ).textContent =
+    sorted.length
+      ? topName +
+        " (" +
+        sorted[0][1] +
+        " Qty)"
+      : "-";
+
+
+  /* SUMMARY */
+
+  const summary =
+    document.getElementById(
+      "summary"
+    );
+
+
+  summary.innerHTML = "";
+
+
+  sorted
+    .slice(0,10)
+    .forEach(
+      ([defect,count]) => {
+
+        const badge =
+          document.createElement(
+            "div"
+          );
+
+
+        badge.className =
+          "badge";
+
+
+        badge.textContent =
+          defect +
+          ": " +
+          count;
+
+
+        summary.appendChild(
+          badge
+        );
+
+      }
+    );
 
 }
 
@@ -1479,667 +1907,240 @@ function updateDashboard(){
 
 function renderTable(){
 
-  const tbody=
-    document.getElementById("tbody");
+  const tbody =
+    document.getElementById(
+      "tbody"
+    );
 
-  const header=
+
+  const header =
     document.getElementById(
       "adminActionHeader"
     );
 
-  tbody.innerHTML="";
+
+  tbody.innerHTML = "";
+
 
   if(currentAdmin){
 
-    header.style.display="table-cell";
+    header.style.display =
+      "table-cell";
 
   }else{
 
-    header.style.display="none";
+    header.style.display =
+      "none";
 
   }
 
-  filteredRows.forEach(row=>{
 
-    const tr=
-      document.createElement("tr");
+  filteredRows.forEach(
+    row => {
 
-    let actionHTML="";
+      const tr =
+        document.createElement(
+          "tr"
+        );
 
-    if(currentAdmin){
 
-      actionHTML=`
+      let actionHTML = "";
 
-        <button
-          type="button"
-          class="action-btn edit-btn"
-          onclick="editRow('${escapeAttr(row.id)}')">
-          ✏️ EDIT
-        </button>
 
-        <button
-          type="button"
-          class="action-btn delete-btn"
-          onclick="deleteRow('${escapeAttr(row.id)}')">
-          🗑️ DELETE
-        </button>
+      if(currentAdmin){
+
+        actionHTML = `
+
+          <button
+            type="button"
+            class="action-btn edit-btn"
+            onclick="editRow('${escapeAttr(row.id)}')">
+            ✏️ EDIT
+          </button>
+
+          <button
+            type="button"
+            class="action-btn delete-btn"
+            onclick="deleteRow('${escapeAttr(row.id)}')">
+            🗑️ DELETE
+          </button>
+
+        `;
+
+      }
+
+
+      tr.innerHTML = `
+
+        <td>
+          ${escapeHTML(
+            row.component_sn
+          )}
+        </td>
+
+        <td>
+          ${escapeHTML(
+            row.component_pn
+          )}
+        </td>
+
+        <td>
+          ${escapeHTML(
+            row.defect
+          )}
+        </td>
+
+        <td>
+          ${escapeHTML(
+            row.defect_class
+          )}
+        </td>
+
+        <td>
+          ${escapeHTML(
+            row.operator_id
+          )}
+        </td>
+
+        <td>
+          ${formatDateTime(
+            row.date_time
+          )}
+        </td>
+
+        ${
+          currentAdmin
+          ? `
+            <td class="action-cell">
+              ${actionHTML}
+            </td>
+          `
+          : ""
+        }
 
       `;
 
-    }
 
-    tr.innerHTML=`
-
-      <td>
-        ${escapeHTML(row.component_sn)}
-      </td>
-
-      <td>
-        ${escapeHTML(row.component_pn)}
-      </td>
-
-      <td>
-        ${escapeHTML(row.defect)}
-      </td>
-
-      <td>
-        ${escapeHTML(row.defect_class)}
-      </td>
-
-      <td>
-        ${escapeHTML(row.operator_id)}
-      </td>
-
-      <td>
-        ${formatDateTime(row.date_time)}
-      </td>
-
-      ${
-        currentAdmin
-        ? `
-          <td class="action-cell">
-            ${actionHTML}
-          </td>
-        `
-        : ""
-      }
-
-    `;
-
-    tbody.appendChild(tr);
-
-  });
-
-}
-
-
-/* =====================================================
-   EDIT
-===================================================== */
-
-async function editRow(id){
-
-  if(!isAdmin()){
-
-    alert("Admin access required.");
-
-    return;
-
-  }
-
-  const row=
-    rows.find(
-      x =>
-      String(x.id)===String(id)
-    );
-
-  if(!row)
-    return;
-
-  const sn=
-    prompt(
-      "Component SN:",
-      row.component_sn||""
-    );
-
-  if(sn===null)
-    return;
-
-  const pn=
-    prompt(
-      "Component PN:",
-      row.component_pn||""
-    );
-
-  if(pn===null)
-    return;
-
-  const defect=
-    prompt(
-      "Defect:",
-      row.defect||""
-    );
-
-  if(defect===null)
-    return;
-
-  const defectClass=
-    prompt(
-      "Defect Class:",
-      row.defect_class||""
-    );
-
-  if(defectClass===null)
-    return;
-
-  const operator=
-    prompt(
-      "Badge ID:",
-      row.operator_id||""
-    );
-
-  if(operator===null)
-    return;
-
-  if(!sn.trim()){
-
-    alert("Component SN cannot be empty.");
-
-    return;
-
-  }
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .update({
-
-        component_sn:sn.trim(),
-        component_pn:pn.trim(),
-        defect:defect.trim(),
-        defect_class:defectClass.trim(),
-        operator_id:operator.trim()
-
-      })
-      .eq("id",id);
-
-  if(error){
-
-    if(error.code==="23505"){
-
-      alert(
-        "Cannot update. This Component SN already exists."
-      );
-
-    }else{
-
-      alert(
-        "Update failed: "+error.message
-      );
+      tbody.appendChild(tr);
 
     }
-
-    return;
-
-  }
-
-  await loadRows();
-
-  alert(
-    "Record updated successfully."
   );
 
 }
 
 
 /* =====================================================
-   DELETE ONE RECORD
-===================================================== */
-
-async function deleteRow(id){
-
-  if(!isAdmin()){
-
-    alert("Admin access required.");
-
-    return;
-
-  }
-
-  const row=
-    rows.find(
-      x =>
-      String(x.id)===String(id)
-    );
-
-  if(!row){
-
-    alert("Record not found.");
-
-    return;
-
-  }
-
-  const ok=
-    confirm(
-      "DELETE THIS RECORD?\n\n"+
-      "Component SN: "+
-      row.component_sn+
-      "\nDefect: "+
-      row.defect+
-      "\n\nThis action cannot be undone."
-    );
-
-  if(!ok)
-    return;
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    alert(
-      "Delete failed: "+error.message
-    );
-
-    return;
-
-  }
-
-  await loadRows();
-
-  alert(
-    "Record deleted successfully."
-  );
-
-}
-
-
-/* =====================================================
-   CLEAR ALL
-===================================================== */
-
-async function clearAll(){
-
-  if(!isAdmin()){
-
-    alert("Admin access required.");
-
-    return;
-
-  }
-
-  const ok=
-    confirm(
-      "WARNING!\n\n"+
-      "Delete ALL reject data?\n\n"+
-      "This cannot be undone."
-    );
-
-  if(!ok)
-    return;
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .delete()
-      .not("id","is",null);
-
-  if(error){
-
-    alert(
-      "Clear All failed: "+error.message
-    );
-
-    return;
-
-  }
-
-  await loadRows();
-
-  alert(
-    "All reject data has been cleared."
-  );
-
-}
-
-
-/* =====================================================
-   IMPORT
-===================================================== */
-
-async function importExcel(){
-
-  const file=
-    document
-      .getElementById("excelFile")
-      .files[0];
-
-  const msg=
-    document.getElementById(
-      "importMsg"
-    );
-
-  if(!file){
-
-    msg.style.color="red";
-
-    msg.textContent=
-      "Please select Excel / CSV file.";
-
-    return;
-
-  }
-
-  msg.style.color="#555";
-
-  msg.textContent=
-    "Importing data...";
-
-  try{
-
-    const buffer=
-      await file.arrayBuffer();
-
-    const workbook=
-      XLSX.read(
-        buffer,
-        {
-          type:"array",
-          cellDates:true
-        }
-      );
-
-    if(
-      !workbook.SheetNames ||
-      !workbook.SheetNames.length
-    ){
-
-      throw new Error(
-        "No worksheet found."
-      );
-
-    }
-
-    const sheet=
-      workbook.Sheets[
-        workbook.SheetNames[0]
-      ];
-
-    const data=
-      XLSX.utils.sheet_to_json(
-        sheet,
-        {
-          defval:"",
-          raw:true
-        }
-      );
-
-    if(!data.length){
-
-      throw new Error(
-        "No data found in file."
-      );
-
-    }
-
-    const records=[];
-    const duplicateSNs=[];
-    const fileSNs=new Set();
-
-    data.forEach(row=>{
-
-      const sn=
-        String(
-          row["Component SN"] ??
-          row["component_sn"] ??
-          row["SN"] ??
-          row["sn"] ??
-          ""
-        ).trim();
-
-      if(!sn)
-        return;
-
-      const snKey=
-        sn.toLowerCase();
-
-      if(fileSNs.has(snKey)){
-
-        duplicateSNs.push(sn);
-
-        return;
-
-      }
-
-      fileSNs.add(snKey);
-
-      const badgeID=
-        String(
-          row["Badge ID"] ??
-          row["badge_id"] ??
-          row["Operator ID"] ??
-          row["operator_id"] ??
-          row["Operator"] ??
-          row["operator"] ??
-          ""
-        ).trim();
-
-      records.push({
-
-        component_sn:sn,
-
-        component_pn:
-          String(
-            row["Component PN"] ??
-            row["component_pn"] ??
-            row["PN"] ??
-            row["pn"] ??
-            ""
-          ).trim(),
-
-        defect:
-          String(
-            row["Defect"] ??
-            row["defect"] ??
-            ""
-          ).trim(),
-
-        defect_class:
-          String(
-            row["Defect Class"] ??
-            row["defect_class"] ??
-            ""
-          ).trim(),
-
-        operator_id:
-          badgeID,
-
-        date_time:
-          parseImportDate(
-            row["Date Time"] ??
-            row["date_time"] ??
-            row["Date"] ??
-            row["date"] ??
-            ""
-          )
-
-      });
-
-    });
-
-    if(!records.length){
-
-      throw new Error(
-        "No valid Component SN found."
-      );
-
-    }
-
-    const existingSNs=
-      new Set(
-        rows.map(row =>
-          String(
-            row.component_sn||""
-          )
-          .trim()
-          .toLowerCase()
-        )
-      );
-
-    const newRecords=
-      records.filter(record=>{
-
-        const key=
-          String(
-            record.component_sn
-          )
-          .trim()
-          .toLowerCase();
-
-        return !existingSNs.has(key);
-
-      });
-
-    const existingCount=
-      records.length-newRecords.length;
-
-    if(!newRecords.length){
-
-      throw new Error(
-        "All SN in this file already exist in the database."
-      );
-
-    }
-
-    const {error}=
-      await supabaseClient
-        .from("rejects")
-        .insert(newRecords);
-
-    if(error){
-
-      if(error.code==="23505"){
-
-        throw new Error(
-          "Import stopped because one or more Component SN already exist in the database."
-        );
-
-      }
-
-      throw new Error(
-        error.message||
-        "Database insert failed."
-      );
-
-    }
-
-    let successMessage=
-      newRecords.length+
-      " records imported successfully.";
-
-    if(existingCount>0){
-
-      successMessage+=
-        " "+
-        existingCount+
-        " duplicate SN skipped.";
-
-    }
-
-    if(duplicateSNs.length>0){
-
-      successMessage+=
-        " "+
-        duplicateSNs.length+
-        " duplicate SN inside the file skipped.";
-
-    }
-
-    msg.style.color="green";
-
-    msg.textContent=
-      successMessage;
-
-    document
-      .getElementById("excelFile")
-      .value="";
-
-    await loadRows();
-
-  }catch(error){
-
-    console.error(error);
-
-    msg.style.color="red";
-
-    msg.textContent=
-      "Import failed: "+
-      (
-        error.message||
-        "Unknown error"
-      );
-
-  }
-
-}
-
-
-/* =====================================================
-   BAR CHART
+   COSMETIC BAR CHART
 ===================================================== */
 
 function renderChart(){
 
-  const counts={};
+  const counts = {};
 
-  filteredRows.forEach(row=>{
 
-    const key=
-      formatDateKey(
-        new Date(row.date_time)
+  filteredRows.forEach(
+    row => {
+
+      const defectClass =
+        String(
+          row.defect_class || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      /* ONLY COSMETIC */
+
+      if(
+        defectClass !==
+        "cosmetic"
+      ){
+
+        return;
+
+      }
+
+
+      const defect =
+        String(
+          row.defect ||
+          "Unknown"
+        ).trim();
+
+
+      if(!defect)
+        return;
+
+
+      counts[defect] =
+        (
+          counts[defect] ||
+          0
+        ) + 1;
+
+    }
+  );
+
+
+  /* SORT HIGH TO LOW */
+
+  const sorted =
+    Object.entries(counts)
+      .sort(
+        (a,b) =>
+          b[1] - a[1]
       );
 
-    counts[key]=
-      (counts[key]||0)+1;
 
-  });
-
-  const labels=
-    Object.keys(counts).sort();
-
-  const values=
-    labels.map(
-      x=>counts[x]
+  const labels =
+    sorted.map(
+      item => item[0]
     );
 
-  const total=
-    values.reduce(
-      (sum,value)=>sum+value,
-      0
+
+  const values =
+    sorted.map(
+      item => item[1]
     );
 
-  document
-    .getElementById("chartTotal")
-    .textContent=
-      "TOTAL: "+total;
 
-  const canvas=
+  const empty =
+    document.getElementById(
+      "chartEmpty"
+    );
+
+
+  if(!labels.length){
+
+    empty.style.display =
+      "block";
+
+  }else{
+
+    empty.style.display =
+      "none";
+
+  }
+
+
+  const canvas =
     document.getElementById(
       "trendChart"
     );
 
-  const ctx=
+
+  const ctx =
     canvas.getContext("2d");
+
 
   if(trendChart){
 
     trendChart.destroy();
 
+    trendChart = null;
+
   }
+
 
   if(!labels.length){
 
@@ -2147,12 +2148,10 @@ function renderChart(){
 
   }
 
-  /*
-    Gradient bar:
-    pink -> purple
-  */
 
-  const gradient=
+  /* GRADIENT */
+
+  const gradient =
     ctx.createLinearGradient(
       0,
       0,
@@ -2160,15 +2159,18 @@ function renderChart(){
       430
     );
 
+
   gradient.addColorStop(
     0,
     "#ff4f9a"
   );
 
+
   gradient.addColorStop(
-    .5,
+    0.5,
     "#d946ef"
   );
+
 
   gradient.addColorStop(
     1,
@@ -2176,30 +2178,33 @@ function renderChart(){
   );
 
 
-  trendChart=
+  /* BAR CHART */
+
+  trendChart =
     new Chart(
       ctx,
       {
 
         type:"bar",
 
-        plugins:[
-          ChartDataLabels
-        ],
 
         data:{
 
           labels:labels,
 
+
           datasets:[{
 
-            label:"Reject Quantity",
+            label:
+              "Cosmetic Reject Qty",
 
             data:values,
 
-            backgroundColor:gradient,
+            backgroundColor:
+              gradient,
 
-            borderColor:"#8b5cf6",
+            borderColor:
+              "#8b3d70",
 
             borderWidth:1,
 
@@ -2209,17 +2214,12 @@ function renderChart(){
 
             barPercentage:.65,
 
-            categoryPercentage:.72,
-
-            hoverBackgroundColor:"#ec4899",
-
-            hoverBorderColor:"#7c3aed",
-
-            hoverBorderWidth:2
+            categoryPercentage:.75
 
           }]
 
         },
+
 
         options:{
 
@@ -2227,91 +2227,60 @@ function renderChart(){
 
           maintainAspectRatio:false,
 
+
           animation:{
 
-            duration:900,
-
-            easing:"easeOutQuart"
+            duration:700
 
           },
 
-          interaction:{
-
-            intersect:false,
-
-            mode:"index"
-
-          },
 
           plugins:{
 
             legend:{
 
-              display:false
-
-            },
-
-            datalabels:{
-
               display:true,
 
-              color:"#7a315c",
+              labels:{
 
-              anchor:"end",
+                color:"#6b3157",
 
-              align:"top",
-
-              offset:4,
-
-              font:{
-
-                weight:"bold",
-
-                size:12
-
-              },
-
-              formatter:function(value){
-
-                return value;
+                font:{
+                  weight:"bold"
+                }
 
               }
 
             },
 
+
             tooltip:{
 
-              backgroundColor:"rgba(45,30,50,.95)",
+              backgroundColor:
+                "#4a1535",
 
-              titleColor:"#fff",
+              titleColor:
+                "#ffffff",
 
-              bodyColor:"#fff",
+              bodyColor:
+                "#ffffff",
 
-              padding:13,
+              padding:12,
 
               cornerRadius:10,
 
-              displayColors:false,
 
               callbacks:{
 
-                title:function(items){
+                label:
+                  function(context){
 
-                  if(!items.length)
-                    return "";
+                    return (
+                      " Qty: " +
+                      context.parsed.y
+                    );
 
-                  return "Date: "+
-                    items[0].label;
-
-                },
-
-                label:function(context){
-
-                  return "Reject: "+
-                    context.parsed.y+
-                    " pcs";
-
-                }
+                  }
 
               }
 
@@ -2319,111 +2288,87 @@ function renderChart(){
 
           },
 
+
           scales:{
 
             x:{
 
               grid:{
-
                 display:false
-
               },
 
-              border:{
-
-                display:false
-
-              },
-
-              ticks:{
-
-                color:"#666",
-
-                font:{
-
-                  size:11,
-
-                  weight:"bold"
-
-                },
-
-                maxRotation:45,
-
-                minRotation:0
-
-              },
 
               title:{
 
                 display:true,
 
-                text:"DATE",
+                text:
+                  "NAMA REJECT / DEFECT",
 
-                color:"#8b3d70",
+                color:
+                  "#7a315c",
 
                 font:{
+                  weight:"bold"
+                }
 
-                  weight:"bold",
+              },
 
-                  size:12
 
+              ticks:{
+
+                color:"#555",
+
+                autoSkip:false,
+
+                maxRotation:45,
+
+                minRotation:0,
+
+                font:{
+                  size:11
                 }
 
               }
 
             },
 
+
             y:{
 
               beginAtZero:true,
-
-              suggestedMax:
-                Math.max(...values)+1,
-
-              border:{
-
-                display:false
-
-              },
 
               ticks:{
 
                 precision:0,
 
-                color:"#666",
+                color:"#555",
 
-                font:{
-
-                  size:11
-
-                }
+                stepSize:1
 
               },
 
-              grid:{
-
-                color:
-                  "rgba(139,92,246,.10)",
-
-                drawTicks:false
-
-              },
 
               title:{
 
                 display:true,
 
-                text:"REJECT QUANTITY",
+                text:"QTY",
 
-                color:"#8b3d70",
+                color:
+                  "#7a315c",
 
                 font:{
-
-                  weight:"bold",
-
-                  size:12
-
+                  weight:"bold"
                 }
+
+              },
+
+
+              grid:{
+
+                color:
+                  "rgba(139,92,246,.10)"
 
               }
 
@@ -2445,88 +2390,750 @@ function renderChart(){
 
 function renderDailyTopDefect(){
 
-  const container=
+  const container =
     document.getElementById(
       "dailyTopDefect"
     );
 
-  const dates={};
 
-  filteredRows.forEach(row=>{
+  const dates = {};
 
-    const date=
-      formatDateKey(
-        new Date(row.date_time)
-      );
 
-    if(!dates[date])
-      dates[date]={};
+  filteredRows.forEach(
+    row => {
 
-    const defect=
-      row.defect||"Unknown";
+      const date =
+        formatDateKey(
+          new Date(
+            row.date_time
+          )
+        );
 
-    dates[date][defect]=
-      (
-        dates[date][defect]||0
-      )+1;
 
-  });
+      if(!dates[date])
+        dates[date] = {};
 
-  const dateKeys=
+
+      const defect =
+        row.defect ||
+        "Unknown";
+
+
+      dates[date][defect] =
+        (
+          dates[date][defect] ||
+          0
+        ) + 1;
+
+    }
+  );
+
+
+  const dateKeys =
     Object.keys(dates)
       .sort()
       .reverse();
 
+
   if(!dateKeys.length){
 
-    container.innerHTML=
+    container.innerHTML =
       "<p>No data available.</p>";
 
     return;
 
   }
 
-  let html="";
 
-  dateKeys.forEach(date=>{
+  let html = "";
 
-    const sorted=
-      Object.entries(
-        dates[date]
-      )
-      .sort(
-        (a,b)=>b[1]-a[1]
+
+  dateKeys.forEach(
+    date => {
+
+      const sorted =
+        Object.entries(
+          dates[date]
+        )
+        .sort(
+          (a,b) =>
+            b[1] - a[1]
+        );
+
+
+      const top =
+        sorted[0];
+
+
+      html += `
+
+        <div class="daily-box">
+
+          <b>
+            ${escapeHTML(date)}
+          </b>
+
+          <br>
+
+          Top Defect:
+
+          <strong>
+            ${escapeHTML(top[0])}
+          </strong>
+
+          — ${top[1]} reject(s)
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  container.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+async function editRow(id){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  const row =
+    rows.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
+
+  if(!row)
+    return;
+
+
+  const sn =
+    prompt(
+      "Component SN:",
+      row.component_sn || ""
+    );
+
+
+  if(sn === null)
+    return;
+
+
+  const pn =
+    prompt(
+      "Component PN:",
+      row.component_pn || ""
+    );
+
+
+  if(pn === null)
+    return;
+
+
+  const defect =
+    prompt(
+      "Defect:",
+      row.defect || ""
+    );
+
+
+  if(defect === null)
+    return;
+
+
+  const defectClass =
+    prompt(
+      "Defect Class:",
+      row.defect_class || ""
+    );
+
+
+  if(defectClass === null)
+    return;
+
+
+  const operator =
+    prompt(
+      "Badge ID:",
+      row.operator_id || ""
+    );
+
+
+  if(operator === null)
+    return;
+
+
+  if(!sn.trim()){
+
+    alert(
+      "Component SN cannot be empty."
+    );
+
+    return;
+
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("rejects")
+      .update({
+
+        component_sn:
+          sn.trim(),
+
+        component_pn:
+          pn.trim(),
+
+        defect:
+          defect.trim(),
+
+        defect_class:
+          defectClass.trim(),
+
+        operator_id:
+          operator.trim()
+
+      })
+      .eq(
+        "id",
+        id
       );
 
-    const top=sorted[0];
 
-    html+=`
+  if(error){
 
-      <div
-        style="
-        padding:12px;
-        margin-bottom:10px;
-        background:#fff5f9;
-        border-radius:12px">
+    if(
+      error.code ===
+      "23505"
+    ){
 
-        <b>${escapeHTML(date)}</b>
+      alert(
+        "Cannot update. This Component SN already exists."
+      );
 
-        <br>
+    }else{
 
-        Top Defect:
-        <strong>
-          ${escapeHTML(top[0])}
-        </strong>
+      alert(
+        "Update failed: " +
+        error.message
+      );
 
-        — ${top[1]} reject(s)
+    }
 
-      </div>
+    return;
 
-    `;
+  }
 
-  });
 
-  container.innerHTML=html;
+  await loadRows();
+
+  alert(
+    "Record updated successfully."
+  );
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+async function deleteRow(id){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  const row =
+    rows.find(
+      x =>
+        String(x.id) ===
+        String(id)
+    );
+
+
+  if(!row){
+
+    alert(
+      "Record not found."
+    );
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      "DELETE THIS RECORD?\n\n" +
+      "Component SN: " +
+      row.component_sn +
+      "\nDefect: " +
+      row.defect +
+      "\n\nThis action cannot be undone."
+    );
+
+
+  if(!ok)
+    return;
+
+
+  const {error} =
+    await supabaseClient
+      .from("rejects")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if(error){
+
+    alert(
+      "Delete failed: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadRows();
+
+  alert(
+    "Record deleted successfully."
+  );
+
+}
+
+
+/* =====================================================
+   CLEAR ALL
+===================================================== */
+
+async function clearAll(){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      "WARNING!\n\n" +
+      "Delete ALL reject data?\n\n" +
+      "This cannot be undone."
+    );
+
+
+  if(!ok)
+    return;
+
+
+  const {error} =
+    await supabaseClient
+      .from("rejects")
+      .delete()
+      .not(
+        "id",
+        "is",
+        null
+      );
+
+
+  if(error){
+
+    alert(
+      "Clear All failed: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadRows();
+
+  alert(
+    "All reject data has been cleared."
+  );
+
+}
+
+
+/* =====================================================
+   IMPORT EXCEL
+===================================================== */
+
+async function importExcel(){
+
+  const file =
+    document
+      .getElementById(
+        "excelFile"
+      )
+      .files[0];
+
+
+  const msg =
+    document.getElementById(
+      "importMsg"
+    );
+
+
+  if(!file){
+
+    msg.style.color =
+      "red";
+
+    msg.textContent =
+      "Please select Excel / CSV file.";
+
+    return;
+
+  }
+
+
+  msg.style.color =
+    "#555";
+
+  msg.textContent =
+    "Importing data...";
+
+
+  try{
+
+    const buffer =
+      await file.arrayBuffer();
+
+
+    const workbook =
+      XLSX.read(
+        buffer,
+        {
+          type:"array",
+          cellDates:true
+        }
+      );
+
+
+    if(
+      !workbook.SheetNames ||
+      !workbook.SheetNames.length
+    ){
+
+      throw new Error(
+        "No worksheet found."
+      );
+
+    }
+
+
+    const sheet =
+      workbook.Sheets[
+        workbook.SheetNames[0]
+      ];
+
+
+    const data =
+      XLSX.utils.sheet_to_json(
+        sheet,
+        {
+          defval:"",
+          raw:true
+        }
+      );
+
+
+    if(!data.length){
+
+      throw new Error(
+        "No data found in file."
+      );
+
+    }
+
+
+    const records = [];
+
+    const duplicateSNs = [];
+
+    const fileSNs =
+      new Set();
+
+
+    data.forEach(
+      row => {
+
+        const sn =
+          String(
+            row["Component SN"] ??
+            row["component_sn"] ??
+            row["SN"] ??
+            row["sn"] ??
+            ""
+          ).trim();
+
+
+        if(!sn)
+          return;
+
+
+        const snKey =
+          sn.toLowerCase();
+
+
+        if(
+          fileSNs.has(snKey)
+        ){
+
+          duplicateSNs.push(sn);
+
+          return;
+
+        }
+
+
+        fileSNs.add(snKey);
+
+
+        const badgeID =
+          String(
+            row["Badge ID"] ??
+            row["badge_id"] ??
+            row["Operator ID"] ??
+            row["operator_id"] ??
+            row["Operator"] ??
+            row["operator"] ??
+            ""
+          ).trim();
+
+
+        records.push({
+
+          component_sn:
+            sn,
+
+          component_pn:
+            String(
+              row["Component PN"] ??
+              row["component_pn"] ??
+              row["PN"] ??
+              row["pn"] ??
+              ""
+            ).trim(),
+
+          defect:
+            String(
+              row["Defect"] ??
+              row["defect"] ??
+              ""
+            ).trim(),
+
+          defect_class:
+            String(
+              row["Defect Class"] ??
+              row["defect_class"] ??
+              ""
+            ).trim(),
+
+          operator_id:
+            badgeID,
+
+          date_time:
+            parseImportDate(
+              row["Date Time"] ??
+              row["date_time"] ??
+              row["Date"] ??
+              row["date"] ??
+              ""
+            )
+
+        });
+
+      }
+    );
+
+
+    if(!records.length){
+
+      throw new Error(
+        "No valid Component SN found."
+      );
+
+    }
+
+
+    const existingSNs =
+      new Set(
+        rows.map(
+          row =>
+            String(
+              row.component_sn ||
+              ""
+            )
+            .trim()
+            .toLowerCase()
+        )
+      );
+
+
+    const newRecords =
+      records.filter(
+        record => {
+
+          const key =
+            String(
+              record.component_sn
+            )
+            .trim()
+            .toLowerCase();
+
+
+          return !existingSNs.has(key);
+
+        }
+      );
+
+
+    const existingCount =
+      records.length -
+      newRecords.length;
+
+
+    if(!newRecords.length){
+
+      throw new Error(
+        "All SN in this file already exist in the database."
+      );
+
+    }
+
+
+    const {error} =
+      await supabaseClient
+        .from("rejects")
+        .insert(
+          newRecords
+        );
+
+
+    if(error){
+
+      if(
+        error.code ===
+        "23505"
+      ){
+
+        throw new Error(
+          "Import stopped because one or more Component SN already exist in the database."
+        );
+
+      }
+
+
+      throw new Error(
+        error.message ||
+        "Database insert failed."
+      );
+
+    }
+
+
+    let successMessage =
+      newRecords.length +
+      " records imported successfully.";
+
+
+    if(existingCount > 0){
+
+      successMessage +=
+        " " +
+        existingCount +
+        " duplicate SN skipped.";
+
+    }
+
+
+    if(
+      duplicateSNs.length > 0
+    ){
+
+      successMessage +=
+        " " +
+        duplicateSNs.length +
+        " duplicate SN inside the file skipped.";
+
+    }
+
+
+    msg.style.color =
+      "green";
+
+    msg.textContent =
+      successMessage;
+
+
+    document
+      .getElementById(
+        "excelFile"
+      )
+      .value = "";
+
+
+    await loadRows();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    msg.style.color =
+      "red";
+
+    msg.textContent =
+      "Import failed: " +
+      (
+        error.message ||
+        "Unknown error"
+      );
+
+  }
 
 }
 
@@ -2547,44 +3154,51 @@ function exportCSV(){
 
   }
 
-  const exportRows=
-    filteredRows.map(row=>({
 
-      "Component SN":
-        row.component_sn,
+  const exportRows =
+    filteredRows.map(
+      row => ({
 
-      "Component PN":
-        row.component_pn,
+        "Component SN":
+          row.component_sn,
 
-      "Defect":
-        row.defect,
+        "Component PN":
+          row.component_pn,
 
-      "Defect Class":
-        row.defect_class,
+        "Defect":
+          row.defect,
 
-      "Badge ID":
-        row.operator_id,
+        "Defect Class":
+          row.defect_class,
 
-      "Date Time":
-        formatDateTime(
-          row.date_time
-        )
+        "Badge ID":
+          row.operator_id,
 
-    }));
+        "Date Time":
+          formatDateTime(
+            row.date_time
+          )
 
-  const worksheet=
+      })
+    );
+
+
+  const worksheet =
     XLSX.utils.json_to_sheet(
       exportRows
     );
 
-  const workbook=
+
+  const workbook =
     XLSX.utils.book_new();
+
 
   XLSX.utils.book_append_sheet(
     workbook,
     worksheet,
     "Reject Data"
   );
+
 
   XLSX.writeFile(
     workbook,
@@ -2600,7 +3214,7 @@ function exportCSV(){
 
 function backupJSON(){
 
-  const blob=
+  const blob =
     new Blob(
       [
         JSON.stringify(
@@ -2610,24 +3224,36 @@ function backupJSON(){
         )
       ],
       {
-        type:"application/json"
+        type:
+          "application/json"
       }
     );
 
-  const url=
-    URL.createObjectURL(blob);
 
-  const a=
-    document.createElement("a");
+  const url =
+    URL.createObjectURL(
+      blob
+    );
 
-  a.href=url;
 
-  a.download=
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href = url;
+
+  a.download =
     "Reject_Trending_Backup.json";
+
 
   a.click();
 
-  URL.revokeObjectURL(url);
+
+  URL.revokeObjectURL(
+    url
+  );
 
 }
 
@@ -2640,11 +3266,14 @@ function openAdminLogin(){
 
   document.getElementById(
     "adminModal"
-  ).style.display="flex";
+  ).style.display =
+    "flex";
+
 
   document.getElementById(
     "adminError"
-  ).textContent="";
+  ).textContent =
+    "";
 
 }
 
@@ -2653,40 +3282,53 @@ function closeAdminLogin(){
 
   document.getElementById(
     "adminModal"
-  ).style.display="none";
+  ).style.display =
+    "none";
 
 }
 
 
 async function adminLogin(){
 
-  const email=
+  const email =
     document.getElementById(
       "adminEmail"
     ).value.trim();
 
-  const password=
+
+  const password =
     document.getElementById(
       "adminPassword"
     ).value;
 
-  const errorBox=
+
+  const errorBox =
     document.getElementById(
       "adminError"
     );
 
-  errorBox.textContent="";
 
-  if(!email||!password){
+  errorBox.textContent =
+    "";
 
-    errorBox.textContent=
+
+  if(
+    !email ||
+    !password
+  ){
+
+    errorBox.textContent =
       "Please enter email and password.";
 
     return;
 
   }
 
-  const {data,error}=
+
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .auth
       .signInWithPassword({
@@ -2697,34 +3339,41 @@ async function adminLogin(){
 
       });
 
+
   if(error){
 
-    errorBox.textContent=
+    errorBox.textContent =
       error.message;
 
     return;
 
   }
 
+
   if(
-    !data.user||
-    data.user.id!==ADMIN_UID
+    !data.user ||
+    data.user.id !==
+    ADMIN_UID
   ){
 
     await supabaseClient
       .auth
       .signOut();
 
-    errorBox.textContent=
+
+    errorBox.textContent =
       "This account is not authorised as admin.";
 
     return;
 
   }
 
+
   closeAdminLogin();
 
-  await updateAdminUI(data.user);
+  await updateAdminUI(
+    data.user
+  );
 
   renderTable();
 
@@ -2737,7 +3386,10 @@ async function adminLogout(){
     .auth
     .signOut();
 
-  await updateAdminUI(null);
+
+  await updateAdminUI(
+    null
+  );
 
   renderTable();
 
@@ -2750,13 +3402,14 @@ async function adminLogout(){
 
 async function checkAdmin(){
 
-  const {data}=
+  const {data} =
     await supabaseClient
       .auth
       .getUser();
 
+
   await updateAdminUI(
-    data.user||null
+    data.user || null
   );
 
 }
@@ -2773,87 +3426,109 @@ function isAdmin(){
    ADMIN UI
 ===================================================== */
 
-async function updateAdminUI(user=null){
+async function updateAdminUI(
+  user = null
+){
 
   if(!user){
 
-    const result=
+    const result =
       await supabaseClient
         .auth
         .getUser();
 
-    user=
-      result.data.user||null;
+
+    user =
+      result.data.user ||
+      null;
 
   }
 
-  currentAdmin=
+
+  currentAdmin =
     !!(
       user &&
-      user.id===ADMIN_UID
+      user.id ===
+      ADMIN_UID
     );
 
-  const status=
+
+  const status =
     document.getElementById(
       "adminStatus"
     );
 
-  const loginBtn=
+
+  const loginBtn =
     document.getElementById(
       "adminButton"
     );
 
-  const logoutBtn=
+
+  const logoutBtn =
     document.getElementById(
       "adminLogoutButton"
     );
 
-  const management=
+
+  const management =
     document.getElementById(
       "dataManagement"
     );
 
+
   if(currentAdmin){
 
-    status.textContent=
+    status.textContent =
       "ADMIN MODE";
 
-    status.style.background=
+
+    status.style.background =
       "#dcfce7";
 
-    status.style.color=
+
+    status.style.color =
       "#166534";
 
-    loginBtn.style.display=
+
+    loginBtn.style.display =
       "none";
 
-    logoutBtn.style.display=
+
+    logoutBtn.style.display =
       "inline-block";
 
-    management.style.display=
+
+    management.style.display =
       "block";
 
   }else{
 
-    status.textContent=
+    status.textContent =
       "VIEWER MODE";
 
-    status.style.background=
+
+    status.style.background =
       "#f3e8ff";
 
-    status.style.color=
+
+    status.style.color =
       "#6b21a8";
 
-    loginBtn.style.display=
+
+    loginBtn.style.display =
       "inline-block";
 
-    logoutBtn.style.display=
+
+    logoutBtn.style.display =
       "none";
 
-    management.style.display=
+
+    management.style.display =
       "none";
 
   }
+
 
   renderTable();
 
@@ -2900,21 +3575,26 @@ setInterval(
    DATE
 ===================================================== */
 
-function formatDateKey(date){
+function formatDateKey(
+  date
+){
 
   if(
-    !date||
-    isNaN(date.getTime())
+    !date ||
+    isNaN(
+      date.getTime()
+    )
   )
     return "Unknown";
 
+
   return(
-    date.getFullYear()+
-    "-"+
+    date.getFullYear() +
+    "-" +
     String(
-      date.getMonth()+1
-    ).padStart(2,"0")+
-    "-"+
+      date.getMonth() + 1
+    ).padStart(2,"0") +
+    "-" +
     String(
       date.getDate()
     ).padStart(2,"0")
@@ -2923,15 +3603,21 @@ function formatDateKey(date){
 }
 
 
-function formatDateTime(value){
+function formatDateTime(
+  value
+){
 
-  const date=
+  const date =
     new Date(value);
 
+
   if(
-    isNaN(date.getTime())
+    isNaN(
+      date.getTime()
+    )
   )
-    return value||"";
+    return value || "";
+
 
   return date.toLocaleString();
 
@@ -2942,14 +3628,21 @@ function formatDateTime(value){
    IMPORT DATE
 ===================================================== */
 
-function parseImportDate(value){
+function parseImportDate(
+  value
+){
 
   if(!value)
-    return new Date().toISOString();
+    return new Date()
+      .toISOString();
 
-  if(typeof value==="number"){
 
-    const excelEpoch=
+  if(
+    typeof value ===
+    "number"
+  ){
+
+    const excelEpoch =
       new Date(
         Date.UTC(
           1899,
@@ -2958,61 +3651,121 @@ function parseImportDate(value){
         )
       );
 
-    const date=
+
+    const date =
       new Date(
-        excelEpoch.getTime()+
-        value*86400000
+        excelEpoch.getTime() +
+        value *
+        86400000
       );
 
+
     return date.toISOString();
 
   }
 
-  if(value instanceof Date){
 
-    if(!isNaN(value.getTime()))
+  if(
+    value instanceof Date
+  ){
+
+    if(
+      !isNaN(
+        value.getTime()
+      )
+    ){
+
       return value.toISOString();
 
+    }
+
   }
 
-  const text=
+
+  const text =
     String(value).trim();
 
-  if(!text)
-    return new Date().toISOString();
 
-  const date=
+  if(!text)
+    return new Date()
+      .toISOString();
+
+
+  const date =
     new Date(text);
 
-  if(!isNaN(date.getTime()))
+
+  if(
+    !isNaN(
+      date.getTime()
+    )
+  ){
+
     return date.toISOString();
 
-  return new Date().toISOString();
+  }
+
+
+  return new Date()
+    .toISOString();
 
 }
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
-  return String(value??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-function escapeAttr(value){
+/* =====================================================
+   ESCAPE ATTRIBUTE
+===================================================== */
 
-  return String(value??"")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
+function escapeAttr(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  );
 
 }
 
@@ -3021,17 +3774,25 @@ function escapeAttr(value){
    MESSAGE
 ===================================================== */
 
-function showMessage(text,color){
+function showMessage(
+  text,
+  color
+){
 
-  const msg=
-    document.getElementById("msg");
+  const msg =
+    document.getElementById(
+      "msg"
+    );
 
-  msg.textContent=text;
 
-  msg.style.color=
-    color==="green"
-    ? "#16a34a"
-    : "#dc2626";
+  msg.textContent =
+    text;
+
+
+  msg.style.color =
+    color === "green"
+      ? "#16a34a"
+      : "#dc2626";
 
 }
 
