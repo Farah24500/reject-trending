@@ -12,59 +12,51 @@
 
 <style>
 
-/* =========================================================
-   ROOT / THEME
-========================================================= */
-
 :root{
-    --bg:#19191d;
-    --panel:#24242a;
-    --panel2:#2b2b32;
-    --panel3:#303039;
+    --bg:#f7f5fb;
+    --white:#ffffff;
+    --text:#34323d;
+    --muted:#85818f;
 
-    --border:#3b3b44;
-    --border-soft:rgba(255,255,255,.075);
+    --lavender:#9b7edc;
+    --lavender-light:#eee7ff;
 
-    --text:#f2f0f2;
-    --muted:#aaa8b0;
+    --pink:#e88fa5;
+    --pink-light:#ffe8ef;
 
-    --lavender:#b9abd7;
-    --lavender-dark:#75678f;
+    --peach:#eead76;
+    --peach-light:#fff0df;
 
-    --rose:#d5a5af;
-    --rose-dark:#805d66;
+    --mint:#78bfa3;
+    --mint-light:#e3f6ee;
 
-    --sage:#9fbea8;
-    --sage-dark:#617b69;
+    --teal:#6dbbc3;
+    --teal-light:#e1f5f7;
 
-    --teal:#91c3c3;
-    --teal-dark:#587b7b;
+    --coral:#e88972;
+    --coral-light:#ffebe5;
 
-    --peach:#d6b08e;
-    --gold:#d2c08d;
-    --purple:#aa9bcf;
-    --green:#94b99f;
-    --red:#c98e97;
-    --orange:#d1a77d;
+    --yellow:#dfb65e;
+    --yellow-light:#fff6dc;
 
-    --shadow:0 16px 40px rgba(0,0,0,.24);
-    --radius:18px;
+    --border:#e9e4ef;
+
+    --shadow:
+        0 12px 35px rgba(105,82,140,.10);
+
+    --shadow-hover:
+        0 18px 45px rgba(105,82,140,.17);
 }
 
 *{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     margin:0;
-    min-height:100vh;
     font-family:
         Inter,
-        Segoe UI,
+        "Segoe UI",
         Arial,
         sans-serif;
 
@@ -72,24 +64,28 @@ body{
 
     background:
         radial-gradient(
-            circle at 10% 0%,
-            rgba(185,171,215,.12),
+            circle at 8% 8%,
+            rgba(220,202,255,.75),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 12%,
+            rgba(255,214,226,.65),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(207,244,232,.65),
             transparent 28%
         ),
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(145,195,195,.10),
-            transparent 26%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(213,165,175,.08),
-            transparent 30%
-        ),
-        var(--bg);
+        #f7f5fb;
 
-    overflow-x:hidden;
+    min-height:100vh;
 }
+
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 button,
 input,
@@ -99,6 +95,7 @@ select{
 
 button{
     cursor:pointer;
+    border:none;
 }
 
 .hidden{
@@ -114,39 +111,26 @@ header{
     top:0;
     z-index:100;
 
-    width:100%;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(31,31,36,.96),
-            rgba(24,24,28,.94)
-        );
-
-    border-bottom:1px solid rgba(255,255,255,.07);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    box-shadow:0 8px 30px rgba(0,0,0,.18);
-}
-
-.header-inner{
-    max-width:1450px;
-    margin:auto;
-
-    padding:15px 24px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:18px;
+
+    padding:16px 30px;
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(220,214,230,.8);
+
+    box-shadow:
+        0 5px 20px rgba(80,60,100,.06);
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:14px;
+    gap:13px;
 }
 
 .logo{
@@ -159,32 +143,33 @@ header{
     align-items:center;
     justify-content:center;
 
-    font-size:17px;
     font-weight:900;
+    font-size:18px;
 
-    color:#fff;
+    color:white;
 
     background:
         linear-gradient(
             135deg,
-            #9f91c1,
-            #c394a0
+            #a786df,
+            #df8fa8,
+            #efa978
         );
 
     box-shadow:
-        0 8px 22px rgba(165,143,180,.24);
+        0 8px 20px rgba(170,120,190,.28);
 }
 
 .brand-title{
-    font-size:19px;
     font-weight:900;
+    font-size:18px;
     letter-spacing:.5px;
 }
 
 .brand-subtitle{
-    margin-top:3px;
     color:var(--muted);
     font-size:12px;
+    margin-top:2px;
 }
 
 .header-actions{
@@ -193,14 +178,52 @@ header{
     gap:10px;
 }
 
+/* Admin logo button */
+
+.admin-logo-btn{
+    width:46px;
+    height:46px;
+
+    border-radius:15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+
+    color:#7657aa;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1e9ff,
+            #ffe8f0
+        );
+
+    border:1px solid #e1d4f5;
+
+    box-shadow:
+        0 6px 18px rgba(125,92,165,.12);
+
+    transition:.2s;
+}
+
+.admin-logo-btn:hover{
+    transform:translateY(-2px) scale(1.03);
+
+    box-shadow:
+        0 10px 24px rgba(125,92,165,.20);
+}
+
 /* =========================================================
    MAIN
 ========================================================= */
 
 main{
-    max-width:1450px;
-    margin:auto;
-    padding:28px 24px 70px;
+    width:min(1450px,94%);
+    margin:0 auto;
+    padding:28px 0 60px;
 }
 
 .hero{
@@ -209,148 +232,65 @@ main{
 
 .hero h1{
     margin:0;
-    font-size:30px;
-    letter-spacing:-.6px;
+
+    font-size:31px;
+    font-weight:900;
+
+    color:#3d3947;
 }
 
 .hero p{
-    margin:8px 0 0;
+    margin:7px 0 0;
+
     color:var(--muted);
     font-size:14px;
 }
 
 /* =========================================================
-   GENERAL CARD
+   CARDS
 ========================================================= */
 
 .card{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(42,42,49,.97),
-            rgba(34,34,40,.97)
-        );
+    background:rgba(255,255,255,.94);
 
-    border:1px solid var(--border-soft);
+    border:1px solid var(--border);
 
-    border-radius:var(--radius);
-
-    box-shadow:var(--shadow);
+    border-radius:22px;
 
     padding:22px;
+
+    box-shadow:var(--shadow);
 
     margin-bottom:22px;
 }
 
-.card-title{
-    font-size:17px;
-    font-weight:800;
-    margin-bottom:5px;
+.card:hover{
+    box-shadow:var(--shadow-hover);
 }
 
-.card-subtitle{
-    color:var(--muted);
-    font-size:12px;
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
     margin-bottom:18px;
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+.card-title h2,
+.card-title h3{
+    margin:0;
 
-.btn{
-    border:1px solid transparent;
-
-    border-radius:11px;
-
-    padding:10px 15px;
-
-    font-size:13px;
-    font-weight:750;
-
-    transition:
-        .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-
-    color:#fff;
+    font-size:18px;
+    font-weight:900;
 }
 
-.btn:hover{
-    transform:translateY(-1px);
-}
+.card-title p{
+    margin:4px 0 0;
 
-.btn:active{
-    transform:translateY(0);
-}
-
-.btn-primary{
-    background:#81759b;
-    border-color:#9889b6;
-}
-
-.btn-primary:hover{
-    background:#8e80aa;
-    box-shadow:0 8px 22px rgba(185,171,215,.16);
-}
-
-.btn-teal{
-    background:#587b7b;
-    border-color:#769d9d;
-}
-
-.btn-teal:hover{
-    background:#668b8b;
-}
-
-.btn-green{
-    background:#617b69;
-    border-color:#83a28d;
-}
-
-.btn-green:hover{
-    background:#6f8e78;
-}
-
-.btn-red{
-    background:#805d66;
-    border-color:#a57983;
-}
-
-.btn-red:hover{
-    background:#916a74;
-}
-
-.btn-purple{
-    background:#6d6286;
-    border-color:#9081ad;
-}
-
-.btn-purple:hover{
-    background:#796d93;
-}
-
-.btn-orange{
-    background:#82694f;
-    border-color:#a88965;
-}
-
-.btn-orange:hover{
-    background:#917456;
-}
-
-.btn-dark{
-    background:#303039;
-    border-color:#484852;
-}
-
-.btn-dark:hover{
-    background:#3a3a45;
-}
-
-.btn-small{
-    padding:7px 10px;
-    font-size:11px;
+    color:var(--muted);
+    font-size:12px;
 }
 
 /* =========================================================
@@ -359,31 +299,118 @@ main{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:17px;
 
     margin-bottom:22px;
 }
 
 .stat{
     position:relative;
+
     overflow:hidden;
 
     min-height:145px;
 
-    border-radius:18px;
+    padding:22px;
 
-    padding:20px;
+    border-radius:22px;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:1px solid transparent;
 
     box-shadow:var(--shadow);
 
-    transition:.22s ease;
+    transition:.25s;
 }
 
 .stat:hover{
-    transform:translateY(-3px);
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-hover);
+}
+
+.stat:nth-child(1){
+    background:
+        linear-gradient(
+            135deg,
+            #eee7ff,
+            #e1d6ff
+        );
+
+    border-color:#d7c7fa;
+}
+
+.stat:nth-child(2){
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8ef,
+            #ffd8e4
+        );
+
+    border-color:#f5c7d6;
+}
+
+.stat:nth-child(3){
+    background:
+        linear-gradient(
+            135deg,
+            #fff0df,
+            #ffe2c4
+        );
+
+    border-color:#f4d1aa;
+}
+
+.stat:nth-child(4){
+    background:
+        linear-gradient(
+            135deg,
+            #e3f6ee,
+            #d2eee4
+        );
+
+    border-color:#bfe2d4;
+}
+
+.stat-label{
+    position:relative;
+    z-index:2;
+
+    color:#716b79;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.stat-value{
+    position:relative;
+    z-index:2;
+
+    margin-top:12px;
+
+    font-size:34px;
+    font-weight:950;
+
+    color:#3d3947;
+}
+
+.stat:nth-child(1) .stat-value{
+    color:#7658b1;
+}
+
+.stat:nth-child(2) .stat-value{
+    color:#c55c78;
+}
+
+.stat:nth-child(3) .stat-value{
+    color:#c47a38;
+}
+
+.stat:nth-child(4) .stat-value{
+    color:#4f987c;
 }
 
 .stat::after{
@@ -391,118 +418,54 @@ main{
 
     position:absolute;
 
-    width:115px;
-    height:115px;
+    width:100px;
+    height:100px;
 
-    right:-35px;
-    bottom:-42px;
+    right:-28px;
+    bottom:-35px;
 
     border-radius:50%;
 
-    opacity:.25;
+    background:rgba(255,255,255,.42);
 }
 
-.stat:nth-child(1){
+/* =========================================================
+   ADMIN WORKSPACE
+========================================================= */
+
+.admin-workspace{
+    display:none;
+}
+
+body.admin-mode .admin-workspace{
+    display:block;
+}
+
+.admin-panel{
     background:
         linear-gradient(
-            145deg,
-            #34313e,
-            #282630
+            135deg,
+            #fff,
+            #f8f2ff
         );
+
+    border:1px solid #e1d4f4;
 }
 
-.stat:nth-child(1)::after{
-    background:#b9abd7;
-}
+.admin-badge{
+    display:inline-flex;
+    align-items:center;
 
-.stat:nth-child(1) .stat-value{
-    color:#c4b7df;
-}
+    padding:7px 12px;
 
-.stat:nth-child(2){
-    background:
-        linear-gradient(
-            145deg,
-            #3a3035,
-            #2c272b
-        );
-}
+    border-radius:30px;
 
-.stat:nth-child(2)::after{
-    background:#d5a5af;
-}
+    background:#eee7ff;
 
-.stat:nth-child(2) .stat-value{
-    color:#d9aeb7;
-}
-
-.stat:nth-child(3){
-    background:
-        linear-gradient(
-            145deg,
-            #303a34,
-            #272e2a
-        );
-}
-
-.stat:nth-child(3)::after{
-    background:#9fbea8;
-}
-
-.stat:nth-child(3) .stat-value{
-    color:#a9c9b1;
-}
-
-.stat:nth-child(4){
-    background:
-        linear-gradient(
-            145deg,
-            #2d3939,
-            #252e2e
-        );
-}
-
-.stat:nth-child(4)::after{
-    background:#91c3c3;
-}
-
-.stat:nth-child(4) .stat-value{
-    color:#9ecaca;
-}
-
-.stat-label{
-    position:relative;
-    z-index:2;
-
-    color:var(--muted);
+    color:#7454a9;
 
     font-size:12px;
-    font-weight:700;
-
-    text-transform:uppercase;
-    letter-spacing:.7px;
-}
-
-.stat-value{
-    position:relative;
-    z-index:2;
-
-    margin-top:13px;
-
-    font-size:35px;
-    font-weight:900;
-
-    letter-spacing:-1px;
-}
-
-.stat-note{
-    position:relative;
-    z-index:2;
-
-    margin-top:8px;
-
-    color:#99979f;
-    font-size:11px;
+    font-weight:800;
 }
 
 /* =========================================================
@@ -511,177 +474,227 @@ main{
 
 .form-grid{
     display:grid;
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
 
-    gap:14px;
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap:15px;
 }
 
-.field{
+.form-group{
     display:flex;
     flex-direction:column;
     gap:7px;
 }
 
-.field label{
-    font-size:11px;
-    color:#b9b7be;
-    font-weight:750;
+.form-group label{
+    font-size:12px;
+    font-weight:800;
+
+    color:#686370;
 }
 
 input,
 select{
     width:100%;
 
-    background:#25252b;
+    min-height:45px;
 
-    border:1px solid #3d3d47;
+    padding:10px 13px;
 
-    color:var(--text);
+    border-radius:12px;
 
-    border-radius:10px;
+    border:1px solid #ddd7e7;
 
-    padding:11px 12px;
+    background:#fff;
+
+    color:#37343e;
 
     outline:none;
 
-    transition:.18s ease;
+    transition:.2s;
 }
 
 input::placeholder{
-    color:#77757e;
+    color:#aaa5b1;
 }
 
 input:focus,
 select:focus{
-    border-color:#a99acb;
+    border-color:#b39adf;
 
     box-shadow:
-        0 0 0 3px rgba(185,171,215,.10);
+        0 0 0 4px rgba(179,154,223,.14);
 }
 
-input:disabled,
-select:disabled{
-    opacity:.62;
-    cursor:not-allowed;
+.readonly{
+    background:#f5f2f8;
+    color:#77717f;
 }
 
-.full{
-    grid-column:1/-1;
-}
+/* =========================================================
+   BUTTONS
+========================================================= */
 
-.form-actions{
+.button-row{
     display:flex;
     flex-wrap:wrap;
-    gap:9px;
+    gap:10px;
+
     margin-top:16px;
 }
 
-/* =========================================================
-   ADMIN
-========================================================= */
+.btn{
+    min-height:42px;
 
-.admin-panel{
-    border-color:rgba(185,171,215,.20);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(48,44,56,.98),
-            rgba(36,34,41,.98)
-        );
-}
-
-.admin-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.admin-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-
-    padding:7px 10px;
-
-    border-radius:999px;
-
-    background:rgba(185,171,215,.10);
-
-    border:1px solid rgba(185,171,215,.18);
-
-    color:#c9bee0;
-
-    font-size:11px;
-    font-weight:800;
-}
-
-body:not(.admin-mode) .admin-only{
-    display:none !important;
-}
-
-body.admin-mode .admin-login-btn{
-    display:none;
-}
-
-.admin-logout-btn{
-    display:none;
-}
-
-body.admin-mode .admin-logout-btn{
-    display:inline-flex;
-}
-
-/* =========================================================
-   BATCH LIST
-========================================================= */
-
-.batch-box{
-    margin-top:16px;
-
-    padding:13px;
-
-    background:#202026;
-
-    border:1px solid #363640;
+    padding:10px 17px;
 
     border-radius:12px;
+
+    font-weight:800;
+
+    transition:.2s;
 }
 
-.batch-header{
-    display:flex;
+.btn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(70,55,90,.12);
+}
+
+.btn-primary{
+    background:#a58bd8;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#9175c8;
+}
+
+.btn-pink{
+    background:#e999ae;
+    color:white;
+}
+
+.btn-peach{
+    background:#eab17d;
+    color:white;
+}
+
+.btn-mint{
+    background:#78bda2;
+    color:white;
+}
+
+.btn-teal{
+    background:#70b9c0;
+    color:white;
+}
+
+.btn-danger{
+    background:#df8c83;
+    color:white;
+}
+
+.btn-dark{
+    background:#6e6876;
+    color:white;
+}
+
+.btn-light{
+    background:#f1edf7;
+    color:#665f70;
+}
+
+/* =========================================================
+   SCAN LIST
+========================================================= */
+
+.scan-count{
+    display:inline-flex;
     align-items:center;
-    justify-content:space-between;
 
-    margin-bottom:10px;
+    min-width:34px;
+    height:30px;
 
-    color:#bdbbc2;
+    padding:0 10px;
 
-    font-size:12px;
-    font-weight:750;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:#eee7ff;
+    color:#7254aa;
+
+    font-weight:900;
 }
 
 .batch-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
+    margin-top:15px;
+
+    border-radius:15px;
+
+    background:#faf9fc;
+
+    border:1px solid #ebe7f0;
+
+    overflow:hidden;
+}
+
+.batch-empty{
+    padding:18px;
+
+    color:#99939f;
+
+    text-align:center;
+
+    font-size:13px;
 }
 
 .batch-item{
-    padding:7px 9px;
+    display:grid;
+
+    grid-template-columns:
+        1.4fr 1fr 1.7fr 1fr 70px;
+
+    gap:10px;
+
+    padding:12px 15px;
+
+    border-bottom:1px solid #eeeaf1;
+
+    font-size:12px;
+}
+
+.batch-item:last-child{
+    border-bottom:none;
+}
+
+.batch-item strong{
+    color:#48434f;
+}
+
+.remove-batch{
+    color:#c65d62;
+
+    background:#ffe9e9;
 
     border-radius:8px;
 
-    background:#31313a;
+    padding:6px 9px;
 
-    border:1px solid #454550;
+    font-weight:800;
+}
 
-    color:#d9d7dc;
+/* =========================================================
+   IMPORT
+========================================================= */
 
-    font-size:11px;
+.file-input{
+    padding:9px;
+
+    background:#faf9fc;
 }
 
 /* =========================================================
@@ -690,15 +703,17 @@ body.admin-mode .admin-logout-btn{
 
 .filter-grid{
     display:grid;
-    grid-template-columns:
-        repeat(6,minmax(0,1fr));
 
-    gap:12px;
+    grid-template-columns:
+        repeat(6, minmax(0,1fr));
+
+    gap:13px;
 }
 
 .filter-actions{
     display:flex;
     align-items:flex-end;
+
     gap:8px;
 }
 
@@ -709,21 +724,17 @@ body.admin-mode .admin-logout-btn{
 .chart-wrap{
     position:relative;
 
-    height:420px;
+    height:400px;
 
-    padding-top:8px;
+    padding:12px 4px;
 }
 
-.chart-empty{
-    height:100%;
+.chart-note{
+    color:var(--muted);
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size:12px;
 
-    color:#77757e;
-
-    font-size:13px;
+    margin-bottom:10px;
 }
 
 /* =========================================================
@@ -734,110 +745,52 @@ body.admin-mode .admin-logout-btn{
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fill,minmax(220px,1fr));
+        repeat(auto-fill,minmax(210px,1fr));
 
-    gap:12px;
+    gap:14px;
 }
 
 .daily-card{
+    padding:17px;
+
+    border-radius:18px;
+
     background:
         linear-gradient(
-            145deg,
-            #292931,
-            #232329
+            135deg,
+            #fff,
+            #faf6ff
         );
 
-    border:1px solid #3a3a44;
+    border:1px solid #e7def3;
 
-    border-radius:13px;
-
-    padding:15px;
+    box-shadow:
+        0 8px 22px rgba(100,80,120,.07);
 }
 
 .daily-date{
-    color:#aaa8b0;
-    font-size:11px;
-    font-weight:750;
+    font-weight:900;
+    color:#5f5868;
 }
 
 .daily-defect{
-    margin-top:8px;
+    margin-top:9px;
 
-    font-size:13px;
+    color:#8a65bd;
+
     font-weight:850;
 
-    color:#dedbe4;
+    font-size:14px;
 }
 
 .daily-qty{
-    margin-top:10px;
+    margin-top:7px;
 
-    color:#c4b7df;
+    font-size:23px;
 
-    font-size:22px;
-    font-weight:900;
-}
+    font-weight:950;
 
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-wrap{
-    width:100%;
-    overflow:auto;
-
-    border:1px solid #373740;
-
-    border-radius:13px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-
-    min-width:980px;
-}
-
-thead{
-    background:#303039;
-}
-
-th{
-    padding:12px 11px;
-
-    text-align:left;
-
-    color:#c0bec5;
-
-    font-size:10px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.5px;
-
-    white-space:nowrap;
-}
-
-td{
-    padding:11px;
-
-    border-top:1px solid rgba(255,255,255,.045);
-
-    color:#dddbe0;
-
-    font-size:11px;
-
-    white-space:nowrap;
-}
-
-tbody tr:hover{
-    background:rgba(185,171,215,.045);
-}
-
-.empty-row{
-    text-align:center;
-    color:#77757e;
-    padding:25px;
+    color:#3f3948;
 }
 
 /* =========================================================
@@ -847,71 +800,147 @@ tbody tr:hover{
 .tag{
     display:inline-flex;
 
-    padding:5px 8px;
+    padding:5px 9px;
 
-    border-radius:7px;
+    border-radius:30px;
 
-    font-size:10px;
+    font-size:11px;
+
     font-weight:800;
-
-    border:1px solid transparent;
 }
 
 .tag-debug{
-    background:rgba(185,171,215,.12);
-    border-color:rgba(185,171,215,.18);
-    color:#c7b9df;
+    background:#eee7ff;
+    color:#7355a9;
 }
 
 .tag-maintenance{
-    background:rgba(214,176,142,.12);
-    border-color:rgba(214,176,142,.18);
-    color:#d9b995;
+    background:#fff0df;
+    color:#b76e32;
 }
 
 .tag-cosmetic{
-    background:rgba(213,165,175,.12);
-    border-color:rgba(213,165,175,.18);
-    color:#d8adb7;
+    background:#ffe8ef;
+    color:#bd5c79;
 }
 
-.tag-eao{
-    background:rgba(159,190,168,.12);
-    border-color:rgba(159,190,168,.18);
-    color:#a8c8b1;
+.tag-eaoi{
+    background:#e3f6ee;
+    color:#4d9277;
 }
 
 /* =========================================================
-   SECTION TOOLBAR
+   RECORDS
 ========================================================= */
 
-.toolbar{
-    display:flex;
-    flex-wrap:wrap;
+.record-filter-grid{
+    display:grid;
 
-    align-items:center;
-    justify-content:space-between;
+    grid-template-columns:
+        1.4fr 1fr 1.4fr 1fr 1fr;
 
     gap:12px;
 
     margin-bottom:15px;
 }
 
-.toolbar-left,
-.toolbar-right{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    align-items:center;
+.table-wrap{
+    width:100%;
+
+    overflow:auto;
+
+    border-radius:15px;
+
+    border:1px solid #ebe6ef;
 }
 
-.result-count{
-    color:#85838b;
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:900px;
+}
+
+thead{
+    background:
+        linear-gradient(
+            90deg,
+            #f0e9ff,
+            #ffeaf1,
+            #fff0df
+        );
+}
+
+th{
+    padding:13px;
+
+    text-align:left;
+
+    font-size:12px;
+
+    color:#625b6b;
+
+    white-space:nowrap;
+}
+
+td{
+    padding:12px 13px;
+
+    border-top:1px solid #f0edf3;
+
+    font-size:12px;
+
+    color:#514b59;
+}
+
+tbody tr:hover{
+    background:#fcf9ff;
+}
+
+.action-cell{
+    display:flex;
+    gap:7px;
+}
+
+.edit-btn,
+.delete-btn{
+    padding:7px 10px;
+
+    border-radius:8px;
+
     font-size:11px;
+
+    font-weight:800;
+}
+
+.edit-btn{
+    background:#eee7ff;
+    color:#7454a9;
+}
+
+.delete-btn{
+    background:#ffe8e8;
+    color:#be5a5a;
 }
 
 /* =========================================================
-   LOGIN MODAL / GENERAL MODAL
+   DATA MANAGEMENT
+========================================================= */
+
+.data-management{
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf5,
+            #fff
+        );
+
+    border-color:#f0dfcf;
+}
+
+/* =========================================================
+   MODALS
 ========================================================= */
 
 .modal-overlay{
@@ -919,7 +948,7 @@ tbody tr:hover{
 
     inset:0;
 
-    z-index:1000;
+    z-index:9999;
 
     display:none;
 
@@ -928,10 +957,10 @@ tbody tr:hover{
 
     padding:20px;
 
-    background:rgba(9,9,12,.76);
+    background:
+        rgba(61,49,76,.32);
 
     backdrop-filter:blur(9px);
-    -webkit-backdrop-filter:blur(9px);
 }
 
 .modal-overlay.show{
@@ -939,89 +968,133 @@ tbody tr:hover{
 }
 
 .modal{
-    width:min(780px,96vw);
+    width:min(950px,96vw);
+
     max-height:90vh;
 
     overflow:auto;
 
-    background:
-        linear-gradient(
-            145deg,
-            #2c2b33,
-            #222228
-        );
+    background:#fff;
 
-    border:1px solid rgba(185,171,215,.20);
+    border-radius:25px;
 
-    border-radius:20px;
+    border:1px solid #e5d9f2;
 
     box-shadow:
-        0 28px 80px rgba(0,0,0,.48);
+        0 30px 80px rgba(70,45,90,.25);
 
-    animation:modalIn .18s ease;
-}
-
-.modal.small{
-    width:min(430px,96vw);
+    animation:
+        modalIn .22s ease;
 }
 
 @keyframes modalIn{
     from{
         opacity:0;
-        transform:translateY(8px) scale(.985);
+        transform:translateY(12px) scale(.98);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:none;
     }
 }
 
 .modal-header{
+    position:sticky;
+    top:0;
+
+    z-index:2;
+
+    padding:20px 23px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    gap:12px;
+    background:
+        linear-gradient(
+            135deg,
+            #eee6ff,
+            #ffe8ef,
+            #fff0df
+        );
 
-    padding:18px 20px;
+    border-bottom:1px solid #eadfee;
+}
+
+.modal-header h3{
+    margin:0;
+
+    font-size:19px;
+
+    color:#4a4354;
+}
+
+.modal-close{
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.8);
+
+    color:#665d6d;
+
+    font-size:20px;
+
+    font-weight:900;
+}
+
+.modal-body{
+    padding:22px;
+}
+
+/* Login modal */
+
+.login-modal{
+    width:min(430px,94vw);
+}
+
+.login-icon{
+    width:65px;
+    height:65px;
+
+    margin:0 auto 13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    font-size:30px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(185,171,215,.12),
-            rgba(213,165,175,.08)
+            #eee5ff,
+            #ffe5ee
         );
 
-    border-bottom:1px solid rgba(255,255,255,.07);
+    color:#7956af;
 }
 
-.modal-title{
-    font-size:16px;
-    font-weight:850;
+.login-title{
+    text-align:center;
+
+    font-weight:900;
+
+    font-size:22px;
 }
 
-.modal-close{
-    width:34px;
-    height:34px;
+.login-subtitle{
+    text-align:center;
 
-    border-radius:10px;
+    color:var(--muted);
 
-    border:1px solid #45454f;
+    font-size:12px;
 
-    background:#303039;
-
-    color:#d5d2d8;
-
-    font-size:17px;
-}
-
-.modal-close:hover{
-    background:#3b3b46;
-}
-
-.modal-body{
-    padding:20px;
+    margin:5px 0 20px;
 }
 
 /* =========================================================
@@ -1032,119 +1105,114 @@ tbody tr:hover{
     display:grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+        repeat(4,minmax(0,1fr));
 
-    gap:10px;
+    gap:12px;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .summary-box{
-    background:#292930;
+    padding:15px;
 
-    border:1px solid #3b3b45;
+    border-radius:16px;
 
-    border-radius:12px;
+    border:1px solid;
 
-    padding:13px;
+    background:#fff;
 }
 
 .summary-box:nth-child(1){
-    border-color:rgba(185,171,215,.25);
+    background:#f0eaff;
+    border-color:#d9c9fa;
 }
 
 .summary-box:nth-child(2){
-    border-color:rgba(213,165,175,.25);
+    background:#ffe9ef;
+    border-color:#f5cad7;
 }
 
 .summary-box:nth-child(3){
-    border-color:rgba(159,190,168,.25);
+    background:#fff0df;
+    border-color:#f4d1ae;
+}
+
+.summary-box:nth-child(4){
+    background:#e3f6ee;
+    border-color:#c3e5d7;
 }
 
 .summary-label{
-    color:#8e8c94;
-    font-size:10px;
-    text-transform:uppercase;
+    font-size:11px;
+
+    color:#79717f;
+
+    font-weight:800;
 }
 
 .summary-value{
     margin-top:5px;
 
     font-size:20px;
-    font-weight:900;
 
-    color:#ddd9e4;
-}
+    font-weight:950;
 
-/* =========================================================
-   LOGIN
-========================================================= */
-
-.login-note{
-    color:#8e8c94;
-    font-size:11px;
-    line-height:1.5;
-
-    margin-top:12px;
+    color:#403946;
 }
 
 /* =========================================================
    TOAST
 ========================================================= */
 
-.toast-container{
+.toast{
     position:fixed;
 
-    right:20px;
-    bottom:20px;
+    right:22px;
+    bottom:22px;
 
-    z-index:2000;
+    z-index:10000;
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-}
-
-.toast{
     max-width:360px;
 
-    padding:12px 14px;
+    padding:14px 17px;
 
-    border-radius:11px;
+    border-radius:14px;
 
-    border:1px solid rgba(255,255,255,.10);
+    color:#fff;
 
-    background:#303039;
+    font-size:13px;
 
-    color:#e8e5ea;
+    font-weight:700;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.28);
+    box-shadow:
+        0 15px 35px rgba(50,40,60,.2);
 
-    font-size:12px;
+    transform:
+        translateY(20px);
 
-    animation:toastIn .2s ease;
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:none;
 }
 
 .toast.success{
-    border-color:rgba(159,190,168,.35);
+    background:#72ad91;
 }
 
 .toast.error{
-    border-color:rgba(213,165,175,.35);
+    background:#d77e78;
 }
 
-@keyframes toastIn{
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.toast.info{
+    background:#8d79be;
 }
 
 /* =========================================================
@@ -1167,33 +1235,30 @@ tbody tr:hover{
         grid-template-columns:
             repeat(3,1fr);
     }
+
+    .record-filter-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
 }
 
 @media(max-width:700px){
 
-    main{
-        padding:20px 14px 50px;
+    header{
+        padding:13px 16px;
     }
 
-    .header-inner{
-        padding:12px 14px;
+    main{
+        width:94%;
+        padding-top:20px;
     }
 
     .brand-subtitle{
         display:none;
     }
 
-    .brand-title{
-        font-size:16px;
-    }
-
-    .logo{
-        width:42px;
-        height:42px;
-    }
-
     .hero h1{
-        font-size:24px;
+        font-size:25px;
     }
 
     .stats{
@@ -1208,16 +1273,21 @@ tbody tr:hover{
         grid-template-columns:1fr;
     }
 
-    .filter-actions{
-        align-items:stretch;
-    }
-
-    .modal-summary{
+    .record-filter-grid{
         grid-template-columns:1fr;
     }
 
+    .modal-summary{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
     .chart-wrap{
-        height:320px;
+        height:330px;
+    }
+
+    .batch-item{
+        grid-template-columns:1fr;
     }
 }
 
@@ -1232,43 +1302,36 @@ tbody tr:hover{
 
 <header>
 
-    <div class="header-inner">
+    <div class="brand">
 
-        <div class="brand">
-
-            <div class="logo">
-                RT
-            </div>
-
-            <div>
-                <div class="brand-title">
-                    REJECT TRENDING
-                </div>
-
-                <div class="brand-subtitle">
-                    Reject monitoring & daily trend analysis
-                </div>
-            </div>
-
+        <div class="logo">
+            RT
         </div>
 
-        <div class="header-actions">
+        <div>
+            <div class="brand-title">
+                REJECT TRENDING
+            </div>
 
-            <button
-                id="adminLoginBtn"
-                class="btn btn-primary admin-login-btn"
-                onclick="openLoginModal()">
-                Admin
-            </button>
-
-            <button
-                id="adminLogoutBtn"
-                class="btn btn-dark admin-logout-btn"
-                onclick="logoutAdmin()">
-                Logout
-            </button>
-
+            <div class="brand-subtitle">
+                Reject monitoring & daily trend analysis
+            </div>
         </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <!-- ADMIN LOGO -->
+
+        <button
+            class="admin-logo-btn"
+            id="adminButton"
+            title="Admin Login"
+            onclick="openLoginModal()"
+        >
+            👑
+        </button>
 
     </div>
 
@@ -1281,8 +1344,6 @@ tbody tr:hover{
 
 <main>
 
-    <!-- HERO -->
-
     <section class="hero">
 
         <h1>
@@ -1290,15 +1351,15 @@ tbody tr:hover{
         </h1>
 
         <p>
-            Monitor reject quantity, process trends,
-            defect classification and daily reject performance.
+            Monitor reject quantity, defect trends,
+            classification and daily reject performance.
         </p>
 
     </section>
 
 
     <!-- =====================================================
-         QUALITY DASHBOARD
+         DASHBOARD
     ====================================================== -->
 
     <section class="stats">
@@ -1306,75 +1367,63 @@ tbody tr:hover{
         <div class="stat">
 
             <div class="stat-label">
-                Total Reject
+                TOTAL REJECT
             </div>
 
             <div
-                id="totalReject"
-                class="stat-value">
-                0
-            </div>
-
-            <div class="stat-note">
-                Total filtered reject records
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Reject Today
-            </div>
-
-            <div
-                id="rejectToday"
-                class="stat-value">
-                0
-            </div>
-
-            <div class="stat-note">
-                Reject records for today
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Top Reject
-            </div>
-
-            <div
-                id="topReject"
                 class="stat-value"
-                style="font-size:20px;">
+                id="totalReject"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                REJECT TODAY
+            </div>
+
+            <div
+                class="stat-value"
+                id="rejectToday"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                TOP REJECT
+            </div>
+
+            <div
+                class="stat-value"
+                id="topReject"
+                style="font-size:20px;"
+            >
                 -
             </div>
 
-            <div class="stat-note">
-                Highest reject category
-            </div>
-
         </div>
 
 
         <div class="stat">
 
             <div class="stat-label">
-                Total Component SN
+                TOTAL COMPONENT SN
             </div>
 
             <div
+                class="stat-value"
                 id="totalSN"
-                class="stat-value">
+            >
                 0
-            </div>
-
-            <div class="stat-note">
-                Unique component serial numbers
             </div>
 
         </div>
@@ -1387,50 +1436,54 @@ tbody tr:hover{
     ====================================================== -->
 
     <section
-        id="adminWorkspace"
-        class="card admin-panel admin-only">
+        class="card admin-workspace admin-panel"
+    >
 
-        <div class="admin-header">
+        <div class="card-title">
 
             <div>
 
-                <div class="card-title">
-                    Admin Workspace
-                </div>
+                <h2>
+                    👑 Admin Workspace
+                </h2>
 
-                <div class="card-subtitle">
-                    Scan, import and manage reject records.
-                </div>
+                <p>
+                    Scan, import and manage reject data.
+                </p>
 
             </div>
 
-            <div class="admin-badge">
-                ● ADMIN ACCESS
-            </div>
+            <span class="admin-badge">
+                ADMIN ACCESS
+            </span>
 
         </div>
 
 
         <!-- ADMIN SETTINGS -->
 
-        <div class="card"
-             style="
-                background:#222229;
-                box-shadow:none;
-                margin-bottom:16px;
-             ">
+        <div class="card" style="margin-bottom:18px;">
 
             <div class="card-title">
-                Admin Settings
+
+                <div>
+
+                    <h3>
+                        Admin Settings
+                    </h3>
+
+                    <p>
+                        Admin identification
+                    </p>
+
+                </div>
+
             </div>
 
-            <div class="card-subtitle">
-                Admin identification for reject tracking.
-            </div>
 
             <div class="form-grid">
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Admin Email
@@ -1438,13 +1491,14 @@ tbody tr:hover{
 
                     <input
                         id="adminEmail"
-                        type="text"
-                        readonly>
+                        class="readonly"
+                        readonly
+                    >
 
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Admin Badge ID
@@ -1452,24 +1506,37 @@ tbody tr:hover{
 
                     <input
                         id="adminBadge"
-                        type="text"
-                        placeholder="Enter badge ID">
+                        placeholder="Enter badge ID"
+                    >
 
                 </div>
 
+                <div class="form-group">
 
-                <div class="field"
-                     style="
-                        display:flex;
-                        align-items:flex-end;
-                     ">
+                    <label>
+                        &nbsp;
+                    </label>
 
                     <button
                         class="btn btn-primary"
-                        onclick="saveBadge()">
+                        onclick="saveAdminBadge()"
+                    >
+                        SAVE BADGE
+                    </button>
 
-                        Save Badge ID
+                </div>
 
+                <div class="form-group">
+
+                    <label>
+                        &nbsp;
+                    </label>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="logoutAdmin()"
+                    >
+                        LOGOUT
                     </button>
 
                 </div>
@@ -1481,25 +1548,35 @@ tbody tr:hover{
 
         <!-- SCAN REJECT -->
 
-        <div class="card"
-             style="
-                background:#222229;
-                box-shadow:none;
-                margin-bottom:16px;
-             ">
+        <div class="card" style="margin-bottom:18px;">
 
             <div class="card-title">
-                Scan Reject
-            </div>
 
-            <div class="card-subtitle">
-                Scan SN → classify reject → submit.
+                <div>
+
+                    <h3>
+                        Scan Reject
+                    </h3>
+
+                    <p>
+                        Scan SN → classify reject → submit
+                    </p>
+
+                </div>
+
+                <span
+                    class="scan-count"
+                    id="scanCount"
+                >
+                    0
+                </span>
+
             </div>
 
 
             <div class="form-grid">
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Component Serial Number
@@ -1507,22 +1584,20 @@ tbody tr:hover{
 
                     <input
                         id="sn"
-                        type="text"
                         autofocus
-                        autocomplete="off"
-                        placeholder="Scan barcode here">
+                        placeholder="Scan barcode here"
+                    >
 
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Process
                     </label>
 
                     <select id="process">
-
                         <option value="">
                             Select Process
                         </option>
@@ -1540,7 +1615,7 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Component PN
@@ -1549,7 +1624,7 @@ tbody tr:hover{
                     <select id="pn">
 
                         <option value="">
-                            Select PN
+                            Select Part Number
                         </option>
 
                         <option value="1670826">
@@ -1565,7 +1640,7 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Reject
@@ -1582,7 +1657,7 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Defect Class
@@ -1607,77 +1682,56 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Badge ID
                     </label>
 
                     <input
-                        id="operatorId"
-                        type="text"
-                        readonly>
+                        id="operator"
+                        class="readonly"
+                        readonly
+                    >
 
                 </div>
 
             </div>
 
 
-            <div class="form-actions">
+            <div class="button-row">
 
                 <button
                     class="btn btn-primary"
-                    onclick="addSN()">
-
-                    + Add SN
-
+                    onclick="addSN()"
+                >
+                    ＋ ADD SN
                 </button>
 
                 <button
-                    class="btn btn-green"
-                    onclick="submitReject()">
-
-                    Submit All Reject
-
+                    class="btn btn-mint"
+                    onclick="submitReject()"
+                >
+                    ✓ SUBMIT ALL REJECT
                 </button>
 
                 <button
-                    class="btn btn-dark"
-                    onclick="clearBatch()">
-
-                    Clear
-
+                    class="btn btn-light"
+                    onclick="clearBatch()"
+                >
+                    CLEAR
                 </button>
 
             </div>
 
 
-            <div class="batch-box">
+            <div
+                class="batch-list"
+                id="batchList"
+            >
 
-                <div class="batch-header">
-
-                    <span>
-                        Current Batch
-                    </span>
-
-                    <span id="scanCount">
-                        0 SN
-                    </span>
-
-                </div>
-
-                <div
-                    id="batchList"
-                    class="batch-list">
-
-                    <span
-                        style="
-                            color:#6f6d75;
-                            font-size:11px;
-                        ">
-                        No SN scanned yet.
-                    </span>
-
+                <div class="batch-empty">
+                    No scanned SN yet.
                 </div>
 
             </div>
@@ -1687,53 +1741,53 @@ tbody tr:hover{
 
         <!-- IMPORT -->
 
-        <div class="card"
-             style="
-                background:#222229;
-                box-shadow:none;
-                margin-bottom:0;
-             ">
+        <div class="card">
 
             <div class="card-title">
-                Import Existing Data
-            </div>
 
-            <div class="card-subtitle">
-                Import Excel, XLS or CSV data into the shared database.
-            </div>
+                <div>
 
-            <div class="form-actions">
+                    <h3>
+                        Import Existing Data
+                    </h3>
 
-                <label
-                    class="btn btn-teal"
-                    style="display:inline-flex;">
+                    <p>
+                        Excel / XLS / CSV
+                    </p>
 
-                    Choose Excel / CSV
-
-                    <input
-                        id="excelFile"
-                        type="file"
-                        accept=".xlsx,.xls,.csv"
-                        style="display:none;"
-                        onchange="importExcel(event)">
-
-                </label>
+                </div>
 
             </div>
 
-            <div
+            <input
+                type="file"
+                id="excelFile"
+                class="file-input"
+                accept=".xlsx,.xls,.csv"
+            >
+
+            <div class="button-row">
+
+                <button
+                    class="btn btn-peach"
+                    onclick="importExcel()"
+                >
+                    📥 IMPORT DATA
+                </button>
+
+            </div>
+
+            <p
                 style="
-                    margin-top:12px;
-                    color:#77757e;
-                    font-size:10px;
-                    line-height:1.6;
-                ">
-
+                color:#99929f;
+                font-size:11px;
+                margin-bottom:0;
+                "
+            >
                 Expected columns:
                 Component SN, Component PN, Process,
                 Reject, Defect Class, Badge ID, Date Time
-
-            </div>
+            </p>
 
         </div>
 
@@ -1747,17 +1801,25 @@ tbody tr:hover{
     <section class="card">
 
         <div class="card-title">
-            Analytics Filter
-        </div>
 
-        <div class="card-subtitle">
-            Filter the dashboard and graph by selected criteria.
+            <div>
+
+                <h2>
+                    Analytics Filter
+                </h2>
+
+                <p>
+                    Filter graph and dashboard data
+                </p>
+
+            </div>
+
         </div>
 
 
         <div class="filter-grid">
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Process
@@ -1774,7 +1836,7 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Reject
@@ -1791,7 +1853,7 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Defect Class
@@ -1800,15 +1862,7 @@ tbody tr:hover{
                 <select id="analyticsClass">
 
                     <option value="">
-                        All Defect Class
-                    </option>
-
-                    <option value="Cosmetic">
-                        Cosmetic
-                    </option>
-
-                    <option value="EAOI Reject">
-                        EAOI Reject
+                        All Class
                     </option>
 
                 </select>
@@ -1816,7 +1870,7 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Part Number
@@ -1833,50 +1887,50 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     From Date
                 </label>
 
                 <input
+                    type="date"
                     id="analyticsFrom"
-                    type="date">
+                >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     To Date
                 </label>
 
                 <input
+                    type="date"
                     id="analyticsTo"
-                    type="date">
+                >
 
             </div>
 
         </div>
 
 
-        <div class="form-actions">
+        <div class="button-row">
 
             <button
                 class="btn btn-primary"
-                onclick="applyAnalytics()">
-
-                Apply Filter
-
+                onclick="applyAnalytics()"
+            >
+                APPLY FILTER
             </button>
 
             <button
-                class="btn btn-dark"
-                onclick="clearAnalytics()">
-
-                Clear Filter
-
+                class="btn btn-light"
+                onclick="clearAnalytics()"
+            >
+                CLEAR FILTER
             </button>
 
         </div>
@@ -1890,37 +1944,25 @@ tbody tr:hover{
 
     <section class="card">
 
-        <div class="toolbar">
+        <div class="card-title">
 
             <div>
 
-                <div class="card-title">
+                <h2>
                     Reject Quantity by Name
-                </div>
+                </h2>
 
-                <div class="card-subtitle"
-                     style="margin-bottom:0;">
-
+                <p>
                     Click any bar to view detailed records.
-
-                </div>
+                </p>
 
             </div>
 
         </div>
 
-
         <div class="chart-wrap">
 
             <canvas id="rejectChart"></canvas>
-
-            <div
-                id="chartEmpty"
-                class="chart-empty hidden">
-
-                No reject data available.
-
-            </div>
 
         </div>
 
@@ -1934,60 +1976,55 @@ tbody tr:hover{
     <section class="card">
 
         <div class="card-title">
-            Daily Top Reject
-        </div>
 
-        <div class="card-subtitle">
-            Highest reject category for each day.
+            <div>
+
+                <h2>
+                    Daily Top Reject
+                </h2>
+
+                <p>
+                    Highest reject for each day.
+                </p>
+
+            </div>
+
         </div>
 
         <div
+            class="daily-grid"
             id="dailyTop"
-            class="daily-grid">
-
-        </div>
+        ></div>
 
     </section>
 
 
     <!-- =====================================================
-         REJECT RECORDS
+         RECORDS
     ====================================================== -->
 
     <section class="card">
 
-        <div class="toolbar">
+        <div class="card-title">
 
             <div>
 
-                <div class="card-title">
+                <h2>
                     Reject Records
-                </div>
+                </h2>
 
-                <div class="card-subtitle"
-                     style="margin-bottom:0;">
-
+                <p>
                     Search and filter reject records.
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="recordCount"
-                class="result-count">
-
-                0 records
+                </p>
 
             </div>
 
         </div>
 
 
-        <div class="filter-grid">
+        <div class="record-filter-grid">
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Search Component SN
@@ -1995,13 +2032,13 @@ tbody tr:hover{
 
                 <input
                     id="recordSN"
-                    type="text"
-                    placeholder="Search SN">
+                    placeholder="Search SN..."
+                >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Process
@@ -2018,7 +2055,7 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     Reject
@@ -2035,66 +2072,63 @@ tbody tr:hover{
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     From Date
                 </label>
 
                 <input
+                    type="date"
                     id="recordFrom"
-                    type="date">
+                >
 
             </div>
 
 
-            <div class="field">
+            <div class="form-group">
 
                 <label>
                     To Date
                 </label>
 
                 <input
+                    type="date"
                     id="recordTo"
-                    type="date">
+                >
 
             </div>
 
         </div>
 
 
-        <div class="form-actions">
+        <div class="button-row">
 
             <button
                 class="btn btn-primary"
-                onclick="applyRecordFilters()">
-
-                Apply
-
+                onclick="renderRecords()"
+            >
+                APPLY
             </button>
 
             <button
-                class="btn btn-dark"
-                onclick="clearRecordFilters()">
-
-                Clear Filters
-
+                class="btn btn-light"
+                onclick="clearRecordFilters()"
+            >
+                CLEAR FILTERS
             </button>
 
             <button
                 class="btn btn-teal"
-                onclick="copyVisibleRecords()">
-
-                Copy Visible Records
-
+                onclick="copyVisibleRecords()"
+            >
+                COPY VISIBLE RECORDS
             </button>
 
         </div>
 
 
-        <div
-            class="table-wrap"
-            style="margin-top:17px;">
+        <div class="table-wrap">
 
             <table>
 
@@ -2139,9 +2173,8 @@ tbody tr:hover{
                 </thead>
 
                 <tbody
-                    id="recordsBody">
-
-                </tbody>
+                    id="recordsBody"
+                ></tbody>
 
             </table>
 
@@ -2154,44 +2187,41 @@ tbody tr:hover{
          DATA MANAGEMENT
     ====================================================== -->
 
-    <section class="card admin-only">
+    <section
+        class="card data-management admin-workspace"
+    >
 
-        <div class="toolbar">
+        <div class="card-title">
 
             <div>
 
-                <div class="card-title">
+                <h2>
                     Data Management
-                </div>
+                </h2>
 
-                <div class="card-subtitle"
-                     style="margin-bottom:0;">
-
-                    Administrative data actions.
-
-                </div>
+                <p>
+                    Admin-only data controls.
+                </p>
 
             </div>
 
         </div>
 
 
-        <div class="form-actions">
+        <div class="button-row">
 
             <button
-                class="btn btn-orange"
-                onclick="exportExcel()">
-
-                Export Excel
-
+                class="btn btn-mint"
+                onclick="exportExcel()"
+            >
+                📊 EXPORT EXCEL
             </button>
 
             <button
-                class="btn btn-red"
-                onclick="clearAllData()">
-
-                Clear All Data
-
+                class="btn btn-danger"
+                onclick="clearAllData()"
+            >
+                🗑 CLEAR ALL DATA
             </button>
 
         </div>
@@ -2206,23 +2236,23 @@ tbody tr:hover{
 ========================================================= -->
 
 <div
+    class="modal-overlay"
     id="loginModal"
-    class="modal-overlay">
+>
 
-    <div class="modal small">
+    <div class="modal login-modal">
 
         <div class="modal-header">
 
-            <div class="modal-title">
-                Admin Login
-            </div>
+            <h3>
+                Admin Access
+            </h3>
 
             <button
                 class="modal-close"
-                onclick="closeLoginModal()">
-
+                onclick="closeLoginModal()"
+            >
                 ×
-
             </button>
 
         </div>
@@ -2230,64 +2260,61 @@ tbody tr:hover{
 
         <div class="modal-body">
 
-            <div class="field">
+            <div class="login-icon">
+                👑
+            </div>
+
+            <div class="login-title">
+                Welcome Admin
+            </div>
+
+            <div class="login-subtitle">
+                Sign in to manage reject data
+            </div>
+
+
+            <div class="form-group">
 
                 <label>
                     Email
                 </label>
 
                 <input
-                    id="loginEmail"
                     type="email"
-                    autocomplete="username"
-                    placeholder="Admin email">
+                    id="loginEmail"
+                    placeholder="Admin email"
+                >
 
             </div>
 
 
             <div
-                class="field"
-                style="margin-top:13px;">
+                class="form-group"
+                style="margin-top:13px;"
+            >
 
                 <label>
                     Password
                 </label>
 
                 <input
-                    id="loginPassword"
                     type="password"
-                    autocomplete="current-password"
-                    placeholder="Password">
+                    id="loginPassword"
+                    placeholder="Password"
+                >
 
             </div>
 
 
-            <div class="form-actions">
+            <div class="button-row">
 
                 <button
                     class="btn btn-primary"
-                    onclick="loginAdmin()">
-
-                    Login
-
+                    style="width:100%;"
+                    onclick="loginAdmin()"
+                >
+                    LOGIN
                 </button>
-
-                <button
-                    class="btn btn-dark"
-                    onclick="closeLoginModal()">
-
-                    Cancel
-
-                </button>
-
-            </div>
-
-
-            <div class="login-note">
-
-                Only the authorised admin account can access
-                scanning, import, edit, delete, export and
-                clear-data functions.
 
             </div>
 
@@ -2299,35 +2326,27 @@ tbody tr:hover{
 
 
 <!-- =========================================================
-     GRAPH DETAIL MODAL
+     GRAPH DETAILS MODAL
 ========================================================= -->
 
 <div
-    id="chartModal"
-    class="modal-overlay">
+    class="modal-overlay"
+    id="graphModal"
+>
 
     <div class="modal">
 
         <div class="modal-header">
 
-            <div>
-
-                <div
-                    id="chartModalTitle"
-                    class="modal-title">
-
-                    Reject Details
-
-                </div>
-
-            </div>
+            <h3 id="graphModalTitle">
+                Reject Details
+            </h3>
 
             <button
                 class="modal-close"
-                onclick="closeChartModal()">
-
+                onclick="closeGraphModal()"
+            >
                 ×
-
             </button>
 
         </div>
@@ -2340,50 +2359,62 @@ tbody tr:hover{
                 <div class="summary-box">
 
                     <div class="summary-label">
-                        Reject
+                        REJECT
                     </div>
 
                     <div
-                        id="modalRejectName"
-                        class="summary-value">
-
-                        -
-
-                    </div>
-
-                </div>
-
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        Quantity
-                    </div>
-
-                    <div
-                        id="modalRejectQty"
-                        class="summary-value">
-
-                        0
-
-                    </div>
-
-                </div>
-
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        Process
-                    </div>
-
-                    <div
-                        id="modalRejectProcess"
                         class="summary-value"
-                        style="font-size:14px;">
-
+                        id="modalReject"
+                    >
                         -
+                    </div>
 
+                </div>
+
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        QUANTITY
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="modalQuantity"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        PROCESS
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="modalProcess"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        PART NUMBER
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="modalPN"
+                    >
+                        -
                     </div>
 
                 </div>
@@ -2408,7 +2439,7 @@ tbody tr:hover{
                             </th>
 
                             <th>
-                                Component PN
+                                PN
                             </th>
 
                             <th>
@@ -2428,9 +2459,8 @@ tbody tr:hover{
                     </thead>
 
                     <tbody
-                        id="chartModalBody">
-
-                    </tbody>
+                        id="graphModalBody"
+                    ></tbody>
 
                 </table>
 
@@ -2448,23 +2478,23 @@ tbody tr:hover{
 ========================================================= -->
 
 <div
+    class="modal-overlay"
     id="editModal"
-    class="modal-overlay">
+>
 
     <div class="modal">
 
         <div class="modal-header">
 
-            <div class="modal-title">
+            <h3>
                 Edit Reject Record
-            </div>
+            </h3>
 
             <button
                 class="modal-close"
-                onclick="closeEditModal()">
-
+                onclick="closeEditModal()"
+            >
                 ×
-
             </button>
 
         </div>
@@ -2473,13 +2503,14 @@ tbody tr:hover{
         <div class="modal-body">
 
             <input
+                type="hidden"
                 id="editId"
-                type="hidden">
+            >
 
 
             <div class="form-grid">
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Component SN
@@ -2487,13 +2518,14 @@ tbody tr:hover{
 
                     <input
                         id="editSN"
-                        type="text"
-                        readonly>
+                        class="readonly"
+                        readonly
+                    >
 
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Component PN
@@ -2514,7 +2546,7 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Process
@@ -2535,20 +2567,18 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Reject
                     </label>
 
-                    <select id="editDefect">
-
-                    </select>
+                    <select id="editDefect"></select>
 
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Defect Class
@@ -2569,50 +2599,47 @@ tbody tr:hover{
                 </div>
 
 
-                <div class="field">
+                <div class="form-group">
 
                     <label>
                         Badge ID
                     </label>
 
-                    <input
-                        id="editOperator"
-                        type="text">
+                    <input id="editOperator">
 
                 </div>
 
 
-                <div class="field full">
+                <div class="form-group">
 
                     <label>
                         Date Time
                     </label>
 
                     <input
-                        id="editDateTime"
-                        type="datetime-local">
+                        type="datetime-local"
+                        id="editDate"
+                    >
 
                 </div>
 
             </div>
 
 
-            <div class="form-actions">
+            <div class="button-row">
 
                 <button
-                    class="btn btn-purple"
-                    onclick="saveEdit()">
-
-                    Save Changes
-
+                    class="btn btn-primary"
+                    onclick="saveEdit()"
+                >
+                    SAVE CHANGES
                 </button>
 
                 <button
-                    class="btn btn-dark"
-                    onclick="closeEditModal()">
-
-                    Cancel
-
+                    class="btn btn-light"
+                    onclick="closeEditModal()"
+                >
+                    CANCEL
                 </button>
 
             </div>
@@ -2629,9 +2656,9 @@ tbody tr:hover{
 ========================================================= -->
 
 <div
-    id="toastContainer"
-    class="toast-container">
-</div>
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
@@ -2641,19 +2668,19 @@ tbody tr:hover{
 ========================================================= */
 
 const SUPABASE_URL =
-    "https://nefsqjxfhvsacsuiwquy.supabase.co";
+"https://nefsqjxfhvsacsuiwquy.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
+"sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
 
 const ADMIN_UID =
-    "199986ab-800f-4c85-8f25-9b3bf28984fb";
+"199986ab-800f-4c85-8f25-9b3bf28984fb";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 /* =========================================================
@@ -2699,42 +2726,29 @@ const processRejects = {
 
 
 /* =========================================================
-   TOAST
+   UTILITIES
 ========================================================= */
 
 function showToast(
     message,
-    type="success"
+    type="info"
 ){
 
-    const container =
-        document.getElementById(
-            "toastContainer"
-        );
-
     const toast =
-        document.createElement("div");
-
-    toast.className =
-        `toast ${type}`;
+        document.getElementById("toast");
 
     toast.textContent =
         message;
 
-    container.appendChild(toast);
+    toast.className =
+        "toast show " + type;
 
-    setTimeout(
-        ()=>{
-            toast.remove();
-        },
-        3200
-    );
+    setTimeout(()=>{
+        toast.className =
+            "toast";
+    },3000);
 }
 
-
-/* =========================================================
-   NORMALIZE
-========================================================= */
 
 function normalizeSN(value){
 
@@ -2744,98 +2758,6 @@ function normalizeSN(value){
 
 }
 
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
-
-function todayString(){
-
-    const d =
-        new Date();
-
-    const y =
-        d.getFullYear();
-
-    const m =
-        String(
-            d.getMonth()+1
-        ).padStart(2,"0");
-
-    const day =
-        String(
-            d.getDate()
-        ).padStart(2,"0");
-
-    return `${y}-${m}-${day}`;
-
-}
-
-
-function formatDateTime(value){
-
-    if(!value){
-        return "-";
-    }
-
-    const d =
-        new Date(value);
-
-    if(
-        Number.isNaN(
-            d.getTime()
-        )
-    ){
-        return value;
-    }
-
-    return d.toLocaleString(
-        "en-MY",
-        {
-            year:"numeric",
-            month:"2-digit",
-            day:"2-digit",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
-
-}
-
-
-function toInputDateTime(value){
-
-    if(!value){
-        return "";
-    }
-
-    const d =
-        new Date(value);
-
-    if(
-        Number.isNaN(
-            d.getTime()
-        )
-    ){
-        return "";
-    }
-
-    const local =
-        new Date(
-            d.getTime() -
-            d.getTimezoneOffset()*60000
-        );
-
-    return local
-        .toISOString()
-        .slice(0,16);
-
-}
-
-
-/* =========================================================
-   EMAIL MASKING
-========================================================= */
 
 function displayOperator(value){
 
@@ -2847,9 +2769,7 @@ function displayOperator(value){
         String(value).trim();
 
     if(
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            text
-        )
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)
     ){
         return "Admin";
     }
@@ -2859,17 +2779,25 @@ function displayOperator(value){
 }
 
 
-/* =========================================================
-   ADMIN CHECK
-========================================================= */
-
 function isAdmin(){
 
-    return Boolean(
+    return !!(
         currentSession &&
         currentSession.user &&
         currentSession.user.id === ADMIN_UID
     );
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -2880,221 +2808,75 @@ function isAdmin(){
 
 function updateAdminUI(){
 
-    document.body.classList.toggle(
-        "admin-mode",
-        isAdmin()
-    );
-
-    const email =
-        document.getElementById(
-            "adminEmail"
-        );
-
-    const operator =
-        document.getElementById(
-            "operatorId"
-        );
+    const adminWorkspace =
+        document.querySelector(".admin-workspace");
 
     if(isAdmin()){
 
-        if(email){
+        document.body.classList.add(
+            "admin-mode"
+        );
 
-            email.value =
-                currentSession.user.email || "";
-
-        }
+        document.getElementById(
+            "adminEmail"
+        ).value =
+            currentSession.user.email || "";
 
         const savedBadge =
             localStorage.getItem(
                 "rejectTrendingAdminBadge"
-            ) || "";
-
-        const badge =
-            document.getElementById(
-                "adminBadge"
             );
 
-        if(badge){
-            badge.value =
-                savedBadge;
-        }
+        document.getElementById(
+            "adminBadge"
+        ).value =
+            savedBadge || "";
 
-        if(operator){
-            operator.value =
-                savedBadge;
-        }
+        document.getElementById(
+            "operator"
+        ).value =
+            savedBadge || "";
 
-    }
-    else{
+    }else{
 
-        if(email){
-            email.value = "";
-        }
-
-        if(operator){
-            operator.value = "";
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-function openLoginModal(){
-
-    document
-        .getElementById("loginModal")
-        .classList.add("show");
-
-    setTimeout(
-        ()=>{
-            document
-                .getElementById("loginEmail")
-                .focus();
-        },
-        100
-    );
-
-}
-
-
-function closeLoginModal(){
-
-    document
-        .getElementById("loginModal")
-        .classList.remove("show");
-
-}
-
-
-async function loginAdmin(){
-
-    const email =
-        document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("loginPassword")
-            .value;
-
-    if(!email || !password){
-
-        showToast(
-            "Please enter email and password.",
-            "error"
+        document.body.classList.remove(
+            "admin-mode"
         );
 
-        return;
-    }
+        document.getElementById(
+            "adminEmail"
+        ).value = "";
 
-    try{
+        document.getElementById(
+            "adminBadge"
+        ).value = "";
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth
-                .signInWithPassword({
-                    email,
-                    password
-                });
-
-        if(error){
-            throw error;
-        }
-
-        if(
-            !data.session ||
-            data.user.id !== ADMIN_UID
-        ){
-
-            await supabaseClient.auth.signOut();
-
-            showToast(
-                "This account is not authorised as admin.",
-                "error"
-            );
-
-            return;
-        }
-
-        currentSession =
-            data.session;
-
-        updateAdminUI();
-
-        closeLoginModal();
-
-        document
-            .getElementById("loginPassword")
-            .value = "";
-
-        showToast(
-            "Admin login successful."
-        );
+        document.getElementById(
+            "operator"
+        ).value = "";
 
     }
-    catch(error){
 
-        console.error(error);
-
-        showToast(
-            error.message ||
-            "Login failed.",
-            "error"
-        );
-
-    }
+    renderRecords();
 
 }
 
 
-async function logoutAdmin(){
-
-    await supabaseClient.auth.signOut();
-
-    currentSession = null;
-
-    scannedSNs = [];
-
-    renderBatch();
-
-    updateAdminUI();
-
-    showToast(
-        "Admin logged out."
-    );
-
-}
-
-
-/* =========================================================
-   BADGE
-========================================================= */
-
-function saveBadge(){
+function saveAdminBadge(){
 
     if(!isAdmin()){
         return;
     }
 
     const badge =
-        document
-            .getElementById("adminBadge")
-            .value
-            .trim();
+        document.getElementById(
+            "adminBadge"
+        ).value.trim();
 
     if(!badge){
 
         showToast(
-            "Please enter Badge ID.",
+            "Please enter Admin Badge ID.",
             "error"
         );
 
@@ -3106,234 +2888,257 @@ function saveBadge(){
         badge
     );
 
-    document
-        .getElementById("operatorId")
-        .value = badge;
+    document.getElementById(
+        "operator"
+    ).value = badge;
 
     showToast(
-        "Badge ID saved."
+        "Admin Badge ID saved.",
+        "success"
     );
 
 }
 
 
 /* =========================================================
-   POPULATE REJECT DROPDOWN
+   LOGIN
 ========================================================= */
 
-function populateRejectSelect(){
+function openLoginModal(){
 
-    const process =
-        document
-            .getElementById("process")
-            .value;
+    document.getElementById(
+        "loginModal"
+    ).classList.add("show");
 
-    const select =
-        document
-            .getElementById("defect");
+}
 
-    select.innerHTML =
-        `<option value="">
-            Select Reject
-        </option>`;
 
-    if(!process){
+function closeLoginModal(){
+
+    document.getElementById(
+        "loginModal"
+    ).classList.remove("show");
+
+}
+
+
+async function loginAdmin(){
+
+    const email =
+        document.getElementById(
+            "loginEmail"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+    if(!email || !password){
+
+        showToast(
+            "Please enter email and password.",
+            "error"
+        );
+
         return;
     }
 
-    processRejects[process]
-        .forEach(
-            defect=>{
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth
+            .signInWithPassword({
+                email,
+                password
+            });
 
-                const option =
-                    document.createElement(
-                        "option"
-                    );
+    if(error){
 
-                option.value =
-                    defect;
-
-                option.textContent =
-                    defect;
-
-                select.appendChild(
-                    option
-                );
-
-            }
+        showToast(
+            error.message,
+            "error"
         );
+
+        return;
+    }
+
+    if(
+        !data.session ||
+        data.user.id !== ADMIN_UID
+    ){
+
+        await supabaseClient.auth.signOut();
+
+        showToast(
+            "This account is not authorised as admin.",
+            "error"
+        );
+
+        return;
+    }
+
+    currentSession =
+        data.session;
+
+    closeLoginModal();
+
+    updateAdminUI();
+
+    showToast(
+        "Admin login successful.",
+        "success"
+    );
 
 }
 
 
-function populateEditRejectSelect(
-    process,
-    selected=""
-){
+async function logoutAdmin(){
 
-    const select =
-        document
-            .getElementById("editDefect");
+    await supabaseClient.auth.signOut();
 
-    select.innerHTML = "";
+    currentSession = null;
 
-    const list =
-        processRejects[process] || [];
+    updateAdminUI();
 
-    list.forEach(
-        defect=>{
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                defect;
-
-            option.textContent =
-                defect;
-
-            if(defect === selected){
-                option.selected = true;
-            }
-
-            select.appendChild(
-                option
-            );
-
-        }
+    showToast(
+        "Admin logged out.",
+        "info"
     );
 
 }
 
 
 /* =========================================================
-   FILTER OPTIONS
+   PROCESS / DEFECT
 ========================================================= */
 
-function uniqueSorted(
-    values
-){
-
-    return [
-        ...new Set(
-            values
-                .filter(Boolean)
-                .map(v=>String(v))
-        )
-    ].sort(
-        (a,b)=>
-            a.localeCompare(b)
-    );
-
-}
-
-
-function fillSelect(
-    id,
-    values,
-    allLabel
+function populateRejectSelect(
+    selectId,
+    processValue,
+    currentValue=""
 ){
 
     const select =
-        document.getElementById(id);
+        document.getElementById(selectId);
 
     if(!select){
         return;
     }
 
-    const current =
-        select.value;
-
     select.innerHTML =
-        `<option value="">
-            ${allLabel}
-        </option>`;
+        `<option value="">Select Reject</option>`;
 
-    values.forEach(
-        value=>{
+    const list =
+        processRejects[processValue] || [];
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+    list.forEach(defect=>{
 
-            option.value =
-                value;
+        const option =
+            document.createElement("option");
 
-            option.textContent =
-                value;
+        option.value =
+            defect;
 
-            select.appendChild(
-                option
+        option.textContent =
+            defect;
+
+        if(defect === currentValue){
+            option.selected = true;
+        }
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+function setupProcessDropdowns(){
+
+    document.getElementById(
+        "process"
+    ).addEventListener(
+        "change",
+        function(){
+
+            populateRejectSelect(
+                "defect",
+                this.value
             );
 
         }
     );
 
-    if(
-        values.includes(current)
-    ){
-        select.value =
-            current;
-    }
+
+    document.getElementById(
+        "editProcess"
+    ).addEventListener(
+        "change",
+        function(){
+
+            populateRejectSelect(
+                "editDefect",
+                this.value
+            );
+
+        }
+    );
 
 }
 
 
-function populateFilterOptions(){
+function populateAllRejectFilters(){
 
-    const processes =
-        uniqueSorted(
-            rows.map(
-                row=>row.process
+    const allDefects =
+        [
+            ...new Set(
+                Object.values(processRejects)
+                    .flat()
             )
-        );
+        ]
+        .sort();
 
-    const defects =
-        uniqueSorted(
-            rows.map(
-                row=>row.defect
-            )
-        );
 
-    const pns =
-        uniqueSorted(
-            rows.map(
-                row=>row.component_pn
-            )
-        );
-
-    fillSelect(
-        "analyticsProcess",
-        processes,
-        "All Process"
-    );
-
-    fillSelect(
+    const filterIds = [
         "analyticsDefect",
-        defects,
-        "All Reject"
-    );
+        "recordDefect"
+    ];
 
-    fillSelect(
-        "analyticsPN",
-        pns,
-        "All Part Number"
-    );
 
-    fillSelect(
-        "recordProcess",
-        processes,
-        "All Process"
-    );
+    filterIds.forEach(id=>{
 
-    fillSelect(
-        "recordDefect",
-        defects,
-        "All Reject"
-    );
+        const select =
+            document.getElementById(id);
+
+        if(!select){
+            return;
+        }
+
+        const first =
+            select.options[0];
+
+        select.innerHTML = "";
+
+        select.appendChild(first);
+
+        allDefects.forEach(defect=>{
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                defect;
+
+            option.textContent =
+                defect;
+
+            select.appendChild(option);
+
+        });
+
+    });
 
 }
 
@@ -3344,43 +3149,21 @@ function populateFilterOptions(){
 
 async function loadRows(){
 
-    try{
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("rejects")
+            .select("*")
+            .order(
+                "date_time",
+                {
+                    ascending:false
+                }
+            );
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .select("*")
-                .order(
-                    "date_time",
-                    {
-                        ascending:false
-                    }
-                );
-
-        if(error){
-            throw error;
-        }
-
-        rows =
-            Array.isArray(data)
-                ? data
-                : [];
-
-        populateFilterOptions();
-
-        renderDashboard();
-
-        renderChart();
-
-        renderDailyTop();
-
-        renderRecords();
-
-    }
-    catch(error){
+    if(error){
 
         console.error(error);
 
@@ -3389,116 +3172,213 @@ async function loadRows(){
             "error"
         );
 
+        return;
     }
+
+    rows =
+        data || [];
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderChart();
+
+    renderDailyTop();
+
+    renderRecords();
+
+}
+
+
+function populateFilterOptions(){
+
+    const processes =
+        [
+            ...new Set(
+                rows
+                    .map(r=>r.process)
+                    .filter(Boolean)
+            )
+        ]
+        .sort();
+
+
+    const pns =
+        [
+            ...new Set(
+                rows
+                    .map(r=>r.component_pn)
+                    .filter(Boolean)
+            )
+        ]
+        .sort();
+
+
+    const processIds = [
+        "analyticsProcess",
+        "recordProcess"
+    ];
+
+
+    processIds.forEach(id=>{
+
+        const select =
+            document.getElementById(id);
+
+        const first =
+            select.options[0];
+
+        select.innerHTML = "";
+
+        select.appendChild(first);
+
+        processes.forEach(process=>{
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                process;
+
+            option.textContent =
+                process;
+
+            select.appendChild(option);
+
+        });
+
+    });
+
+
+    const pnSelect =
+        document.getElementById(
+            "analyticsPN"
+        );
+
+    const pnFirst =
+        pnSelect.options[0];
+
+    pnSelect.innerHTML = "";
+
+    pnSelect.appendChild(pnFirst);
+
+    pns.forEach(pn=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            pn;
+
+        option.textContent =
+            pn;
+
+        pnSelect.appendChild(option);
+
+    });
+
+
+    populateAllRejectFilters();
 
 }
 
 
 /* =========================================================
-   ANALYTICS FILTER
+   ANALYTICS
 ========================================================= */
 
 function getAnalyticsRows(){
 
     const process =
-        document
-            .getElementById(
-                "analyticsProcess"
-            )
-            .value;
+        document.getElementById(
+            "analyticsProcess"
+        ).value;
 
     const defect =
-        document
-            .getElementById(
-                "analyticsDefect"
-            )
-            .value;
+        document.getElementById(
+            "analyticsDefect"
+        ).value;
 
     const defectClass =
-        document
-            .getElementById(
-                "analyticsClass"
-            )
-            .value;
+        document.getElementById(
+            "analyticsClass"
+        ).value;
 
     const pn =
-        document
-            .getElementById(
-                "analyticsPN"
-            )
-            .value;
+        document.getElementById(
+            "analyticsPN"
+        ).value;
 
     const from =
-        document
-            .getElementById(
-                "analyticsFrom"
-            )
-            .value;
+        document.getElementById(
+            "analyticsFrom"
+        ).value;
 
     const to =
-        document
-            .getElementById(
-                "analyticsTo"
-            )
-            .value;
+        document.getElementById(
+            "analyticsTo"
+        ).value;
 
-    return rows.filter(
-        row=>{
 
-            if(
-                process &&
-                row.process !== process
-            ){
+    return rows.filter(row=>{
+
+        if(process &&
+           row.process !== process){
+
+            return false;
+        }
+
+        if(defect &&
+           row.defect !== defect){
+
+            return false;
+        }
+
+        if(defectClass &&
+           row.defect_class !== defectClass){
+
+            return false;
+        }
+
+        if(pn &&
+           String(row.component_pn) !== String(pn)){
+
+            return false;
+        }
+
+
+        const date =
+            new Date(row.date_time);
+
+
+        if(from){
+
+            const start =
+                new Date(from + "T00:00:00");
+
+            if(date < start){
                 return false;
             }
-
-            if(
-                defect &&
-                row.defect !== defect
-            ){
-                return false;
-            }
-
-            if(
-                defectClass &&
-                row.defect_class !== defectClass
-            ){
-                return false;
-            }
-
-            if(
-                pn &&
-                String(row.component_pn)
-                !== String(pn)
-            ){
-                return false;
-            }
-
-            const rowDate =
-                row.date_time
-                    ? String(
-                        row.date_time
-                    ).slice(0,10)
-                    : "";
-
-            if(
-                from &&
-                rowDate < from
-            ){
-                return false;
-            }
-
-            if(
-                to &&
-                rowDate > to
-            ){
-                return false;
-            }
-
-            return true;
 
         }
-    );
+
+
+        if(to){
+
+            const end =
+                new Date(to + "T23:59:59");
+
+            if(date > end){
+                return false;
+            }
+
+        }
+
+
+        return true;
+
+    });
 
 }
 
@@ -3511,56 +3391,36 @@ function applyAnalytics(){
 
     renderDailyTop();
 
-    showToast(
-        "Analytics filter applied."
-    );
-
 }
 
 
 function clearAnalytics(){
 
-    document
-        .getElementById(
-            "analyticsProcess"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsProcess"
+    ).value = "";
 
-    document
-        .getElementById(
-            "analyticsDefect"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsDefect"
+    ).value = "";
 
-    document
-        .getElementById(
-            "analyticsClass"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsClass"
+    ).value = "";
 
-    document
-        .getElementById(
-            "analyticsPN"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsPN"
+    ).value = "";
 
-    document
-        .getElementById(
-            "analyticsFrom"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsFrom"
+    ).value = "";
 
-    document
-        .getElementById(
-            "analyticsTo"
-        )
-        .value = "";
+    document.getElementById(
+        "analyticsTo"
+    ).value = "";
 
-    renderDashboard();
-
-    renderChart();
-
-    renderDailyTop();
+    applyAnalytics();
 
 }
 
@@ -3574,98 +3434,68 @@ function renderDashboard(){
     const filtered =
         getAnalyticsRows();
 
-    const total =
+
+    document.getElementById(
+        "totalReject"
+    ).textContent =
         filtered.length;
 
+
     const today =
-        todayString();
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
 
     const todayCount =
-        filtered.filter(
-            row=>
-                row.date_time &&
-                String(
-                    row.date_time
-                ).slice(0,10)
-                === today
-        ).length;
+        filtered.filter(row=>{
 
-    const defectCounts = {};
+            return new Date(row.date_time)
+                .toISOString()
+                .slice(0,10)
+                === today;
 
-    filtered.forEach(
-        row=>{
+        }).length;
 
-            const defect =
-                row.defect ||
-                "Unknown";
 
-            defectCounts[defect] =
-                (defectCounts[defect] || 0)
-                + 1;
+    document.getElementById(
+        "rejectToday"
+    ).textContent =
+        todayCount;
 
-        }
-    );
 
-    let topDefect = "-";
-    let topQty = 0;
+    const counts = {};
 
-    Object.entries(
-        defectCounts
-    ).forEach(
-        ([defect,qty])=>{
+    filtered.forEach(row=>{
 
-            if(qty > topQty){
+        counts[row.defect] =
+            (counts[row.defect] || 0) + 1;
 
-                topQty =
-                    qty;
+    });
 
-                topDefect =
-                    defect;
 
-            }
+    const top =
+        Object.entries(counts)
+            .sort((a,b)=>b[1]-a[1])[0];
 
-        }
-    );
+
+    document.getElementById(
+        "topReject"
+    ).textContent =
+        top ? top[0] : "-";
+
 
     const uniqueSN =
         new Set(
             filtered
-                .map(
-                    row=>
-                        normalizeSN(
-                            row.component_sn
-                        )
-                )
+                .map(r=>normalizeSN(r.component_sn))
                 .filter(Boolean)
         );
 
-    document
-        .getElementById(
-            "totalReject"
-        )
-        .textContent =
-            total;
-
-    document
-        .getElementById(
-            "rejectToday"
-        )
-        .textContent =
-            todayCount;
-
-    document
-        .getElementById(
-            "topReject"
-        )
-        .textContent =
-            topDefect;
-
-    document
-        .getElementById(
-            "totalSN"
-        )
-        .textContent =
-            uniqueSN.size;
+    document.getElementById(
+        "totalSN"
+    ).textContent =
+        uniqueSN.size;
 
 }
 
@@ -3679,115 +3509,85 @@ function renderChart(){
     const filtered =
         getAnalyticsRows();
 
+
     const counts = {};
 
-    filtered.forEach(
-        row=>{
+    filtered.forEach(row=>{
 
-            const defect =
-                row.defect ||
-                "Unknown";
+        const defect =
+            row.defect || "Unknown";
 
-            counts[defect] =
-                (counts[defect] || 0)
-                + 1;
+        counts[defect] =
+            (counts[defect] || 0) + 1;
 
-        }
-    );
+    });
+
 
     const labels =
         Object.keys(counts)
             .sort(
                 (a,b)=>
-                    counts[b] -
-                    counts[a]
+                    counts[b] - counts[a]
             );
+
 
     const values =
         labels.map(
-            label=>
-                counts[label]
+            label=>counts[label]
         );
 
-    const canvas =
-        document.getElementById(
-            "rejectChart"
-        );
 
-    const empty =
-        document.getElementById(
-            "chartEmpty"
-        );
+    const colors = [
+        "#9b7edc",
+        "#e88fa5",
+        "#eead76",
+        "#78bfa3",
+        "#6dbbc3",
+        "#e88972",
+        "#dfb65e",
+        "#b78bd3",
+        "#79b6a2",
+        "#d889a4",
+        "#eca66f",
+        "#70b5c0"
+    ];
+
+
+    const hoverColors = [
+        "#896bc9",
+        "#d97891",
+        "#dd985d",
+        "#61aa8d",
+        "#5aaab2",
+        "#d77760",
+        "#cea64f",
+        "#a474c2",
+        "#64a48e",
+        "#cb718d",
+        "#dc955c",
+        "#5da8b0"
+    ];
+
+
+    const ctx =
+        document
+            .getElementById(
+                "rejectChart"
+            )
+            .getContext("2d");
+
 
     if(rejectChart){
 
         rejectChart.destroy();
 
-        rejectChart = null;
-
     }
 
-    if(!labels.length){
-
-        canvas.classList.add(
-            "hidden"
-        );
-
-        empty.classList.remove(
-            "hidden"
-        );
-
-        return;
-
-    }
-
-    canvas.classList.remove(
-        "hidden"
-    );
-
-    empty.classList.add(
-        "hidden"
-    );
-
-    const colors = [
-
-        "#b9abd7",
-        "#d5a5af",
-        "#9fbea8",
-        "#91c3c3",
-        "#d6b08e",
-        "#d2c08d",
-        "#a99acb",
-        "#b98f9a",
-        "#88aaa0",
-        "#9dbbbb",
-        "#c2a7b0",
-        "#9e91b6"
-
-    ];
-
-    const hoverColors = [
-
-        "#c9bce3",
-        "#dfb5bf",
-        "#afd0b8",
-        "#a2d1d1",
-        "#e0bf9d",
-        "#dfcf9d",
-        "#b9aae0",
-        "#cb9ea8",
-        "#9bbcb2",
-        "#afd0d0",
-        "#d1b9c1",
-        "#b0a3c8"
-
-    ];
 
     rejectChart =
         new Chart(
-            canvas,
+            ctx,
             {
-
                 type:"bar",
 
                 data:{
@@ -3801,28 +3601,23 @@ function renderChart(){
 
                             backgroundColor:
                                 labels.map(
-                                    (_,index)=>
+                                    (_,i)=>
                                         colors[
-                                            index %
-                                            colors.length
+                                            i % colors.length
                                         ]
                                 ),
 
                             hoverBackgroundColor:
                                 labels.map(
-                                    (_,index)=>
+                                    (_,i)=>
                                         hoverColors[
-                                            index %
-                                            hoverColors.length
+                                            i % hoverColors.length
                                         ]
                                 ),
 
-                            borderWidth:0,
+                            borderRadius:10,
 
-                            borderRadius:7,
-
-                            maxBarThickness:55
-
+                            borderSkipped:false
                         }
                     ]
                 },
@@ -3842,20 +3637,15 @@ function renderChart(){
                         tooltip:{
 
                             backgroundColor:
-                                "#24242a",
+                                "#403949",
 
-                            titleColor:
-                                "#f2f0f2",
+                            titleColor:"#fff",
 
-                            bodyColor:
-                                "#d8d5dc",
+                            bodyColor:"#fff",
 
-                            borderColor:
-                                "#454550",
+                            padding:12,
 
-                            borderWidth:1,
-
-                            padding:11
+                            cornerRadius:10
 
                         }
 
@@ -3866,17 +3656,18 @@ function renderChart(){
                         x:{
 
                             ticks:{
-                                color:"#aaa8b0",
+                                color:"#77717f",
 
                                 font:{
-                                    size:10
+                                    size:11,
+                                    weight:"600"
                                 }
                             },
 
                             grid:{
-                                color:
-                                    "rgba(255,255,255,.035)"
+                                display:false
                             }
+
                         },
 
                         y:{
@@ -3884,47 +3675,41 @@ function renderChart(){
                             beginAtZero:true,
 
                             ticks:{
-                                color:"#aaa8b0",
+                                color:"#77717f",
 
-                                precision:0,
-
-                                font:{
-                                    size:10
-                                }
+                                precision:0
                             },
 
                             grid:{
                                 color:
-                                    "rgba(255,255,255,.045)"
+                                    "rgba(130,110,150,.10)"
                             }
+
                         }
 
                     },
 
-                    onClick:
-                        function(
-                            event,
-                            elements
-                        ){
+                    onClick:function(
+                        event,
+                        elements
+                    ){
 
-                            if(
-                                !elements.length
-                            ){
-                                return;
-                            }
-
-                            const index =
-                                elements[0].index;
-
-                            const defect =
-                                labels[index];
-
-                            openChartModal(
-                                defect,
-                                filtered
-                            );
-
+                        if(!elements.length){
+                            return;
                         }
+
+                        const index =
+                            elements[0].index;
+
+                        const defect =
+                            labels[index];
+
+                        openChartModal(
+                            defect,
+                            filtered
+                        );
+
+                    }
 
                 }
 
@@ -3935,141 +3720,135 @@ function renderChart(){
 
 
 /* =========================================================
-   GRAPH MODAL
+   GRAPH POPUP
 ========================================================= */
 
 function openChartModal(
     defect,
-    sourceRows
+    filteredRows
 ){
 
-    const selected =
-        sourceRows.filter(
-            row=>
+    const detailRows =
+        filteredRows.filter(
+            row =>
                 row.defect === defect
         );
 
-    document
-        .getElementById(
-            "chartModalTitle"
-        )
-        .textContent =
-            `${defect} Details`;
 
-    document
-        .getElementById(
-            "modalRejectName"
-        )
-        .textContent =
-            defect;
+    document.getElementById(
+        "graphModalTitle"
+    ).textContent =
+        defect;
 
-    document
-        .getElementById(
-            "modalRejectQty"
-        )
-        .textContent =
-            selected.length;
+
+    document.getElementById(
+        "modalReject"
+    ).textContent =
+        defect;
+
+
+    document.getElementById(
+        "modalQuantity"
+    ).textContent =
+        detailRows.length;
+
 
     const processes =
         [
             ...new Set(
-                selected
-                    .map(
-                        row=>row.process
-                    )
+                detailRows
+                    .map(r=>r.process)
                     .filter(Boolean)
             )
         ];
 
-    document
-        .getElementById(
-            "modalRejectProcess"
-        )
-        .textContent =
-            processes.length
-                ? processes.join(", ")
-                : "-";
+
+    const pns =
+        [
+            ...new Set(
+                detailRows
+                    .map(r=>r.component_pn)
+                    .filter(Boolean)
+            )
+        ];
+
+
+    document.getElementById(
+        "modalProcess"
+    ).textContent =
+        processes.join(", ") || "-";
+
+
+    document.getElementById(
+        "modalPN"
+    ).textContent =
+        pns.join(", ") || "-";
+
 
     const body =
         document.getElementById(
-            "chartModalBody"
+            "graphModalBody"
         );
 
-    body.innerHTML = "";
 
-    selected.forEach(
-        row=>{
+    body.innerHTML =
+        detailRows.map(row=>{
 
-            const tr =
-                document.createElement(
-                    "tr"
-                );
+            return `
 
-            tr.innerHTML = `
+                <tr>
 
-                <td>
-                    ${escapeHtml(
-                        row.component_sn || "-"
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(row.component_sn)}
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        row.process || "-"
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(row.process)}
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        row.component_pn || "-"
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(row.component_pn)}
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        row.defect_class || "-"
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(row.defect_class)}
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        displayOperator(
-                            row.operator_id
-                        )
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(
+                            displayOperator(
+                                row.operator_id
+                            )
+                        )}
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        formatDateTime(
-                            row.date_time
-                        )
-                    )}
-                </td>
+                    <td>
+                        ${escapeHtml(
+                            formatDateTime(
+                                row.date_time
+                            )
+                        )}
+                    </td>
+
+                </tr>
 
             `;
 
-            body.appendChild(tr);
+        }).join("");
 
-        }
-    );
 
-    document
-        .getElementById(
-            "chartModal"
-        )
-        .classList.add("show");
+    document.getElementById(
+        "graphModal"
+    ).classList.add("show");
 
 }
 
 
-function closeChartModal(){
+function closeGraphModal(){
 
-    document
-        .getElementById(
-            "chartModal"
-        )
-        .classList.remove("show");
+    document.getElementById(
+        "graphModal"
+    ).classList.remove("show");
 
 }
 
@@ -4083,140 +3862,95 @@ function renderDailyTop(){
     const filtered =
         getAnalyticsRows();
 
-    const grouped = {};
 
-    filtered.forEach(
-        row=>{
+    const groups = {};
 
-            if(!row.date_time){
-                return;
-            }
 
-            const date =
-                String(
-                    row.date_time
-                ).slice(0,10);
+    filtered.forEach(row=>{
 
-            if(!grouped[date]){
-                grouped[date] = [];
-            }
+        const date =
+            new Date(row.date_time)
+                .toISOString()
+                .slice(0,10);
 
-            grouped[date].push(row);
-
+        if(!groups[date]){
+            groups[date] = {};
         }
-    );
+
+        const defect =
+            row.defect || "Unknown";
+
+        groups[date][defect] =
+            (groups[date][defect] || 0) + 1;
+
+    });
+
 
     const container =
         document.getElementById(
             "dailyTop"
         );
 
-    container.innerHTML = "";
 
     const dates =
-        Object.keys(grouped)
+        Object.keys(groups)
             .sort()
             .reverse();
 
+
     if(!dates.length){
 
-        container.innerHTML =
-            `<div
-                style="
-                    color:#77757e;
-                    font-size:12px;
-                ">
-                No daily data available.
-            </div>`;
+        container.innerHTML = `
+            <div class="daily-card">
+                <div class="daily-date">
+                    No data
+                </div>
+            </div>
+        `;
 
         return;
     }
 
-    dates.forEach(
-        date=>{
 
-            const counts = {};
+    container.innerHTML =
+        dates.map(date=>{
 
-            grouped[date].forEach(
-                row=>{
+            const top =
+                Object.entries(
+                    groups[date]
+                )
+                .sort(
+                    (a,b)=>b[1]-a[1]
+                )[0];
 
-                    const defect =
-                        row.defect ||
-                        "Unknown";
 
-                    counts[defect] =
-                        (counts[defect] || 0)
-                        + 1;
+            return `
 
-                }
-            );
+                <div class="daily-card">
 
-            let topDefect =
-                "-";
+                    <div class="daily-date">
+                        ${formatDateOnly(date)}
+                    </div>
 
-            let topQty =
-                0;
+                    <div class="daily-defect">
+                        ${escapeHtml(top[0])}
+                    </div>
 
-            Object.entries(
-                counts
-            ).forEach(
-                ([defect,qty])=>{
+                    <div class="daily-qty">
+                        ${top[1]} reject
+                    </div>
 
-                    if(qty > topQty){
-
-                        topQty =
-                            qty;
-
-                        topDefect =
-                            defect;
-
-                    }
-
-                }
-            );
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "daily-card";
-
-            card.innerHTML = `
-
-                <div class="daily-date">
-                    ${escapeHtml(date)}
-                </div>
-
-                <div class="daily-defect">
-                    ${escapeHtml(topDefect)}
-                </div>
-
-                <div class="daily-qty">
-                    ${topQty}
-                    <span
-                        style="
-                            font-size:11px;
-                            color:#85838b;
-                            font-weight:600;
-                        ">
-                        reject
-                    </span>
                 </div>
 
             `;
 
-            container.appendChild(card);
-
-        }
-    );
+        }).join("");
 
 }
 
 
 /* =========================================================
-   BATCH SCAN
+   BATCH SCANNING
 ========================================================= */
 
 function addSN(){
@@ -4224,45 +3958,46 @@ function addSN(){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
 
+
     const sn =
         normalizeSN(
-            document
-                .getElementById("sn")
-                .value
+            document.getElementById(
+                "sn"
+            ).value
         );
 
     const process =
-        document
-            .getElementById("process")
-            .value;
+        document.getElementById(
+            "process"
+        ).value;
 
     const pn =
-        document
-            .getElementById("pn")
-            .value;
+        document.getElementById(
+            "pn"
+        ).value;
 
     const defect =
-        document
-            .getElementById("defect")
-            .value;
+        document.getElementById(
+            "defect"
+        ).value;
 
     const defectClass =
-        document
-            .getElementById("defectClass")
-            .value;
+        document.getElementById(
+            "defectClass"
+        ).value;
 
-    const badge =
-        document
-            .getElementById("operatorId")
-            .value
-            .trim();
+    const operator =
+        document.getElementById(
+            "operator"
+        ).value.trim();
+
 
     if(!sn){
 
@@ -4274,63 +4009,28 @@ function addSN(){
         return;
     }
 
-    if(!process){
+
+    if(!process ||
+       !pn ||
+       !defect ||
+       !defectClass ||
+       !operator){
 
         showToast(
-            "Please select Process.",
+            "Please complete all fields.",
             "error"
         );
 
         return;
     }
 
-    if(!pn){
-
-        showToast(
-            "Please select Component PN.",
-            "error"
-        );
-
-        return;
-    }
-
-    if(!defect){
-
-        showToast(
-            "Please select Reject.",
-            "error"
-        );
-
-        return;
-    }
-
-    if(!defectClass){
-
-        showToast(
-            "Please select Defect Class.",
-            "error"
-        );
-
-        return;
-    }
-
-    if(!badge){
-
-        showToast(
-            "Please save Admin Badge ID first.",
-            "error"
-        );
-
-        return;
-    }
 
     const duplicateBatch =
         scannedSNs.some(
-            item=>
-                normalizeSN(
-                    item.component_sn
-                ) === sn
+            item =>
+                item.component_sn === sn
         );
+
 
     if(duplicateBatch){
 
@@ -4342,23 +4042,26 @@ function addSN(){
         return;
     }
 
-    const duplicateExisting =
+
+    const duplicateDB =
         rows.some(
-            row=>
+            row =>
                 normalizeSN(
                     row.component_sn
                 ) === sn
         );
 
-    if(duplicateExisting){
+
+    if(duplicateDB){
 
         showToast(
-            `SN ${sn} already exists.`,
+            "This SN already exists in database.",
             "error"
         );
 
         return;
     }
+
 
     scannedSNs.push({
 
@@ -4366,81 +4069,128 @@ function addSN(){
 
         component_pn:pn,
 
-        process:process,
+        process,
 
-        defect:defect,
+        defect,
 
         defect_class:defectClass,
 
-        operator_id:badge,
+        operator_id:operator,
 
         date_time:
             new Date().toISOString()
 
     });
 
-    document
-        .getElementById("sn")
-        .value = "";
+
+    document.getElementById(
+        "sn"
+    ).value = "";
+
 
     renderBatch();
 
-    document
-        .getElementById("sn")
-        .focus();
+    document.getElementById(
+        "sn"
+    ).focus();
+
+
+    showToast(
+        "SN added to batch.",
+        "success"
+    );
 
 }
 
 
 function renderBatch(){
 
-    const list =
+    const container =
         document.getElementById(
             "batchList"
         );
 
-    const count =
-        document.getElementById(
-            "scanCount"
-        );
 
-    count.textContent =
-        `${scannedSNs.length} SN`;
+    document.getElementById(
+        "scanCount"
+    ).textContent =
+        scannedSNs.length;
 
-    list.innerHTML = "";
 
     if(!scannedSNs.length){
 
-        list.innerHTML =
-            `<span
-                style="
-                    color:#6f6d75;
-                    font-size:11px;
-                ">
-                No SN scanned yet.
-            </span>`;
+        container.innerHTML = `
+            <div class="batch-empty">
+                No scanned SN yet.
+            </div>
+        `;
 
         return;
     }
 
-    scannedSNs.forEach(
-        item=>{
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+    container.innerHTML =
+        scannedSNs.map(
+            (item,index)=>{
 
-            div.className =
-                "batch-item";
+                return `
 
-            div.textContent =
-                item.component_sn;
+                    <div class="batch-item">
 
-            list.appendChild(div);
+                        <div>
+                            <strong>
+                                ${escapeHtml(
+                                    item.component_sn
+                                )}
+                            </strong>
+                        </div>
 
-        }
+                        <div>
+                            PN:
+                            ${escapeHtml(
+                                item.component_pn
+                            )}
+                        </div>
+
+                        <div>
+                            ${escapeHtml(
+                                item.defect
+                            )}
+                        </div>
+
+                        <div>
+                            ${escapeHtml(
+                                item.defect_class
+                            )}
+                        </div>
+
+                        <div>
+                            <button
+                                class="remove-batch"
+                                onclick="removeBatchItem(${index})"
+                            >
+                                REMOVE
+                            </button>
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+function removeBatchItem(index){
+
+    scannedSNs.splice(
+        index,
+        1
     );
+
+    renderBatch();
 
 }
 
@@ -4451,15 +4201,11 @@ function clearBatch(){
 
     renderBatch();
 
-    document
-        .getElementById("sn")
-        .focus();
-
 }
 
 
 /* =========================================================
-   SUBMIT BATCH
+   SUBMIT
 ========================================================= */
 
 async function submitReject(){
@@ -4467,105 +4213,94 @@ async function submitReject(){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
+
 
     if(!scannedSNs.length){
 
         showToast(
-            "No SN in current batch.",
+            "No scanned SN to submit.",
             "error"
         );
 
         return;
     }
 
-    try{
 
-        const payload =
-            scannedSNs.map(
-                item=>({
+    const payload =
+        scannedSNs.map(item=>({
 
-                    component_sn:
-                        item.component_sn,
+            component_sn:
+                item.component_sn,
 
-                    component_pn:
-                        item.component_pn,
+            component_pn:
+                item.component_pn,
 
-                    process:
-                        item.process,
+            process:
+                item.process,
 
-                    defect:
-                        item.defect,
+            defect:
+                item.defect,
 
-                    defect_class:
-                        item.defect_class,
+            defect_class:
+                item.defect_class,
 
-                    operator_id:
-                        item.operator_id,
+            operator_id:
+                item.operator_id,
 
-                    date_time:
-                        item.date_time
+            date_time:
+                item.date_time
 
-                })
+        }));
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("rejects")
+            .insert(payload);
+
+
+    if(error){
+
+        if(error.code === "23505"){
+
+            showToast(
+                "Duplicate SN detected. Nothing was submitted.",
+                "error"
             );
 
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .insert(payload);
+        }else{
 
-        if(error){
+            console.error(error);
 
-            if(
-                error.code === "23505"
-            ){
+            showToast(
+                error.message,
+                "error"
+            );
 
-                showToast(
-                    "Duplicate Component SN detected.",
-                    "error"
-                );
-
-            }
-            else{
-                throw error;
-            }
-
-            return;
         }
 
-        showToast(
-            `${payload.length} reject record(s) submitted.`
-        );
-
-        scannedSNs = [];
-
-        renderBatch();
-
-        await loadRows();
-
-        document
-            .getElementById("sn")
-            .focus();
-
+        return;
     }
-    catch(error){
 
-        console.error(error);
 
-        showToast(
-            error.message ||
-            "Unable to submit records.",
-            "error"
-        );
+    scannedSNs = [];
 
-    }
+    renderBatch();
+
+    await loadRows();
+
+    showToast(
+        "Reject data submitted successfully.",
+        "success"
+    );
 
 }
 
@@ -4574,32 +4309,21 @@ async function submitReject(){
    EXCEL IMPORT
 ========================================================= */
 
-function findColumn(
+function getCell(
     row,
     names
 ){
 
-    const keys =
-        Object.keys(row);
+    for(const name of names){
 
-    for(
-        const name of names
-    ){
+        if(
+            row[name] !== undefined &&
+            row[name] !== null &&
+            String(row[name]).trim() !== ""
+        ){
 
-        const found =
-            keys.find(
-                key=>
-                    String(key)
-                        .trim()
-                        .toLowerCase()
-                    ===
-                    name
-                        .trim()
-                        .toLowerCase()
-            );
+            return row[name];
 
-        if(found){
-            return row[found];
         }
 
     }
@@ -4609,15 +4333,14 @@ function findColumn(
 }
 
 
-function parseExcelDate(value){
-
-    if(!value){
-        return new Date().toISOString();
-    }
+function excelDateToISO(value){
 
     if(value instanceof Date){
+
         return value.toISOString();
+
     }
+
 
     if(
         typeof value === "number"
@@ -4628,35 +4351,25 @@ function parseExcelDate(value){
                 value
             );
 
-        if(date){
-
-            const d =
-                new Date(
-                    Date.UTC(
-                        date.y,
-                        date.m-1,
-                        date.d,
-                        date.H,
-                        date.M,
-                        date.S
-                    )
-                );
-
-            return d.toISOString();
-
-        }
+        return new Date(
+            date.y,
+            date.m - 1,
+            date.d,
+            date.H || 0,
+            date.M || 0,
+            date.S || 0
+        ).toISOString();
 
     }
+
 
     const parsed =
         new Date(value);
 
-    if(
-        !Number.isNaN(
-            parsed.getTime()
-        )
-    ){
+    if(!isNaN(parsed)){
+
         return parsed.toISOString();
+
     }
 
     return new Date().toISOString();
@@ -4664,43 +4377,56 @@ function parseExcelDate(value){
 }
 
 
-async function importExcel(event){
+async function importExcel(){
 
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
 
+
     const file =
-        event.target.files[0];
+        document.getElementById(
+            "excelFile"
+        ).files[0];
+
 
     if(!file){
+
+        showToast(
+            "Please select Excel / CSV file.",
+            "error"
+        );
+
         return;
     }
+
 
     try{
 
         const buffer =
             await file.arrayBuffer();
 
+
         const workbook =
             XLSX.read(
                 buffer,
                 {
-                    type:"array",
-                    cellDates:true
+                    type:"array"
                 }
             );
+
 
         const sheet =
             workbook.Sheets[
                 workbook.SheetNames[0]
             ];
+
 
         const data =
             XLSX.utils.sheet_to_json(
@@ -4710,243 +4436,224 @@ async function importExcel(event){
                 }
             );
 
+
         if(!data.length){
 
             showToast(
-                "No data found in file.",
+                "File contains no data.",
                 "error"
             );
 
             return;
         }
 
+
         const existingSNs =
             new Set(
-                rows
-                    .map(
-                        row=>
-                            normalizeSN(
-                                row.component_sn
-                            )
-                    )
-                    .filter(Boolean)
+                rows.map(
+                    row =>
+                        normalizeSN(
+                            row.component_sn
+                        )
+                )
             );
 
-        const importedSNs =
+
+        const importSNs =
             new Set();
+
 
         const payload = [];
 
-        const errors = [];
+        let skipped = 0;
 
-        data.forEach(
-            (row,index)=>{
 
-                const line =
-                    index + 2;
+        for(const row of data){
 
-                const sn =
-                    normalizeSN(
-                        findColumn(
-                            row,
-                            [
-                                "Component SN",
-                                "Component Serial Number",
-                                "SN",
-                                "Serial Number"
-                            ]
-                        )
-                    );
-
-                const pn =
-                    String(
-                        findColumn(
-                            row,
-                            [
-                                "Component PN",
-                                "Part Number",
-                                "PN"
-                            ]
-                        )
-                    ).trim();
-
-                const process =
-                    String(
-                        findColumn(
-                            row,
-                            ["Process"]
-                        )
-                    )
-                    .trim()
-                    .toUpperCase();
-
-                const defect =
-                    String(
-                        findColumn(
-                            row,
-                            [
-                                "Reject",
-                                "Defect"
-                            ]
-                        )
-                    ).trim();
-
-                const defectClass =
-                    String(
-                        findColumn(
-                            row,
-                            [
-                                "Defect Class",
-                                "DefectClass"
-                            ]
-                        )
-                    ).trim();
-
-                const operator =
-                    String(
-                        findColumn(
-                            row,
-                            [
-                                "Badge ID",
-                                "Operator ID",
-                                "Operator",
-                                "Badge"
-                            ]
-                        )
-                    ).trim();
-
-                const dateValue =
-                    findColumn(
+            const sn =
+                normalizeSN(
+                    getCell(
                         row,
                         [
-                            "Date Time",
-                            "Datetime",
-                            "Date",
-                            "DateTime"
+                            "Component SN",
+                            "Component Serial Number",
+                            "SN",
+                            "Serial Number"
                         ]
-                    );
-
-                if(!sn){
-
-                    errors.push(
-                        `Row ${line}: missing SN`
-                    );
-
-                    return;
-                }
-
-                if(
-                    existingSNs.has(sn) ||
-                    importedSNs.has(sn)
-                ){
-
-                    return;
-                }
-
-                if(
-                    ![
-                        "DEBUG",
-                        "MAINTENANCE"
-                    ].includes(process)
-                ){
-
-                    errors.push(
-                        `Row ${line}: invalid Process`
-                    );
-
-                    return;
-                }
-
-                if(
-                    !processRejects[
-                        process
-                    ].includes(defect)
-                ){
-
-                    errors.push(
-                        `Row ${line}: invalid Reject`
-                    );
-
-                    return;
-                }
-
-                if(
-                    ![
-                        "Cosmetic",
-                        "EAOI Reject"
-                    ].includes(defectClass)
-                ){
-
-                    errors.push(
-                        `Row ${line}: invalid Defect Class`
-                    );
-
-                    return;
-                }
-
-                /*
-                 * Do not store an email as operator ID.
-                 * If email is imported accidentally,
-                 * store Admin instead.
-                 */
-
-                const safeOperator =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                        operator
                     )
-                        ? "Admin"
-                        : operator;
+                );
 
-                if(!safeOperator){
 
-                    errors.push(
-                        `Row ${line}: missing Badge ID`
-                    );
+            const pn =
+                String(
+                    getCell(
+                        row,
+                        [
+                            "Component PN",
+                            "Part Number",
+                            "PN"
+                        ]
+                    )
+                ).trim();
 
-                    return;
-                }
 
-                payload.push({
+            const process =
+                String(
+                    getCell(
+                        row,
+                        [
+                            "Process"
+                        ]
+                    )
+                ).trim()
+                .toUpperCase();
 
-                    component_sn:
-                        sn,
 
-                    component_pn:
-                        pn,
+            const defect =
+                String(
+                    getCell(
+                        row,
+                        [
+                            "Reject",
+                            "Defect"
+                        ]
+                    )
+                ).trim();
 
-                    process:
-                        process,
 
-                    defect:
-                        defect,
+            const defectClass =
+                String(
+                    getCell(
+                        row,
+                        [
+                            "Defect Class",
+                            "DefectClass"
+                        ]
+                    )
+                ).trim();
 
-                    defect_class:
-                        defectClass,
 
-                    operator_id:
-                        safeOperator,
+            const operator =
+                String(
+                    getCell(
+                        row,
+                        [
+                            "Badge ID",
+                            "Operator ID",
+                            "Operator",
+                            "Badge"
+                        ]
+                    )
+                ).trim();
 
-                    date_time:
-                        parseExcelDate(
-                            dateValue
-                        )
 
-                });
+            const dateValue =
+                getCell(
+                    row,
+                    [
+                        "Date Time",
+                        "Datetime",
+                        "Date",
+                        "DateTime"
+                    ]
+                );
 
-                importedSNs.add(sn);
+
+            if(!sn){
+
+                skipped++;
+                continue;
 
             }
-        );
+
+
+            if(existingSNs.has(sn)){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            if(importSNs.has(sn)){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            if(
+                !["DEBUG","MAINTENANCE"]
+                    .includes(process)
+            ){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            if(
+                !processRejects[process]
+                    .includes(defect)
+            ){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            if(
+                !["Cosmetic","EAOI Reject"]
+                    .includes(defectClass)
+            ){
+
+                skipped++;
+                continue;
+
+            }
+
+
+            importSNs.add(sn);
+
+
+            payload.push({
+
+                component_sn:sn,
+
+                component_pn:pn,
+
+                process,
+
+                defect,
+
+                defect_class:defectClass,
+
+                operator_id:
+                    operator || "Admin",
+
+                date_time:
+                    excelDateToISO(
+                        dateValue
+                    )
+
+            });
+
+        }
+
 
         if(!payload.length){
 
             showToast(
-                "No new valid records to import.",
+                "No valid new records found.",
                 "error"
             );
 
             return;
         }
+
 
         const {
             error
@@ -4955,56 +4662,39 @@ async function importExcel(event){
                 .from("rejects")
                 .insert(payload);
 
+
         if(error){
 
-            if(
-                error.code === "23505"
-            ){
-
-                showToast(
-                    "Import stopped because duplicate SN exists.",
-                    "error"
-                );
-
-                return;
-            }
-
-            throw error;
-        }
-
-        await loadRows();
-
-        event.target.value = "";
-
-        if(errors.length){
+            console.error(error);
 
             showToast(
-                `${payload.length} imported. ${errors.length} row(s) skipped.`,
+                error.message,
                 "error"
             );
 
-            console.warn(
-                "Import skipped rows:",
-                errors
-            );
-
-        }
-        else{
-
-            showToast(
-                `${payload.length} record(s) imported successfully.`
-            );
-
+            return;
         }
 
-    }
-    catch(error){
+
+        await loadRows();
+
+
+        document.getElementById(
+            "excelFile"
+        ).value = "";
+
+
+        showToast(
+            `${payload.length} records imported. ${skipped} skipped.`,
+            "success"
+        );
+
+    }catch(error){
 
         console.error(error);
 
         showToast(
-            error.message ||
-            "Excel import failed.",
+            "Unable to import file.",
             "error"
         );
 
@@ -5014,281 +4704,290 @@ async function importExcel(event){
 
 
 /* =========================================================
-   RECORD FILTERS
+   RECORD FILTER
 ========================================================= */
 
 function getFilteredRecords(){
 
     const sn =
-        document
-            .getElementById("recordSN")
-            .value
-            .trim()
-            .toUpperCase();
+        document.getElementById(
+            "recordSN"
+        ).value
+        .trim()
+        .toUpperCase();
+
 
     const process =
-        document
-            .getElementById("recordProcess")
-            .value;
+        document.getElementById(
+            "recordProcess"
+        ).value;
+
 
     const defect =
-        document
-            .getElementById("recordDefect")
-            .value;
+        document.getElementById(
+            "recordDefect"
+        ).value;
+
 
     const from =
-        document
-            .getElementById("recordFrom")
-            .value;
+        document.getElementById(
+            "recordFrom"
+        ).value;
+
 
     const to =
-        document
-            .getElementById("recordTo")
-            .value;
+        document.getElementById(
+            "recordTo"
+        ).value;
 
-    return rows.filter(
-        row=>{
 
-            if(
-                sn &&
-                !normalizeSN(
-                    row.component_sn
-                ).includes(sn)
-            ){
-                return false;
-            }
+    return rows.filter(row=>{
 
-            if(
-                process &&
-                row.process !== process
-            ){
-                return false;
-            }
+        if(
+            sn &&
+            !normalizeSN(
+                row.component_sn
+            ).includes(sn)
+        ){
 
-            if(
-                defect &&
-                row.defect !== defect
-            ){
-                return false;
-            }
-
-            const rowDate =
-                row.date_time
-                    ? String(
-                        row.date_time
-                    ).slice(0,10)
-                    : "";
-
-            if(
-                from &&
-                rowDate < from
-            ){
-                return false;
-            }
-
-            if(
-                to &&
-                rowDate > to
-            ){
-                return false;
-            }
-
-            return true;
+            return false;
 
         }
-    );
+
+
+        if(
+            process &&
+            row.process !== process
+        ){
+
+            return false;
+
+        }
+
+
+        if(
+            defect &&
+            row.defect !== defect
+        ){
+
+            return false;
+
+        }
+
+
+        const date =
+            new Date(
+                row.date_time
+            );
+
+
+        if(from){
+
+            const start =
+                new Date(
+                    from + "T00:00:00"
+                );
+
+            if(date < start){
+                return false;
+            }
+
+        }
+
+
+        if(to){
+
+            const end =
+                new Date(
+                    to + "T23:59:59"
+                );
+
+            if(date > end){
+                return false;
+            }
+
+        }
+
+
+        return true;
+
+    });
 
 }
 
 
 function renderRecords(){
 
-    const filtered =
-        getFilteredRecords();
-
     const body =
         document.getElementById(
             "recordsBody"
         );
 
-    const count =
-        document.getElementById(
-            "recordCount"
-        );
 
-    count.textContent =
-        `${filtered.length} record${
-            filtered.length === 1
-                ? ""
-                : "s"
-        }`;
+    const filtered =
+        getFilteredRecords();
 
-    body.innerHTML = "";
 
     if(!filtered.length){
 
-        const tr =
-            document.createElement(
-                "tr"
-            );
-
-        const td =
-            document.createElement(
-                "td"
-            );
-
-        td.colSpan =
-            isAdmin()
-                ? 8
-                : 7;
-
-        td.className =
-            "empty-row";
-
-        td.textContent =
-            "No records found.";
-
-        tr.appendChild(td);
-
-        body.appendChild(tr);
+        body.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    style="
+                    text-align:center;
+                    padding:25px;
+                    color:#99939f;
+                    "
+                >
+                    No records found.
+                </td>
+            </tr>
+        `;
 
         return;
     }
 
-    filtered.forEach(
-        row=>{
 
-            const tr =
-                document.createElement(
-                    "tr"
-                );
+    body.innerHTML =
+        filtered.map(row=>{
 
-            let actionHtml = "";
+            const processTag =
+                row.process === "DEBUG"
+                    ? "tag-debug"
+                    : "tag-maintenance";
 
-            if(isAdmin()){
 
-                actionHtml = `
+            const classTag =
+                row.defect_class === "Cosmetic"
+                    ? "tag-cosmetic"
+                    : "tag-eaoi";
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                row.component_sn
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            row.component_pn
+                        )}
+                    </td>
+
+                    <td>
+                        <span
+                            class="tag ${processTag}"
+                        >
+                            ${escapeHtml(
+                                row.process
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            row.defect
+                        )}
+                    </td>
+
+                    <td>
+                        <span
+                            class="tag ${classTag}"
+                        >
+                            ${escapeHtml(
+                                row.defect_class
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            displayOperator(
+                                row.operator_id
+                            )
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            formatDateTime(
+                                row.date_time
+                            )
+                        )}
+                    </td>
 
                     <td>
 
-                        <div
-                            style="
-                                display:flex;
-                                gap:5px;
-                            ">
+                        ${
+                            isAdmin()
+                            ?
+                            `
+                            <div class="action-cell">
 
-                            <button
-                                class="btn btn-purple btn-small"
-                                onclick="editRecord('${escapeAttr(row.id)}')">
+                                <button
+                                    class="edit-btn"
+                                    onclick="editRecord('${row.id}')"
+                                >
+                                    EDIT
+                                </button>
 
-                                Edit
+                                <button
+                                    class="delete-btn"
+                                    onclick="deleteRecord('${row.id}')"
+                                >
+                                    DELETE
+                                </button>
 
-                            </button>
-
-                            <button
-                                class="btn btn-red btn-small"
-                                onclick="deleteRecord('${escapeAttr(row.id)}')">
-
-                                Delete
-
-                            </button>
-
-                        </div>
+                            </div>
+                            `
+                            :
+                            "-"
+                        }
 
                     </td>
 
-                `;
-
-            }
-
-            tr.innerHTML = `
-
-                <td>
-                    ${escapeHtml(
-                        row.component_sn || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        row.component_pn || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${processTag(
-                        row.process
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        row.defect || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${classTag(
-                        row.defect_class
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        displayOperator(
-                            row.operator_id
-                        )
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        formatDateTime(
-                            row.date_time
-                        )
-                    )}
-                </td>
-
-                ${actionHtml}
+                </tr>
 
             `;
 
-            body.appendChild(tr);
-
-        }
-    );
+        }).join("");
 
 }
 
 
-function applyRecordFilters(){
-
-    renderRecords();
-
-}
-
+/* =========================================================
+   CLEAR RECORD FILTER
+========================================================= */
 
 function clearRecordFilters(){
 
-    document
-        .getElementById("recordSN")
-        .value = "";
+    document.getElementById(
+        "recordSN"
+    ).value = "";
 
-    document
-        .getElementById("recordProcess")
-        .value = "";
+    document.getElementById(
+        "recordProcess"
+    ).value = "";
 
-    document
-        .getElementById("recordDefect")
-        .value = "";
+    document.getElementById(
+        "recordDefect"
+    ).value = "";
 
-    document
-        .getElementById("recordFrom")
-        .value = "";
+    document.getElementById(
+        "recordFrom"
+    ).value = "";
 
-    document
-        .getElementById("recordTo")
-        .value = "";
+    document.getElementById(
+        "recordTo"
+    ).value = "";
 
     renderRecords();
 
@@ -5296,55 +4995,7 @@ function clearRecordFilters(){
 
 
 /* =========================================================
-   TAG HELPERS
-========================================================= */
-
-function processTag(
-    value
-){
-
-    if(!value){
-        return "-";
-    }
-
-    const cls =
-        value === "DEBUG"
-            ? "tag-debug"
-            : "tag-maintenance";
-
-    return `
-        <span class="tag ${cls}">
-            ${escapeHtml(value)}
-        </span>
-    `;
-
-}
-
-
-function classTag(
-    value
-){
-
-    if(!value){
-        return "-";
-    }
-
-    const cls =
-        value === "Cosmetic"
-            ? "tag-cosmetic"
-            : "tag-eao";
-
-    return `
-        <span class="tag ${cls}">
-            ${escapeHtml(value)}
-        </span>
-    `;
-
-}
-
-
-/* =========================================================
-   COPY
+   COPY RECORDS
 ========================================================= */
 
 async function copyVisibleRecords(){
@@ -5352,74 +5003,58 @@ async function copyVisibleRecords(){
     const filtered =
         getFilteredRecords();
 
+
     if(!filtered.length){
 
         showToast(
-            "No visible records to copy.",
+            "No visible records.",
             "error"
         );
 
         return;
     }
 
-    const lines = [
 
-        [
-            "Component SN",
-            "Component PN",
-            "Process",
-            "Reject",
-            "Defect Class",
-            "Badge ID",
-            "Date Time"
-        ].join("\t")
+    const text =
+        filtered.map(row=>{
 
-    ];
+            return [
 
-    filtered.forEach(
-        row=>{
+                row.component_sn,
 
-            lines.push(
-                [
+                row.component_pn,
 
-                    row.component_sn || "",
+                row.process,
 
-                    row.component_pn || "",
+                row.defect,
 
-                    row.process || "",
+                row.defect_class,
 
-                    row.defect || "",
+                displayOperator(
+                    row.operator_id
+                ),
 
-                    row.defect_class || "",
+                formatDateTime(
+                    row.date_time
+                )
 
-                    displayOperator(
-                        row.operator_id
-                    ),
+            ].join("\t");
 
-                    formatDateTime(
-                        row.date_time
-                    )
+        }).join("\n");
 
-                ].join("\t")
-            );
-
-        }
-    );
 
     try{
 
         await navigator.clipboard.writeText(
-            lines.join("\n")
+            text
         );
 
         showToast(
-            `${filtered.length} record(s) copied.`
+            "Visible records copied.",
+            "success"
         );
 
-    }
-    catch(error){
-
-        console.error(error);
+    }catch(error){
 
         showToast(
             "Unable to copy records.",
@@ -5440,90 +5075,91 @@ function editRecord(id){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
+
 
     const row =
         rows.find(
-            item=>
-                String(item.id)
-                === String(id)
+            item =>
+                String(item.id) === String(id)
         );
+
 
     if(!row){
-
-        showToast(
-            "Record not found.",
-            "error"
-        );
-
         return;
     }
 
-    document
-        .getElementById("editId")
-        .value =
-            row.id;
 
-    document
-        .getElementById("editSN")
-        .value =
-            row.component_sn || "";
+    document.getElementById(
+        "editId"
+    ).value =
+        row.id;
 
-    document
-        .getElementById("editPN")
-        .value =
-            row.component_pn || "";
 
-    document
-        .getElementById("editProcess")
-        .value =
-            row.process || "DEBUG";
+    document.getElementById(
+        "editSN"
+    ).value =
+        row.component_sn;
 
-    populateEditRejectSelect(
-        row.process || "DEBUG",
-        row.defect || ""
+
+    document.getElementById(
+        "editPN"
+    ).value =
+        row.component_pn;
+
+
+    document.getElementById(
+        "editProcess"
+    ).value =
+        row.process;
+
+
+    populateRejectSelect(
+        "editDefect",
+        row.process,
+        row.defect
     );
 
-    document
-        .getElementById("editClass")
-        .value =
-            row.defect_class || "";
 
-    document
-        .getElementById("editOperator")
-        .value =
-            displayOperator(
-                row.operator_id
-            ) === "Admin"
-                ? "Admin"
-                : (
-                    row.operator_id || ""
-                );
+    document.getElementById(
+        "editClass"
+    ).value =
+        row.defect_class;
 
-    document
-        .getElementById("editDateTime")
-        .value =
-            toInputDateTime(
-                row.date_time
-            );
 
-    document
-        .getElementById("editModal")
-        .classList.add("show");
+    document.getElementById(
+        "editOperator"
+    ).value =
+        displayOperator(
+            row.operator_id
+        );
+
+
+    document.getElementById(
+        "editDate"
+    ).value =
+        toDateTimeLocal(
+            row.date_time
+        );
+
+
+    document.getElementById(
+        "editModal"
+    ).classList.add("show");
 
 }
 
 
 function closeEditModal(){
 
-    document
-        .getElementById("editModal")
-        .classList.remove("show");
+    document.getElementById(
+        "editModal"
+    ).classList.remove("show");
 
 }
 
@@ -5533,148 +5169,87 @@ async function saveEdit(){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
+
 
     const id =
-        document
-            .getElementById("editId")
-            .value;
+        document.getElementById(
+            "editId"
+        ).value;
 
-    const process =
-        document
-            .getElementById("editProcess")
-            .value;
 
-    const defect =
-        document
-            .getElementById("editDefect")
-            .value;
+    const payload = {
 
-    const pn =
-        document
-            .getElementById("editPN")
-            .value;
+        component_pn:
+            document.getElementById(
+                "editPN"
+            ).value,
 
-    const defectClass =
-        document
-            .getElementById("editClass")
-            .value;
+        process:
+            document.getElementById(
+                "editProcess"
+            ).value,
 
-    let operator =
-        document
-            .getElementById("editOperator")
-            .value
-            .trim();
+        defect:
+            document.getElementById(
+                "editDefect"
+            ).value,
 
-    const dateTime =
-        document
-            .getElementById("editDateTime")
-            .value;
+        defect_class:
+            document.getElementById(
+                "editClass"
+            ).value,
 
-    if(
-        !process ||
-        !defect ||
-        !pn ||
-        !defectClass ||
-        !operator ||
-        !dateTime
-    ){
+        operator_id:
+            document.getElementById(
+                "editOperator"
+            ).value.trim(),
 
-        showToast(
-            "Please complete all fields.",
-            "error"
-        );
+        date_time:
+            new Date(
+                document.getElementById(
+                    "editDate"
+                ).value
+            ).toISOString()
 
-        return;
-    }
+    };
 
-    if(
-        !processRejects[process]
-            .includes(defect)
-    ){
 
-        showToast(
-            "Reject does not match selected process.",
-            "error"
-        );
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("rejects")
+            .update(payload)
+            .eq("id",id);
 
-        return;
-    }
 
-    if(
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            operator
-        )
-    ){
-
-        operator = "Admin";
-
-    }
-
-    try{
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .update({
-
-                    component_pn:
-                        pn,
-
-                    process:
-                        process,
-
-                    defect:
-                        defect,
-
-                    defect_class:
-                        defectClass,
-
-                    operator_id:
-                        operator,
-
-                    date_time:
-                        new Date(
-                            dateTime
-                        ).toISOString()
-
-                })
-                .eq(
-                    "id",
-                    id
-                );
-
-        if(error){
-            throw error;
-        }
-
-        closeEditModal();
-
-        showToast(
-            "Record updated successfully."
-        );
-
-        await loadRows();
-
-    }
-    catch(error){
+    if(error){
 
         console.error(error);
 
         showToast(
-            error.message ||
-            "Unable to update record.",
+            error.message,
             "error"
         );
 
+        return;
     }
+
+
+    closeEditModal();
+
+    await loadRows();
+
+    showToast(
+        "Record updated successfully.",
+        "success"
+    );
 
 }
 
@@ -5688,75 +5263,59 @@ async function deleteRecord(id){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
 
-    const row =
-        rows.find(
-            item=>
-                String(item.id)
-                === String(id)
-        );
 
-    const sn =
-        row
-            ? row.component_sn
-            : "this record";
-
-    const confirmed =
+    const confirmDelete =
         confirm(
-            `Delete reject record ${sn}?`
+            "Delete this reject record?"
         );
 
-    if(!confirmed){
+
+    if(!confirmDelete){
         return;
     }
 
-    try{
 
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .delete()
-                .eq(
-                    "id",
-                    id
-                );
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("rejects")
+            .delete()
+            .eq("id",id);
 
-        if(error){
-            throw error;
-        }
 
-        showToast(
-            "Record deleted."
-        );
-
-        await loadRows();
-
-    }
-    catch(error){
+    if(error){
 
         console.error(error);
 
         showToast(
-            error.message ||
-            "Unable to delete record.",
+            error.message,
             "error"
         );
 
+        return;
     }
+
+
+    await loadRows();
+
+    showToast(
+        "Record deleted.",
+        "success"
+    );
 
 }
 
 
 /* =========================================================
-   CLEAR ALL DATA
+   CLEAR ALL
 ========================================================= */
 
 async function clearAllData(){
@@ -5764,68 +5323,67 @@ async function clearAllData(){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
 
+
     const first =
         confirm(
-            "Are you sure you want to clear ALL reject data?"
+            "Are you sure you want to delete ALL reject data?"
         );
+
 
     if(!first){
         return;
     }
 
+
     const second =
         confirm(
-            "This action cannot be undone. Continue?"
+            "FINAL WARNING: This will remove all records permanently. Continue?"
         );
+
 
     if(!second){
         return;
     }
 
-    try{
 
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .delete()
-                .neq(
-                    "component_sn",
-                    "__IMPOSSIBLE_DELETE_VALUE__"
-                );
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("rejects")
+            .delete()
+            .neq(
+                "component_sn",
+                "__IMPOSSIBLE_DELETE_VALUE__"
+            );
 
-        if(error){
-            throw error;
-        }
 
-        rows = [];
-
-        await loadRows();
-
-        showToast(
-            "All reject data has been cleared."
-        );
-
-    }
-    catch(error){
+    if(error){
 
         console.error(error);
 
         showToast(
-            error.message ||
-            "Unable to clear all data.",
+            error.message,
             "error"
         );
 
+        return;
     }
+
+
+    await loadRows();
+
+    showToast(
+        "All reject data cleared.",
+        "success"
+    );
 
 }
 
@@ -5839,276 +5397,260 @@ function exportExcel(){
     if(!isAdmin()){
 
         showToast(
-            "Admin login required.",
+            "Admin access required.",
             "error"
         );
 
         return;
     }
+
 
     if(!rows.length){
 
         showToast(
-            "No data available to export.",
+            "No data to export.",
             "error"
         );
 
         return;
     }
 
-    const exportData =
-        rows.map(
-            row=>({
 
-                "Component SN":
-                    row.component_sn || "",
+    const exportRows =
+        rows.map(row=>({
 
-                "Component PN":
-                    row.component_pn || "",
+            "Component SN":
+                row.component_sn,
 
-                "Process":
-                    row.process || "",
+            "Component PN":
+                row.component_pn,
 
-                "Reject":
-                    row.defect || "",
+            "Process":
+                row.process,
 
-                "Defect Class":
-                    row.defect_class || "",
+            "Reject":
+                row.defect,
 
-                "Badge ID":
-                    displayOperator(
-                        row.operator_id
-                    ),
+            "Defect Class":
+                row.defect_class,
 
-                "Date Time":
-                    formatDateTime(
-                        row.date_time
-                    )
+            "Badge ID":
+                displayOperator(
+                    row.operator_id
+                ),
 
-            })
-        );
+            "Date Time":
+                formatDateTime(
+                    row.date_time
+                )
+
+        }));
+
 
     const worksheet =
         XLSX.utils.json_to_sheet(
-            exportData
+            exportRows
         );
+
 
     const workbook =
         XLSX.utils.book_new();
 
+
     XLSX.utils.book_append_sheet(
         workbook,
         worksheet,
-        "Reject Records"
+        "Reject Data"
     );
 
-    const filename =
-        `Reject_Trending_${
-            todayString()
-        }.xlsx`;
 
     XLSX.writeFile(
         workbook,
-        filename
+        "Reject_Trending.xlsx"
     );
+
 
     showToast(
-        "Excel exported successfully."
+        "Excel exported successfully.",
+        "success"
     );
 
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   DATE FORMAT
 ========================================================= */
 
-function escapeHtml(
-    value
-){
+function formatDateTime(value){
 
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
+    if(!value){
+        return "-";
+    }
+
+    const date =
+        new Date(value);
+
+    if(isNaN(date)){
+        return value;
+    }
+
+    return date.toLocaleString(
+        "en-MY",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit",
+            hour12:true
+        }
     );
 
 }
 
 
-function escapeAttr(
-    value
-){
+function formatDateOnly(value){
 
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /'/g,
-        "\\'"
+    const date =
+        new Date(
+            value + "T00:00:00"
+        );
+
+    if(isNaN(date)){
+        return value;
+    }
+
+    return date.toLocaleDateString(
+        "en-MY",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function toDateTimeLocal(value){
+
+    const date =
+        new Date(value);
+
+    const pad =
+        number =>
+            String(number)
+                .padStart(2,"0");
+
+
+    return (
+        date.getFullYear() +
+        "-" +
+        pad(date.getMonth()+1) +
+        "-" +
+        pad(date.getDate()) +
+        "T" +
+        pad(date.getHours()) +
+        ":" +
+        pad(date.getMinutes())
     );
 
 }
 
 
 /* =========================================================
-   PROCESS DROPDOWNS
+   ENTER KEY SCANNER
 ========================================================= */
 
-document
-    .getElementById("process")
-    .addEventListener(
-        "change",
-        populateRejectSelect
-    );
-
-
-document
-    .getElementById("editProcess")
-    .addEventListener(
-        "change",
-        function(){
-
-            populateEditRejectSelect(
-                this.value
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   BARCODE ENTER
-========================================================= */
-
-document
-    .getElementById("sn")
-    .addEventListener(
-        "keydown",
-        function(event){
-
-            if(
-                event.key === "Enter"
-            ){
-
-                event.preventDefault();
-
-                addSN();
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   RECORD SEARCH
-========================================================= */
-
-document
-    .getElementById("recordSN")
-    .addEventListener(
-        "input",
-        function(){
-
-            renderRecords();
-
-        }
-    );
-
-
-/* =========================================================
-   MODAL OUTSIDE CLICK
-========================================================= */
-
-document
-    .getElementById("loginModal")
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(
-                event.target === this
-            ){
-                closeLoginModal();
-            }
-
-        }
-    );
-
-
-document
-    .getElementById("chartModal")
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(
-                event.target === this
-            ){
-                closeChartModal();
-            }
-
-        }
-    );
-
-
-document
-    .getElementById("editModal")
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(
-                event.target === this
-            ){
-                closeEditModal();
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   KEYBOARD ESC
-========================================================= */
-
-document.addEventListener(
+document.getElementById(
+    "sn"
+).addEventListener(
     "keydown",
     function(event){
 
-        if(
-            event.key !== "Escape"
-        ){
-            return;
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            addSN();
+
         }
-
-        closeLoginModal();
-
-        closeChartModal();
-
-        closeEditModal();
 
     }
 );
+
+
+/* =========================================================
+   MODAL CLICK OUTSIDE
+========================================================= */
+
+document.getElementById(
+    "loginModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            closeLoginModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "graphModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            closeGraphModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "editModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            closeEditModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+supabaseClient
+    .channel("rejects-live")
+    .on(
+        "postgres_changes",
+        {
+            event:"*",
+            schema:"public",
+            table:"rejects"
+        },
+        async ()=>{
+            await loadRows();
+        }
+    )
+    .subscribe();
 
 
 /* =========================================================
@@ -6118,36 +5660,14 @@ document.addEventListener(
 supabaseClient.auth
     .getSession()
     .then(
-        async ({
+        ({
             data
         })=>{
 
             currentSession =
                 data.session;
 
-            /*
-             * If someone already has a session
-             * but is not the authorised admin,
-             * sign them out.
-             */
-
-            if(
-                currentSession &&
-                currentSession.user.id
-                !== ADMIN_UID
-            ){
-
-                await supabaseClient.auth
-                    .signOut();
-
-                currentSession =
-                    null;
-
-            }
-
             updateAdminUI();
-
-            await loadRows();
 
         }
     );
@@ -6155,7 +5675,7 @@ supabaseClient.auth
 
 supabaseClient.auth
     .onAuthStateChange(
-        async (
+        (
             event,
             session
         )=>{
@@ -6163,55 +5683,29 @@ supabaseClient.auth
             currentSession =
                 session;
 
-            if(
-                session &&
-                session.user.id
-                !== ADMIN_UID
-            ){
-
-                await supabaseClient.auth
-                    .signOut();
-
-                currentSession =
-                    null;
-
-            }
-
             updateAdminUI();
-
-            renderRecords();
 
         }
     );
 
 
 /* =========================================================
-   REALTIME
+   INITIALISE
 ========================================================= */
 
-supabaseClient
-    .channel(
-        "rejects-live"
-    )
-    .on(
-        "postgres_changes",
-        {
-            event:"*",
-            schema:"public",
-            table:"rejects"
-        },
-        async()=>{
+setupProcessDropdowns();
 
-            await loadRows();
+populateRejectSelect(
+    "defect",
+    ""
+);
 
-        }
-    )
-    .subscribe();
+populateRejectSelect(
+    "editDefect",
+    ""
+);
 
-
-/* =========================================================
-   INITIAL
-========================================================= */
+loadRows();
 
 renderBatch();
 
