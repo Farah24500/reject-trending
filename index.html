@@ -6,1619 +6,843 @@
 
 <title>Reject Trending</title>
 
+<!-- SUPABASE -->
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<!-- XLSX -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-:root{
-    --bg:#f7f5fb;
-    --white:#ffffff;
-    --text:#34323d;
-    --muted:#85818f;
-
-    --lavender:#9b7edc;
-    --lavender-light:#eee7ff;
-
-    --pink:#e88fa5;
-    --pink-light:#ffe8ef;
-
-    --peach:#eead76;
-    --peach-light:#fff0df;
-
-    --mint:#78bfa3;
-    --mint-light:#e3f6ee;
-
-    --teal:#6dbbc3;
-    --teal-light:#e1f5f7;
-
-    --coral:#e88972;
-    --coral-light:#ffebe5;
-
-    --yellow:#dfb65e;
-    --yellow-light:#fff6dc;
-
-    --border:#e9e4ef;
-
-    --shadow:
-        0 12px 35px rgba(105,82,140,.10);
-
-    --shadow-hover:
-        0 18px 45px rgba(105,82,140,.17);
+* {
+    box-sizing: border-box;
 }
 
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    color:var(--text);
-
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(
-            circle at 8% 8%,
-            rgba(220,202,255,.75),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 92% 12%,
-            rgba(255,214,226,.65),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(207,244,232,.65),
-            transparent 28%
-        ),
-        #f7f5fb;
-
-    min-height:100vh;
+        radial-gradient(circle at top left, #25204a 0%, transparent 35%),
+        radial-gradient(circle at top right, #102f45 0%, transparent 35%),
+        #090b13;
+    color: #ffffff;
+    min-height: 100vh;
 }
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 button,
 input,
-select{
-    font:inherit;
+select {
+    font-family: inherit;
 }
 
-button{
-    cursor:pointer;
-    border:none;
+button {
+    cursor: pointer;
 }
 
-.hidden{
-    display:none !important;
+/* ================= HEADER ================= */
+
+.header {
+    padding: 24px 30px;
+    background: rgba(16, 18, 31, 0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(15px);
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:16px 30px;
-
-    background:rgba(255,255,255,.88);
-
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid rgba(220,214,230,.8);
-
-    box-shadow:
-        0 5px 20px rgba(80,60,100,.06);
+.logo-area h1 {
+    margin: 0;
+    font-size: 27px;
+    letter-spacing: 1px;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:13px;
+.logo-area p {
+    margin: 5px 0 0;
+    color: #9ca3af;
+    font-size: 13px;
 }
 
-.logo{
-    width:48px;
-    height:48px;
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    border-radius:15px;
+.user-email {
+    background: rgba(255,255,255,0.06);
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #dbeafe;
+    font-size: 13px;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+/* ================= BUTTON ================= */
 
-    font-weight:900;
-    font-size:18px;
+.btn {
+    border: none;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    color: white;
+    transition: 0.2s;
+}
 
-    color:white;
+.btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+}
 
+.btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+}
+
+.btn-secondary {
+    background: #252938;
+}
+
+.btn-small {
+    padding: 7px 10px;
+    font-size: 12px;
+}
+
+/* ================= LOGIN ================= */
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    width: 420px;
+    max-width: 100%;
+    padding: 35px;
+    border-radius: 22px;
+    background: rgba(20, 23, 38, 0.94);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-logo .icon {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    font-size: 30px;
+}
+
+.login-logo h2 {
+    margin: 16px 0 5px;
+}
+
+.login-logo p {
+    color: #9ca3af;
+    margin: 0;
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 25px;
+}
+
+.section {
+    background: rgba(18, 21, 35, 0.88);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.18);
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.section-title span {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+/* ================= CARDS ================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(22, 25, 42, 0.9);
+    border: 1px solid rgba(255,255,255,0.07);
+}
+
+.card-label {
+    color: #9ca3af;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.card-value {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.card-purple {
+    border-left: 4px solid #8b5cf6;
+}
+
+.card-blue {
+    border-left: 4px solid #06b6d4;
+}
+
+.card-green {
+    border-left: 4px solid #10b981;
+}
+
+.card-orange {
+    border-left: 4px solid #f59e0b;
+}
+
+/* ================= ADMIN PANEL ================= */
+
+.admin-panel {
+    border: 1px solid rgba(139,92,246,0.35);
     background:
         linear-gradient(
             135deg,
-            #a786df,
-            #df8fa8,
-            #efa978
+            rgba(124,58,237,0.10),
+            rgba(6,182,212,0.05)
         );
-
-    box-shadow:
-        0 8px 20px rgba(170,120,190,.28);
 }
 
-.brand-title{
-    font-weight:900;
-    font-size:18px;
-    letter-spacing:.5px;
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(124,58,237,0.15);
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: 700;
 }
 
-.brand-subtitle{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:2px;
+/* ================= FORM ================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
 }
 
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-/* Admin logo button */
-
-.admin-logo-btn{
-    width:46px;
-    height:46px;
-
-    border-radius:15px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:21px;
-
-    color:#7657aa;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f1e9ff,
-            #ffe8f0
-        );
-
-    border:1px solid #e1d4f5;
-
-    box-shadow:
-        0 6px 18px rgba(125,92,165,.12);
-
-    transition:.2s;
-}
-
-.admin-logo-btn:hover{
-    transform:translateY(-2px) scale(1.03);
-
-    box-shadow:
-        0 10px 24px rgba(125,92,165,.20);
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-main{
-    width:min(1450px,94%);
-    margin:0 auto;
-    padding:28px 0 60px;
-}
-
-.hero{
-    margin-bottom:24px;
-}
-
-.hero h1{
-    margin:0;
-
-    font-size:31px;
-    font-weight:900;
-
-    color:#3d3947;
-}
-
-.hero p{
-    margin:7px 0 0;
-
-    color:var(--muted);
-    font-size:14px;
-}
-
-/* =========================================================
-   CARDS
-========================================================= */
-
-.card{
-    background:rgba(255,255,255,.94);
-
-    border:1px solid var(--border);
-
-    border-radius:22px;
-
-    padding:22px;
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:22px;
-}
-
-.card:hover{
-    box-shadow:var(--shadow-hover);
-}
-
-.card-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:18px;
-}
-
-.card-title h2,
-.card-title h3{
-    margin:0;
-
-    font-size:18px;
-    font-weight:900;
-}
-
-.card-title p{
-    margin:4px 0 0;
-
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* =========================================================
-   QUALITY DASHBOARD
-========================================================= */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
-
-    gap:17px;
-
-    margin-bottom:22px;
-}
-
-.stat{
-    position:relative;
-
-    overflow:hidden;
-
-    min-height:145px;
-
-    padding:22px;
-
-    border-radius:22px;
-
-    border:1px solid transparent;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s;
-}
-
-.stat:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-hover);
-}
-
-.stat:nth-child(1){
-    background:
-        linear-gradient(
-            135deg,
-            #eee7ff,
-            #e1d6ff
-        );
-
-    border-color:#d7c7fa;
-}
-
-.stat:nth-child(2){
-    background:
-        linear-gradient(
-            135deg,
-            #ffe8ef,
-            #ffd8e4
-        );
-
-    border-color:#f5c7d6;
-}
-
-.stat:nth-child(3){
-    background:
-        linear-gradient(
-            135deg,
-            #fff0df,
-            #ffe2c4
-        );
-
-    border-color:#f4d1aa;
-}
-
-.stat:nth-child(4){
-    background:
-        linear-gradient(
-            135deg,
-            #e3f6ee,
-            #d2eee4
-        );
-
-    border-color:#bfe2d4;
-}
-
-.stat-label{
-    position:relative;
-    z-index:2;
-
-    color:#716b79;
-
-    font-size:13px;
-    font-weight:700;
-}
-
-.stat-value{
-    position:relative;
-    z-index:2;
-
-    margin-top:12px;
-
-    font-size:34px;
-    font-weight:950;
-
-    color:#3d3947;
-}
-
-.stat:nth-child(1) .stat-value{
-    color:#7658b1;
-}
-
-.stat:nth-child(2) .stat-value{
-    color:#c55c78;
-}
-
-.stat:nth-child(3) .stat-value{
-    color:#c47a38;
-}
-
-.stat:nth-child(4) .stat-value{
-    color:#4f987c;
-}
-
-.stat::after{
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
-
-    right:-28px;
-    bottom:-35px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.42);
-}
-
-/* =========================================================
-   ADMIN WORKSPACE
-========================================================= */
-
-.admin-workspace{
-    display:none;
-}
-
-body.admin-mode .admin-workspace{
-    display:block;
-}
-
-.admin-panel{
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #f8f2ff
-        );
-
-    border:1px solid #e1d4f4;
-}
-
-.admin-badge{
-    display:inline-flex;
-    align-items:center;
-
-    padding:7px 12px;
-
-    border-radius:30px;
-
-    background:#eee7ff;
-
-    color:#7454a9;
-
-    font-size:12px;
-    font-weight:800;
-}
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.form-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
-
-    gap:15px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.form-group label{
-    font-size:12px;
-    font-weight:800;
-
-    color:#686370;
+.form-group label {
+    font-size: 12px;
+    color: #9ca3af;
 }
 
 input,
-select{
-    width:100%;
-
-    min-height:45px;
-
-    padding:10px 13px;
-
-    border-radius:12px;
-
-    border:1px solid #ddd7e7;
-
-    background:#fff;
-
-    color:#37343e;
-
-    outline:none;
-
-    transition:.2s;
-}
-
-input::placeholder{
-    color:#aaa5b1;
+select {
+    width: 100%;
+    background: #101321;
+    color: #ffffff;
+    border: 1px solid #30364d;
+    border-radius: 10px;
+    padding: 12px;
+    outline: none;
 }
 
 input:focus,
-select:focus{
-    border-color:#b39adf;
-
-    box-shadow:
-        0 0 0 4px rgba(179,154,223,.14);
+select:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139,92,246,0.12);
 }
 
-.readonly{
-    background:#f5f2f8;
-    color:#77717f;
+.sn-row {
+    display: flex;
+    gap: 10px;
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.button-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-
-    margin-top:16px;
+.sn-row input {
+    flex: 1;
 }
 
-.btn{
-    min-height:42px;
-
-    padding:10px 17px;
-
-    border-radius:12px;
-
-    font-weight:800;
-
-    transition:.2s;
+.scan-count {
+    margin-top: 8px;
+    color: #67e8f9;
+    font-size: 13px;
 }
 
-.btn:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 7px 18px rgba(70,55,90,.12);
+.batch-list {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
 }
 
-.btn-primary{
-    background:#a58bd8;
-    color:#fff;
+.sn-tag {
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: rgba(6,182,212,0.12);
+    border: 1px solid rgba(6,182,212,0.25);
+    font-size: 12px;
 }
 
-.btn-primary:hover{
-    background:#9175c8;
+/* ================= FILTER ================= */
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 10px;
 }
 
-.btn-pink{
-    background:#e999ae;
-    color:white;
+/* ================= CHART ================= */
+
+.chart-container {
+    position: relative;
+    height: 390px;
 }
 
-.btn-peach{
-    background:#eab17d;
-    color:white;
+.chart-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
 }
 
-.btn-mint{
-    background:#78bda2;
-    color:white;
+.top-defects {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.btn-teal{
-    background:#70b9c0;
-    color:white;
+.defect-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: rgba(255,255,255,0.035);
+    border-radius: 10px;
 }
 
-.btn-danger{
-    background:#df8c83;
-    color:white;
+.defect-name {
+    font-size: 13px;
 }
 
-.btn-dark{
-    background:#6e6876;
-    color:white;
+.defect-count {
+    background: rgba(139,92,246,0.2);
+    color: #c4b5fd;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 12px;
 }
 
-.btn-light{
-    background:#f1edf7;
-    color:#665f70;
+/* ================= TABLE ================= */
+
+.table-wrapper {
+    overflow-x: auto;
 }
 
-/* =========================================================
-   SCAN LIST
-========================================================= */
-
-.scan-count{
-    display:inline-flex;
-    align-items:center;
-
-    min-width:34px;
-    height:30px;
-
-    padding:0 10px;
-
-    justify-content:center;
-
-    border-radius:20px;
-
-    background:#eee7ff;
-    color:#7254aa;
-
-    font-weight:900;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
 }
 
-.batch-list{
-    margin-top:15px;
-
-    border-radius:15px;
-
-    background:#faf9fc;
-
-    border:1px solid #ebe7f0;
-
-    overflow:hidden;
+th {
+    text-align: left;
+    padding: 13px;
+    background: #161a2b;
+    color: #a5b4fc;
+    font-size: 12px;
+    position: sticky;
+    top: 0;
 }
 
-.batch-empty{
-    padding:18px;
-
-    color:#99939f;
-
-    text-align:center;
-
-    font-size:13px;
+td {
+    padding: 12px 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px;
 }
 
-.batch-item{
-    display:grid;
-
-    grid-template-columns:
-        1.4fr 1fr 1.7fr 1fr 70px;
-
-    gap:10px;
-
-    padding:12px 15px;
-
-    border-bottom:1px solid #eeeaf1;
-
-    font-size:12px;
+tr:hover td {
+    background: rgba(255,255,255,0.025);
 }
 
-.batch-item:last-child{
-    border-bottom:none;
+.badge {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 7px;
+    font-size: 11px;
+    background: rgba(139,92,246,0.15);
+    color: #c4b5fd;
 }
 
-.batch-item strong{
-    color:#48434f;
+.action-buttons {
+    display: flex;
+    gap: 5px;
 }
 
-.remove-batch{
-    color:#c65d62;
+/* ================= MODAL ================= */
 
-    background:#ffe9e9;
-
-    border-radius:8px;
-
-    padding:6px 9px;
-
-    font-weight:800;
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(7px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
 }
 
-/* =========================================================
-   IMPORT
-========================================================= */
-
-.file-input{
-    padding:9px;
-
-    background:#faf9fc;
+.modal-overlay.show {
+    display: flex;
 }
 
-/* =========================================================
-   FILTER
-========================================================= */
-
-.filter-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(6, minmax(0,1fr));
-
-    gap:13px;
+.modal {
+    width: 560px;
+    max-width: 100%;
+    background: #171a2b;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.5);
 }
 
-.filter-actions{
-    display:flex;
-    align-items:flex-end;
-
-    gap:8px;
+.modal h3 {
+    margin-top: 0;
 }
 
-/* =========================================================
-   CHART
-========================================================= */
-
-.chart-wrap{
-    position:relative;
-
-    height:400px;
-
-    padding:12px 4px;
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.chart-note{
-    color:var(--muted);
+/* ================= TOAST ================= */
 
-    font-size:12px;
-
-    margin-bottom:10px;
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: #181c2e;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+    display: none;
+    z-index: 10000;
+    max-width: 380px;
 }
 
-/* =========================================================
-   DAILY TOP
-========================================================= */
-
-.daily-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fill,minmax(210px,1fr));
-
-    gap:14px;
+.toast.show {
+    display: block;
 }
 
-.daily-card{
-    padding:17px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #faf6ff
-        );
-
-    border:1px solid #e7def3;
-
-    box-shadow:
-        0 8px 22px rgba(100,80,120,.07);
+.toast.success {
+    border-left: 4px solid #10b981;
 }
 
-.daily-date{
-    font-weight:900;
-    color:#5f5868;
+.toast.error {
+    border-left: 4px solid #ef4444;
 }
 
-.daily-defect{
-    margin-top:9px;
-
-    color:#8a65bd;
-
-    font-weight:850;
-
-    font-size:14px;
+.toast.info {
+    border-left: 4px solid #06b6d4;
 }
 
-.daily-qty{
-    margin-top:7px;
+/* ================= HIDDEN ================= */
 
-    font-size:23px;
-
-    font-weight:950;
-
-    color:#3f3948;
+.hidden {
+    display: none !important;
 }
 
-/* =========================================================
-   TAGS
-========================================================= */
+/* ================= RESPONSIVE ================= */
 
-.tag{
-    display:inline-flex;
-
-    padding:5px 9px;
-
-    border-radius:30px;
-
-    font-size:11px;
-
-    font-weight:800;
-}
-
-.tag-debug{
-    background:#eee7ff;
-    color:#7355a9;
-}
-
-.tag-maintenance{
-    background:#fff0df;
-    color:#b76e32;
-}
-
-.tag-cosmetic{
-    background:#ffe8ef;
-    color:#bd5c79;
-}
-
-.tag-eaoi{
-    background:#e3f6ee;
-    color:#4d9277;
-}
-
-/* =========================================================
-   RECORDS
-========================================================= */
-
-.record-filter-grid{
-    display:grid;
-
-    grid-template-columns:
-        1.4fr 1fr 1.4fr 1fr 1fr;
-
-    gap:12px;
-
-    margin-bottom:15px;
-}
-
-.table-wrap{
-    width:100%;
-
-    overflow:auto;
-
-    border-radius:15px;
-
-    border:1px solid #ebe6ef;
-}
-
-table{
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:900px;
-}
-
-thead{
-    background:
-        linear-gradient(
-            90deg,
-            #f0e9ff,
-            #ffeaf1,
-            #fff0df
-        );
-}
-
-th{
-    padding:13px;
-
-    text-align:left;
-
-    font-size:12px;
-
-    color:#625b6b;
-
-    white-space:nowrap;
-}
-
-td{
-    padding:12px 13px;
-
-    border-top:1px solid #f0edf3;
-
-    font-size:12px;
-
-    color:#514b59;
-}
-
-tbody tr:hover{
-    background:#fcf9ff;
-}
-
-.action-cell{
-    display:flex;
-    gap:7px;
-}
-
-.edit-btn,
-.delete-btn{
-    padding:7px 10px;
-
-    border-radius:8px;
-
-    font-size:11px;
-
-    font-weight:800;
-}
-
-.edit-btn{
-    background:#eee7ff;
-    color:#7454a9;
-}
-
-.delete-btn{
-    background:#ffe8e8;
-    color:#be5a5a;
-}
-
-/* =========================================================
-   DATA MANAGEMENT
-========================================================= */
-
-.data-management{
-    background:
-        linear-gradient(
-            135deg,
-            #fffaf5,
-            #fff
-        );
-
-    border-color:#f0dfcf;
-}
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-.modal-overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:9999;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(61,49,76,.32);
-
-    backdrop-filter:blur(9px);
-}
-
-.modal-overlay.show{
-    display:flex;
-}
-
-.modal{
-    width:min(950px,96vw);
-
-    max-height:90vh;
-
-    overflow:auto;
-
-    background:#fff;
-
-    border-radius:25px;
-
-    border:1px solid #e5d9f2;
-
-    box-shadow:
-        0 30px 80px rgba(70,45,90,.25);
-
-    animation:
-        modalIn .22s ease;
-}
-
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(12px) scale(.98);
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    to{
-        opacity:1;
-        transform:none;
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-row {
+        grid-template-columns: 1fr;
     }
 }
 
-.modal-header{
-    position:sticky;
-    top:0;
-
-    z-index:2;
-
-    padding:20px 23px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eee6ff,
-            #ffe8ef,
-            #fff0df
-        );
-
-    border-bottom:1px solid #eadfee;
-}
-
-.modal-header h3{
-    margin:0;
-
-    font-size:19px;
-
-    color:#4a4354;
-}
-
-.modal-close{
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.8);
-
-    color:#665d6d;
-
-    font-size:20px;
-
-    font-weight:900;
-}
-
-.modal-body{
-    padding:22px;
-}
-
-/* Login modal */
-
-.login-modal{
-    width:min(430px,94vw);
-}
-
-.login-icon{
-    width:65px;
-    height:65px;
-
-    margin:0 auto 13px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:20px;
-
-    font-size:30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eee5ff,
-            #ffe5ee
-        );
-
-    color:#7956af;
-}
-
-.login-title{
-    text-align:center;
-
-    font-weight:900;
-
-    font-size:22px;
-}
-
-.login-subtitle{
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    margin:5px 0 20px;
-}
-
-/* =========================================================
-   GRAPH MODAL
-========================================================= */
-
-.modal-summary{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:12px;
-
-    margin-bottom:20px;
-}
-
-.summary-box{
-    padding:15px;
-
-    border-radius:16px;
-
-    border:1px solid;
-
-    background:#fff;
-}
-
-.summary-box:nth-child(1){
-    background:#f0eaff;
-    border-color:#d9c9fa;
-}
-
-.summary-box:nth-child(2){
-    background:#ffe9ef;
-    border-color:#f5cad7;
-}
-
-.summary-box:nth-child(3){
-    background:#fff0df;
-    border-color:#f4d1ae;
-}
-
-.summary-box:nth-child(4){
-    background:#e3f6ee;
-    border-color:#c3e5d7;
-}
-
-.summary-label{
-    font-size:11px;
-
-    color:#79717f;
-
-    font-weight:800;
-}
-
-.summary-value{
-    margin-top:5px;
-
-    font-size:20px;
-
-    font-weight:950;
-
-    color:#403946;
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-    position:fixed;
-
-    right:22px;
-    bottom:22px;
-
-    z-index:10000;
-
-    max-width:360px;
-
-    padding:14px 17px;
-
-    border-radius:14px;
-
-    color:#fff;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    box-shadow:
-        0 15px 35px rgba(50,40,60,.2);
-
-    transform:
-        translateY(20px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.25s;
-}
-
-.toast.show{
-    opacity:1;
-
-    transform:none;
-}
-
-.toast.success{
-    background:#72ad91;
-}
-
-.toast.error{
-    background:#d77e78;
-}
-
-.toast.info{
-    background:#8d79be;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1100px){
-
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
+@media (max-width: 700px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .form-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+    .header-right {
+        width: 100%;
+        flex-wrap: wrap;
     }
 
-    .filter-grid{
-        grid-template-columns:
-            repeat(3,1fr);
+    .cards {
+        grid-template-columns: 1fr;
     }
 
-    .record-filter-grid{
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-}
-
-@media(max-width:700px){
-
-    header{
-        padding:13px 16px;
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 
-    main{
-        width:94%;
-        padding-top:20px;
+    .filter-grid {
+        grid-template-columns: 1fr;
     }
 
-    .brand-subtitle{
-        display:none;
+    .container {
+        padding: 14px;
     }
 
-    .hero h1{
-        font-size:25px;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .filter-grid{
-        grid-template-columns:1fr;
-    }
-
-    .record-filter-grid{
-        grid-template-columns:1fr;
-    }
-
-    .modal-summary{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .chart-wrap{
-        height:330px;
-    }
-
-    .batch-item{
-        grid-template-columns:1fr;
+    .section {
+        padding: 16px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+<!-- ========================================================= -->
+<!-- LOGIN -->
+<!-- ========================================================= -->
 
-<header>
+<div id="loginScreen" class="login-screen">
 
-    <div class="brand">
+    <div class="login-card">
 
-        <div class="logo">
-            RT
-        </div>
+        <div class="login-logo">
 
-        <div>
-            <div class="brand-title">
-                REJECT TRENDING
+            <div class="icon">
+                📊
             </div>
 
-            <div class="brand-subtitle">
-                Reject monitoring & daily trend analysis
-            </div>
+            <h2>Reject Trending</h2>
+
+            <p>Sign in to continue</p>
+
         </div>
 
-    </div>
+        <div class="form-group">
 
-    <div class="header-actions">
+            <label>Email</label>
 
-        <!-- ADMIN LOGO -->
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                onkeydown="if(event.key==='Enter') login()"
+            >
+
+        </div>
+
+        <br>
 
         <button
-            class="admin-logo-btn"
-            id="adminButton"
-            title="Admin Login"
-            onclick="openLoginModal()"
+            class="btn btn-primary"
+            style="width:100%;"
+            onclick="login()"
         >
-            👑
+            LOGIN
         </button>
+
+        <p
+            id="loginMessage"
+            style="
+                color:#f87171;
+                font-size:13px;
+                text-align:center;
+                margin-top:15px;
+            "
+        ></p>
 
     </div>
 
-</header>
+</div>
 
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
+<!-- ========================================================= -->
+<!-- MAIN APP -->
+<!-- ========================================================= -->
 
-<main>
+<div id="app" class="hidden">
 
-    <section class="hero">
+    <!-- HEADER -->
 
-        <h1>
-            Quality Reject Dashboard
-        </h1>
+    <header class="header">
 
-        <p>
-            Monitor reject quantity, defect trends,
-            classification and daily reject performance.
-        </p>
+        <div class="logo-area">
 
-    </section>
+            <h1>REJECT TRENDING</h1>
 
-
-    <!-- =====================================================
-         DASHBOARD
-    ====================================================== -->
-
-    <section class="stats">
-
-        <div class="stat">
-
-            <div class="stat-label">
-                TOTAL REJECT
-            </div>
-
-            <div
-                class="stat-value"
-                id="totalReject"
-            >
-                0
-            </div>
+            <p>
+                Scan → classify reject → analyse → trend
+            </p>
 
         </div>
 
+        <div class="header-right">
 
-        <div class="stat">
-
-            <div class="stat-label">
-                REJECT TODAY
-            </div>
-
-            <div
-                class="stat-value"
-                id="rejectToday"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                TOP REJECT
-            </div>
-
-            <div
-                class="stat-value"
-                id="topReject"
-                style="font-size:20px;"
-            >
+            <div class="user-email" id="userEmail">
                 -
             </div>
 
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                TOTAL COMPONENT SN
-            </div>
-
             <div
-                class="stat-value"
-                id="totalSN"
+                id="adminBadge"
+                class="admin-badge hidden"
             >
-                0
+                👑 ADMIN
             </div>
+
+            <button
+                class="btn btn-secondary"
+                onclick="logout()"
+            >
+                LOGOUT
+            </button>
 
         </div>
 
-    </section>
+    </header>
 
 
-    <!-- =====================================================
-         ADMIN WORKSPACE
-    ====================================================== -->
-
-    <section
-        class="card admin-workspace admin-panel"
-    >
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    👑 Admin Workspace
-                </h2>
-
-                <p>
-                    Scan, import and manage reject data.
-                </p>
-
-            </div>
-
-            <span class="admin-badge">
-                ADMIN ACCESS
-            </span>
-
-        </div>
+    <main class="container">
 
 
-        <!-- ADMIN SETTINGS -->
+        <!-- ================================================= -->
+        <!-- SUMMARY CARDS -->
+        <!-- ================================================= -->
 
-        <div class="card" style="margin-bottom:18px;">
+        <div class="cards">
 
-            <div class="card-title">
+            <div class="card card-purple">
 
-                <div>
-
-                    <h3>
-                        Admin Settings
-                    </h3>
-
-                    <p>
-                        Admin identification
-                    </p>
-
+                <div class="card-label">
+                    Total Reject
                 </div>
 
-            </div>
-
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>
-                        Admin Email
-                    </label>
-
-                    <input
-                        id="adminEmail"
-                        class="readonly"
-                        readonly
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Admin Badge ID
-                    </label>
-
-                    <input
-                        id="adminBadge"
-                        placeholder="Enter badge ID"
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        &nbsp;
-                    </label>
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="saveAdminBadge()"
-                    >
-                        SAVE BADGE
-                    </button>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        &nbsp;
-                    </label>
-
-                    <button
-                        class="btn btn-light"
-                        onclick="logoutAdmin()"
-                    >
-                        LOGOUT
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- SCAN REJECT -->
-
-        <div class="card" style="margin-bottom:18px;">
-
-            <div class="card-title">
-
-                <div>
-
-                    <h3>
-                        Scan Reject
-                    </h3>
-
-                    <p>
-                        Scan SN → classify reject → submit
-                    </p>
-
-                </div>
-
-                <span
-                    class="scan-count"
-                    id="scanCount"
+                <div
+                    class="card-value"
+                    id="totalReject"
                 >
                     0
-                </span>
+                </div>
 
             </div>
 
 
-            <div class="form-grid">
+            <div class="card card-blue">
 
-                <div class="form-group">
+                <div class="card-label">
+                    Reject Quantity
+                </div>
 
-                    <label>
-                        Component Serial Number
-                    </label>
+                <div
+                    class="card-value"
+                    id="rejectQty"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card card-green">
+
+                <div class="card-label">
+                    Top Defect
+                </div>
+
+                <div
+                    class="card-value"
+                    id="topDefect"
+                    style="font-size:20px;"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="card card-orange">
+
+                <div class="card-label">
+                    Current User
+                </div>
+
+                <div
+                    class="card-value"
+                    id="currentRole"
+                    style="font-size:20px;"
+                >
+                    USER
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ADMIN PANEL -->
+        <!-- ================================================= -->
+
+        <section
+            id="adminPanel"
+            class="section admin-panel hidden"
+        >
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        👑 Admin Data Management
+                    </h2>
+
+                    <span>
+                        Only authorised admins can add, edit, delete and import data.
+                    </span>
+
+                </div>
+
+                <div class="admin-badge">
+                    ADMIN ACCESS
+                </div>
+
+            </div>
+
+
+            <!-- SCAN -->
+
+            <div class="form-group">
+
+                <label>
+                    Component Serial Number
+                </label>
+
+                <div class="sn-row">
 
                     <input
                         id="sn"
-                        autofocus
+                        type="text"
                         placeholder="Scan barcode here"
+                        autofocus
+                        onkeydown="handleSNKey(event)"
                     >
 
+                    <button
+                        class="btn btn-primary"
+                        onclick="addSN()"
+                    >
+                        + ADD SN
+                    </button>
+
                 </div>
 
+                <div
+                    id="scanCount"
+                    class="scan-count"
+                >
+                    0 SN ready
+                </div>
+
+                <div
+                    id="batchList"
+                    class="batch-list"
+                ></div>
+
+            </div>
+
+
+            <br>
+
+
+            <!-- DATA -->
+
+            <div class="form-grid">
 
                 <div class="form-group">
 
                     <label>
-                        Process
-                    </label>
-
-                    <select id="process">
-                        <option value="">
-                            Select Process
-                        </option>
-
-                        <option value="DEBUG">
-                            DEBUG
-                        </option>
-
-                        <option value="MAINTENANCE">
-                            MAINTENANCE
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Component PN
+                        Part Number
                     </label>
 
                     <select id="pn">
@@ -1643,14 +867,27 @@ tbody tr:hover{
                 <div class="form-group">
 
                     <label>
-                        Reject
+                        Defect
                     </label>
 
                     <select id="defect">
 
                         <option value="">
-                            Select Reject
+                            Select Defect
                         </option>
+
+                        <option>P2 SHELL ABRASIVE</option>
+                        <option>BENT</option>
+                        <option>DENTED</option>
+                        <option>CONTAM</option>
+                        <option>DAMAGED</option>
+                        <option>BLISTER</option>
+                        <option>EXPOSED COPPER</option>
+                        <option>LINEAR SCRATCHED</option>
+                        <option>PEEL OFF</option>
+                        <option>SCRATCHED</option>
+                        <option>DISCOLORATION</option>
+                        <option>P2 MPO CONNECTOR DAMAGE</option>
 
                     </select>
 
@@ -1666,15 +903,19 @@ tbody tr:hover{
                     <select id="defectClass">
 
                         <option value="">
-                            Select Defect Class
+                            Select Class
                         </option>
 
                         <option value="Cosmetic">
                             Cosmetic
                         </option>
 
-                        <option value="EAOI Reject">
-                            EAOI Reject
+                        <option value="Eeprom">
+                            Eeprom
+                        </option>
+
+                        <option value="Eefail">
+                            Eefail
                         </option>
 
                     </select>
@@ -1685,13 +926,13 @@ tbody tr:hover{
                 <div class="form-group">
 
                     <label>
-                        Badge ID
+                        Operator ID
                     </label>
 
                     <input
                         id="operator"
-                        class="readonly"
-                        readonly
+                        type="text"
+                        placeholder="Operator ID"
                     >
 
                 </div>
@@ -1699,730 +940,218 @@ tbody tr:hover{
             </div>
 
 
-            <div class="button-row">
+            <br>
+
+
+            <div style="
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
+            ">
 
                 <button
-                    class="btn btn-primary"
-                    onclick="addSN()"
+                    class="btn btn-success"
+                    onclick="submitRejects()"
                 >
-                    ＋ ADD SN
+                    SUBMIT ALL REJECT
                 </button>
 
                 <button
-                    class="btn btn-mint"
-                    onclick="submitReject()"
+                    class="btn btn-warning"
+                    onclick="document.getElementById('excelFile').click()"
                 >
-                    ✓ SUBMIT ALL REJECT
+                    IMPORT EXCEL
                 </button>
 
+                <input
+                    type="file"
+                    id="excelFile"
+                    accept=".xlsx,.xls,.csv"
+                    class="hidden"
+                    onchange="importExcel(event)"
+                >
+
                 <button
-                    class="btn btn-light"
-                    onclick="clearBatch()"
+                    class="btn btn-danger"
+                    onclick="clearAllData()"
+                >
+                    CLEAR ALL DATA
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- FILTER -->
+        <!-- ================================================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        🔎 Search & Filter
+                    </h2>
+
+                    <span>
+                        Public users can view and filter reject data.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-grid">
+
+                <input
+                    id="searchSN"
+                    placeholder="Search Component SN..."
+                    oninput="applyFilters()"
+                >
+
+
+                <select
+                    id="filterDefect"
+                    onchange="applyFilters()"
+                >
+
+                    <option value="">
+                        All Defects
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="filterClass"
+                    onchange="applyFilters()"
+                >
+
+                    <option value="">
+                        All Classes
+                    </option>
+
+                    <option value="Cosmetic">
+                        Cosmetic
+                    </option>
+
+                    <option value="Eeprom">
+                        Eeprom
+                    </option>
+
+                    <option value="Eefail">
+                        Eefail
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="date"
+                    id="filterDate"
+                    onchange="applyFilters()"
+                >
+
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="clearFilters()"
                 >
                     CLEAR
                 </button>
 
             </div>
 
-
-            <div
-                class="batch-list"
-                id="batchList"
-            >
-
-                <div class="batch-empty">
-                    No scanned SN yet.
-                </div>
-
-            </div>
-
-        </div>
+        </section>
 
 
-        <!-- IMPORT -->
+        <!-- ================================================= -->
+        <!-- CHART -->
+        <!-- ================================================= -->
 
-        <div class="card">
+        <section class="section">
 
-            <div class="card-title">
+            <div class="section-title">
 
                 <div>
 
-                    <h3>
-                        Import Existing Data
+                    <h2>
+                        📈 Reject Trend
+                    </h2>
+
+                    <span>
+                        Click chart points to view daily reject details.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-container">
+
+                    <canvas id="trendChart"></canvas>
+
+                </div>
+
+
+                <div>
+
+                    <h3 style="margin-top:0;">
+                        Top Defects
                     </h3>
 
-                    <p>
-                        Excel / XLS / CSV
-                    </p>
+                    <div
+                        id="topDefects"
+                        class="top-defects"
+                    ></div>
 
                 </div>
 
             </div>
 
-            <input
-                type="file"
-                id="excelFile"
-                class="file-input"
-                accept=".xlsx,.xls,.csv"
-            >
+        </section>
 
-            <div class="button-row">
+
+        <!-- ================================================= -->
+        <!-- DATA TABLE -->
+        <!-- ================================================= -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        📋 Reject Data
+                    </h2>
+
+                    <span id="recordCount">
+                        0 records
+                    </span>
+
+                </div>
+
 
                 <button
-                    class="btn btn-peach"
-                    onclick="importExcel()"
+                    class="btn btn-success btn-small"
+                    onclick="exportExcel()"
                 >
-                    📥 IMPORT DATA
+                    EXPORT EXCEL
                 </button>
 
             </div>
 
-            <p
-                style="
-                color:#99929f;
-                font-size:11px;
-                margin-bottom:0;
-                "
-            >
-                Expected columns:
-                Component SN, Component PN, Process,
-                Reject, Defect Class, Badge ID, Date Time
-            </p>
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         ANALYTICS FILTER
-    ====================================================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    Analytics Filter
-                </h2>
-
-                <p>
-                    Filter graph and dashboard data
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="filter-grid">
-
-            <div class="form-group">
-
-                <label>
-                    Process
-                </label>
-
-                <select id="analyticsProcess">
-
-                    <option value="">
-                        All Process
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Reject
-                </label>
-
-                <select id="analyticsDefect">
-
-                    <option value="">
-                        All Reject
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Defect Class
-                </label>
-
-                <select id="analyticsClass">
-
-                    <option value="">
-                        All Class
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Part Number
-                </label>
-
-                <select id="analyticsPN">
-
-                    <option value="">
-                        All Part Number
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    From Date
-                </label>
-
-                <input
-                    type="date"
-                    id="analyticsFrom"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    To Date
-                </label>
-
-                <input
-                    type="date"
-                    id="analyticsTo"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="button-row">
-
-            <button
-                class="btn btn-primary"
-                onclick="applyAnalytics()"
-            >
-                APPLY FILTER
-            </button>
-
-            <button
-                class="btn btn-light"
-                onclick="clearAnalytics()"
-            >
-                CLEAR FILTER
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         GRAPH
-    ====================================================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    Reject Quantity by Name
-                </h2>
-
-                <p>
-                    Click any bar to view detailed records.
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="chart-wrap">
-
-            <canvas id="rejectChart"></canvas>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DAILY TOP
-    ====================================================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    Daily Top Reject
-                </h2>
-
-                <p>
-                    Highest reject for each day.
-                </p>
-
-            </div>
-
-        </div>
-
-        <div
-            class="daily-grid"
-            id="dailyTop"
-        ></div>
-
-    </section>
-
-
-    <!-- =====================================================
-         RECORDS
-    ====================================================== -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    Reject Records
-                </h2>
-
-                <p>
-                    Search and filter reject records.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="record-filter-grid">
-
-            <div class="form-group">
-
-                <label>
-                    Search Component SN
-                </label>
-
-                <input
-                    id="recordSN"
-                    placeholder="Search SN..."
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Process
-                </label>
-
-                <select id="recordProcess">
-
-                    <option value="">
-                        All Process
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Reject
-                </label>
-
-                <select id="recordDefect">
-
-                    <option value="">
-                        All Reject
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    From Date
-                </label>
-
-                <input
-                    type="date"
-                    id="recordFrom"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    To Date
-                </label>
-
-                <input
-                    type="date"
-                    id="recordTo"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="button-row">
-
-            <button
-                class="btn btn-primary"
-                onclick="renderRecords()"
-            >
-                APPLY
-            </button>
-
-            <button
-                class="btn btn-light"
-                onclick="clearRecordFilters()"
-            >
-                CLEAR FILTERS
-            </button>
-
-            <button
-                class="btn btn-teal"
-                onclick="copyVisibleRecords()"
-            >
-                COPY VISIBLE RECORDS
-            </button>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Component SN
-                        </th>
-
-                        <th>
-                            Component PN
-                        </th>
-
-                        <th>
-                            Process
-                        </th>
-
-                        <th>
-                            Reject
-                        </th>
-
-                        <th>
-                            Defect Class
-                        </th>
-
-                        <th>
-                            Badge ID
-                        </th>
-
-                        <th>
-                            Date Time
-                        </th>
-
-                        <th class="admin-only">
-                            Action
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                    id="recordsBody"
-                ></tbody>
-
-            </table>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DATA MANAGEMENT
-    ====================================================== -->
-
-    <section
-        class="card data-management admin-workspace"
-    >
-
-        <div class="card-title">
-
-            <div>
-
-                <h2>
-                    Data Management
-                </h2>
-
-                <p>
-                    Admin-only data controls.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="button-row">
-
-            <button
-                class="btn btn-mint"
-                onclick="exportExcel()"
-            >
-                📊 EXPORT EXCEL
-            </button>
-
-            <button
-                class="btn btn-danger"
-                onclick="clearAllData()"
-            >
-                🗑 CLEAR ALL DATA
-            </button>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- =========================================================
-     LOGIN MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="loginModal"
->
-
-    <div class="modal login-modal">
-
-        <div class="modal-header">
-
-            <h3>
-                Admin Access
-            </h3>
-
-            <button
-                class="modal-close"
-                onclick="closeLoginModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <div class="login-icon">
-                👑
-            </div>
-
-            <div class="login-title">
-                Welcome Admin
-            </div>
-
-            <div class="login-subtitle">
-                Sign in to manage reject data
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="loginEmail"
-                    placeholder="Admin email"
-                >
-
-            </div>
-
-
-            <div
-                class="form-group"
-                style="margin-top:13px;"
-            >
-
-                <label>
-                    Password
-                </label>
-
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="Password"
-                >
-
-            </div>
-
-
-            <div class="button-row">
-
-                <button
-                    class="btn btn-primary"
-                    style="width:100%;"
-                    onclick="loginAdmin()"
-                >
-                    LOGIN
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     GRAPH DETAILS MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="graphModal"
->
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h3 id="graphModalTitle">
-                Reject Details
-            </h3>
-
-            <button
-                class="modal-close"
-                onclick="closeGraphModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <div class="modal-summary">
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        REJECT
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="modalReject"
-                    >
-                        -
-                    </div>
-
-                </div>
-
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        QUANTITY
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="modalQuantity"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        PROCESS
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="modalProcess"
-                    >
-                        -
-                    </div>
-
-                </div>
-
-
-                <div class="summary-box">
-
-                    <div class="summary-label">
-                        PART NUMBER
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="modalPN"
-                    >
-                        -
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="table-wrap">
+            <div class="table-wrapper">
 
                 <table>
 
@@ -2435,11 +1164,11 @@ tbody tr:hover{
                             </th>
 
                             <th>
-                                Process
+                                Component PN
                             </th>
 
                             <th>
-                                PN
+                                Defect
                             </th>
 
                             <th>
@@ -2447,202 +1176,172 @@ tbody tr:hover{
                             </th>
 
                             <th>
-                                Badge ID
+                                Operator
                             </th>
 
                             <th>
                                 Date Time
                             </th>
 
+                            <th id="actionHeader" class="hidden">
+                                Action
+                            </th>
+
                         </tr>
 
                     </thead>
 
-                    <tbody
-                        id="graphModalBody"
-                    ></tbody>
+                    <tbody id="dataTable">
+
+                    </tbody>
 
                 </table>
 
             </div>
 
-        </div>
+        </section>
 
-    </div>
+    </main>
 
 </div>
 
 
-<!-- =========================================================
-     EDIT MODAL
-========================================================= -->
+<!-- ========================================================= -->
+<!-- EDIT MODAL -->
+<!-- ========================================================= -->
 
 <div
-    class="modal-overlay"
     id="editModal"
+    class="modal-overlay"
 >
 
     <div class="modal">
 
-        <div class="modal-header">
+        <h3>
+            ✏️ Edit Reject
+        </h3>
 
-            <h3>
-                Edit Reject Record
-            </h3>
+        <input
+            type="hidden"
+            id="editId"
+        >
 
-            <button
-                class="modal-close"
-                onclick="closeEditModal()"
+        <div class="form-group">
+
+            <label>
+                Component SN
+            </label>
+
+            <input
+                id="editSN"
+                readonly
             >
-                ×
-            </button>
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+
+            <label>
+                Part Number
+            </label>
+
+            <select id="editPN">
+
+                <option value="1670826">
+                    1670826
+                </option>
+
+                <option value="1649167">
+                    1649167
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+
+            <label>
+                Defect
+            </label>
+
+            <select id="editDefect">
+
+                <option>P2 SHELL ABRASIVE</option>
+                <option>BENT</option>
+                <option>DENTED</option>
+                <option>CONTAM</option>
+                <option>DAMAGED</option>
+                <option>BLISTER</option>
+                <option>EXPOSED COPPER</option>
+                <option>LINEAR SCRATCHED</option>
+                <option>PEEL OFF</option>
+                <option>SCRATCHED</option>
+                <option>DISCOLORATION</option>
+                <option>P2 MPO CONNECTOR DAMAGE</option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+
+            <label>
+                Defect Class
+            </label>
+
+            <select id="editClass">
+
+                <option value="Cosmetic">
+                    Cosmetic
+                </option>
+
+                <option value="Eeprom">
+                    Eeprom
+                </option>
+
+                <option value="Eefail">
+                    Eefail
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div class="form-group">
+
+            <label>
+                Operator
+            </label>
+
+            <input id="editOperator">
 
         </div>
 
 
-        <div class="modal-body">
+        <div class="modal-buttons">
 
-            <input
-                type="hidden"
-                id="editId"
+            <button
+                class="btn btn-secondary"
+                onclick="closeEdit()"
             >
+                CANCEL
+            </button>
 
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>
-                        Component SN
-                    </label>
-
-                    <input
-                        id="editSN"
-                        class="readonly"
-                        readonly
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Component PN
-                    </label>
-
-                    <select id="editPN">
-
-                        <option value="1670826">
-                            1670826
-                        </option>
-
-                        <option value="1649167">
-                            1649167
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Process
-                    </label>
-
-                    <select id="editProcess">
-
-                        <option value="DEBUG">
-                            DEBUG
-                        </option>
-
-                        <option value="MAINTENANCE">
-                            MAINTENANCE
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Reject
-                    </label>
-
-                    <select id="editDefect"></select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Defect Class
-                    </label>
-
-                    <select id="editClass">
-
-                        <option value="Cosmetic">
-                            Cosmetic
-                        </option>
-
-                        <option value="EAOI Reject">
-                            EAOI Reject
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Badge ID
-                    </label>
-
-                    <input id="editOperator">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Date Time
-                    </label>
-
-                    <input
-                        type="datetime-local"
-                        id="editDate"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="button-row">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="saveEdit()"
-                >
-                    SAVE CHANGES
-                </button>
-
-                <button
-                    class="btn btn-light"
-                    onclick="closeEditModal()"
-                >
-                    CANCEL
-                </button>
-
-            </div>
+            <button
+                class="btn btn-primary"
+                onclick="saveEdit()"
+            >
+                SAVE CHANGES
+            </button>
 
         </div>
 
@@ -2651,1311 +1350,398 @@ tbody tr:hover{
 </div>
 
 
-<!-- =========================================================
-     TOAST
-========================================================= -->
+<!-- ========================================================= -->
+<!-- TOAST -->
+<!-- ========================================================= -->
 
 <div
-    class="toast"
     id="toast"
+    class="toast"
 ></div>
 
 
 <script>
 
-/* =========================================================
+/* ============================================================
    SUPABASE CONFIG
-========================================================= */
+   ============================================================ */
 
 const SUPABASE_URL =
-"https://nefsqjxfhvsacsuiwquy.supabase.co";
+    "https://nefsqjxfhvsacsuiwquy.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
-
-const ADMIN_UID =
-"199986ab-800f-4c85-8f25-9b3bf28984fb";
+    "sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
 
 const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-/* =========================================================
-   STATE
-========================================================= */
+/* ============================================================
+   GLOBAL
+   ============================================================ */
 
-let rows = [];
+let currentUser = null;
+let isAdmin = false;
+
+let allData = [];
+let filteredData = [];
 
 let scannedSNs = [];
 
-let rejectChart = null;
+let trendChart = null;
 
-let currentSession = null;
 
-
-/* =========================================================
-   REJECT LIST
-========================================================= */
-
-const processRejects = {
-
-    DEBUG:[
-        "P2 SHELL ABRASIVE",
-        "P2 SHELL BENT",
-        "P2 SHELL DENTED",
-        "P2 SHELL CONTAM",
-        "P2 SHELL DAMAGED",
-        "P2 SHELL BLISTER",
-        "P2 SHELL EXPOSED COPPER",
-        "P2 SHELL LINEAR SCRATCHED",
-        "P2 SHELL PEEL OFF",
-        "P2 SHELL SCRATCHED",
-        "P2 SHELL DISCOLORATION",
-        "P2 MPO CONNECTOR DAMAGE"
-    ],
-
-    MAINTENANCE:[
-        "P2 MPO CONTAM 1",
-        "P2 MPO CONTAM 2"
-    ]
-
-};
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function showToast(
-    message,
-    type="info"
-){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent =
-        message;
-
-    toast.className =
-        "toast show " + type;
-
-    setTimeout(()=>{
-        toast.className =
-            "toast";
-    },3000);
-}
-
-
-function normalizeSN(value){
-
-    return String(value || "")
-        .trim()
-        .toUpperCase();
-
-}
-
-
-function displayOperator(value){
-
-    if(!value){
-        return "-";
-    }
-
-    const text =
-        String(value).trim();
-
-    if(
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)
-    ){
-        return "Admin";
-    }
-
-    return text;
-
-}
-
-
-function isAdmin(){
-
-    return !!(
-        currentSession &&
-        currentSession.user &&
-        currentSession.user.id === ADMIN_UID
-    );
-
-}
-
-
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   ADMIN UI
-========================================================= */
-
-function updateAdminUI(){
-
-    const adminWorkspace =
-        document.querySelector(".admin-workspace");
-
-    if(isAdmin()){
-
-        document.body.classList.add(
-            "admin-mode"
-        );
-
-        document.getElementById(
-            "adminEmail"
-        ).value =
-            currentSession.user.email || "";
-
-        const savedBadge =
-            localStorage.getItem(
-                "rejectTrendingAdminBadge"
-            );
-
-        document.getElementById(
-            "adminBadge"
-        ).value =
-            savedBadge || "";
-
-        document.getElementById(
-            "operator"
-        ).value =
-            savedBadge || "";
-
-    }else{
-
-        document.body.classList.remove(
-            "admin-mode"
-        );
-
-        document.getElementById(
-            "adminEmail"
-        ).value = "";
-
-        document.getElementById(
-            "adminBadge"
-        ).value = "";
-
-        document.getElementById(
-            "operator"
-        ).value = "";
-
-    }
-
-    renderRecords();
-
-}
-
-
-function saveAdminBadge(){
-
-    if(!isAdmin()){
-        return;
-    }
-
-    const badge =
-        document.getElementById(
-            "adminBadge"
-        ).value.trim();
-
-    if(!badge){
-
-        showToast(
-            "Please enter Admin Badge ID.",
-            "error"
-        );
-
-        return;
-    }
-
-    localStorage.setItem(
-        "rejectTrendingAdminBadge",
-        badge
-    );
-
-    document.getElementById(
-        "operator"
-    ).value = badge;
-
-    showToast(
-        "Admin Badge ID saved.",
-        "success"
-    );
-
-}
-
-
-/* =========================================================
+/* ============================================================
    LOGIN
-========================================================= */
+   ============================================================ */
 
-function openLoginModal(){
-
-    document.getElementById(
-        "loginModal"
-    ).classList.add("show");
-
-}
-
-
-function closeLoginModal(){
-
-    document.getElementById(
-        "loginModal"
-    ).classList.remove("show");
-
-}
-
-
-async function loginAdmin(){
+async function login() {
 
     const email =
-        document.getElementById(
-            "loginEmail"
-        ).value.trim();
+        document.getElementById("loginEmail").value.trim();
 
     const password =
-        document.getElementById(
-            "loginPassword"
-        ).value;
+        document.getElementById("loginPassword").value;
 
-    if(!email || !password){
+    const message =
+        document.getElementById("loginMessage");
 
-        showToast(
-            "Please enter email and password.",
-            "error"
-        );
+    message.textContent = "";
 
-        return;
-    }
+    if (!email || !password) {
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth
-            .signInWithPassword({
-                email,
-                password
-            });
-
-    if(error){
-
-        showToast(
-            error.message,
-            "error"
-        );
+        message.textContent =
+            "Please enter email and password.";
 
         return;
     }
 
-    if(
-        !data.session ||
-        data.user.id !== ADMIN_UID
-    ){
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
 
-        await supabaseClient.auth.signOut();
+    if (error) {
 
-        showToast(
-            "This account is not authorised as admin.",
-            "error"
-        );
+        console.error(error);
+
+        message.textContent =
+            error.message;
 
         return;
     }
 
-    currentSession =
-        data.session;
+    currentUser = data.user;
 
-    closeLoginModal();
-
-    updateAdminUI();
-
-    showToast(
-        "Admin login successful.",
-        "success"
-    );
+    await initialiseApp();
 
 }
 
 
-async function logoutAdmin(){
+/* ============================================================
+   LOGOUT
+   ============================================================ */
+
+async function logout() {
 
     await supabaseClient.auth.signOut();
 
-    currentSession = null;
-
-    updateAdminUI();
-
-    showToast(
-        "Admin logged out.",
-        "info"
-    );
+    location.reload();
 
 }
 
 
-/* =========================================================
-   PROCESS / DEFECT
-========================================================= */
+/* ============================================================
+   CHECK ADMIN
+   ============================================================ */
 
-function populateRejectSelect(
-    selectId,
-    processValue,
-    currentValue=""
-){
+async function checkAdmin() {
 
-    const select =
-        document.getElementById(selectId);
-
-    if(!select){
-        return;
+    if (!currentUser) {
+        return false;
     }
 
-    select.innerHTML =
-        `<option value="">Select Reject</option>`;
+    const { data, error } =
+        await supabaseClient
+            .from("admins")
+            .select("id")
+            .eq("id", currentUser.id)
+            .maybeSingle();
 
-    const list =
-        processRejects[processValue] || [];
+    if (error) {
 
-    list.forEach(defect=>{
+        console.error(
+            "Admin check error:",
+            error
+        );
 
-        const option =
-            document.createElement("option");
+        return false;
+    }
 
-        option.value =
-            defect;
-
-        option.textContent =
-            defect;
-
-        if(defect === currentValue){
-            option.selected = true;
-        }
-
-        select.appendChild(option);
-
-    });
+    return !!data;
 
 }
 
 
-function setupProcessDropdowns(){
+/* ============================================================
+   INITIALISE
+   ============================================================ */
 
-    document.getElementById(
-        "process"
-    ).addEventListener(
-        "change",
-        function(){
+async function initialiseApp() {
 
-            populateRejectSelect(
-                "defect",
-                this.value
-            );
+    isAdmin = await checkAdmin();
 
-        }
-    );
+    document
+        .getElementById("loginScreen")
+        .classList.add("hidden");
 
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
 
-    document.getElementById(
-        "editProcess"
-    ).addEventListener(
-        "change",
-        function(){
+    document
+        .getElementById("userEmail")
+        .textContent =
+        currentUser.email;
 
-            populateRejectSelect(
-                "editDefect",
-                this.value
-            );
+    if (isAdmin) {
 
-        }
-    );
+        document
+            .getElementById("adminPanel")
+            .classList.remove("hidden");
 
-}
+        document
+            .getElementById("adminBadge")
+            .classList.remove("hidden");
 
+        document
+            .getElementById("actionHeader")
+            .classList.remove("hidden");
 
-function populateAllRejectFilters(){
+        document
+            .getElementById("currentRole")
+            .textContent = "ADMIN";
 
-    const allDefects =
-        [
-            ...new Set(
-                Object.values(processRejects)
-                    .flat()
-            )
-        ]
-        .sort();
+    } else {
 
+        document
+            .getElementById("currentRole")
+            .textContent = "USER";
 
-    const filterIds = [
-        "analyticsDefect",
-        "recordDefect"
-    ];
+    }
 
-
-    filterIds.forEach(id=>{
-
-        const select =
-            document.getElementById(id);
-
-        if(!select){
-            return;
-        }
-
-        const first =
-            select.options[0];
-
-        select.innerHTML = "";
-
-        select.appendChild(first);
-
-        allDefects.forEach(defect=>{
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                defect;
-
-            option.textContent =
-                defect;
-
-            select.appendChild(option);
-
-        });
-
-    });
+    await loadData();
 
 }
 
 
-/* =========================================================
+/* ============================================================
+   CHECK SESSION
+   ============================================================ */
+
+async function checkSession() {
+
+    const {
+        data: {
+            session
+        }
+    } = await supabaseClient.auth.getSession();
+
+    if (session && session.user) {
+
+        currentUser = session.user;
+
+        await initialiseApp();
+
+    }
+
+}
+
+
+/* ============================================================
    LOAD DATA
-========================================================= */
+   ============================================================ */
 
-async function loadRows(){
+async function loadData() {
 
     const {
         data,
         error
-    } =
-        await supabaseClient
-            .from("rejects")
-            .select("*")
-            .order(
-                "date_time",
-                {
-                    ascending:false
-                }
-            );
+    } = await supabaseClient
+        .from("rejects")
+        .select("*")
+        .order("date_time", {
+            ascending: false
+        });
 
-    if(error){
+    if (error) {
 
         console.error(error);
 
         showToast(
-            "Unable to load reject data.",
+            "Failed to load data.",
             "error"
         );
 
         return;
     }
 
-    rows =
-        data || [];
+    allData = data || [];
 
-    populateFilterOptions();
+    applyFilters();
 
-    renderDashboard();
+    updateDashboard();
 
-    renderChart();
-
-    renderDailyTop();
-
-    renderRecords();
+    populateDefectFilter();
 
 }
 
 
-function populateFilterOptions(){
+/* ============================================================
+   ADD SN
+   ============================================================ */
 
-    const processes =
-        [
-            ...new Set(
-                rows
-                    .map(r=>r.process)
-                    .filter(Boolean)
-            )
-        ]
-        .sort();
+function handleSNKey(event) {
 
+    if (event.key === "Enter") {
 
-    const pns =
-        [
-            ...new Set(
-                rows
-                    .map(r=>r.component_pn)
-                    .filter(Boolean)
-            )
-        ]
-        .sort();
+        event.preventDefault();
 
-
-    const processIds = [
-        "analyticsProcess",
-        "recordProcess"
-    ];
-
-
-    processIds.forEach(id=>{
-
-        const select =
-            document.getElementById(id);
-
-        const first =
-            select.options[0];
-
-        select.innerHTML = "";
-
-        select.appendChild(first);
-
-        processes.forEach(process=>{
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                process;
-
-            option.textContent =
-                process;
-
-            select.appendChild(option);
-
-        });
-
-    });
-
-
-    const pnSelect =
-        document.getElementById(
-            "analyticsPN"
-        );
-
-    const pnFirst =
-        pnSelect.options[0];
-
-    pnSelect.innerHTML = "";
-
-    pnSelect.appendChild(pnFirst);
-
-    pns.forEach(pn=>{
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            pn;
-
-        option.textContent =
-            pn;
-
-        pnSelect.appendChild(option);
-
-    });
-
-
-    populateAllRejectFilters();
-
-}
-
-
-/* =========================================================
-   ANALYTICS
-========================================================= */
-
-function getAnalyticsRows(){
-
-    const process =
-        document.getElementById(
-            "analyticsProcess"
-        ).value;
-
-    const defect =
-        document.getElementById(
-            "analyticsDefect"
-        ).value;
-
-    const defectClass =
-        document.getElementById(
-            "analyticsClass"
-        ).value;
-
-    const pn =
-        document.getElementById(
-            "analyticsPN"
-        ).value;
-
-    const from =
-        document.getElementById(
-            "analyticsFrom"
-        ).value;
-
-    const to =
-        document.getElementById(
-            "analyticsTo"
-        ).value;
-
-
-    return rows.filter(row=>{
-
-        if(process &&
-           row.process !== process){
-
-            return false;
-        }
-
-        if(defect &&
-           row.defect !== defect){
-
-            return false;
-        }
-
-        if(defectClass &&
-           row.defect_class !== defectClass){
-
-            return false;
-        }
-
-        if(pn &&
-           String(row.component_pn) !== String(pn)){
-
-            return false;
-        }
-
-
-        const date =
-            new Date(row.date_time);
-
-
-        if(from){
-
-            const start =
-                new Date(from + "T00:00:00");
-
-            if(date < start){
-                return false;
-            }
-
-        }
-
-
-        if(to){
-
-            const end =
-                new Date(to + "T23:59:59");
-
-            if(date > end){
-                return false;
-            }
-
-        }
-
-
-        return true;
-
-    });
-
-}
-
-
-function applyAnalytics(){
-
-    renderDashboard();
-
-    renderChart();
-
-    renderDailyTop();
-
-}
-
-
-function clearAnalytics(){
-
-    document.getElementById(
-        "analyticsProcess"
-    ).value = "";
-
-    document.getElementById(
-        "analyticsDefect"
-    ).value = "";
-
-    document.getElementById(
-        "analyticsClass"
-    ).value = "";
-
-    document.getElementById(
-        "analyticsPN"
-    ).value = "";
-
-    document.getElementById(
-        "analyticsFrom"
-    ).value = "";
-
-    document.getElementById(
-        "analyticsTo"
-    ).value = "";
-
-    applyAnalytics();
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboard(){
-
-    const filtered =
-        getAnalyticsRows();
-
-
-    document.getElementById(
-        "totalReject"
-    ).textContent =
-        filtered.length;
-
-
-    const today =
-        new Date()
-            .toISOString()
-            .slice(0,10);
-
-
-    const todayCount =
-        filtered.filter(row=>{
-
-            return new Date(row.date_time)
-                .toISOString()
-                .slice(0,10)
-                === today;
-
-        }).length;
-
-
-    document.getElementById(
-        "rejectToday"
-    ).textContent =
-        todayCount;
-
-
-    const counts = {};
-
-    filtered.forEach(row=>{
-
-        counts[row.defect] =
-            (counts[row.defect] || 0) + 1;
-
-    });
-
-
-    const top =
-        Object.entries(counts)
-            .sort((a,b)=>b[1]-a[1])[0];
-
-
-    document.getElementById(
-        "topReject"
-    ).textContent =
-        top ? top[0] : "-";
-
-
-    const uniqueSN =
-        new Set(
-            filtered
-                .map(r=>normalizeSN(r.component_sn))
-                .filter(Boolean)
-        );
-
-    document.getElementById(
-        "totalSN"
-    ).textContent =
-        uniqueSN.size;
-
-}
-
-
-/* =========================================================
-   CHART
-========================================================= */
-
-function renderChart(){
-
-    const filtered =
-        getAnalyticsRows();
-
-
-    const counts = {};
-
-    filtered.forEach(row=>{
-
-        const defect =
-            row.defect || "Unknown";
-
-        counts[defect] =
-            (counts[defect] || 0) + 1;
-
-    });
-
-
-    const labels =
-        Object.keys(counts)
-            .sort(
-                (a,b)=>
-                    counts[b] - counts[a]
-            );
-
-
-    const values =
-        labels.map(
-            label=>counts[label]
-        );
-
-
-    const colors = [
-        "#9b7edc",
-        "#e88fa5",
-        "#eead76",
-        "#78bfa3",
-        "#6dbbc3",
-        "#e88972",
-        "#dfb65e",
-        "#b78bd3",
-        "#79b6a2",
-        "#d889a4",
-        "#eca66f",
-        "#70b5c0"
-    ];
-
-
-    const hoverColors = [
-        "#896bc9",
-        "#d97891",
-        "#dd985d",
-        "#61aa8d",
-        "#5aaab2",
-        "#d77760",
-        "#cea64f",
-        "#a474c2",
-        "#64a48e",
-        "#cb718d",
-        "#dc955c",
-        "#5da8b0"
-    ];
-
-
-    const ctx =
-        document
-            .getElementById(
-                "rejectChart"
-            )
-            .getContext("2d");
-
-
-    if(rejectChart){
-
-        rejectChart.destroy();
+        addSN();
 
     }
 
-
-    rejectChart =
-        new Chart(
-            ctx,
-            {
-                type:"bar",
-
-                data:{
-                    labels,
-
-                    datasets:[
-                        {
-                            label:"Reject Quantity",
-
-                            data:values,
-
-                            backgroundColor:
-                                labels.map(
-                                    (_,i)=>
-                                        colors[
-                                            i % colors.length
-                                        ]
-                                ),
-
-                            hoverBackgroundColor:
-                                labels.map(
-                                    (_,i)=>
-                                        hoverColors[
-                                            i % hoverColors.length
-                                        ]
-                                ),
-
-                            borderRadius:10,
-
-                            borderSkipped:false
-                        }
-                    ]
-                },
-
-                options:{
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    plugins:{
-
-                        legend:{
-                            display:false
-                        },
-
-                        tooltip:{
-
-                            backgroundColor:
-                                "#403949",
-
-                            titleColor:"#fff",
-
-                            bodyColor:"#fff",
-
-                            padding:12,
-
-                            cornerRadius:10
-
-                        }
-
-                    },
-
-                    scales:{
-
-                        x:{
-
-                            ticks:{
-                                color:"#77717f",
-
-                                font:{
-                                    size:11,
-                                    weight:"600"
-                                }
-                            },
-
-                            grid:{
-                                display:false
-                            }
-
-                        },
-
-                        y:{
-
-                            beginAtZero:true,
-
-                            ticks:{
-                                color:"#77717f",
-
-                                precision:0
-                            },
-
-                            grid:{
-                                color:
-                                    "rgba(130,110,150,.10)"
-                            }
-
-                        }
-
-                    },
-
-                    onClick:function(
-                        event,
-                        elements
-                    ){
-
-                        if(!elements.length){
-                            return;
-                        }
-
-                        const index =
-                            elements[0].index;
-
-                        const defect =
-                            labels[index];
-
-                        openChartModal(
-                            defect,
-                            filtered
-                        );
-
-                    }
-
-                }
-
-            }
-        );
-
 }
 
 
-/* =========================================================
-   GRAPH POPUP
-========================================================= */
+function addSN() {
 
-function openChartModal(
-    defect,
-    filteredRows
-){
+    const input =
+        document.getElementById("sn");
 
-    const detailRows =
-        filteredRows.filter(
-            row =>
-                row.defect === defect
+    const sn =
+        input.value.trim();
+
+    if (!sn) {
+        return;
+    }
+
+
+    const existsInBatch =
+        scannedSNs.some(
+            x => x.toUpperCase() === sn.toUpperCase()
         );
 
+    if (existsInBatch) {
 
-    document.getElementById(
-        "graphModalTitle"
-    ).textContent =
-        defect;
-
-
-    document.getElementById(
-        "modalReject"
-    ).textContent =
-        defect;
-
-
-    document.getElementById(
-        "modalQuantity"
-    ).textContent =
-        detailRows.length;
-
-
-    const processes =
-        [
-            ...new Set(
-                detailRows
-                    .map(r=>r.process)
-                    .filter(Boolean)
-            )
-        ];
-
-
-    const pns =
-        [
-            ...new Set(
-                detailRows
-                    .map(r=>r.component_pn)
-                    .filter(Boolean)
-            )
-        ];
-
-
-    document.getElementById(
-        "modalProcess"
-    ).textContent =
-        processes.join(", ") || "-";
-
-
-    document.getElementById(
-        "modalPN"
-    ).textContent =
-        pns.join(", ") || "-";
-
-
-    const body =
-        document.getElementById(
-            "graphModalBody"
+        showToast(
+            "Duplicate SN in current batch.",
+            "error"
         );
 
-
-    body.innerHTML =
-        detailRows.map(row=>{
-
-            return `
-
-                <tr>
-
-                    <td>
-                        ${escapeHtml(row.component_sn)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(row.process)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(row.component_pn)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(row.defect_class)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            displayOperator(
-                                row.operator_id
-                            )
-                        )}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            formatDateTime(
-                                row.date_time
-                            )
-                        )}
-                    </td>
-
-                </tr>
-
-            `;
-
-        }).join("");
-
-
-    document.getElementById(
-        "graphModal"
-    ).classList.add("show");
-
-}
-
-
-function closeGraphModal(){
-
-    document.getElementById(
-        "graphModal"
-    ).classList.remove("show");
-
-}
-
-
-/* =========================================================
-   DAILY TOP
-========================================================= */
-
-function renderDailyTop(){
-
-    const filtered =
-        getAnalyticsRows();
-
-
-    const groups = {};
-
-
-    filtered.forEach(row=>{
-
-        const date =
-            new Date(row.date_time)
-                .toISOString()
-                .slice(0,10);
-
-        if(!groups[date]){
-            groups[date] = {};
-        }
-
-        const defect =
-            row.defect || "Unknown";
-
-        groups[date][defect] =
-            (groups[date][defect] || 0) + 1;
-
-    });
-
-
-    const container =
-        document.getElementById(
-            "dailyTop"
-        );
-
-
-    const dates =
-        Object.keys(groups)
-            .sort()
-            .reverse();
-
-
-    if(!dates.length){
-
-        container.innerHTML = `
-            <div class="daily-card">
-                <div class="daily-date">
-                    No data
-                </div>
-            </div>
-        `;
+        input.select();
 
         return;
     }
 
 
-    container.innerHTML =
-        dates.map(date=>{
+    const existsInDatabase =
+        allData.some(
+            x =>
+                String(x.component_sn || "")
+                    .toUpperCase() === sn.toUpperCase()
+        );
 
-            const top =
-                Object.entries(
-                    groups[date]
-                )
-                .sort(
-                    (a,b)=>b[1]-a[1]
-                )[0];
+    if (existsInDatabase) {
+
+        showToast(
+            "This SN already exists in database.",
+            "error"
+        );
+
+        input.select();
+
+        return;
+    }
 
 
-            return `
+    scannedSNs.push(sn);
 
-                <div class="daily-card">
+    input.value = "";
 
-                    <div class="daily-date">
-                        ${formatDateOnly(date)}
-                    </div>
+    updateBatchDisplay();
 
-                    <div class="daily-defect">
-                        ${escapeHtml(top[0])}
-                    </div>
-
-                    <div class="daily-qty">
-                        ${top[1]} reject
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
+    input.focus();
 
 }
 
 
-/* =========================================================
-   BATCH SCANNING
-========================================================= */
+/* ============================================================
+   BATCH DISPLAY
+   ============================================================ */
 
-function addSN(){
+function updateBatchDisplay() {
 
-    if(!isAdmin()){
+    document
+        .getElementById("scanCount")
+        .textContent =
+        `${scannedSNs.length} SN ready`;
+
+    const container =
+        document.getElementById("batchList");
+
+    container.innerHTML = "";
+
+    scannedSNs.forEach(
+        (sn, index) => {
+
+            const tag =
+                document.createElement("div");
+
+            tag.className = "sn-tag";
+
+            tag.innerHTML = `
+                ${escapeHTML(sn)}
+                <span
+                    style="
+                        margin-left:8px;
+                        cursor:pointer;
+                        color:#f87171;
+                    "
+                    onclick="removeSN(${index})"
+                >
+                    ×
+                </span>
+            `;
+
+            container.appendChild(tag);
+
+        }
+    );
+
+}
+
+
+function removeSN(index) {
+
+    scannedSNs.splice(index, 1);
+
+    updateBatchDisplay();
+
+}
+
+
+/* ============================================================
+   SUBMIT REJECTS
+   ============================================================ */
+
+async function submitRejects() {
+
+    if (!isAdmin) {
 
         showToast(
             "Admin access required.",
@@ -3966,43 +1752,10 @@ function addSN(){
     }
 
 
-    const sn =
-        normalizeSN(
-            document.getElementById(
-                "sn"
-            ).value
-        );
-
-    const process =
-        document.getElementById(
-            "process"
-        ).value;
-
-    const pn =
-        document.getElementById(
-            "pn"
-        ).value;
-
-    const defect =
-        document.getElementById(
-            "defect"
-        ).value;
-
-    const defectClass =
-        document.getElementById(
-            "defectClass"
-        ).value;
-
-    const operator =
-        document.getElementById(
-            "operator"
-        ).value.trim();
-
-
-    if(!sn){
+    if (scannedSNs.length === 0) {
 
         showToast(
-            "Please scan Component SN.",
+            "Please scan at least one SN.",
             "error"
         );
 
@@ -4010,11 +1763,20 @@ function addSN(){
     }
 
 
-    if(!process ||
-       !pn ||
-       !defect ||
-       !defectClass ||
-       !operator){
+    const pn =
+        document.getElementById("pn").value;
+
+    const defect =
+        document.getElementById("defect").value;
+
+    const defectClass =
+        document.getElementById("defectClass").value;
+
+    const operator =
+        document.getElementById("operator").value.trim();
+
+
+    if (!pn || !defect || !defectClass || !operator) {
 
         showToast(
             "Please complete all fields.",
@@ -4025,361 +1787,66 @@ function addSN(){
     }
 
 
-    const duplicateBatch =
-        scannedSNs.some(
-            item =>
-                item.component_sn === sn
-        );
-
-
-    if(duplicateBatch){
-
-        showToast(
-            "Duplicate SN in current batch.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const duplicateDB =
-        rows.some(
-            row =>
-                normalizeSN(
-                    row.component_sn
-                ) === sn
-        );
-
-
-    if(duplicateDB){
-
-        showToast(
-            "This SN already exists in database.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    scannedSNs.push({
-
-        component_sn:sn,
-
-        component_pn:pn,
-
-        process,
-
-        defect,
-
-        defect_class:defectClass,
-
-        operator_id:operator,
-
-        date_time:
-            new Date().toISOString()
-
-    });
-
-
-    document.getElementById(
-        "sn"
-    ).value = "";
-
-
-    renderBatch();
-
-    document.getElementById(
-        "sn"
-    ).focus();
-
-
-    showToast(
-        "SN added to batch.",
-        "success"
-    );
-
-}
-
-
-function renderBatch(){
-
-    const container =
-        document.getElementById(
-            "batchList"
-        );
-
-
-    document.getElementById(
-        "scanCount"
-    ).textContent =
-        scannedSNs.length;
-
-
-    if(!scannedSNs.length){
-
-        container.innerHTML = `
-            <div class="batch-empty">
-                No scanned SN yet.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
+    const rows =
         scannedSNs.map(
-            (item,index)=>{
-
-                return `
-
-                    <div class="batch-item">
-
-                        <div>
-                            <strong>
-                                ${escapeHtml(
-                                    item.component_sn
-                                )}
-                            </strong>
-                        </div>
-
-                        <div>
-                            PN:
-                            ${escapeHtml(
-                                item.component_pn
-                            )}
-                        </div>
-
-                        <div>
-                            ${escapeHtml(
-                                item.defect
-                            )}
-                        </div>
-
-                        <div>
-                            ${escapeHtml(
-                                item.defect_class
-                            )}
-                        </div>
-
-                        <div>
-                            <button
-                                class="remove-batch"
-                                onclick="removeBatchItem(${index})"
-                            >
-                                REMOVE
-                            </button>
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-function removeBatchItem(index){
-
-    scannedSNs.splice(
-        index,
-        1
-    );
-
-    renderBatch();
-
-}
-
-
-function clearBatch(){
-
-    scannedSNs = [];
-
-    renderBatch();
-
-}
-
-
-/* =========================================================
-   SUBMIT
-========================================================= */
-
-async function submitReject(){
-
-    if(!isAdmin()){
-
-        showToast(
-            "Admin access required.",
-            "error"
+            sn => ({
+                component_sn: sn,
+                component_pn: pn,
+                defect: defect,
+                defect_class: defectClass,
+                operator: operator,
+                date_time: new Date().toISOString()
+            })
         );
-
-        return;
-    }
-
-
-    if(!scannedSNs.length){
-
-        showToast(
-            "No scanned SN to submit.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const payload =
-        scannedSNs.map(item=>({
-
-            component_sn:
-                item.component_sn,
-
-            component_pn:
-                item.component_pn,
-
-            process:
-                item.process,
-
-            defect:
-                item.defect,
-
-            defect_class:
-                item.defect_class,
-
-            operator_id:
-                item.operator_id,
-
-            date_time:
-                item.date_time
-
-        }));
 
 
     const {
         error
-    } =
-        await supabaseClient
-            .from("rejects")
-            .insert(payload);
+    } = await supabaseClient
+        .from("rejects")
+        .insert(rows);
 
 
-    if(error){
+    if (error) {
 
-        if(error.code === "23505"){
+        console.error(error);
 
-            showToast(
-                "Duplicate SN detected. Nothing was submitted.",
-                "error"
-            );
-
-        }else{
-
-            console.error(error);
-
-            showToast(
-                error.message,
-                "error"
-            );
-
-        }
+        showToast(
+            error.message,
+            "error"
+        );
 
         return;
     }
 
 
-    scannedSNs = [];
-
-    renderBatch();
-
-    await loadRows();
-
     showToast(
-        "Reject data submitted successfully.",
+        `${rows.length} reject(s) submitted successfully.`,
         "success"
     );
 
-}
 
+    scannedSNs = [];
 
-/* =========================================================
-   EXCEL IMPORT
-========================================================= */
+    updateBatchDisplay();
 
-function getCell(
-    row,
-    names
-){
+    document.getElementById("pn").value = "";
+    document.getElementById("defect").value = "";
+    document.getElementById("defectClass").value = "";
+    document.getElementById("operator").value = "";
 
-    for(const name of names){
-
-        if(
-            row[name] !== undefined &&
-            row[name] !== null &&
-            String(row[name]).trim() !== ""
-        ){
-
-            return row[name];
-
-        }
-
-    }
-
-    return "";
+    await loadData();
 
 }
 
 
-function excelDateToISO(value){
+/* ============================================================
+   IMPORT EXCEL
+   ============================================================ */
 
-    if(value instanceof Date){
+async function importExcel(event) {
 
-        return value.toISOString();
-
-    }
-
-
-    if(
-        typeof value === "number"
-    ){
-
-        const date =
-            XLSX.SSF.parse_date_code(
-                value
-            );
-
-        return new Date(
-            date.y,
-            date.m - 1,
-            date.d,
-            date.H || 0,
-            date.M || 0,
-            date.S || 0
-        ).toISOString();
-
-    }
-
-
-    const parsed =
-        new Date(value);
-
-    if(!isNaN(parsed)){
-
-        return parsed.toISOString();
-
-    }
-
-    return new Date().toISOString();
-
-}
-
-
-async function importExcel(){
-
-    if(!isAdmin()){
+    if (!isAdmin) {
 
         showToast(
             "Admin access required.",
@@ -4391,56 +1858,37 @@ async function importExcel(){
 
 
     const file =
-        document.getElementById(
-            "excelFile"
-        ).files[0];
+        event.target.files[0];
 
-
-    if(!file){
-
-        showToast(
-            "Please select Excel / CSV file.",
-            "error"
-        );
-
+    if (!file) {
         return;
     }
 
 
-    try{
+    try {
 
-        const buffer =
+        const data =
             await file.arrayBuffer();
-
 
         const workbook =
             XLSX.read(
-                buffer,
-                {
-                    type:"array"
-                }
+                data,
+                { type: "array" }
             );
-
 
         const sheet =
             workbook.Sheets[
                 workbook.SheetNames[0]
             ];
 
-
-        const data =
-            XLSX.utils.sheet_to_json(
-                sheet,
-                {
-                    defval:""
-                }
-            );
+        const rows =
+            XLSX.utils.sheet_to_json(sheet);
 
 
-        if(!data.length){
+        if (!rows.length) {
 
             showToast(
-                "File contains no data.",
+                "Excel file is empty.",
                 "error"
             );
 
@@ -4448,208 +1896,101 @@ async function importExcel(){
         }
 
 
+        const records = [];
+
         const existingSNs =
             new Set(
-                rows.map(
-                    row =>
-                        normalizeSN(
-                            row.component_sn
-                        )
+                allData.map(
+                    x =>
+                        String(
+                            x.component_sn || ""
+                        ).toUpperCase()
                 )
             );
 
 
-        const importSNs =
-            new Set();
-
-
-        const payload = [];
-
-        let skipped = 0;
-
-
-        for(const row of data){
+        for (const row of rows) {
 
             const sn =
-                normalizeSN(
-                    getCell(
-                        row,
-                        [
-                            "Component SN",
-                            "Component Serial Number",
-                            "SN",
-                            "Serial Number"
-                        ]
-                    )
-                );
+                String(
+                    row["Component SN"] ||
+                    row["component_sn"] ||
+                    row["SN"] ||
+                    ""
+                ).trim();
+
+
+            if (!sn) {
+                continue;
+            }
+
+
+            if (
+                existingSNs.has(
+                    sn.toUpperCase()
+                )
+            ) {
+                continue;
+            }
 
 
             const pn =
-                String(
-                    getCell(
-                        row,
-                        [
-                            "Component PN",
-                            "Part Number",
-                            "PN"
-                        ]
-                    )
-                ).trim();
-
-
-            const process =
-                String(
-                    getCell(
-                        row,
-                        [
-                            "Process"
-                        ]
-                    )
-                ).trim()
-                .toUpperCase();
+                row["Component PN"] ||
+                row["component_pn"] ||
+                "";
 
 
             const defect =
-                String(
-                    getCell(
-                        row,
-                        [
-                            "Reject",
-                            "Defect"
-                        ]
-                    )
-                ).trim();
+                row["Defect"] ||
+                row["defect"] ||
+                "";
 
 
             const defectClass =
-                String(
-                    getCell(
-                        row,
-                        [
-                            "Defect Class",
-                            "DefectClass"
-                        ]
-                    )
-                ).trim();
+                row["Defect Class"] ||
+                row["defect_class"] ||
+                "";
 
 
             const operator =
-                String(
-                    getCell(
-                        row,
-                        [
-                            "Badge ID",
-                            "Operator ID",
-                            "Operator",
-                            "Badge"
-                        ]
-                    )
-                ).trim();
+                row["Operator"] ||
+                row["operator"] ||
+                "";
 
 
             const dateValue =
-                getCell(
-                    row,
-                    [
-                        "Date Time",
-                        "Datetime",
-                        "Date",
-                        "DateTime"
-                    ]
-                );
+                row["Date Time"] ||
+                row["date_time"];
 
 
-            if(!sn){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            if(existingSNs.has(sn)){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            if(importSNs.has(sn)){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            if(
-                !["DEBUG","MAINTENANCE"]
-                    .includes(process)
-            ){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            if(
-                !processRejects[process]
-                    .includes(defect)
-            ){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            if(
-                !["Cosmetic","EAOI Reject"]
-                    .includes(defectClass)
-            ){
-
-                skipped++;
-                continue;
-
-            }
-
-
-            importSNs.add(sn);
-
-
-            payload.push({
-
-                component_sn:sn,
-
-                component_pn:pn,
-
-                process,
-
-                defect,
-
-                defect_class:defectClass,
-
-                operator_id:
-                    operator || "Admin",
-
+            records.push({
+                component_sn: sn,
+                component_pn: String(pn),
+                defect: String(defect),
+                defect_class: String(defectClass),
+                operator: String(operator),
                 date_time:
-                    excelDateToISO(
-                        dateValue
-                    )
-
+                    dateValue
+                    ? new Date(dateValue).toISOString()
+                    : new Date().toISOString()
             });
+
+
+            existingSNs.add(
+                sn.toUpperCase()
+            );
 
         }
 
 
-        if(!payload.length){
+        if (!records.length) {
 
             showToast(
-                "No valid new records found.",
-                "error"
+                "No new records found. Duplicate SN may have been skipped.",
+                "info"
             );
+
+            event.target.value = "";
 
             return;
         }
@@ -4657,13 +1998,12 @@ async function importExcel(){
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("rejects")
-                .insert(payload);
+        } = await supabaseClient
+            .from("rejects")
+            .insert(records);
 
 
-        if(error){
+        if (error) {
 
             console.error(error);
 
@@ -4676,25 +2016,23 @@ async function importExcel(){
         }
 
 
-        await loadRows();
-
-
-        document.getElementById(
-            "excelFile"
-        ).value = "";
-
-
         showToast(
-            `${payload.length} records imported. ${skipped} skipped.`,
+            `${records.length} record(s) imported successfully.`,
             "success"
         );
 
-    }catch(error){
+
+        event.target.value = "";
+
+        await loadData();
+
+
+    } catch (error) {
 
         console.error(error);
 
         showToast(
-            "Unable to import file.",
+            "Failed to read Excel file.",
             "error"
         );
 
@@ -4703,376 +2041,531 @@ async function importExcel(){
 }
 
 
-/* =========================================================
-   RECORD FILTER
-========================================================= */
+/* ============================================================
+   FILTER
+   ============================================================ */
 
-function getFilteredRecords(){
+function applyFilters() {
 
-    const sn =
-        document.getElementById(
-            "recordSN"
-        ).value
-        .trim()
-        .toUpperCase();
-
-
-    const process =
-        document.getElementById(
-            "recordProcess"
-        ).value;
-
+    const search =
+        document
+            .getElementById("searchSN")
+            .value
+            .trim()
+            .toLowerCase();
 
     const defect =
-        document.getElementById(
-            "recordDefect"
-        ).value;
+        document
+            .getElementById("filterDefect")
+            .value;
+
+    const defectClass =
+        document
+            .getElementById("filterClass")
+            .value;
+
+    const date =
+        document
+            .getElementById("filterDate")
+            .value;
 
 
-    const from =
-        document.getElementById(
-            "recordFrom"
-        ).value;
+    filteredData =
+        allData.filter(row => {
+
+            const sn =
+                String(
+                    row.component_sn || ""
+                ).toLowerCase();
+
+            if (
+                search &&
+                !sn.includes(search)
+            ) {
+                return false;
+            }
 
 
-    const to =
-        document.getElementById(
-            "recordTo"
-        ).value;
+            if (
+                defect &&
+                row.defect !== defect
+            ) {
+                return false;
+            }
 
 
-    return rows.filter(row=>{
-
-        if(
-            sn &&
-            !normalizeSN(
-                row.component_sn
-            ).includes(sn)
-        ){
-
-            return false;
-
-        }
+            if (
+                defectClass &&
+                row.defect_class !== defectClass
+            ) {
+                return false;
+            }
 
 
-        if(
-            process &&
-            row.process !== process
-        ){
+            if (date) {
 
-            return false;
+                const rowDate =
+                    new Date(
+                        row.date_time
+                    );
 
-        }
+                const localDate =
+                    rowDate
+                        .toISOString()
+                        .slice(0,10);
+
+                if (
+                    localDate !== date
+                ) {
+                    return false;
+                }
+
+            }
 
 
-        if(
-            defect &&
-            row.defect !== defect
-        ){
+            return true;
 
-            return false;
+        });
 
-        }
+
+    renderTable();
+
+    updateDashboard();
+
+    updateChart();
+
+}
+
+
+/* ============================================================
+   CLEAR FILTER
+   ============================================================ */
+
+function clearFilters() {
+
+    document.getElementById("searchSN").value = "";
+    document.getElementById("filterDefect").value = "";
+    document.getElementById("filterClass").value = "";
+    document.getElementById("filterDate").value = "";
+
+    applyFilters();
+
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+function renderTable() {
+
+    const tbody =
+        document.getElementById("dataTable");
+
+    tbody.innerHTML = "";
+
+
+    filteredData.forEach(row => {
+
+        const tr =
+            document.createElement("tr");
 
 
         const date =
-            new Date(
-                row.date_time
-            );
+            row.date_time
+                ? new Date(
+                    row.date_time
+                ).toLocaleString()
+                : "-";
 
 
-        if(from){
+        tr.innerHTML = `
 
-            const start =
-                new Date(
-                    from + "T00:00:00"
-                );
+            <td>
+                ${escapeHTML(row.component_sn || "")}
+            </td>
 
-            if(date < start){
-                return false;
+            <td>
+                ${escapeHTML(row.component_pn || "")}
+            </td>
+
+            <td>
+                <span class="badge">
+                    ${escapeHTML(row.defect || "")}
+                </span>
+            </td>
+
+            <td>
+                ${escapeHTML(row.defect_class || "")}
+            </td>
+
+            <td>
+                ${escapeHTML(row.operator || "")}
+            </td>
+
+            <td>
+                ${escapeHTML(date)}
+            </td>
+
+            ${
+                isAdmin
+                ?
+                `
+                <td>
+
+                    <div class="action-buttons">
+
+                        <button
+                            class="btn btn-small btn-primary"
+                            onclick="editReject('${row.id}')"
+                        >
+                            EDIT
+                        </button>
+
+                        <button
+                            class="btn btn-small btn-danger"
+                            onclick="deleteReject('${row.id}')"
+                        >
+                            DELETE
+                        </button>
+
+                    </div>
+
+                </td>
+                `
+                :
+                ""
             }
 
-        }
+        `;
 
 
-        if(to){
-
-            const end =
-                new Date(
-                    to + "T23:59:59"
-                );
-
-            if(date > end){
-                return false;
-            }
-
-        }
-
-
-        return true;
+        tbody.appendChild(tr);
 
     });
 
+
+    document
+        .getElementById("recordCount")
+        .textContent =
+        `${filteredData.length} record(s)`;
+
 }
 
 
-function renderRecords(){
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
 
-    const body =
+function updateDashboard() {
+
+    const total =
+        filteredData.length;
+
+    document
+        .getElementById("totalReject")
+        .textContent = total;
+
+    document
+        .getElementById("rejectQty")
+        .textContent = total;
+
+
+    const counts = {};
+
+    filteredData.forEach(
+        row => {
+
+            const defect =
+                row.defect || "Unknown";
+
+            counts[defect] =
+                (counts[defect] || 0) + 1;
+
+        }
+    );
+
+
+    const sorted =
+        Object.entries(counts)
+            .sort(
+                (a,b) =>
+                    b[1] - a[1]
+            );
+
+
+    document
+        .getElementById("topDefect")
+        .textContent =
+        sorted.length
+        ? sorted[0][0]
+        : "-";
+
+
+    const topContainer =
+        document.getElementById("topDefects");
+
+    topContainer.innerHTML = "";
+
+
+    sorted
+        .slice(0, 10)
+        .forEach(
+            ([name,count]) => {
+
+                const div =
+                    document.createElement("div");
+
+                div.className =
+                    "defect-item";
+
+                div.innerHTML = `
+
+                    <div class="defect-name">
+                        ${escapeHTML(name)}
+                    </div>
+
+                    <div class="defect-count">
+                        ${count}
+                    </div>
+
+                `;
+
+                topContainer.appendChild(div);
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   DEFECT FILTER
+   ============================================================ */
+
+function populateDefectFilter() {
+
+    const select =
         document.getElementById(
-            "recordsBody"
+            "filterDefect"
+        );
+
+    const current =
+        select.value;
+
+
+    const defects =
+        [
+            ...new Set(
+                allData
+                    .map(
+                        x => x.defect
+                    )
+                    .filter(Boolean)
+            )
+        ]
+        .sort();
+
+
+    select.innerHTML = `
+        <option value="">
+            All Defects
+        </option>
+    `;
+
+
+    defects.forEach(
+        defect => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = defect;
+
+            option.textContent = defect;
+
+            select.appendChild(option);
+
+        }
+    );
+
+
+    select.value = current;
+
+}
+
+
+/* ============================================================
+   CHART
+   ============================================================ */
+
+function updateChart() {
+
+    const daily = {};
+
+
+    filteredData.forEach(
+        row => {
+
+            const date =
+                new Date(
+                    row.date_time
+                );
+
+
+            const key =
+                date
+                    .toISOString()
+                    .slice(0,10);
+
+
+            daily[key] =
+                (daily[key] || 0) + 1;
+
+        }
+    );
+
+
+    const labels =
+        Object.keys(daily).sort();
+
+
+    const values =
+        labels.map(
+            label => daily[label]
         );
 
 
-    const filtered =
-        getFilteredRecords();
+    const ctx =
+        document
+            .getElementById(
+                "trendChart"
+            )
+            .getContext("2d");
 
 
-    if(!filtered.length){
-
-        body.innerHTML = `
-            <tr>
-                <td
-                    colspan="8"
-                    style="
-                    text-align:center;
-                    padding:25px;
-                    color:#99939f;
-                    "
-                >
-                    No records found.
-                </td>
-            </tr>
-        `;
-
-        return;
+    if (trendChart) {
+        trendChart.destroy();
     }
 
 
-    body.innerHTML =
-        filtered.map(row=>{
+    trendChart =
+        new Chart(
+            ctx,
+            {
+                type: "line",
 
-            const processTag =
-                row.process === "DEBUG"
-                    ? "tag-debug"
-                    : "tag-maintenance";
+                data: {
 
+                    labels,
 
-            const classTag =
-                row.defect_class === "Cosmetic"
-                    ? "tag-cosmetic"
-                    : "tag-eaoi";
+                    datasets: [
 
+                        {
 
-            return `
+                            label:
+                                "Reject Quantity",
 
-                <tr>
+                            data:
+                                values,
 
-                    <td>
-                        <strong>
-                            ${escapeHtml(
-                                row.component_sn
-                            )}
-                        </strong>
-                    </td>
+                            tension:
+                                0.35,
 
-                    <td>
-                        ${escapeHtml(
-                            row.component_pn
-                        )}
-                    </td>
+                            fill:
+                                true,
 
-                    <td>
-                        <span
-                            class="tag ${processTag}"
-                        >
-                            ${escapeHtml(
-                                row.process
-                            )}
-                        </span>
-                    </td>
+                            borderWidth:
+                                3
 
-                    <td>
-                        ${escapeHtml(
-                            row.defect
-                        )}
-                    </td>
-
-                    <td>
-                        <span
-                            class="tag ${classTag}"
-                        >
-                            ${escapeHtml(
-                                row.defect_class
-                            )}
-                        </span>
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            displayOperator(
-                                row.operator_id
-                            )
-                        )}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            formatDateTime(
-                                row.date_time
-                            )
-                        )}
-                    </td>
-
-                    <td>
-
-                        ${
-                            isAdmin()
-                            ?
-                            `
-                            <div class="action-cell">
-
-                                <button
-                                    class="edit-btn"
-                                    onclick="editRecord('${row.id}')"
-                                >
-                                    EDIT
-                                </button>
-
-                                <button
-                                    class="delete-btn"
-                                    onclick="deleteRecord('${row.id}')"
-                                >
-                                    DELETE
-                                </button>
-
-                            </div>
-                            `
-                            :
-                            "-"
                         }
 
-                    </td>
+                    ]
 
-                </tr>
+                },
 
-            `;
+                options: {
 
-        }).join("");
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            labels: {
+
+                                color:
+                                    "#ffffff"
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            ticks: {
+
+                                color:
+                                    "#9ca3af"
+
+                            },
+
+                            grid: {
+
+                                color:
+                                    "rgba(255,255,255,0.05)"
+
+                            }
+
+                        },
+
+                        y: {
+
+                            beginAtZero:
+                                true,
+
+                            ticks: {
+
+                                color:
+                                    "#9ca3af",
+
+                                precision:
+                                    0
+
+                            },
+
+                            grid: {
+
+                                color:
+                                    "rgba(255,255,255,0.05)"
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
 
 }
 
 
-/* =========================================================
-   CLEAR RECORD FILTER
-========================================================= */
-
-function clearRecordFilters(){
-
-    document.getElementById(
-        "recordSN"
-    ).value = "";
-
-    document.getElementById(
-        "recordProcess"
-    ).value = "";
-
-    document.getElementById(
-        "recordDefect"
-    ).value = "";
-
-    document.getElementById(
-        "recordFrom"
-    ).value = "";
-
-    document.getElementById(
-        "recordTo"
-    ).value = "";
-
-    renderRecords();
-
-}
-
-
-/* =========================================================
-   COPY RECORDS
-========================================================= */
-
-async function copyVisibleRecords(){
-
-    const filtered =
-        getFilteredRecords();
-
-
-    if(!filtered.length){
-
-        showToast(
-            "No visible records.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const text =
-        filtered.map(row=>{
-
-            return [
-
-                row.component_sn,
-
-                row.component_pn,
-
-                row.process,
-
-                row.defect,
-
-                row.defect_class,
-
-                displayOperator(
-                    row.operator_id
-                ),
-
-                formatDateTime(
-                    row.date_time
-                )
-
-            ].join("\t");
-
-        }).join("\n");
-
-
-    try{
-
-        await navigator.clipboard.writeText(
-            text
-        );
-
-        showToast(
-            "Visible records copied.",
-            "success"
-        );
-
-    }catch(error){
-
-        showToast(
-            "Unable to copy records.",
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
+/* ============================================================
    EDIT
-========================================================= */
+   ============================================================ */
 
-function editRecord(id){
+function editReject(id) {
 
-    if(!isAdmin()){
+    if (!isAdmin) {
 
         showToast(
             "Admin access required.",
@@ -5084,152 +2577,113 @@ function editRecord(id){
 
 
     const row =
-        rows.find(
-            item =>
-                String(item.id) === String(id)
+        allData.find(
+            x => String(x.id) === String(id)
         );
 
 
-    if(!row){
+    if (!row) {
         return;
     }
 
 
-    document.getElementById(
-        "editId"
-    ).value =
+    document.getElementById("editId").value =
         row.id;
 
+    document.getElementById("editSN").value =
+        row.component_sn || "";
 
-    document.getElementById(
-        "editSN"
-    ).value =
-        row.component_sn;
+    document.getElementById("editPN").value =
+        row.component_pn || "";
 
+    document.getElementById("editDefect").value =
+        row.defect || "";
 
-    document.getElementById(
-        "editPN"
-    ).value =
-        row.component_pn;
+    document.getElementById("editClass").value =
+        row.defect_class || "";
 
-
-    document.getElementById(
-        "editProcess"
-    ).value =
-        row.process;
+    document.getElementById("editOperator").value =
+        row.operator || "";
 
 
-    populateRejectSelect(
-        "editDefect",
-        row.process,
-        row.defect
-    );
-
-
-    document.getElementById(
-        "editClass"
-    ).value =
-        row.defect_class;
-
-
-    document.getElementById(
-        "editOperator"
-    ).value =
-        displayOperator(
-            row.operator_id
-        );
-
-
-    document.getElementById(
-        "editDate"
-    ).value =
-        toDateTimeLocal(
-            row.date_time
-        );
-
-
-    document.getElementById(
-        "editModal"
-    ).classList.add("show");
+    document
+        .getElementById("editModal")
+        .classList.add("show");
 
 }
 
 
-function closeEditModal(){
+function closeEdit() {
 
-    document.getElementById(
-        "editModal"
-    ).classList.remove("show");
+    document
+        .getElementById("editModal")
+        .classList.remove("show");
 
 }
 
 
-async function saveEdit(){
+/* ============================================================
+   SAVE EDIT
+   ============================================================ */
 
-    if(!isAdmin()){
+async function saveEdit() {
 
-        showToast(
-            "Admin access required.",
-            "error"
-        );
-
+    if (!isAdmin) {
         return;
     }
 
 
     const id =
-        document.getElementById(
-            "editId"
-        ).value;
+        document.getElementById("editId").value;
+
+    const pn =
+        document.getElementById("editPN").value;
+
+    const defect =
+        document.getElementById("editDefect").value;
+
+    const defectClass =
+        document.getElementById("editClass").value;
+
+    const operator =
+        document
+            .getElementById("editOperator")
+            .value
+            .trim();
 
 
-    const payload = {
+    if (
+        !pn ||
+        !defect ||
+        !defectClass ||
+        !operator
+    ) {
 
-        component_pn:
-            document.getElementById(
-                "editPN"
-            ).value,
+        showToast(
+            "Please complete all fields.",
+            "error"
+        );
 
-        process:
-            document.getElementById(
-                "editProcess"
-            ).value,
-
-        defect:
-            document.getElementById(
-                "editDefect"
-            ).value,
-
-        defect_class:
-            document.getElementById(
-                "editClass"
-            ).value,
-
-        operator_id:
-            document.getElementById(
-                "editOperator"
-            ).value.trim(),
-
-        date_time:
-            new Date(
-                document.getElementById(
-                    "editDate"
-                ).value
-            ).toISOString()
-
-    };
+        return;
+    }
 
 
     const {
         error
-    } =
-        await supabaseClient
-            .from("rejects")
-            .update(payload)
-            .eq("id",id);
+    } = await supabaseClient
+        .from("rejects")
+        .update({
+
+            component_pn: pn,
+            defect: defect,
+            defect_class: defectClass,
+            operator: operator
+
+        })
+        .eq("id", id);
 
 
-    if(error){
+    if (error) {
 
         console.error(error);
 
@@ -5242,25 +2696,25 @@ async function saveEdit(){
     }
 
 
-    closeEditModal();
-
-    await loadRows();
+    closeEdit();
 
     showToast(
-        "Record updated successfully.",
+        "Reject updated successfully.",
         "success"
     );
+
+    await loadData();
 
 }
 
 
-/* =========================================================
+/* ============================================================
    DELETE
-========================================================= */
+   ============================================================ */
 
-async function deleteRecord(id){
+async function deleteReject(id) {
 
-    if(!isAdmin()){
+    if (!isAdmin) {
 
         showToast(
             "Admin access required.",
@@ -5271,27 +2725,37 @@ async function deleteRecord(id){
     }
 
 
-    const confirmDelete =
-        confirm(
-            "Delete this reject record?"
+    const row =
+        allData.find(
+            x => String(x.id) === String(id)
         );
 
 
-    if(!confirmDelete){
+    if (!row) {
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `Delete SN ${row.component_sn}?`
+        );
+
+
+    if (!confirmed) {
         return;
     }
 
 
     const {
         error
-    } =
-        await supabaseClient
-            .from("rejects")
-            .delete()
-            .eq("id",id);
+    } = await supabaseClient
+        .from("rejects")
+        .delete()
+        .eq("id", id);
 
 
-    if(error){
+    if (error) {
 
         console.error(error);
 
@@ -5304,23 +2768,24 @@ async function deleteRecord(id){
     }
 
 
-    await loadRows();
-
     showToast(
-        "Record deleted.",
+        "Reject deleted successfully.",
         "success"
     );
+
+
+    await loadData();
 
 }
 
 
-/* =========================================================
-   CLEAR ALL
-========================================================= */
+/* ============================================================
+   CLEAR ALL DATA
+   ============================================================ */
 
-async function clearAllData(){
+async function clearAllData() {
 
-    if(!isAdmin()){
+    if (!isAdmin) {
 
         showToast(
             "Admin access required.",
@@ -5331,41 +2796,30 @@ async function clearAllData(){
     }
 
 
-    const first =
+    const confirmed =
         confirm(
-            "Are you sure you want to delete ALL reject data?"
+            "WARNING!\n\nThis will delete ALL reject data.\n\nAre you sure?"
         );
 
 
-    if(!first){
-        return;
-    }
-
-
-    const second =
-        confirm(
-            "FINAL WARNING: This will remove all records permanently. Continue?"
-        );
-
-
-    if(!second){
+    if (!confirmed) {
         return;
     }
 
 
     const {
         error
-    } =
-        await supabaseClient
-            .from("rejects")
-            .delete()
-            .neq(
-                "component_sn",
-                "__IMPOSSIBLE_DELETE_VALUE__"
-            );
+    } = await supabaseClient
+        .from("rejects")
+        .delete()
+        .not(
+            "id",
+            "is",
+            null
+        );
 
 
-    if(error){
+    if (error) {
 
         console.error(error);
 
@@ -5378,78 +2832,67 @@ async function clearAllData(){
     }
 
 
-    await loadRows();
-
     showToast(
-        "All reject data cleared.",
+        "All reject data has been deleted.",
         "success"
     );
+
+
+    await loadData();
 
 }
 
 
-/* =========================================================
+/* ============================================================
    EXPORT EXCEL
-========================================================= */
+   ============================================================ */
 
-function exportExcel(){
+function exportExcel() {
 
-    if(!isAdmin()){
-
-        showToast(
-            "Admin access required.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    if(!rows.length){
+    if (!filteredData.length) {
 
         showToast(
             "No data to export.",
-            "error"
+            "info"
         );
 
         return;
     }
 
 
-    const exportRows =
-        rows.map(row=>({
+    const exportData =
+        filteredData.map(
+            row => ({
 
-            "Component SN":
-                row.component_sn,
+                "Component SN":
+                    row.component_sn,
 
-            "Component PN":
-                row.component_pn,
+                "Component PN":
+                    row.component_pn,
 
-            "Process":
-                row.process,
+                "Defect":
+                    row.defect,
 
-            "Reject":
-                row.defect,
+                "Defect Class":
+                    row.defect_class,
 
-            "Defect Class":
-                row.defect_class,
+                "Operator":
+                    row.operator,
 
-            "Badge ID":
-                displayOperator(
-                    row.operator_id
-                ),
-
-            "Date Time":
-                formatDateTime(
+                "Date Time":
                     row.date_time
-                )
+                    ? new Date(
+                        row.date_time
+                    ).toLocaleString()
+                    : ""
 
-        }));
+            })
+        );
 
 
     const worksheet =
         XLSX.utils.json_to_sheet(
-            exportRows
+            exportData
         );
 
 
@@ -5469,245 +2912,102 @@ function exportExcel(){
         "Reject_Trending.xlsx"
     );
 
-
-    showToast(
-        "Excel exported successfully.",
-        "success"
-    );
-
 }
 
 
-/* =========================================================
-   DATE FORMAT
-========================================================= */
+/* ============================================================
+   TOAST
+   ============================================================ */
 
-function formatDateTime(value){
+function showToast(
+    message,
+    type = "info"
+) {
 
-    if(!value){
-        return "-";
-    }
-
-    const date =
-        new Date(value);
-
-    if(isNaN(date)){
-        return value;
-    }
-
-    return date.toLocaleString(
-        "en-MY",
-        {
-            day:"2-digit",
-            month:"2-digit",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit",
-            hour12:true
-        }
-    );
-
-}
-
-
-function formatDateOnly(value){
-
-    const date =
-        new Date(
-            value + "T00:00:00"
+    const toast =
+        document.getElementById(
+            "toast"
         );
 
-    if(isNaN(date)){
-        return value;
-    }
+    toast.textContent =
+        message;
 
-    return date.toLocaleDateString(
-        "en-MY",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
-    );
+    toast.className =
+        `toast show ${type}`;
 
-}
+    setTimeout(
+        () => {
 
+            toast.classList.remove(
+                "show"
+            );
 
-function toDateTimeLocal(value){
-
-    const date =
-        new Date(value);
-
-    const pad =
-        number =>
-            String(number)
-                .padStart(2,"0");
-
-
-    return (
-        date.getFullYear() +
-        "-" +
-        pad(date.getMonth()+1) +
-        "-" +
-        pad(date.getDate()) +
-        "T" +
-        pad(date.getHours()) +
-        ":" +
-        pad(date.getMinutes())
-    );
-
-}
-
-
-/* =========================================================
-   ENTER KEY SCANNER
-========================================================= */
-
-document.getElementById(
-    "sn"
-).addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Enter"){
-
-            event.preventDefault();
-
-            addSN();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MODAL CLICK OUTSIDE
-========================================================= */
-
-document.getElementById(
-    "loginModal"
-).addEventListener(
-    "click",
-    function(event){
-
-        if(event.target === this){
-
-            closeLoginModal();
-
-        }
-
-    }
-);
-
-
-document.getElementById(
-    "graphModal"
-).addEventListener(
-    "click",
-    function(event){
-
-        if(event.target === this){
-
-            closeGraphModal();
-
-        }
-
-    }
-);
-
-
-document.getElementById(
-    "editModal"
-).addEventListener(
-    "click",
-    function(event){
-
-        if(event.target === this){
-
-            closeEditModal();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   REALTIME
-========================================================= */
-
-supabaseClient
-    .channel("rejects-live")
-    .on(
-        "postgres_changes",
-        {
-            event:"*",
-            schema:"public",
-            table:"rejects"
         },
-        async ()=>{
-            await loadRows();
-        }
-    )
-    .subscribe();
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-supabaseClient.auth
-    .getSession()
-    .then(
-        ({
-            data
-        })=>{
-
-            currentSession =
-                data.session;
-
-            updateAdminUI();
-
-        }
+        3500
     );
 
+}
 
-supabaseClient.auth
-    .onAuthStateChange(
-        (
-            event,
+
+/* ============================================================
+   ESCAPE HTML
+   ============================================================ */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ============================================================
+   START
+   ============================================================ */
+
+checkSession();
+
+
+/* ============================================================
+   AUTH STATE CHANGE
+   ============================================================ */
+
+supabaseClient.auth.onAuthStateChange(
+    async (event, session) => {
+
+        if (
+            event === "SIGNED_IN" &&
             session
-        )=>{
+        ) {
 
-            currentSession =
-                session;
+            currentUser =
+                session.user;
 
-            updateAdminUI();
+            await initialiseApp();
 
         }
-    );
 
-
-/* =========================================================
-   INITIALISE
-========================================================= */
-
-setupProcessDropdowns();
-
-populateRejectSelect(
-    "defect",
-    ""
+    }
 );
-
-populateRejectSelect(
-    "editDefect",
-    ""
-);
-
-loadRows();
-
-renderBatch();
 
 </script>
 
