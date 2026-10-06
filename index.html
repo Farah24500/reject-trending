@@ -11,10 +11,23 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
+:root{
+  --navy:#081426;
+  --navy2:#0d1f38;
+  --blue:#2563eb;
+  --blue2:#38bdf8;
+  --cyan:#06b6d4;
+  --purple:#7c3aed;
+  --green:#10b981;
+  --orange:#f59e0b;
+  --red:#ef4444;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#dbe4ef;
+  --white:#ffffff;
+  --bg:#eef4fb;
+  --shadow:0 15px 40px rgba(15,23,42,.10);
+}
 
 *{
   box-sizing:border-box;
@@ -26,2411 +39,1902 @@ html{
 
 body{
   margin:0;
-  font-family:
-    Inter,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-  color:#29233b;
-
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);
   background:
-    radial-gradient(
-      circle at 8% 8%,
-      rgba(255,64,145,.20),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 92% 5%,
-      rgba(124,58,237,.20),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(236,72,153,.10),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #fff7fb 0%,
-      #f7f4ff 48%,
-      #f8f9ff 100%
-    );
-
+    radial-gradient(circle at 10% 0%,rgba(37,99,235,.18),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(6,182,212,.14),transparent 28%),
+    linear-gradient(135deg,#edf4fc 0%,#f7faff 48%,#edf2fa 100%);
   min-height:100vh;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* ================= HEADER ================= */
 
 header{
-  position:relative;
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      120deg,
-      #ff2f88 0%,
-      #e93d9f 35%,
-      #a33fe5 68%,
-      #6048ee 100%
-    );
-
-  color:#fff;
-
-  padding:
-    34px
-    20px
-    42px;
-
-  text-align:center;
-
-  box-shadow:
-    0 18px 45px rgba(103,45,123,.25);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:linear-gradient(135deg,#071426,#0c2341 55%,#12345c);
+  color:white;
+  padding:18px 28px;
+  box-shadow:0 8px 30px rgba(3,15,35,.25);
 }
 
-header::before{
-  content:"";
-
-  position:absolute;
-
-  width:330px;
-  height:330px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.10);
-
-  top:-210px;
-  left:-80px;
-}
-
-header::after{
-  content:"";
-
-  position:absolute;
-
-  width:370px;
-  height:370px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.09);
-
-  right:-140px;
-  bottom:-260px;
-}
-
-.header-content{
-  position:relative;
-  z-index:2;
-}
-
-.logo-title{
+.header-inner{
+  max-width:1500px;
+  margin:auto;
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
   gap:14px;
 }
 
-.logo-mark{
-  width:58px;
-  height:58px;
-
+.brand-icon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  border-radius:18px;
-
-  background:
-    rgba(255,255,255,.18);
-
-  border:
-    1px solid
-    rgba(255,255,255,.30);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.14);
-
-  font-size:30px;
-
-  backdrop-filter:blur(12px);
+  font-size:24px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  box-shadow:0 8px 25px rgba(37,99,235,.35);
 }
 
-header h1{
+.brand h1{
   margin:0;
-
-  font-size:34px;
-
-  font-weight:950;
-
-  letter-spacing:2px;
-
-  text-shadow:
-    0 4px 15px rgba(0,0,0,.13);
+  font-size:23px;
+  letter-spacing:.5px;
 }
 
-.header-subtitle{
-  margin:10px 0 0;
-
-  opacity:.93;
-
-  font-size:14px;
-
-  letter-spacing:1px;
+.brand p{
+  margin:4px 0 0;
+  color:#b9c9dc;
+  font-size:12px;
 }
 
-/* =========================================================
-   ADMIN ICON
-========================================================= */
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-.admin-area{
-  position:absolute;
-
-  top:20px;
-  right:22px;
-
-  z-index:20;
+.admin-status{
+  font-size:12px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  color:#d9e7f7;
 }
 
 .admin-icon{
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  border:
-    1px solid
-    rgba(255,255,255,.35);
-
-  background:
-    rgba(255,255,255,.16);
-
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:12px;
   cursor:pointer;
-
-  font-size:21px;
-
-  transition:.25s;
-
-  backdrop-filter:blur(12px);
-}
-
-.admin-icon:hover{
-  transform:
-    translateY(-2px)
-    scale(1.06);
-
-  background:
-    rgba(255,255,255,.28);
-}
-
-.admin-icon.admin-active{
-  background:#22c55e;
-
-  border-color:#bbf7d0;
-
-  box-shadow:
-    0 0 0 5px
-    rgba(34,197,94,.15);
-}
-
-.admin-tooltip{
-  position:absolute;
-
-  top:57px;
-  right:0;
-
-  white-space:nowrap;
-
-  background:#21182e;
-
+  background:rgba(255,255,255,.1);
   color:white;
-
-  padding:
-    8px 12px;
-
-  border-radius:9px;
-
-  font-size:11px;
-
-  display:none;
-
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.2);
-}
-
-.admin-area:hover .admin-tooltip{
-  display:block;
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.container{
-  width:94%;
-
-  max-width:1480px;
-
-  margin:
-    30px auto
-    55px;
-}
-
-/* =========================================================
-   CARD
-========================================================= */
-
-.card{
-  background:
-    rgba(255,255,255,.92);
-
-  border:
-    1px solid
-    rgba(255,255,255,.95);
-
-  border-radius:24px;
-
-  padding:25px;
-
-  margin-bottom:22px;
-
-  box-shadow:
-    0 12px 38px
-    rgba(67,42,91,.075);
-
-  backdrop-filter:
-    blur(12px);
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
-}
-
-.card:hover{
-  box-shadow:
-    0 16px 45px
-    rgba(67,42,91,.10);
-}
-
-.card-header{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
-  margin-bottom:20px;
-}
-
-.card h2{
-  margin:0;
-
-  color:#71305d;
-
   font-size:20px;
-
-  font-weight:900;
-}
-
-.card-description{
-  color:#918b9b;
-
-  font-size:13px;
-
-  margin-top:6px;
-}
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(220px,1fr)
-    );
-
-  gap:16px;
-}
-
-label{
-  font-weight:800;
-
-  display:block;
-
-  margin-bottom:7px;
-
-  color:#51495e;
-
-  font-size:13px;
-}
-
-input,
-select,
-button{
-  width:100%;
-
-  padding:
-    12px 14px;
-
-  border-radius:13px;
-
-  border:
-    1px solid
-    #e3dce8;
-
-  font-size:14px;
-
-  font-family:inherit;
-}
-
-input,
-select{
-  background:#fff;
-
-  color:#302b3b;
-
   transition:.2s;
 }
 
-input:hover,
-select:hover{
-  border-color:#d7bfd0;
+.admin-icon:hover{
+  background:rgba(255,255,255,.18);
+  transform:translateY(-1px);
 }
 
-input:focus,
-select:focus{
-  outline:none;
+/* ================= LAYOUT ================= */
 
-  border-color:#ef3e91;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(239,62,145,.10);
+.container{
+  width:min(1500px,calc(100% - 32px));
+  margin:25px auto 60px;
 }
 
-button{
-  border:none;
-
-  cursor:pointer;
-
-  font-weight:850;
-
-  transition:
-    transform .18s,
-    box-shadow .18s,
-    opacity .18s;
+.section{
+  margin-bottom:22px;
 }
 
-button:hover{
-  transform:
-    translateY(-1px);
-
-  opacity:.96;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn-pink{
-  background:
-    linear-gradient(
-      135deg,
-      #ff2f8b,
-      #e93682
-    );
-
-  color:#fff;
-
-  box-shadow:
-    0 7px 18px
-    rgba(239,62,145,.20);
-}
-
-.btn-purple{
-  background:
-    linear-gradient(
-      135deg,
-      #9b5cff,
-      #6838dd
-    );
-
-  color:#fff;
-
-  box-shadow:
-    0 7px 18px
-    rgba(108,56,221,.18);
-}
-
-.btn-green{
-  background:
-    linear-gradient(
-      135deg,
-      #22c55e,
-      #149447
-    );
-
-  color:#fff;
-}
-
-.btn-blue{
-  background:
-    linear-gradient(
-      135deg,
-      #4285f4,
-      #2459df
-    );
-
-  color:#fff;
-}
-
-.btn-red{
-  background:
-    linear-gradient(
-      135deg,
-      #ff5252,
-      #dc2626
-    );
-
-  color:#fff;
-}
-
-.btn-gray{
-  background:
-    linear-gradient(
-      135deg,
-      #747985,
-      #525660
-    );
-
-  color:#fff;
-}
-
-/* =========================================================
-   SCAN
-========================================================= */
-
-.scan-row{
-  display:grid;
-
-  grid-template-columns:
-    1fr
-    155px;
-
-  gap:12px;
-}
-
-.scan-list{
-  margin-top:15px;
-
+.section-title{
   display:flex;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-}
-
-.sn-tag{
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffe1ef,
-      #fce9f5
-    );
-
-  color:#9d174d;
-
-  padding:
-    8px 12px;
-
-  border-radius:30px;
-
-  font-size:13px;
-
-  font-weight:800;
-
-  border:
-    1px solid
-    #ffd0e4;
-}
-
-.sn-tag button{
-  width:23px;
-  height:23px;
-
-  padding:0;
-
-  border-radius:50%;
-
-  background:#ffd0e2;
-
-  color:#dc2626;
-
-  font-size:15px;
-}
-
-.batch-info{
-  margin-top:12px;
-
-  color:#777;
-
-  font-size:13px;
-}
-
-.batch-number{
-  color:#d63384;
-
-  font-size:18px;
-
-  font-weight:950;
-}
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
-.actions{
-  display:flex;
-
-  gap:10px;
-
-  flex-wrap:wrap;
-
-  margin-top:18px;
-}
-
-.actions button{
-  width:auto;
-
-  min-width:150px;
-}
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.msg{
-  margin-top:14px;
-
-  font-weight:750;
-
-  min-height:20px;
-}
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-.stats{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(220px,1fr)
-    );
-
-  gap:16px;
-}
-
-.stat{
-  position:relative;
-
-  overflow:hidden;
-
-  padding:23px;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #fff4fa
-    );
-
-  border:
-    1px solid
-    #f0dfeb;
-
-  box-shadow:
-    0 7px 22px
-    rgba(84,48,80,.04);
-}
-
-.stat:nth-child(2){
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #f4f1ff
-    );
-}
-
-.stat:nth-child(3){
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #fff4ef
-    );
-}
-
-.stat::after{
-  content:"";
-
-  position:absolute;
-
-  width:110px;
-  height:110px;
-
-  border-radius:50%;
-
-  right:-35px;
-  top:-35px;
-
-  background:
-    rgba(255,79,154,.08);
-}
-
-.stat-icon{
-  font-size:25px;
-
-  margin-bottom:10px;
-}
-
-.stat-title{
-  font-size:11px;
-
-  color:#8b8795;
-
-  font-weight:900;
-
-  letter-spacing:.8px;
-
-  text-transform:uppercase;
-}
-
-.stat-value{
-  font-size:27px;
-
-  font-weight:950;
-
-  margin-top:8px;
-
-  color:#7c315f;
-
-  position:relative;
-
-  z-index:1;
-
-  word-break:break-word;
-}
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-.summary{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:9px;
-
-  margin-top:18px;
-}
-
-.badge{
-  padding:
-    9px 13px;
-
-  border-radius:30px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f3e8ff,
-      #fce7f3
-    );
-
-  color:#6b21a8;
-
-  font-size:12px;
-
-  font-weight:800;
-
-  border:
-    1px solid
-    #ead9f8;
-}
-
-/* =========================================================
-   IMPORT
-========================================================= */
-
-.import-box{
-  border:
-    2px dashed
-    #e9a5c8;
-
-  border-radius:20px;
-
-  padding:24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff6fb,
-      #f8f5ff
-    );
-
-  text-align:center;
-}
-
-.import-box p{
-  margin-top:0;
-
-  color:#777;
-
-  line-height:1.7;
-}
-
-.file-input{
-  margin:12px auto;
-
-  max-width:500px;
-}
-
-/* =========================================================
-   CHART
-========================================================= */
-
-.chart-container{
-  position:relative;
-
-  width:100%;
-
-  height:440px;
-}
-
-.chart-info{
-  display:flex;
-
   justify-content:space-between;
-
-  flex-wrap:wrap;
-
-  gap:10px;
-
-  margin-bottom:15px;
-}
-
-.chart-hint{
-  font-size:12px;
-
-  color:#746b7d;
-
-  background:
-    linear-gradient(
-      135deg,
-      #faf5fb,
-      #f5f2ff
-    );
-
-  padding:
-    8px 13px;
-
-  border-radius:20px;
-
-  border:
-    1px solid
-    #eee4f1;
-}
-
-/* =========================================================
-   DAILY TOP
-========================================================= */
-
-.daily-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(240px,1fr)
-    );
-
-  gap:12px;
-}
-
-.daily-item{
-  padding:17px;
-
-  border-radius:17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff6fb,
-      #faf6ff
-    );
-
-  border:
-    1px solid
-    #f0e1ed;
-}
-
-.daily-date{
-  color:#8b3d70;
-
-  font-weight:950;
-
-  margin-bottom:7px;
-}
-
-.daily-defect{
-  font-weight:800;
-
-  color:#41394a;
-
-  line-height:1.4;
-}
-
-.daily-qty{
-  display:inline-block;
-
-  margin-top:8px;
-
-  padding:
-    5px 10px;
-
-  border-radius:20px;
-
-  background:#f3e8ff;
-
-  color:#6b21a8;
-
-  font-size:12px;
-
-  font-weight:850;
-}
-
-/* =========================================================
-   RECORD FILTER
-========================================================= */
-
-.record-filter{
-  padding:18px;
-
-  border-radius:18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff8fb,
-      #f8f5ff
-    );
-
-  border:
-    1px solid
-    #eee2ee;
-
-  margin-bottom:18px;
-}
-
-.record-filter-grid{
-  display:grid;
-
-  grid-template-columns:
-    1.6fr
-    1fr
-    1fr
-    1fr;
-
-  gap:12px;
-}
-
-.search-box{
-  position:relative;
-}
-
-.search-box input{
-  padding-left:42px;
-}
-
-.search-icon{
-  position:absolute;
-
-  left:14px;
-
-  top:50%;
-
-  transform:
-    translateY(-50%);
-
-  font-size:17px;
-
-  pointer-events:none;
-
-  opacity:.65;
-}
-
-.record-count{
-  display:flex;
-
   align-items:center;
+  gap:15px;
+  margin-bottom:12px;
+}
 
-  gap:8px;
+.section-title h2{
+  margin:0;
+  font-size:19px;
+  color:#0f1f35;
+}
 
-  margin-top:15px;
+.section-title p{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
 
-  color:#777;
+.card{
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(203,213,225,.75);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:20px;
+  backdrop-filter:blur(10px);
+}
 
-  font-size:13px;
-
+.admin-badge,
+.public-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
   font-weight:700;
 }
 
-.record-count strong{
-  color:#7a315c;
+.public-badge{
+  color:#0369a1;
+  background:#e0f2fe;
 }
 
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-wrap{
-  overflow:auto;
-
-  border-radius:16px;
-
-  border:
-    1px solid
-    #eee8ef;
+.admin-badge{
+  color:#6d28d9;
+  background:#ede9fe;
 }
 
-table{
-  width:100%;
+/* ================= ADMIN AREA ================= */
 
-  border-collapse:collapse;
-
-  min-width:1150px;
-}
-
-th,
-td{
-  padding:13px;
-
-  border-bottom:
-    1px solid
-    #eee;
-
-  text-align:left;
-
-  font-size:13px;
-}
-
-th{
-  background:
-    linear-gradient(
-      135deg,
-      #ffeaf4,
-      #f0eaff
-    );
-
-  color:#71305d;
-
-  font-weight:950;
-
-  position:sticky;
-
-  top:0;
-
-  z-index:2;
-}
-
-tr:hover{
-  background:#fff8fc;
-}
-
-tr:last-child td{
-  border-bottom:none;
-}
-
-.action-cell{
-  white-space:nowrap;
-
-  text-align:center;
-}
-
-.action-btn{
-  width:auto !important;
-
-  min-width:75px !important;
-
-  padding:
-    8px 11px !important;
-
-  margin-right:5px;
-
-  color:#fff;
-
-  border-radius:9px;
-
-  font-size:12px;
-}
-
-.edit-btn{
-  background:#3b82f6;
-}
-
-.delete-btn{
-  background:#ef4444;
-}
-
-.highlight{
-  background:
-    #fff1f7 !important;
-}
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-.admin-only{
-  display:none;
-}
-
-/* Admin workspace sections are hidden from public viewers. */
 .admin-only-section{
   display:none;
 }
 
-/* Public view is intentionally limited to analytics filter + chart. */
-.public-dashboard-section{
-  display:block;
+.admin-workspace{
+  border:1px solid rgba(124,58,237,.18);
+  background:linear-gradient(135deg,#ffffff,#faf8ff);
 }
 
-.admin-only-button{
-  display:none;
-}
-
-
-#adminModal{
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  background:
-    rgba(20,12,30,.58);
-
-  z-index:9999;
-
+.admin-workspace-title{
+  display:flex;
   align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  backdrop-filter:
-    blur(7px);
+  justify-content:space-between;
+  gap:15px;
 }
 
-.modal-box{
-  background:#fff;
+.admin-workspace-title h2{
+  margin:0;
+  color:#4c1d95;
+}
 
+/* ================= FORMS ================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group label{
+  font-size:12px;
+  font-weight:700;
+  color:#475569;
+}
+
+input,
+select{
   width:100%;
-
-  max-width:420px;
-
-  border-radius:24px;
-
-  padding:28px;
-
-  box-shadow:
-    0 25px 80px
-    rgba(0,0,0,.28);
+  border:1px solid #cbd5e1;
+  border-radius:11px;
+  padding:11px 12px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+  color:#172033;
+  transition:.2s;
 }
 
-.modal-icon{
-  width:60px;
-  height:60px;
+input:focus,
+select:focus{
+  border-color:#38bdf8;
+  box-shadow:0 0 0 4px rgba(56,189,248,.12);
+}
 
-  border-radius:19px;
+.full{
+  grid-column:1/-1;
+}
 
-  background:
-    linear-gradient(
-      135deg,
-      #f3e8ff,
-      #ffe4f1
-    );
-
+.button-row{
   display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:28px;
-
-  margin-bottom:15px;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px;
 }
 
-.modal-box h3{
-  color:#73355f;
-
-  margin:
-    0 0 7px;
-
-  font-size:21px;
+button{
+  font-family:inherit;
 }
 
-.modal-subtitle{
-  color:#888;
-
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 15px;
+  cursor:pointer;
+  font-weight:700;
   font-size:13px;
-
-  margin-bottom:20px;
+  transition:.2s;
 }
 
-.modal-actions{
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  color:white;
+  background:linear-gradient(135deg,#2563eb,#0891b2);
+  box-shadow:0 7px 18px rgba(37,99,235,.22);
+}
+
+.btn-secondary{
+  color:#334155;
+  background:#e8eef6;
+}
+
+.btn-purple{
+  color:white;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+}
+
+.btn-green{
+  color:white;
+  background:linear-gradient(135deg,#059669,#10b981);
+}
+
+.btn-danger{
+  color:white;
+  background:linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.btn-orange{
+  color:white;
+  background:linear-gradient(135deg,#d97706,#f59e0b);
+}
+
+/* ================= STATS ================= */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.stat-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  padding:20px;
+  color:white;
+  min-height:125px;
+  box-shadow:0 12px 28px rgba(15,23,42,.13);
+}
+
+.stat-card::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  right:-35px;
+  top:-45px;
+  background:rgba(255,255,255,.1);
+}
+
+.stat-blue{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb,#0891b2);
+}
+
+.stat-green{
+  background:linear-gradient(135deg,#047857,#10b981);
+}
+
+.stat-purple{
+  background:linear-gradient(135deg,#6d28d9,#7c3aed,#8b5cf6);
+}
+
+.stat-label{
+  font-size:12px;
+  opacity:.85;
+}
+
+.stat-value{
+  margin-top:10px;
+  font-size:31px;
+  font-weight:800;
+}
+
+.stat-sub{
+  margin-top:5px;
+  font-size:12px;
+  opacity:.8;
+}
+
+/* ================= SUMMARY ================= */
+
+.summary-badges{
   display:flex;
-
-  gap:10px;
-
-  margin-top:18px;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
-.modal-actions button{
+.summary-badge{
+  padding:8px 11px;
+  border-radius:10px;
+  background:#eff6ff;
+  color:#1e40af;
+  border:1px solid #dbeafe;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ================= FILTER ================= */
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:12px;
+}
+
+.filter-actions{
+  display:flex;
+  align-items:end;
+  gap:8px;
+}
+
+/* ================= CHART ================= */
+
+.chart-wrapper{
+  height:430px;
+  position:relative;
+}
+
+.chart-info{
+  margin-top:10px;
+  color:#64748b;
+  font-size:12px;
+}
+
+/* ================= DAILY TOP ================= */
+
+.daily-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+
+.daily-card{
+  border:1px solid #dbe4ef;
+  border-radius:15px;
+  padding:15px;
+  background:linear-gradient(145deg,#fff,#f7fbff);
+}
+
+.daily-date{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.daily-defect{
+  font-weight:800;
+  color:#0f172a;
+  font-size:15px;
+}
+
+.daily-qty{
+  margin-top:6px;
+  font-size:13px;
+  color:#2563eb;
+  font-weight:700;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrapper{
+  overflow:auto;
+  border:1px solid #dbe4ef;
+  border-radius:13px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
+}
+
+th{
+  background:#0d1f38;
+  color:white;
+  padding:12px;
+  text-align:left;
+  font-size:12px;
+  position:sticky;
+  top:0;
+}
+
+td{
+  padding:11px 12px;
+  border-bottom:1px solid #e5eaf1;
+  font-size:12px;
+  color:#334155;
+}
+
+tr:hover td{
+  background:#f8fbff;
+}
+
+.action-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.small-btn{
+  border:0;
+  padding:6px 9px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:700;
+}
+
+.edit-btn{
+  color:#1d4ed8;
+  background:#dbeafe;
+}
+
+.delete-btn{
+  color:#b91c1c;
+  background:#fee2e2;
+}
+
+/* ================= IMPORT ================= */
+
+.import-box{
+  border:2px dashed #cbd5e1;
+  padding:20px;
+  border-radius:15px;
+  background:#f8fafc;
+}
+
+/* ================= LOGIN MODAL ================= */
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(2,10,24,.72);
+  backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.login-box{
+  width:min(430px,100%);
+  background:white;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 30px 80px rgba(0,0,0,.3);
+}
+
+.login-icon{
+  width:56px;
+  height:56px;
+  margin:0 auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:17px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  color:white;
+  font-size:25px;
+}
+
+.login-box h2{
+  text-align:center;
+  margin:0;
+}
+
+.login-box p{
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  margin:7px 0 20px;
+}
+
+.login-actions{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.login-actions .btn{
   flex:1;
 }
 
-.admin-error{
+.login-error{
   color:#dc2626;
-
-  font-weight:700;
-
-  min-height:20px;
-
+  background:#fef2f2;
+  border:1px solid #fecaca;
+  padding:9px;
+  border-radius:9px;
+  font-size:12px;
   margin-top:10px;
+  display:none;
+}
 
+/* ================= GRAPH DETAIL MODAL ================= */
+
+.chart-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1200;
+  background:rgba(2,10,24,.76);
+  backdrop-filter:blur(9px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.chart-modal.show{
+  display:flex;
+}
+
+.chart-modal-box{
+  width:min(850px,100%);
+  max-height:90vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 35px 100px rgba(0,0,0,.35);
+  animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:translateY(15px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.chart-modal-header{
+  padding:20px 22px;
+  color:white;
+  background:linear-gradient(135deg,#0b1d36,#123d70,#0891b2);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.chart-modal-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.chart-modal-icon{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.14);
+  font-size:20px;
+}
+
+.chart-modal-header h3{
+  margin:0;
+  font-size:18px;
+}
+
+.chart-modal-header p{
+  margin:4px 0 0;
+  font-size:12px;
+  color:#cce6f4;
+}
+
+.modal-close{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
+  background:rgba(255,255,255,.13);
+  color:white;
+  font-size:20px;
+}
+
+.chart-modal-body{
+  padding:20px;
+  overflow:auto;
+}
+
+.modal-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.modal-stat{
+  border:1px solid #dbe4ef;
+  background:#f8fbff;
+  border-radius:13px;
+  padding:13px;
+}
+
+.modal-stat span{
+  display:block;
+  color:#64748b;
+  font-size:11px;
+}
+
+.modal-stat strong{
+  display:block;
+  margin-top:4px;
+  color:#0f172a;
+  font-size:17px;
+}
+
+.modal-records{
+  border:1px solid #dbe4ef;
+  border-radius:13px;
+  overflow:auto;
+  max-height:390px;
+}
+
+.modal-records table{
+  min-width:720px;
+}
+
+.modal-records th{
+  position:sticky;
+  top:0;
+}
+
+.modal-empty{
+  padding:30px;
+  text-align:center;
+  color:#64748b;
+}
+
+.chart-modal-footer{
+  padding:15px 20px;
+  border-top:1px solid #e5eaf1;
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:2000;
+  min-width:260px;
+  max-width:420px;
+  padding:13px 15px;
+  color:white;
+  background:#0f172a;
+  border-radius:12px;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.25s;
   font-size:13px;
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
 
-.footer{
+.toast.success{
+  background:#047857;
+}
+
+.toast.error{
+  background:#b91c1c;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
   text-align:center;
-
-  color:#aaa;
-
-  font-size:12px;
-
-  margin-top:30px;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:900px){
-
-  .record-filter-grid{
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-}
-
-@media(max-width:700px){
-
-  header{
-    padding:
-      27px
-      15px
-      32px;
-  }
-
-  header h1{
-    font-size:22px;
-  }
-
-  .logo-mark{
-    width:45px;
-    height:45px;
-
-    font-size:22px;
-  }
-
-  .admin-area{
-    top:12px;
-    right:12px;
-  }
-
-  .admin-icon{
-    width:40px;
-    height:40px;
-  }
-
-  .container{
-    width:94%;
-  }
-
-  .card{
-    padding:18px;
-
-    border-radius:19px;
-  }
-
-  .scan-row{
-    grid-template-columns:1fr;
-  }
-
-  .actions button{
-    width:100%;
-  }
-
-  .chart-container{
-    height:350px;
-  }
-
-  .record-filter-grid{
-    grid-template-columns:1fr;
-  }
-
-  .record-filter .actions{
-    display:grid;
-
-    grid-template-columns:1fr;
-  }
-
-}
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-  color:#8b8795;
-
-  text-align:center;
-
-  padding:25px;
-}
-
-.empty-state{
-  color:#999;
-
-  text-align:center;
-
+  color:#64748b;
   padding:30px;
 }
 
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+  .form-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .filter-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  header{
+    padding:14px 16px;
+  }
+
+  .container{
+    width:min(100% - 20px,1500px);
+    margin-top:15px;
+  }
+
+  .brand p{
+    display:none;
+  }
+
+  .brand h1{
+    font-size:18px;
+  }
+
+  .admin-status{
+    display:none;
+  }
+
+  .form-grid,
+  .filter-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .chart-wrapper{
+    height:330px;
+  }
+
+  .modal-summary{
+    grid-template-columns:1fr;
+  }
+
+  .chart-modal-box{
+    max-height:94vh;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
+  <div class="header-inner">
 
-<div class="admin-area">
+    <div class="brand">
+      <div class="brand-icon">📊</div>
 
-<button
-  type="button"
-  id="adminIcon"
-  class="admin-icon"
-  aria-label="Admin Login">
-  👤
-</button>
+      <div>
+        <h1>REJECT TRENDING</h1>
+        <p>Reject Monitoring • Quality Analytics • Daily Performance</p>
+      </div>
+    </div>
 
-<div
-  id="adminTooltip"
-  class="admin-tooltip">
-  Admin Login
-</div>
+    <div class="header-actions">
 
-</div>
+      <div id="adminStatus" class="admin-status">
+        PUBLIC VIEW • READ ONLY
+      </div>
 
-<div class="header-content">
+      <button
+        id="adminButton"
+        class="admin-icon"
+        title="Admin Login"
+      >
+        ⚙️
+      </button>
 
-<div class="logo-title">
-
-<div class="logo-mark">
-  📊
-</div>
-
-<h1>REJECT TRENDING</h1>
-
-</div>
-
-<p class="header-subtitle">
-Reject Monitoring • Quality Analytics • Daily Performance
-</p>
-
-</div>
-
+    </div>
+  </div>
 </header>
 
 
-<div class="container">
+<main class="container">
 
+<!-- ================= ADMIN WORKSPACE ================= -->
 
-<div id="adminWorkspaceTitle" class="admin-only-section" style="margin-bottom:14px">
-  <div class="card" style="margin-bottom:0;padding:18px 22px">
-    <h2 style="margin:0;color:#71305d">⚙️ Admin Workspace</h2>
-    <div class="card-description">Scan new rejects, import existing data, and manage records.</div>
+<section
+  id="adminWorkspaceTitle"
+  class="section admin-only-section"
+>
+
+  <div class="card admin-workspace">
+
+    <div class="admin-workspace-title">
+
+      <div>
+        <span class="admin-badge">🔐 ADMIN MODE</span>
+        <h2>Admin Workspace</h2>
+        <p>
+          Scan reject, import historical data and manage records.
+        </p>
+      </div>
+
+      <button
+        id="logoutButton"
+        class="btn btn-danger"
+      >
+        LOGOUT
+      </button>
+
+    </div>
+
   </div>
-</div>
 
-<!-- =====================================================
-     SCAN
-===================================================== -->
+</section>
 
-<div class="card admin-only-section" id="scanSection">
 
-<div class="card-header">
+<!-- ================= SCAN ================= -->
 
-<div>
+<section
+  id="scanSection"
+  class="section admin-only-section"
+>
 
-<h2>🔎 Scan Reject</h2>
+  <div class="section-title">
+    <div>
+      <h2>📷 Scan Reject</h2>
+      <p>Add new reject records into the system.</p>
+    </div>
+  </div>
 
-<div class="card-description">
-Scan Component SN and submit reject information
-</div>
+  <div class="card">
 
-</div>
+    <div class="form-grid">
 
-</div>
+      <div class="form-group">
+        <label>Component Serial Number</label>
 
-<div class="scan-row">
+        <input
+          id="sn"
+          type="text"
+          placeholder="Scan barcode here"
+          autocomplete="off"
+          autofocus
+        >
+      </div>
 
-<div>
+      <div class="form-group">
+        <label>Component PN</label>
 
-<label>Component SN</label>
+        <select id="pn">
+          <option value="">Select Part Number</option>
+          <option value="1670826">1670826</option>
+          <option value="1649167">1649167</option>
+        </select>
+      </div>
 
-<input
-id="sn"
-type="text"
-placeholder="Scan / enter Component SN"
-autocomplete="off"
-autocorrect="off"
-autocapitalize="off"
-spellcheck="false">
+      <div class="form-group">
+        <label>Reject</label>
 
-</div>
+        <select id="defect">
+          <option value="">Select Reject</option>
+          <option>P2 SHELL ABRASIVE</option>
+          <option>P2 SHELL BENT</option>
+          <option>P2 SHELL DENTED</option>
+          <option>P2 SHELL CONTAM</option>
+          <option>P2 SHELL DAMAGED</option>
+          <option>P2 SHELL BLISTER</option>
+          <option>P2 SHELL EXPOSED COPPER</option>
+          <option>P2 SHELL LINEAR SCRATCHED</option>
+          <option>P2 SHELL PEEL OFF</option>
+          <option>P2 SHELL SCRATCHED</option>
+          <option>P2 SHELL DISCOLORATION</option>
+          <option>P2 MPO CONNECTOR DAMAGE</option>
+        </select>
+      </div>
 
-<div style="align-self:end">
+      <div class="form-group">
+        <label>Defect Class</label>
 
-<button
-type="button"
-class="btn-pink"
-id="addSNButton">
-＋ ADD SN
-</button>
+        <select id="defectClass">
+          <option value="">Select Defect Class</option>
+          <option>Cosmetic</option>
+          <option>Eeprom</option>
+          <option>Eefail</option>
+        </select>
+      </div>
 
-</div>
+      <div class="form-group">
+        <label>Badge ID</label>
 
-</div>
+        <input
+          id="operator"
+          type="text"
+          placeholder="Enter badge ID"
+        >
+      </div>
 
-<div class="batch-info">
+    </div>
 
-Current Batch:
-<span
-id="scanCount"
-class="batch-number">
-0
-</span>
-SN
+    <div class="button-row">
 
-</div>
+      <button
+        id="addSNButton"
+        class="btn btn-secondary"
+      >
+        ＋ ADD SN
+      </button>
+
+      <button
+        id="submitRejectButton"
+        class="btn btn-primary"
+      >
+        SUBMIT ALL REJECT
+      </button>
+
+      <button
+        id="clearBatchButton"
+        class="btn btn-secondary"
+      >
+        CLEAR
+      </button>
+
+    </div>
+
+    <div style="margin-top:12px;color:#64748b;font-size:12px;">
+      Scanned in current batch:
+      <strong id="scanCount">0</strong>
+    </div>
+
+    <div
+      id="batchList"
+      style="margin-top:12px;"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= IMPORT ================= -->
+
+<section
+  id="importSection"
+  class="section admin-only-section"
+>
+
+  <div class="section-title">
+    <div>
+      <h2>📥 Import Existing Data</h2>
+      <p>Import historical reject records from Excel.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="import-box">
+
+      <input
+        id="excelFile"
+        type="file"
+        accept=".xlsx,.xls,.csv"
+      >
+
+      <div class="button-row">
+
+        <button
+          id="importButton"
+          class="btn btn-purple"
+        >
+          IMPORT EXCEL
+        </button>
+
+      </div>
+
+      <p style="font-size:12px;color:#64748b;margin-bottom:0;">
+        Required columns:
+        Component SN, Component PN, Reject,
+        Defect Class, Badge ID, Date Time
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= QUALITY DASHBOARD ================= -->
+
+<section
+  id="dashboardStatsSection"
+  class="section public-dashboard-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <span class="public-badge">👀 PUBLIC VIEW • READ ONLY</span>
+      <h2 style="margin-top:8px;">Quality Dashboard</h2>
+      <p>Live reject performance overview.</p>
+    </div>
+
+  </div>
+
+  <div class="stats-grid">
+
+    <div class="stat-card stat-blue">
+
+      <div class="stat-label">
+        TOTAL REJECT
+      </div>
+
+      <div
+        id="totalReject"
+        class="stat-value"
+      >
+        0
+      </div>
+
+      <div class="stat-sub">
+        All records
+      </div>
+
+    </div>
+
+
+    <div class="stat-card stat-green">
+
+      <div class="stat-label">
+        REJECT TODAY
+      </div>
+
+      <div
+        id="rejectToday"
+        class="stat-value"
+      >
+        0
+      </div>
+
+      <div class="stat-sub">
+        Current day
+      </div>
+
+    </div>
+
+
+    <div class="stat-card stat-purple">
+
+      <div class="stat-label">
+        TOP REJECT
+      </div>
+
+      <div
+        id="topReject"
+        class="stat-value"
+        style="font-size:21px;"
+      >
+        -
+      </div>
+
+      <div
+        id="topRejectQty"
+        class="stat-sub"
+      >
+        0 reject
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:15px;">
+
+    <div class="section-title">
+      <div>
+        <h2 style="font-size:15px;">Reject Summary</h2>
+      </div>
+    </div>
+
+    <div
+      id="summaryBadges"
+      class="summary-badges"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ANALYTICS FILTER ================= -->
+
+<section
+  id="analyticsSection"
+  class="section public-dashboard-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <h2>🔎 Analytics Filter</h2>
+      <p>
+        Filter the dashboard by reject, component and date.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="filter-grid">
+
+      <div class="form-group">
+        <label>Reject</label>
+
+        <select id="analyticsDefect">
+          <option value="">All Reject</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Component PN</label>
+
+        <select id="analyticsPN">
+          <option value="">All PN</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>From Date</label>
+
+        <input
+          id="analyticsFrom"
+          type="date"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>To Date</label>
+
+        <input
+          id="analyticsTo"
+          type="date"
+        >
+      </div>
+
+    </div>
+
+    <div class="button-row">
+
+      <button
+        id="applyAnalytics"
+        class="btn btn-primary"
+      >
+        APPLY FILTER
+      </button>
+
+      <button
+        id="clearAnalytics"
+        class="btn btn-secondary"
+      >
+        CLEAR FILTER
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= GRAPH ================= -->
+
+<section
+  id="chartSection"
+  class="section public-dashboard-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <h2>📊 Reject Quantity by Name</h2>
+      <p>
+        Click any bar to view detailed reject records.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="chart-wrapper">
+      <canvas id="rejectChart"></canvas>
+    </div>
+
+    <div class="chart-info">
+      💡 Tip: Click a reject bar to open the detailed popup.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= DAILY TOP ================= -->
+
+<section
+  id="dailyTopSection"
+  class="section public-dashboard-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <h2>🏆 Daily Top Reject</h2>
+      <p>Highest reject for each day.</p>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div
+      id="dailyTopGrid"
+      class="daily-grid"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= RECORDS ================= -->
+
+<section
+  id="recordsSection"
+  class="section public-dashboard-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <h2>📋 Reject Records</h2>
+      <p>
+        View and filter recorded reject data.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="filter-grid">
+
+      <div class="form-group">
+        <label>Search Component SN</label>
+
+        <input
+          id="recordSearch"
+          type="text"
+          placeholder="Search SN..."
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Reject</label>
+
+        <select id="recordDefect">
+          <option value="">All Reject</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>From Date</label>
+
+        <input
+          id="recordFrom"
+          type="date"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>To Date</label>
+
+        <input
+          id="recordTo"
+          type="date"
+        >
+      </div>
+
+    </div>
+
+    <div class="button-row">
+
+      <button
+        id="clearRecordFilters"
+        class="btn btn-secondary"
+      >
+        CLEAR SEARCH
+      </button>
+
+      <button
+        id="copyVisibleRecords"
+        class="btn btn-secondary admin-only-section"
+      >
+        COPY VISIBLE RECORDS
+      </button>
+
+    </div>
+
+    <div
+      id="recordsCount"
+      style="font-size:12px;color:#64748b;margin:15px 0 10px;"
+    >
+      0 records
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Component SN</th>
+            <th>Component PN</th>
+            <th>Reject</th>
+            <th>Defect Class</th>
+            <th>Badge ID</th>
+            <th>Date Time</th>
+            <th id="adminActionHeader" style="display:none;">
+              Admin Action
+            </th>
+          </tr>
+        </thead>
+
+        <tbody id="recordsBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= DATA MANAGEMENT ================= -->
+
+<section
+  id="dataManagement"
+  class="section admin-only-section"
+>
+
+  <div class="section-title">
+
+    <div>
+      <h2>🛠️ Data Management</h2>
+      <p>Admin-only database controls.</p>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="button-row">
+
+      <button
+        id="exportExcel"
+        class="btn btn-green"
+      >
+        EXPORT EXCEL
+      </button>
+
+      <button
+        id="clearAllData"
+        class="btn btn-danger"
+      >
+        CLEAR ALL DATA
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= ADMIN LOGIN MODAL ================= -->
 
 <div
-id="scanList"
-class="scan-list">
-</div>
+  id="loginModal"
+  class="modal-overlay"
+>
 
-<br>
+  <div class="login-box">
 
-<div class="grid">
+    <div class="login-icon">
+      🔐
+    </div>
 
-<div>
+    <h2>Admin Login</h2>
 
-<label>Component PN</label>
+    <p>
+      Admin access is required to scan and manage reject data.
+    </p>
 
-<select id="pn">
+    <div class="form-group">
 
-<option value="">
--- Select PN --
-</option>
+      <label>Email</label>
 
-<option value="1670826">
-1670826
-</option>
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Admin email"
+      >
 
-<option value="1649167">
-1649167
-</option>
+    </div>
 
-</select>
+    <div
+      class="form-group"
+      style="margin-top:12px;"
+    >
 
-</div>
+      <label>Password</label>
 
-<div>
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+      >
 
-<label>Reject / Defect</label>
+    </div>
 
-<select id="defect">
+    <div
+      id="loginError"
+      class="login-error"
+    ></div>
 
-<option value="">
--- Select Reject --
-</option>
+    <div class="login-actions">
 
-<option>P2 SHELL ABRASIVE</option>
-<option>P2 SHELL BENT</option>
-<option>P2 SHELL DENTED</option>
-<option>P2 SHELL CONTAM</option>
-<option>P2 SHELL DAMAGED</option>
-<option>P2 SHELL BLISTER</option>
-<option>P2 SHELL EXPOSED COPPER</option>
-<option>P2 SHELL LINEAR SCRATCHED</option>
-<option>P2 SHELL PEEL OFF</option>
-<option>P2 SHELL SCRATCHED</option>
-<option>P2 SHELL DISCOLORATION</option>
-<option>P2 MPO CONNECTOR DAMAGE</option>
+      <button
+        id="cancelLogin"
+        class="btn btn-secondary"
+      >
+        CANCEL
+      </button>
 
-</select>
+      <button
+        id="loginButton"
+        class="btn btn-primary"
+      >
+        LOGIN
+      </button>
 
-</div>
+    </div>
 
-<div>
-
-<label>Defect Class</label>
-
-<select id="defectClass">
-
-<option value="">
--- Select Class --
-</option>
-
-<option value="Cosmetic">
-Cosmetic
-</option>
-
-<option value="Eeprom">
-Eeprom
-</option>
-
-<option value="Eefail">
-Eefail
-</option>
-
-</select>
+  </div>
 
 </div>
 
-<div>
 
-<label>Badge ID</label>
-
-<input
-id="operator"
-type="text"
-placeholder="Enter Badge ID"
-autocomplete="off"
-autocorrect="off"
-autocapitalize="off"
-spellcheck="false"
-name="badge_id">
-
-</div>
-
-</div>
-
-<div class="actions">
-
-<button
-type="button"
-class="btn-green"
-id="saveButton">
-✓ SUBMIT ALL REJECT
-</button>
-
-<button
-type="button"
-class="btn-gray"
-id="clearButton">
-CLEAR
-</button>
-
-</div>
+<!-- ================= GRAPH DETAIL MODAL ================= -->
 
 <div
-id="msg"
-class="msg"
-aria-live="polite">
-</div>
+  id="chartModal"
+  class="chart-modal"
+>
+
+  <div class="chart-modal-box">
+
+    <div class="chart-modal-header">
+
+      <div class="chart-modal-title">
+
+        <div class="chart-modal-icon">
+          📊
+        </div>
+
+        <div>
+          <h3 id="chartModalTitle">
+            Reject Details
+          </h3>
+
+          <p id="chartModalSubtitle">
+            Detailed records
+          </p>
+        </div>
+
+      </div>
+
+      <button
+        id="closeChartModal"
+        class="modal-close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="chart-modal-body">
+
+      <div class="modal-summary">
+
+        <div class="modal-stat">
+          <span>Reject</span>
+          <strong id="modalRejectName">-</strong>
+        </div>
+
+        <div class="modal-stat">
+          <span>Total Quantity</span>
+          <strong id="modalRejectQty">0</strong>
+        </div>
+
+        <div class="modal-stat">
+          <span>Records Shown</span>
+          <strong id="modalRecordCount">0</strong>
+        </div>
+
+      </div>
+
+      <div
+        id="modalRecords"
+        class="modal-records"
+      ></div>
+
+    </div>
+
+
+    <div class="chart-modal-footer">
+
+      <button
+        id="closeChartModalBottom"
+        class="btn btn-secondary"
+      >
+        CLOSE
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<!-- =====================================================
-     IMPORT
-===================================================== -->
-
-<div class="card admin-only-section" id="importSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>📥 Import Existing Data</h2>
-
-<div class="card-description">
-Import previous reject records from Excel or CSV
-</div>
-
-</div>
-
-</div>
-
-<div class="import-box">
-
-<p>
-Required columns:
-<br>
-
-<b>
-Component SN • Component PN • Reject • Defect Class • Badge ID / Operator • Date Time
-</b>
-
-</p>
-
-<input
-class="file-input"
-id="excelFile"
-type="file"
-accept=".xlsx,.xls,.csv">
-
-<div class="actions"
-style="justify-content:center">
-
-<button
-type="button"
-class="btn-blue"
-id="importButton">
-IMPORT EXCEL / CSV
-</button>
-
-</div>
-
-<div
-id="importMsg"
-class="msg"
-aria-live="polite">
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
-
-<div class="card admin-only-section" id="dashboardStatsSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>📊 Quality Dashboard</h2>
-
-<div class="card-description">
-Live overview of reject performance
-</div>
-
-</div>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-
-<div class="stat-icon">
-📦
-</div>
-
-<div class="stat-title">
-Total Reject
-</div>
+<!-- ================= TOAST ================= -->
 
 <div
-class="stat-value"
-id="total">
-0
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-icon">
-📅
-</div>
-
-<div class="stat-title">
-Reject Today
-</div>
-
-<div
-class="stat-value"
-id="qtyToday">
-0
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-icon">
-⚠️
-</div>
-
-<div class="stat-title">
-Top Reject
-</div>
-
-<div
-class="stat-value"
-id="topDefect">
--
-</div>
-
-</div>
-
-</div>
-
-<div
-id="summary"
-class="summary">
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     ANALYTICS FILTER
-===================================================== -->
-
-<div class="card public-dashboard-section" id="analyticsSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>🎯 Analytics Filter</h2>
-
-<div class="card-description">
-Filter chart and daily reject analytics
-</div>
-
-</div>
-
-</div>
-
-<div class="grid">
-
-<div>
-
-<label>From Date</label>
-
-<input
-type="date"
-id="fromDate">
-
-</div>
-
-<div>
-
-<label>To Date</label>
-
-<input
-type="date"
-id="toDate">
-
-</div>
-
-<div>
-
-<label>Reject Filter</label>
-
-<select id="filterDefect">
-
-<option value="">
-All Rejects
-</option>
-
-<option>P2 SHELL ABRASIVE</option>
-<option>P2 SHELL BENT</option>
-<option>P2 SHELL DENTED</option>
-<option>P2 SHELL CONTAM</option>
-<option>P2 SHELL DAMAGED</option>
-<option>P2 SHELL BLISTER</option>
-<option>P2 SHELL EXPOSED COPPER</option>
-<option>P2 SHELL LINEAR SCRATCHED</option>
-<option>P2 SHELL PEEL OFF</option>
-<option>P2 SHELL SCRATCHED</option>
-<option>P2 SHELL DISCOLORATION</option>
-<option>P2 MPO CONNECTOR DAMAGE</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="actions">
-
-<button
-type="button"
-class="btn-gray"
-id="clearFilterButton">
-CLEAR FILTER
-</button>
-
-<button
-type="button"
-class="btn-blue admin-only-button"
-id="exportButton">
-EXPORT EXCEL
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CHART
-===================================================== -->
-
-<div class="card public-dashboard-section" id="chartSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>📊 Reject Quantity by Name</h2>
-
-<div class="card-description">
-Bold interactive reject trend
-</div>
-
-</div>
-
-</div>
-
-<div class="chart-info">
-
-<div class="chart-hint">
-📌 X-axis = Reject Name
-</div>
-
-<div class="chart-hint">
-🔢 Y-axis = Quantity
-</div>
-
-</div>
-
-<div class="chart-container">
-
-<canvas id="trendChart"></canvas>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     DAILY TOP
-===================================================== -->
-
-<div class="card admin-only-section" id="dailyTopSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>🔍 Daily Top Reject</h2>
-
-<div class="card-description">
-Highest reject quantity for each day
-</div>
-
-</div>
-
-</div>
-
-<div
-id="dailyTopDefect"
-class="daily-grid">
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     REJECT RECORDS
-===================================================== -->
-
-<div class="card admin-only-section" id="recordsSection">
-
-<div class="card-header">
-
-<div>
-
-<h2>📋 Reject Records</h2>
-
-<div class="card-description">
-Search, filter and manage reject records
-</div>
-
-</div>
-
-</div>
-
-
-<!-- RECORD FILTER -->
-
-<div class="record-filter">
-
-<div class="record-filter-grid">
-
-<div class="search-box">
-
-<label>🔎 Search Component SN</label>
-
-<span class="search-icon">
-⌕
-</span>
-
-<input
-id="recordSearch"
-type="search"
-placeholder="Type Component SN..."
-autocomplete="off">
-
-</div>
-
-
-<div>
-
-<label>Reject</label>
-
-<select id="recordRejectFilter">
-
-<option value="">
-All Rejects
-</option>
-
-<option>P2 SHELL ABRASIVE</option>
-<option>P2 SHELL BENT</option>
-<option>P2 SHELL DENTED</option>
-<option>P2 SHELL CONTAM</option>
-<option>P2 SHELL DAMAGED</option>
-<option>P2 SHELL BLISTER</option>
-<option>P2 SHELL EXPOSED COPPER</option>
-<option>P2 SHELL LINEAR SCRATCHED</option>
-<option>P2 SHELL PEEL OFF</option>
-<option>P2 SHELL SCRATCHED</option>
-<option>P2 SHELL DISCOLORATION</option>
-<option>P2 MPO CONNECTOR DAMAGE</option>
-
-</select>
-
-</div>
-
-
-<div>
-
-<label>From Date</label>
-
-<input
-type="date"
-id="recordFromDate">
-
-</div>
-
-
-<div>
-
-<label>To Date</label>
-
-<input
-type="date"
-id="recordToDate">
-
-</div>
-
-</div>
-
-
-<div class="actions">
-
-<button
-type="button"
-class="btn-gray"
-id="clearRecordFilterButton">
-CLEAR SEARCH
-</button>
-
-<button
-type="button"
-class="btn-blue"
-id="copyRecordsButton">
-📋 COPY VISIBLE RECORDS
-</button>
-
-</div>
-
-
-<div
-id="recordCount"
-class="record-count">
-</div>
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Component SN</th>
-<th>Component PN</th>
-<th>Reject</th>
-<th>Defect Class</th>
-<th>Badge ID</th>
-<th>Date Time</th>
-
-<th
-id="adminActionHeader"
-style="display:none">
-Admin Action
-</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tbody">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     ADMIN DATA MANAGEMENT
-===================================================== -->
-
-<div
-class="card"
-id="dataManagement"
-style="display:none">
-
-<div class="card-header">
-
-<div>
-
-<h2>⚙️ Admin Data Management</h2>
-
-<div class="card-description">
-Restricted administrative controls
-</div>
-
-</div>
-
-</div>
-
-<div class="actions">
-
-<button
-type="button"
-class="btn-red"
-id="clearAllButton">
-🗑 CLEAR ALL DATA
-</button>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-Reject Trending Dashboard • Quality Monitoring System
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     ADMIN MODAL
-===================================================== -->
-
-<div id="adminModal">
-
-<div class="modal-box">
-
-<div class="modal-icon">
-🔐
-</div>
-
-<h3>Admin Access</h3>
-
-<div class="modal-subtitle">
-Sign in to manage reject records.
-</div>
-
-<label>
-Email
-</label>
-
-<input
-id="adminEmail"
-type="email"
-placeholder="Admin email"
-autocomplete="off">
-
-<br><br>
-
-<label>
-Password
-</label>
-
-<input
-id="adminPassword"
-type="password"
-placeholder="Password"
-autocomplete="new-password">
-
-<div
-id="adminError"
-class="admin-error">
-</div>
-
-<div class="modal-actions">
-
-<button
-type="button"
-class="btn-gray"
-id="cancelAdminButton">
-CANCEL
-</button>
-
-<button
-type="button"
-class="btn-purple"
-id="loginAdminButton">
-LOGIN
-</button>
-
-</div>
-
-</div>
-
-</div>
+  id="toast"
+  class="toast"
+></div>
 
 
 <script>
 
 /* =========================================================
-   SUPABASE
+   SUPABASE CONFIG
 ========================================================= */
 
 const SUPABASE_URL =
-"https://nefsqjxfhvsacsuiwquy.supabase.co";
+  "https://nefsqjxfhvsacsuiwquy.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
+  "sb_publishable_gKkTNZx_ZeUavzMHmJdn4g_CSO1pT5Y";
 
 const ADMIN_UID =
-"199986ab-800f-4c85-8f25-9b3bf28984fb";
+  "199986ab-800f-4c85-8f25-9b3bf28984fb";
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =========================================================
-   GLOBAL
+   GLOBAL STATE
 ========================================================= */
 
-let rows=[];
+let rows = [];
 
-let scannedSNs=[];
+let currentAdmin = false;
 
-let filteredRows=[];
+let scannedSNs = [];
 
-let recordFilteredRows=[];
+let rejectChart = null;
 
-let trendChart=null;
+let analyticsRows = [];
 
-let currentAdmin=false;
+let recordRows = [];
 
 
 /* =========================================================
-   INITIALIZE
+   HELPERS
 ========================================================= */
 
-document.addEventListener(
-"DOMContentLoaded",
-async function(){
+function el(id){
+  return document.getElementById(id);
+}
 
-  setupEvents();
 
-  await checkAdmin();
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-  await loadRows();
 
-  renderScanList();
+function showToast(message,type=""){
+  const toast = el("toast");
 
-  document
-    .getElementById("sn")
-    .focus();
+  toast.textContent = message;
 
-});
+  toast.className = "toast show " + type;
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(()=>{
+    toast.className = "toast";
+  },3200);
+}
+
+
+function normalizeSN(sn){
+  return String(sn ?? "")
+    .trim()
+    .toUpperCase();
+}
+
+
+function isAdmin(){
+  return currentAdmin === true;
+}
+
+
+function formatDateTime(value){
+
+  if(!value){
+    return "-";
+  }
+
+  const d = new Date(value);
+
+  if(Number.isNaN(d.getTime())){
+    return value;
+  }
+
+  return d.toLocaleString("en-MY",{
+    year:"numeric",
+    month:"2-digit",
+    day:"2-digit",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  });
+}
+
+
+function dateKey(value){
+
+  if(!value){
+    return "";
+  }
+
+  const d = new Date(value);
+
+  if(Number.isNaN(d.getTime())){
+    return "";
+  }
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
+}
 
 
 /* =========================================================
-   EVENTS
+   AUTH
 ========================================================= */
 
-function setupEvents(){
+async function checkAdminSession(){
 
-  document
-    .getElementById("sn")
-    .addEventListener(
-      "keydown",
-      function(event){
+  try{
 
-        if(event.key==="Enter"){
-
-          event.preventDefault();
-
-          addSN();
-
-        }
-
+    const {
+      data:{
+        session
       }
-    );
+    } = await supabaseClient.auth.getSession();
+
+    if(
+      session &&
+      session.user &&
+      session.user.id === ADMIN_UID
+    ){
+      currentAdmin = true;
+    }else{
+      currentAdmin = false;
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    currentAdmin = false;
+  }
+
+  updateAdminUI();
+}
 
 
-  document
-    .getElementById("addSNButton")
-    .addEventListener(
-      "click",
-      addSN
-    );
+function updateAdminUI(){
+
+  const adminSections = [
+    "adminWorkspaceTitle",
+    "scanSection",
+    "importSection",
+    "dataManagement"
+  ];
+
+  adminSections.forEach(id=>{
+
+    const node = el(id);
+
+    if(!node){
+      return;
+    }
+
+    node.style.display =
+      currentAdmin
+        ? "block"
+        : "none";
+
+  });
 
 
-  document
-    .getElementById("saveButton")
-    .addEventListener(
-      "click",
-      saveReject
-    );
+  /* Public dashboard sections ALWAYS visible */
+
+  const publicSections = [
+    "dashboardStatsSection",
+    "analyticsSection",
+    "chartSection",
+    "dailyTopSection",
+    "recordsSection"
+  ];
+
+  publicSections.forEach(id=>{
+
+    const node = el(id);
+
+    if(node){
+      node.style.display = "block";
+    }
+
+  });
 
 
-  document
-    .getElementById("clearButton")
-    .addEventListener(
-      "click",
-      clearForm
-    );
+  /* Admin action column */
+
+  const adminHeader =
+    el("adminActionHeader");
+
+  if(adminHeader){
+
+    adminHeader.style.display =
+      currentAdmin
+        ? "table-cell"
+        : "none";
+  }
 
 
-  document
-    .getElementById("importButton")
-    .addEventListener(
-      "click",
-      importExcel
-    );
+  /* Copy button */
+
+  const copyButton =
+    el("copyVisibleRecords");
+
+  if(copyButton){
+
+    copyButton.style.display =
+      currentAdmin
+        ? "inline-block"
+        : "none";
+  }
 
 
-  document
-    .getElementById("clearFilterButton")
-    .addEventListener(
-      "click",
-      clearFilters
-    );
+  /* Header status */
+
+  const status =
+    el("adminStatus");
+
+  const adminButton =
+    el("adminButton");
+
+  if(currentAdmin){
+
+    status.textContent =
+      "🔐 ADMIN MODE";
+
+    status.style.background =
+      "rgba(124,58,237,.25)";
+
+    status.style.color =
+      "#e9d5ff";
+
+    adminButton.textContent =
+      "🔓";
+
+    adminButton.title =
+      "Logout Admin";
+
+  }else{
+
+    status.textContent =
+      "PUBLIC VIEW • READ ONLY";
+
+    status.style.background =
+      "rgba(255,255,255,.08)";
+
+    status.style.color =
+      "#d9e7f7";
+
+    adminButton.textContent =
+      "⚙️";
+
+    adminButton.title =
+      "Admin Login";
+  }
 
 
-  document
-    .getElementById("exportButton")
-    .addEventListener(
-      "click",
-      exportCSV
-    );
-
-
-  document
-    .getElementById("backupButton")
-    .addEventListener(
-      "click",
-      backupJSON
-    );
-
-
-  document
-    .getElementById("clearAllButton")
-    .addEventListener(
-      "click",
-      clearAll
-    );
-
-
-  document
-    .getElementById("adminIcon")
-    .addEventListener(
-      "click",
-      openAdminLogin
-    );
-
-
-  document
-    .getElementById("cancelAdminButton")
-    .addEventListener(
-      "click",
-      closeAdminLogin
-    );
-
-
-  document
-    .getElementById("loginAdminButton")
-    .addEventListener(
-      "click",
-      adminLogin
-    );
-
-
-  document
-    .getElementById("fromDate")
-    .addEventListener(
-      "change",
-      applyFilters
-    );
-
-
-  document
-    .getElementById("toDate")
-    .addEventListener(
-      "change",
-      applyFilters
-    );
-
-
-  document
-    .getElementById("filterDefect")
-    .addEventListener(
-      "change",
-      applyFilters
-    );
-
-
-  /* NEW RECORD FILTER */
-
-  document
-    .getElementById("recordSearch")
-    .addEventListener(
-      "input",
-      applyRecordFilters
-    );
-
-
-  document
-    .getElementById("recordRejectFilter")
-    .addEventListener(
-      "change",
-      applyRecordFilters
-    );
-
-
-  document
-    .getElementById("recordFromDate")
-    .addEventListener(
-      "change",
-      applyRecordFilters
-    );
-
-
-  document
-    .getElementById("recordToDate")
-    .addEventListener(
-      "change",
-      applyRecordFilters
-    );
-
-
-  document
-    .getElementById("clearRecordFilterButton")
-    .addEventListener(
-      "click",
-      clearRecordFilters
-    );
-
-
-  document
-    .getElementById("copyRecordsButton")
-    .addEventListener(
-      "click",
-      copyVisibleRecords
-    );
-
+  renderRecords();
 }
 
 
@@ -2440,610 +1944,146 @@ function setupEvents(){
 
 async function loadRows(){
 
-  let allData=[];
+  try{
 
-  let from=0;
+    let allRows = [];
 
-  const batchSize=1000;
+    let from = 0;
 
+    const pageSize = 1000;
 
-  while(true){
+    while(true){
 
-    const {data,error}=
-      await supabaseClient
+      const {
+        data,
+        error
+      } = await supabaseClient
         .from("rejects")
         .select(
           "id,component_sn,component_pn,defect,defect_class,operator_id,date_time"
         )
-        .order(
-          "date_time",
-          {
-            ascending:false
-          }
-        )
+        .order("date_time",{
+          ascending:false
+        })
         .range(
           from,
-          from+batchSize-1
+          from + pageSize - 1
         );
 
-
-    if(error){
-
-      console.error(
-        "SUPABASE LOAD ERROR:",
-        error
-      );
-
-      rows=[];
-
-      showMessage(
-        "Database error: "+
-        error.message,
-        "red"
-      );
-
-      document
-        .getElementById("total")
-        .textContent="ERROR";
-
-      return;
-
-    }
-
-
-    if(
-      !data ||
-      data.length===0
-    )
-      break;
-
-
-    allData=
-      allData.concat(data);
-
-
-    if(
-      data.length<
-      batchSize
-    )
-      break;
-
-
-    from+=batchSize;
-
-  }
-
-
-  rows=allData;
-
-  render();
-
-}
-
-
-/* =========================================================
-   ADD SN
-========================================================= */
-
-function addSN(){
-
-  const input=
-    document.getElementById("sn");
-
-  const sn=
-    input.value.trim();
-
-
-  if(!sn){
-
-    showMessage(
-      "Please enter / scan Component SN.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  const existsCurrent=
-    scannedSNs.some(
-      x =>
-      x.toLowerCase()===
-      sn.toLowerCase()
-    );
-
-
-  if(existsCurrent){
-
-    showMessage(
-      "This SN is already in the current batch.",
-      "red"
-    );
-
-    input.select();
-
-    return;
-
-  }
-
-
-  const existsSaved=
-    rows.some(
-      row =>
-      String(
-        row.component_sn||""
-      )
-      .trim()
-      .toLowerCase()===
-      sn.toLowerCase()
-    );
-
-
-  if(existsSaved){
-
-    showMessage(
-      "This SN already exists in database.",
-      "red"
-    );
-
-    input.select();
-
-    return;
-
-  }
-
-
-  scannedSNs.push(sn);
-
-  input.value="";
-
-  renderScanList();
-
-  input.focus();
-
-  showMessage(
-    "SN added successfully.",
-    "green"
-  );
-
-}
-
-
-/* =========================================================
-   SCAN LIST
-========================================================= */
-
-function renderScanList(){
-
-  const list=
-    document.getElementById(
-      "scanList"
-    );
-
-  const count=
-    document.getElementById(
-      "scanCount"
-    );
-
-
-  count.textContent=
-    scannedSNs.length;
-
-
-  list.innerHTML="";
-
-
-  scannedSNs.forEach(
-    (sn,index)=>{
-
-      const tag=
-        document.createElement(
-          "div"
-        );
-
-      tag.className=
-        "sn-tag";
-
-
-      const span=
-        document.createElement(
-          "span"
-        );
-
-      span.textContent=sn;
-
-
-      const button=
-        document.createElement(
-          "button"
-        );
-
-      button.type="button";
-
-      button.textContent="×";
-
-
-      button.addEventListener(
-        "click",
-        function(){
-
-          removeSN(index);
-
-        }
-      );
-
-
-      tag.appendChild(span);
-
-      tag.appendChild(button);
-
-      list.appendChild(tag);
-
-    }
-  );
-
-}
-
-
-function removeSN(index){
-
-  scannedSNs.splice(
-    index,
-    1
-  );
-
-  renderScanList();
-
-}
-
-
-/* =========================================================
-   SAVE
-========================================================= */
-
-async function saveReject(){
-
-  if(!isAdmin()){
-    alert("Admin access required.");
-    return;
-  }
-
-  const pn=
-    document.getElementById(
-      "pn"
-    ).value;
-
-
-  const defect=
-    document.getElementById(
-      "defect"
-    ).value;
-
-
-  const defectClass=
-    document.getElementById(
-      "defectClass"
-    ).value;
-
-
-  const operator=
-    document
-      .getElementById(
-        "operator"
-      )
-      .value
-      .trim();
-
-
-  if(
-    scannedSNs.length===0
-  ){
-
-    showMessage(
-      "Please scan / add at least one SN.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  if(!pn){
-
-    showMessage(
-      "Please select Component PN.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  if(!defect){
-
-    showMessage(
-      "Please select Reject / Defect.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  if(!defectClass){
-
-    showMessage(
-      "Please select Defect Class.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  if(!operator){
-
-    showMessage(
-      "Please enter Badge ID.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  const now=
-    new Date().toISOString();
-
-
-  const records=
-    scannedSNs.map(
-      sn=>({
-
-        component_sn:sn,
-
-        component_pn:pn,
-
-        defect:defect,
-
-        defect_class:
-          defectClass,
-
-        operator_id:
-          operator,
-
-        date_time:now
-
-      })
-    );
-
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .insert(records);
-
-
-  if(error){
-
-    if(
-      error.code==="23505"
-    ){
-
-      showMessage(
-        "Save failed: one or more SN already exist.",
-        "red"
-      );
-
-    }else{
-
-      showMessage(
-        "Save failed: "+
-        error.message,
-        "red"
-      );
-
-    }
-
-
-    await loadRows();
-
-    return;
-
-  }
-
-
-  scannedSNs=[];
-
-  renderScanList();
-
-  clearForm(false);
-
-  await loadRows();
-
-
-  showMessage(
-    "All reject records saved successfully.",
-    "green"
-  );
-
-}
-
-
-/* =========================================================
-   CLEAR FORM
-========================================================= */
-
-function clearForm(
-  clearBatch=true
-){
-
-  document
-    .getElementById("sn")
-    .value="";
-
-
-  document
-    .getElementById("pn")
-    .value="";
-
-
-  document
-    .getElementById("defect")
-    .value="";
-
-
-  document
-    .getElementById("defectClass")
-    .value="";
-
-
-  document
-    .getElementById("operator")
-    .value="";
-
-
-  if(clearBatch){
-
-    scannedSNs=[];
-
-    renderScanList();
-
-  }
-
-}
-
-
-/* =========================================================
-   MAIN RENDER
-========================================================= */
-
-function render(){
-
-  updateDashboard();
-
-  applyFilters();
-
-  applyRecordFilters();
-
-}
-
-
-/* =========================================================
-   ANALYTICS FILTER
-========================================================= */
-
-function applyFilters(){
-
-  const from=
-    document.getElementById(
-      "fromDate"
-    ).value;
-
-
-  const to=
-    document.getElementById(
-      "toDate"
-    ).value;
-
-
-  const defect=
-    document.getElementById(
-      "filterDefect"
-    ).value;
-
-
-  filteredRows=
-    rows.filter(
-      row=>{
-
-        const d=
-          new Date(
-            row.date_time
-          );
-
-
-        if(
-          isNaN(
-            d.getTime()
-          )
-        )
-          return false;
-
-
-        const day=
-          formatDateKey(d);
-
-
-        if(
-          from &&
-          day<from
-        )
-          return false;
-
-
-        if(
-          to &&
-          day>to
-        )
-          return false;
-
-
-        if(
-          defect &&
-          row.defect!==defect
-        )
-          return false;
-
-
-        return true;
-
+      if(error){
+        throw error;
       }
+
+      allRows =
+        allRows.concat(data || []);
+
+      if(
+        !data ||
+        data.length < pageSize
+      ){
+        break;
+      }
+
+      from += pageSize;
+    }
+
+    rows = allRows;
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderDailyTop();
+
+    renderChart();
+
+    renderRecords();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Failed to load data: " +
+      error.message,
+      "error"
     );
-
-
-  renderChart();
-
-  renderDailyTopDefect();
-
+  }
 }
 
 
 /* =========================================================
-   CLEAR ANALYTICS FILTER
+   FILTER OPTIONS
 ========================================================= */
 
-function clearFilters(){
+function populateFilterOptions(){
 
-  document
-    .getElementById(
-      "fromDate"
-    )
-    .value="";
+  const defects =
+    [...new Set(
+      rows
+        .map(r=>r.defect)
+        .filter(Boolean)
+    )]
+    .sort();
 
-
-  document
-    .getElementById(
-      "toDate"
-    )
-    .value="";
-
-
-  document
-    .getElementById(
-      "filterDefect"
-    )
-    .value="";
+  const pns =
+    [...new Set(
+      rows
+        .map(r=>r.component_pn)
+        .filter(Boolean)
+    )]
+    .sort();
 
 
-  applyFilters();
+  const analyticsDefect =
+    el("analyticsDefect");
 
+  const recordDefect =
+    el("recordDefect");
+
+  const analyticsPN =
+    el("analyticsPN");
+
+
+  const currentAnalyticsDefect =
+    analyticsDefect.value;
+
+  const currentRecordDefect =
+    recordDefect.value;
+
+  const currentPN =
+    analyticsPN.value;
+
+
+  analyticsDefect.innerHTML =
+    `<option value="">All Reject</option>` +
+    defects.map(d=>
+      `<option value="${escapeHTML(d)}">${escapeHTML(d)}</option>`
+    ).join("");
+
+
+  recordDefect.innerHTML =
+    `<option value="">All Reject</option>` +
+    defects.map(d=>
+      `<option value="${escapeHTML(d)}">${escapeHTML(d)}</option>`
+    ).join("");
+
+
+  analyticsPN.innerHTML =
+    `<option value="">All PN</option>` +
+    pns.map(p=>
+      `<option value="${escapeHTML(p)}">${escapeHTML(p)}</option>`
+    ).join("");
+
+
+  analyticsDefect.value =
+    currentAnalyticsDefect;
+
+  recordDefect.value =
+    currentRecordDefect;
+
+  analyticsPN.value =
+    currentPN;
 }
 
 
@@ -3051,118 +2091,563 @@ function clearFilters(){
    DASHBOARD
 ========================================================= */
 
-function updateDashboard(){
+function getAnalyticsRows(){
 
-  document
-    .getElementById(
-      "total"
-    )
-    .textContent=
-      rows.length;
+  let filtered = [...rows];
+
+  const defect =
+    el("analyticsDefect").value;
+
+  const pn =
+    el("analyticsPN").value;
+
+  const from =
+    el("analyticsFrom").value;
+
+  const to =
+    el("analyticsTo").value;
 
 
-  const today=
+  if(defect){
+
+    filtered =
+      filtered.filter(
+        r => r.defect === defect
+      );
+  }
+
+
+  if(pn){
+
+    filtered =
+      filtered.filter(
+        r => String(r.component_pn) === String(pn)
+      );
+  }
+
+
+  if(from){
+
+    filtered =
+      filtered.filter(
+        r => dateKey(r.date_time) >= from
+      );
+  }
+
+
+  if(to){
+
+    filtered =
+      filtered.filter(
+        r => dateKey(r.date_time) <= to
+      );
+  }
+
+
+  return filtered;
+}
+
+
+function renderDashboard(){
+
+  analyticsRows =
+    getAnalyticsRows();
+
+
+  const total =
+    analyticsRows.length;
+
+
+  const today =
     new Date();
 
+  const todayKey =
+    dateKey(today);
 
-  const todayKey=
-    formatDateKey(
-      today
+
+  const todayQty =
+    analyticsRows.filter(
+      r => dateKey(r.date_time) === todayKey
+    ).length;
+
+
+  const counts = {};
+
+  analyticsRows.forEach(r=>{
+
+    const defect =
+      r.defect || "Unknown";
+
+    counts[defect] =
+      (counts[defect] || 0) + 1;
+
+  });
+
+
+  const sorted =
+    Object.entries(counts)
+      .sort((a,b)=>b[1]-a[1]);
+
+
+  const top =
+    sorted[0];
+
+
+  el("totalReject").textContent =
+    total;
+
+
+  el("rejectToday").textContent =
+    todayQty;
+
+
+  el("topReject").textContent =
+    top ? top[0] : "-";
+
+
+  el("topRejectQty").textContent =
+    top
+      ? `${top[1]} reject`
+      : "0 reject";
+
+
+  const badges =
+    el("summaryBadges");
+
+  if(!sorted.length){
+
+    badges.innerHTML =
+      `<div class="empty">No reject data found.</div>`;
+
+    return;
+  }
+
+
+  badges.innerHTML =
+    sorted
+      .map(([defect,qty])=>`
+        <div class="summary-badge">
+          ${escapeHTML(defect)} :
+          ${qty}
+        </div>
+      `)
+      .join("");
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+function renderChart(){
+
+  analyticsRows =
+    getAnalyticsRows();
+
+
+  const counts = {};
+
+  analyticsRows.forEach(r=>{
+
+    const defect =
+      r.defect || "Unknown";
+
+    counts[defect] =
+      (counts[defect] || 0) + 1;
+
+  });
+
+
+  const sorted =
+    Object.entries(counts)
+      .sort((a,b)=>b[1]-a[1]);
+
+
+  const labels =
+    sorted.map(x=>x[0]);
+
+  const values =
+    sorted.map(x=>x[1]);
+
+
+  const canvas =
+    el("rejectChart");
+
+
+  if(rejectChart){
+    rejectChart.destroy();
+  }
+
+
+  const ctx =
+    canvas.getContext("2d");
+
+
+  const gradient =
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      400
     );
 
+  gradient.addColorStop(
+    0,
+    "#2563eb"
+  );
 
-  const todayRows=
-    rows.filter(
-      row =>
-      formatDateKey(
-        new Date(
-          row.date_time
-        )
-      )===
-      todayKey
-    );
+  gradient.addColorStop(
+    .55,
+    "#0891b2"
+  );
 
-
-  document
-    .getElementById(
-      "qtyToday"
-    )
-    .textContent=
-      todayRows.length;
-
-
-  const counts={};
-
-
-  rows.forEach(
-    row=>{
-
-      const defect=
-        row.defect||
-        "Unknown";
-
-
-      counts[defect]=
-        (
-          counts[defect]||0
-        )+1;
-
-    }
+  gradient.addColorStop(
+    1,
+    "#7c3aed"
   );
 
 
-  const sorted=
-    Object.entries(counts)
-      .sort(
-        (a,b)=>b[1]-a[1]
-      );
+  rejectChart =
+    new Chart(ctx,{
 
+      type:"bar",
 
-  document
-    .getElementById(
-      "topDefect"
-    )
-    .textContent=
-      sorted.length
-      ? sorted[0][0]
-      : "-";
+      data:{
+        labels,
 
+        datasets:[{
 
-  const summary=
-    document.getElementById(
-      "summary"
-    );
+          label:"Reject Quantity",
 
+          data:values,
 
-  summary.innerHTML="";
+          backgroundColor:gradient,
 
+          borderRadius:8,
 
-  sorted
-    .slice(0,10)
-    .forEach(
-      ([defect,count])=>{
+          borderSkipped:false,
 
-        const badge=
-          document.createElement(
-            "div"
+          maxBarThickness:60
+
+        }]
+      },
+
+      options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        interaction:{
+          mode:"nearest",
+          intersect:true
+        },
+
+        plugins:{
+
+          legend:{
+            display:false
+          },
+
+          tooltip:{
+
+            backgroundColor:"#0f172a",
+
+            padding:12,
+
+            titleFont:{
+              size:13,
+              weight:"700"
+            },
+
+            bodyFont:{
+              size:12
+            },
+
+            callbacks:{
+
+              label:function(context){
+
+                return (
+                  " Quantity: " +
+                  context.raw
+                );
+
+              }
+
+            }
+
+          }
+
+        },
+
+        scales:{
+
+          x:{
+            grid:{
+              display:false
+            },
+
+            ticks:{
+              color:"#475569",
+              font:{
+                size:11
+              }
+            }
+          },
+
+          y:{
+            beginAtZero:true,
+
+            ticks:{
+              precision:0,
+              color:"#64748b"
+            },
+
+            grid:{
+              color:"rgba(148,163,184,.18)"
+            }
+          }
+
+        },
+
+        onClick:function(
+          event,
+          elements
+        ){
+
+          if(!elements.length){
+            return;
+          }
+
+          const index =
+            elements[0].index;
+
+          const defect =
+            labels[index];
+
+          const qty =
+            values[index];
+
+          openChartModal(
+            defect,
+            qty
           );
 
-        badge.className=
-          "badge";
-
-        badge.textContent=
-          defect+
-          " • "+
-          count+
-          " pcs";
-
-        summary.appendChild(
-          badge
-        );
+        }
 
       }
+
+    });
+}
+
+
+/* =========================================================
+   GRAPH POPUP
+========================================================= */
+
+function openChartModal(
+  defect,
+  quantity
+){
+
+  const filtered =
+    analyticsRows.filter(
+      r => r.defect === defect
     );
 
+
+  el("chartModalTitle").textContent =
+    defect;
+
+
+  el("chartModalSubtitle").textContent =
+    "Detailed records for selected reject";
+
+
+  el("modalRejectName").textContent =
+    defect;
+
+
+  el("modalRejectQty").textContent =
+    quantity;
+
+
+  el("modalRecordCount").textContent =
+    filtered.length;
+
+
+  const modalRecords =
+    el("modalRecords");
+
+
+  if(!filtered.length){
+
+    modalRecords.innerHTML =
+      `<div class="modal-empty">
+        No records found.
+      </div>`;
+
+  }else{
+
+    modalRecords.innerHTML = `
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Component SN</th>
+            <th>Component PN</th>
+            <th>Defect Class</th>
+            <th>Badge ID</th>
+            <th>Date Time</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${filtered.map(r=>`
+
+            <tr>
+
+              <td>
+                ${escapeHTML(r.component_sn)}
+              </td>
+
+              <td>
+                ${escapeHTML(r.component_pn)}
+              </td>
+
+              <td>
+                ${escapeHTML(r.defect_class)}
+              </td>
+
+              <td>
+                ${escapeHTML(r.operator_id)}
+              </td>
+
+              <td>
+                ${escapeHTML(formatDateTime(r.date_time))}
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+
+      </table>
+    `;
+  }
+
+
+  el("chartModal")
+    .classList.add("show");
+}
+
+
+function closeChartModal(){
+
+  el("chartModal")
+    .classList.remove("show");
+}
+
+
+/* =========================================================
+   DAILY TOP REJECT
+========================================================= */
+
+function renderDailyTop(){
+
+  const grouped = {};
+
+  rows.forEach(r=>{
+
+    const day =
+      dateKey(r.date_time);
+
+    if(!day){
+      return;
+    }
+
+    if(!grouped[day]){
+      grouped[day] = {};
+    }
+
+    const defect =
+      r.defect || "Unknown";
+
+    grouped[day][defect] =
+      (grouped[day][defect] || 0) + 1;
+
+  });
+
+
+  const days =
+    Object.keys(grouped)
+      .sort()
+      .reverse();
+
+
+  const container =
+    el("dailyTopGrid");
+
+
+  if(!days.length){
+
+    container.innerHTML =
+      `<div class="empty">No daily data available.</div>`;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    days.map(day=>{
+
+      const top =
+        Object.entries(grouped[day])
+          .sort((a,b)=>b[1]-a[1])[0];
+
+
+      const date =
+        new Date(day + "T00:00:00");
+
+
+      const formatted =
+        date.toLocaleDateString(
+          "en-MY",
+          {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+          }
+        );
+
+
+      return `
+
+        <div class="daily-card">
+
+          <div class="daily-date">
+            ${formatted}
+          </div>
+
+          <div class="daily-defect">
+            ${escapeHTML(top[0])}
+          </div>
+
+          <div class="daily-qty">
+            ${top[1]} reject
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
 }
 
 
@@ -3170,1651 +2655,1101 @@ function updateDashboard(){
    RECORD FILTER
 ========================================================= */
 
-function applyRecordFilters(){
+function getFilteredRecords(){
 
-  const search=
-    document
-      .getElementById(
-        "recordSearch"
-      )
+  let filtered =
+    [...rows];
+
+
+  const search =
+    el("recordSearch")
       .value
       .trim()
-      .toLowerCase();
+      .toUpperCase();
 
 
-  const defect=
-    document
-      .getElementById(
-        "recordRejectFilter"
-      )
-      .value;
+  const defect =
+    el("recordDefect").value;
 
 
-  const from=
-    document
-      .getElementById(
-        "recordFromDate"
-      )
-      .value;
+  const from =
+    el("recordFrom").value;
 
 
-  const to=
-    document
-      .getElementById(
-        "recordToDate"
-      )
-      .value;
+  const to =
+    el("recordTo").value;
 
 
-  recordFilteredRows=
-    rows.filter(
-      row=>{
+  if(search){
 
-        const sn=
-          String(
-            row.component_sn||""
-          )
-          .toLowerCase();
-
-
-        if(
-          search &&
-          !sn.includes(search)
-        ){
-
-          return false;
-
-        }
-
-
-        if(
-          defect &&
-          row.defect!==defect
-        ){
-
-          return false;
-
-        }
-
-
-        const date=
-          new Date(
-            row.date_time
-          );
-
-
-        if(
-          isNaN(
-            date.getTime()
-          )
-        ){
-
-          return false;
-
-        }
-
-
-        const dateKey=
-          formatDateKey(date);
-
-
-        if(
-          from &&
-          dateKey<from
-        ){
-
-          return false;
-
-        }
-
-
-        if(
-          to &&
-          dateKey>to
-        ){
-
-          return false;
-
-        }
-
-
-        return true;
-
-      }
-    );
-
-
-  renderTable();
-
-}
-
-
-/* =========================================================
-   CLEAR RECORD FILTER
-========================================================= */
-
-function clearRecordFilters(){
-
-  document
-    .getElementById(
-      "recordSearch"
-    )
-    .value="";
-
-
-  document
-    .getElementById(
-      "recordRejectFilter"
-    )
-    .value="";
-
-
-  document
-    .getElementById(
-      "recordFromDate"
-    )
-    .value="";
-
-
-  document
-    .getElementById(
-      "recordToDate"
-    )
-    .value="";
-
-
-  applyRecordFilters();
-
-}
-
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-function renderTable(){
-
-  const tbody=
-    document.getElementById(
-      "tbody"
-    );
-
-
-  const header=
-    document.getElementById(
-      "adminActionHeader"
-    );
-
-
-  const count=
-    document.getElementById(
-      "recordCount"
-    );
-
-
-  tbody.innerHTML="";
-
-
-  if(currentAdmin){
-
-    header.style.display=
-      "table-cell";
-
-  }else{
-
-    header.style.display=
-      "none";
+    filtered =
+      filtered.filter(r=>
+        normalizeSN(r.component_sn)
+          .includes(search)
+      );
 
   }
 
 
-  count.innerHTML=
-    `
-      📊 Showing
-      <strong>
-        ${recordFilteredRows.length}
-      </strong>
-      of
-      <strong>
-        ${rows.length}
-      </strong>
-      records
+  if(defect){
+
+    filtered =
+      filtered.filter(
+        r => r.defect === defect
+      );
+
+  }
+
+
+  if(from){
+
+    filtered =
+      filtered.filter(
+        r => dateKey(r.date_time) >= from
+      );
+
+  }
+
+
+  if(to){
+
+    filtered =
+      filtered.filter(
+        r => dateKey(r.date_time) <= to
+      );
+
+  }
+
+
+  return filtered;
+}
+
+
+function renderRecords(){
+
+  recordRows =
+    getFilteredRecords();
+
+
+  const body =
+    el("recordsBody");
+
+
+  el("recordsCount").textContent =
+    `${recordRows.length} record(s)`;
+
+
+  if(!recordRows.length){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="${currentAdmin ? 7 : 6}"
+          class="empty"
+        >
+          No records found.
+        </td>
+
+      </tr>
+
     `;
 
-
-  if(
-    !recordFilteredRows.length
-  ){
-
-    const tr=
-      document.createElement(
-        "tr"
-      );
-
-
-    const td=
-      document.createElement(
-        "td"
-      );
-
-
-    td.colSpan=
-      currentAdmin
-      ? 7
-      : 6;
-
-
-    td.className=
-      "empty-state";
-
-
-    td.textContent=
-      "No reject records found.";
-
-
-    tr.appendChild(td);
-
-    tbody.appendChild(tr);
-
     return;
-
   }
 
 
-  recordFilteredRows.forEach(
-    row=>{
-
-      const tr=
-        document.createElement(
-          "tr"
-        );
-
-
-      const snCell=
-        document.createElement(
-          "td"
-        );
-
-      snCell.textContent=
-        row.component_sn||"";
-
-
-      const pnCell=
-        document.createElement(
-          "td"
-        );
-
-      pnCell.textContent=
-        row.component_pn||"";
-
-
-      const defectCell=
-        document.createElement(
-          "td"
-        );
-
-      defectCell.textContent=
-        row.defect||"";
-
-
-      const classCell=
-        document.createElement(
-          "td"
-        );
-
-      classCell.textContent=
-        row.defect_class||"";
-
-
-      const operatorCell=
-        document.createElement(
-          "td"
-        );
-
-      operatorCell.textContent=
-        row.operator_id||"";
-
-
-      const dateCell=
-        document.createElement(
-          "td"
-        );
-
-      dateCell.textContent=
-        formatDateTime(
-          row.date_time
-        );
-
-
-      tr.appendChild(
-        snCell
-      );
-
-      tr.appendChild(
-        pnCell
-      );
-
-      tr.appendChild(
-        defectCell
-      );
-
-      tr.appendChild(
-        classCell
-      );
-
-      tr.appendChild(
-        operatorCell
-      );
-
-      tr.appendChild(
-        dateCell
-      );
-
-
-      if(currentAdmin){
-
-        const actionCell=
-          document.createElement(
-            "td"
-          );
-
-
-        actionCell.className=
-          "action-cell";
-
-
-        const editButton=
-          document.createElement(
-            "button"
-          );
-
-
-        editButton.type=
-          "button";
-
-
-        editButton.className=
-          "action-btn edit-btn";
-
-
-        editButton.textContent=
-          "✏️ EDIT";
-
-
-        editButton.addEventListener(
-          "click",
-          function(){
-
-            editRow(row.id);
-
-          }
-        );
-
-
-        const deleteButton=
-          document.createElement(
-            "button"
-          );
-
-
-        deleteButton.type=
-          "button";
-
-
-        deleteButton.className=
-          "action-btn delete-btn";
-
-
-        deleteButton.textContent=
-          "🗑️ DELETE";
-
-
-        deleteButton.addEventListener(
-          "click",
-          function(){
-
-            deleteRow(row.id);
-
-          }
-        );
-
-
-        actionCell.appendChild(
-          editButton
-        );
-
-
-        actionCell.appendChild(
-          deleteButton
-        );
-
-
-        tr.appendChild(
-          actionCell
-        );
-
-      }
-
-
-      tbody.appendChild(tr);
-
-    }
-  );
-
+  body.innerHTML =
+    recordRows.map(r=>`
+
+      <tr>
+
+        <td>
+          ${escapeHTML(r.component_sn)}
+        </td>
+
+        <td>
+          ${escapeHTML(r.component_pn)}
+        </td>
+
+        <td>
+          ${escapeHTML(r.defect)}
+        </td>
+
+        <td>
+          ${escapeHTML(r.defect_class)}
+        </td>
+
+        <td>
+          ${escapeHTML(r.operator_id)}
+        </td>
+
+        <td>
+          ${escapeHTML(formatDateTime(r.date_time))}
+        </td>
+
+        ${
+          currentAdmin
+          ?
+          `
+            <td>
+
+              <div class="action-buttons">
+
+                <button
+                  class="small-btn edit-btn"
+                  onclick="editRecord('${r.id}')"
+                >
+                  EDIT
+                </button>
+
+                <button
+                  class="small-btn delete-btn"
+                  onclick="deleteRecord('${r.id}')"
+                >
+                  DELETE
+                </button>
+
+              </div>
+
+            </td>
+          `
+          :
+          ""
+        }
+
+      </tr>
+
+    `).join("");
 }
 
 
 /* =========================================================
-   COPY VISIBLE RECORDS
+   SCAN BATCH
 ========================================================= */
 
-async function copyVisibleRecords(){
+function renderBatch(){
 
-  if(
-    !recordFilteredRows.length
-  ){
+  const container =
+    el("batchList");
 
-    alert(
-      "No visible records to copy."
-    );
+
+  el("scanCount").textContent =
+    scannedSNs.length;
+
+
+  if(!scannedSNs.length){
+
+    container.innerHTML = "";
 
     return;
-
   }
 
 
-  const header=[
-    "Component SN",
-    "Component PN",
-    "Reject",
-    "Defect Class",
-    "Badge ID",
-    "Date Time"
-  ];
+  container.innerHTML = `
+
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    ">
+
+      ${scannedSNs.map(sn=>`
+
+        <span style="
+          padding:7px 9px;
+          background:#eff6ff;
+          color:#1d4ed8;
+          border-radius:8px;
+          font-size:11px;
+          font-weight:700;
+        ">
+          ${escapeHTML(sn)}
+        </span>
+
+      `).join("")}
+
+    </div>
+
+  `;
+}
 
 
-  const lines=[];
+/* =========================================================
+   ADD SN
+========================================================= */
+
+async function addSN(){
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access required.",
+      "error"
+    );
+
+    return;
+  }
 
 
-  lines.push(
-    header.join("\t")
-  );
+  const input =
+    el("sn");
 
 
-  recordFilteredRows.forEach(
-    row=>{
-
-      const values=[
-
-        row.component_sn||"",
-
-        row.component_pn||"",
-
-        row.defect||"",
-
-        row.defect_class||"",
-
-        row.operator_id||"",
-
-        formatDateTime(
-          row.date_time
-        )
-
-      ];
+  const sn =
+    normalizeSN(input.value);
 
 
-      lines.push(
-        values
-          .map(
-            value =>
-            String(value)
-              .replace(
-                /\t/g,
-                " "
-              )
-              .replace(
-                /\r?\n/g,
-                " "
-              )
-          )
-          .join("\t")
-      );
+  if(!sn){
 
-    }
-  );
+    showToast(
+      "Please scan or enter Component SN.",
+      "error"
+    );
+
+    input.focus();
+
+    return;
+  }
 
 
-  const text=
-    lines.join("\n");
+  if(
+    scannedSNs.some(
+      x => normalizeSN(x) === sn
+    )
+  ){
+
+    showToast(
+      "Duplicate SN in current batch.",
+      "error"
+    );
+
+    input.select();
+
+    return;
+  }
+
+
+  const existing =
+    rows.some(
+      r =>
+        normalizeSN(r.component_sn) === sn
+    );
+
+
+  if(existing){
+
+    showToast(
+      "This Component SN already exists in database.",
+      "error"
+    );
+
+    input.select();
+
+    return;
+  }
+
+
+  scannedSNs.push(sn);
+
+  input.value = "";
+
+  renderBatch();
+
+  input.focus();
+}
+
+
+/* =========================================================
+   SUBMIT REJECT
+========================================================= */
+
+async function submitReject(){
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!scannedSNs.length){
+
+    showToast(
+      "Please add at least one SN.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const pn =
+    el("pn").value;
+
+  const defect =
+    el("defect").value;
+
+  const defectClass =
+    el("defectClass").value;
+
+  const operator =
+    el("operator").value.trim();
+
+
+  if(
+    !pn ||
+    !defect ||
+    !defectClass ||
+    !operator
+  ){
+
+    showToast(
+      "Please complete all fields.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const now =
+    new Date().toISOString();
+
+
+  const payload =
+    scannedSNs.map(sn=>({
+
+      component_sn:sn,
+
+      component_pn:pn,
+
+      defect:defect,
+
+      defect_class:defectClass,
+
+      operator_id:operator,
+
+      date_time:now
+
+    }));
 
 
   try{
 
-    await navigator.clipboard.writeText(
-      text
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("rejects")
+      .insert(payload)
+      .select();
+
+
+    if(error){
+
+      if(error.code === "23505"){
+
+        showToast(
+          "Duplicate Component SN detected. Submission cancelled.",
+          "error"
+        );
+
+      }else{
+
+        throw error;
+      }
+
+      return;
+    }
+
+
+    rows =
+      [
+        ...(data || []),
+        ...rows
+      ];
+
+
+    scannedSNs = [];
+
+    renderBatch();
+
+    el("pn").value = "";
+
+    el("defect").value = "";
+
+    el("defectClass").value = "";
+
+    el("operator").value = "";
+
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderDailyTop();
+
+    renderChart();
+
+    renderRecords();
+
+
+    showToast(
+      `${payload.length} reject record(s) submitted successfully.`,
+      "success"
     );
 
 
-    alert(
-      recordFilteredRows.length+
-      " records copied successfully.\n\n"+
-      "You can paste directly into Excel."
-    );
+    el("sn").focus();
 
   }catch(error){
 
-    const textarea=
-      document.createElement(
-        "textarea"
-      );
+    console.error(error);
 
-
-    textarea.value=text;
-
-    document.body.appendChild(
-      textarea
+    showToast(
+      "Submit failed: " +
+      error.message,
+      "error"
     );
-
-    textarea.select();
-
-    document.execCommand(
-      "copy"
-    );
-
-    textarea.remove();
-
-
-    alert(
-      recordFilteredRows.length+
-      " records copied successfully."
-    );
-
   }
-
 }
 
 
 /* =========================================================
-   EDIT
-========================================================= */
-
-async function editRow(id){
-
-  if(!isAdmin()){
-
-    alert(
-      "Admin access required."
-    );
-
-    return;
-
-  }
-
-
-  const row=
-    rows.find(
-      x =>
-      String(x.id)===
-      String(id)
-    );
-
-
-  if(!row)
-    return;
-
-
-  const sn=
-    prompt(
-      "Component SN:",
-      row.component_sn||""
-    );
-
-
-  if(sn===null)
-    return;
-
-
-  const pn=
-    prompt(
-      "Component PN:",
-      row.component_pn||""
-    );
-
-
-  if(pn===null)
-    return;
-
-
-  const defect=
-    prompt(
-      "Reject / Defect:",
-      row.defect||""
-    );
-
-
-  if(defect===null)
-    return;
-
-
-  const defectClass=
-    prompt(
-      "Defect Class:",
-      row.defect_class||""
-    );
-
-
-  if(
-    defectClass===null
-  )
-    return;
-
-
-  const operator=
-    prompt(
-      "Badge ID:",
-      row.operator_id||""
-    );
-
-
-  if(
-    operator===null
-  )
-    return;
-
-
-  if(!sn.trim()){
-
-    alert(
-      "Component SN cannot be empty."
-    );
-
-    return;
-
-  }
-
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .update({
-
-        component_sn:
-          sn.trim(),
-
-        component_pn:
-          pn.trim(),
-
-        defect:
-          defect.trim(),
-
-        defect_class:
-          defectClass.trim(),
-
-        operator_id:
-          operator.trim()
-
-      })
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    if(
-      error.code==="23505"
-    ){
-
-      alert(
-        "Cannot update. This Component SN already exists."
-      );
-
-    }else{
-
-      alert(
-        "Update failed: "+
-        error.message
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  await loadRows();
-
-
-  alert(
-    "Record updated successfully."
-  );
-
-}
-
-
-/* =========================================================
-   DELETE
-========================================================= */
-
-async function deleteRow(id){
-
-  if(!isAdmin()){
-
-    alert(
-      "Admin access required."
-    );
-
-    return;
-
-  }
-
-
-  const row=
-    rows.find(
-      x =>
-      String(x.id)===
-      String(id)
-    );
-
-
-  if(!row){
-
-    alert(
-      "Record not found."
-    );
-
-    return;
-
-  }
-
-
-  const ok=
-    confirm(
-      "DELETE THIS RECORD?\n\n"+
-      "Component SN: "+
-      row.component_sn+
-      "\nReject: "+
-      row.defect+
-      "\n\nThis action cannot be undone."
-    );
-
-
-  if(!ok)
-    return;
-
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .delete()
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(
-      "Delete failed: "+
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  await loadRows();
-
-
-  alert(
-    "Record deleted successfully."
-  );
-
-}
-
-
-/* =========================================================
-   CLEAR ALL
-========================================================= */
-
-async function clearAll(){
-
-  if(!isAdmin()){
-
-    alert(
-      "Admin access required."
-    );
-
-    return;
-
-  }
-
-
-  const ok=
-    confirm(
-      "WARNING!\n\n"+
-      "Delete ALL reject data?\n\n"+
-      "This cannot be undone."
-    );
-
-
-  if(!ok)
-    return;
-
-
-  const {error}=
-    await supabaseClient
-      .from("rejects")
-      .delete()
-      .not(
-        "id",
-        "is",
-        null
-      );
-
-
-  if(error){
-
-    alert(
-      "Clear All failed: "+
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  await loadRows();
-
-
-  alert(
-    "All reject data has been cleared."
-  );
-
-}
-
-
-/* =========================================================
-   IMPORT
+   IMPORT EXCEL
 ========================================================= */
 
 async function importExcel(){
 
   if(!isAdmin()){
-    alert("Admin access required.");
+
+    showToast(
+      "Admin access required.",
+      "error"
+    );
+
     return;
   }
 
-  const file=
-    document
-      .getElementById(
-        "excelFile"
-      )
-      .files[0];
 
-
-  const msg=
-    document.getElementById(
-      "importMsg"
-    );
+  const file =
+    el("excelFile").files[0];
 
 
   if(!file){
 
-    msg.style.color="red";
-
-    msg.textContent=
-      "Please select Excel / CSV file.";
+    showToast(
+      "Please select an Excel file.",
+      "error"
+    );
 
     return;
-
   }
-
-
-  msg.style.color="#555";
-
-  msg.textContent=
-    "Importing data...";
 
 
   try{
 
-    const buffer=
+    const buffer =
       await file.arrayBuffer();
 
 
-    const workbook=
+    const workbook =
       XLSX.read(
         buffer,
-        {
-          type:"array",
-          cellDates:true
-        }
+        {type:"array"}
       );
 
 
-    if(
-      !workbook.SheetNames||
-      !workbook.SheetNames.length
-    ){
-
-      throw new Error(
-        "No worksheet found."
-      );
-
-    }
-
-
-    const sheet=
+    const sheet =
       workbook.Sheets[
         workbook.SheetNames[0]
       ];
 
 
-    const data=
+    const data =
       XLSX.utils.sheet_to_json(
         sheet,
         {
-          defval:"",
-          raw:true
+          defval:""
         }
       );
 
 
     if(!data.length){
 
-      throw new Error(
-        "No data found in file."
+      showToast(
+        "Excel file is empty.",
+        "error"
       );
 
+      return;
     }
 
 
-    const records=[];
-
-    const duplicateSNs=[];
-
-    const fileSNs=
-      new Set();
-
-
-    data.forEach(
-      row=>{
-
-        const sn=
-          String(
-            row["Component SN"] ??
-            row["component_sn"] ??
-            row["SN"] ??
-            row["sn"] ??
-            ""
-          ).trim();
-
-
-        if(!sn)
-          return;
-
-
-        const snKey=
-          sn.toLowerCase();
-
-
-        if(
-          fileSNs.has(snKey)
-        ){
-
-          duplicateSNs.push(sn);
-
-          return;
-
-        }
-
-
-        fileSNs.add(snKey);
-
-
-        const badgeID=
-          String(
-            row["Badge ID"] ??
-            row["badge_id"] ??
-            row["Operator ID"] ??
-            row["operator_id"] ??
-            row["Operator"] ??
-            row["operator"] ??
-            ""
-          ).trim();
-
-
-        records.push({
-
-          component_sn:
-            sn,
-
-          component_pn:
-            String(
-              row["Component PN"] ??
-              row["component_pn"] ??
-              row["PN"] ??
-              row["pn"] ??
-              ""
-            ).trim(),
-
-          defect:
-            String(
-              row["Defect"] ??
-              row["Reject"] ??
-              row["reject"] ??
-              row["defect"] ??
-              ""
-            ).trim(),
-
-          defect_class:
-            String(
-              row["Defect Class"] ??
-              row["defect_class"] ??
-              ""
-            ).trim(),
-
-          operator_id:
-            badgeID,
-
-          date_time:
-            parseImportDate(
-              row["Date Time"] ??
-              row["date_time"] ??
-              row["Date"] ??
-              row["date"] ??
-              ""
-            )
-
-        });
-
-      }
-    );
-
-
-    if(
-      !records.length
-    ){
-
-      throw new Error(
-        "No valid Component SN found."
-      );
-
-    }
-
-
-    const existingSNs=
-      new Set(
-        rows.map(
-          row =>
-          String(
-            row.component_sn||""
-          )
+    const normalizeHeader =
+      key =>
+        String(key)
           .trim()
           .toLowerCase()
-        )
-      );
+          .replace(/\s+/g," ");
 
 
-    const newRecords=
-      records.filter(
-        record=>{
+    const rowsToInsert = [];
 
-          const key=
-            String(
-              record.component_sn
-            )
-            .trim()
-            .toLowerCase();
+    const fileSNs = new Set();
 
 
-          return !existingSNs.has(key);
+    for(const item of data){
+
+      const normalized = {};
+
+      Object.keys(item).forEach(key=>{
+
+        normalized[
+          normalizeHeader(key)
+        ] = item[key];
+
+      });
+
+
+      const sn =
+        String(
+          normalized["component sn"] ??
+          normalized["sn"] ??
+          normalized["serial number"] ??
+          ""
+        ).trim();
+
+
+      const pn =
+        String(
+          normalized["component pn"] ??
+          normalized["pn"] ??
+          ""
+        ).trim();
+
+
+      const defect =
+        String(
+          normalized["reject"] ??
+          normalized["defect"] ??
+          ""
+        ).trim();
+
+
+      const defectClass =
+        String(
+          normalized["defect class"] ??
+          ""
+        ).trim();
+
+
+      const operator =
+        String(
+          normalized["badge id"] ??
+          normalized["operator id"] ??
+          normalized["operator"] ??
+          ""
+        ).trim();
+
+
+      let dateTime =
+        normalized["date time"] ??
+        normalized["datetime"] ??
+        normalized["date"] ??
+        "";
+
+
+      if(!sn){
+        continue;
+      }
+
+
+      const normalizedSN =
+        normalizeSN(sn);
+
+
+      if(fileSNs.has(normalizedSN)){
+
+        showToast(
+          `Duplicate SN inside Excel: ${sn}`,
+          "error"
+        );
+
+        return;
+      }
+
+
+      fileSNs.add(normalizedSN);
+
+
+      const existing =
+        rows.some(
+          r =>
+            normalizeSN(r.component_sn) ===
+            normalizedSN
+        );
+
+
+      if(existing){
+
+        showToast(
+          `SN already exists: ${sn}`,
+          "error"
+        );
+
+        return;
+      }
+
+
+      if(!dateTime){
+
+        dateTime =
+          new Date().toISOString();
+
+      }else{
+
+        const parsed =
+          new Date(dateTime);
+
+        if(!Number.isNaN(parsed.getTime())){
+
+          dateTime =
+            parsed.toISOString();
 
         }
-      );
+      }
 
 
-    const existingCount=
-      records.length-
-      newRecords.length;
+      rowsToInsert.push({
 
+        component_sn:sn,
 
-    if(
-      !newRecords.length
-    ){
+        component_pn:pn,
 
-      throw new Error(
-        "All SN in this file already exist in the database."
-      );
+        defect:defect,
+
+        defect_class:defectClass,
+
+        operator_id:operator,
+
+        date_time:dateTime
+
+      });
 
     }
 
 
-    const {error}=
-      await supabaseClient
-        .from("rejects")
-        .insert(newRecords);
+    if(!rowsToInsert.length){
+
+      showToast(
+        "No valid rows found.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const {
+      data:inserted,
+      error
+    } = await supabaseClient
+      .from("rejects")
+      .insert(rowsToInsert)
+      .select();
 
 
     if(error){
 
-      throw new Error(
-        error.message||
-        "Database insert failed."
-      );
+      if(error.code === "23505"){
 
+        showToast(
+          "Duplicate Component SN detected. Import cancelled.",
+          "error"
+        );
+
+      }else{
+
+        throw error;
+      }
+
+      return;
     }
 
 
-    let successMessage=
-      newRecords.length+
-      " records imported successfully.";
+    rows =
+      [
+        ...(inserted || []),
+        ...rows
+      ];
 
 
-    if(existingCount>0){
+    populateFilterOptions();
 
-      successMessage+=
-        " "+
-        existingCount+
-        " duplicate SN skipped.";
+    renderDashboard();
 
-    }
+    renderDailyTop();
 
+    renderChart();
 
-    if(
-      duplicateSNs.length>0
-    ){
-
-      successMessage+=
-        " "+
-        duplicateSNs.length+
-        " duplicate SN inside file skipped.";
-
-    }
+    renderRecords();
 
 
-    msg.style.color="green";
-
-    msg.textContent=
-      successMessage;
+    el("excelFile").value = "";
 
 
-    document
-      .getElementById(
-        "excelFile"
-      )
-      .value="";
-
-
-    await loadRows();
-
+    showToast(
+      `${rowsToInsert.length} record(s) imported successfully.`,
+      "success"
+    );
 
   }catch(error){
 
     console.error(error);
 
-    msg.style.color="red";
-
-    msg.textContent=
-      "Import failed: "+
-      (
-        error.message||
-        "Unknown error"
-      );
-
+    showToast(
+      "Import failed: " +
+      error.message,
+      "error"
+    );
   }
-
 }
 
 
 /* =========================================================
-   BAR CHART
+   EDIT RECORD
 ========================================================= */
 
-function renderChart(){
+async function editRecord(id){
 
-  const counts={};
+  if(!isAdmin()){
 
-
-  filteredRows.forEach(
-    row=>{
-
-      const defect=
-        row.defect||
-        "Unknown";
-
-
-      counts[defect]=
-        (
-          counts[defect]||0
-        )+1;
-
-    }
-  );
-
-
-  const sorted=
-    Object.entries(counts)
-      .sort(
-        (a,b)=>b[1]-a[1]
-      );
-
-
-  const labels=
-    sorted.map(
-      item=>item[0]
+    showToast(
+      "Admin access required.",
+      "error"
     );
-
-
-  const values=
-    sorted.map(
-      item=>item[1]
-    );
-
-
-  const ctx=
-    document
-      .getElementById(
-        "trendChart"
-      )
-      .getContext("2d");
-
-
-  if(trendChart){
-
-    trendChart.destroy();
-
-  }
-
-
-  /*
-     BOLD MULTI-COLOR GRADIENT
-  */
-
-  const gradient=
-    ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      430
-    );
-
-
-  gradient.addColorStop(
-    0,
-    "#ff1f7a"
-  );
-
-
-  gradient.addColorStop(
-    .28,
-    "#ff3d9a"
-  );
-
-
-  gradient.addColorStop(
-    .58,
-    "#a855f7"
-  );
-
-
-  gradient.addColorStop(
-    1,
-    "#5b3fd3"
-  );
-
-
-  trendChart=
-    new Chart(
-      ctx,
-      {
-
-        type:"bar",
-
-        data:{
-
-          labels:labels,
-
-          datasets:[{
-
-            label:
-              "Reject Quantity",
-
-            data:values,
-
-            backgroundColor:
-              gradient,
-
-            borderColor:
-              "#7c2d8f",
-
-            borderWidth:2,
-
-            borderRadius:10,
-
-            borderSkipped:false,
-
-            maxBarThickness:62,
-
-            hoverBackgroundColor:
-              "#ff197f"
-
-          }]
-
-        },
-
-        options:{
-
-          responsive:true,
-
-          maintainAspectRatio:false,
-
-          interaction:{
-            mode:"index",
-            intersect:false
-          },
-
-          plugins:{
-
-            legend:{
-              display:false
-            },
-
-            tooltip:{
-
-              backgroundColor:
-                "#21182e",
-
-              titleColor:
-                "#fff",
-
-              bodyColor:
-                "#fff",
-
-              padding:13,
-
-              cornerRadius:10,
-
-              displayColors:false,
-
-              callbacks:{
-
-                label:function(
-                  context
-                ){
-
-                  return(
-                    " Quantity: "+
-                    context.raw+
-                    " reject(s)"
-                  );
-
-                }
-
-              }
-
-            }
-
-          },
-
-          scales:{
-
-            x:{
-
-              grid:{
-                display:false
-              },
-
-              ticks:{
-
-                color:"#62596c",
-
-                font:{
-                  size:11,
-                  weight:"800"
-                },
-
-                maxRotation:35,
-
-                minRotation:0
-
-              }
-
-            },
-
-            y:{
-
-              beginAtZero:true,
-
-              ticks:{
-
-                precision:0,
-
-                color:"#62596c",
-
-                font:{
-                  weight:"700"
-                }
-
-              },
-
-              grid:{
-
-                color:
-                  "rgba(100,80,110,.10)"
-
-              }
-
-            }
-
-          },
-
-          onClick:function(
-            event,
-            elements
-          ){
-
-            if(
-              !elements.length
-            )
-              return;
-
-
-            const index=
-              elements[0].index;
-
-
-            const defect=
-              labels[index];
-
-
-            const qty=
-              values[index];
-
-
-            alert(
-              defect+
-              "\n\nQuantity: "+
-              qty+
-              " reject(s)"
-            );
-
-          }
-
-        }
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   DAILY TOP
-========================================================= */
-
-function renderDailyTopDefect(){
-
-  const container=
-    document.getElementById(
-      "dailyTopDefect"
-    );
-
-
-  const dates={};
-
-
-  filteredRows.forEach(
-    row=>{
-
-      const date=
-        formatDateKey(
-          new Date(
-            row.date_time
-          )
-        );
-
-
-      if(
-        !dates[date]
-      )
-        dates[date]={};
-
-
-      const defect=
-        row.defect||
-        "Unknown";
-
-
-      dates[date][defect]=
-        (
-          dates[date][defect]||0
-        )+1;
-
-    }
-  );
-
-
-  const dateKeys=
-    Object.keys(dates)
-      .sort()
-      .reverse();
-
-
-  if(
-    !dateKeys.length
-  ){
-
-    container.innerHTML=
-      `<div class="empty-state">
-        No data available.
-      </div>`;
 
     return;
-
   }
 
 
-  container.innerHTML="";
+  const row =
+    rows.find(
+      r => String(r.id) === String(id)
+    );
 
 
-  dateKeys.forEach(
-    date=>{
+  if(!row){
 
-      const sorted=
-        Object.entries(
-          dates[date]
-        )
-        .sort(
-          (a,b)=>b[1]-a[1]
-        );
+    showToast(
+      "Record not found.",
+      "error"
+    );
 
-
-      const top=
-        sorted[0];
+    return;
+  }
 
 
-      const item=
-        document.createElement(
-          "div"
-        );
+  const newDefect =
+    prompt(
+      "Update Reject:",
+      row.defect || ""
+    );
 
 
-      item.className=
-        "daily-item";
+  if(newDefect === null){
+    return;
+  }
 
 
-      const dateDiv=
-        document.createElement(
-          "div"
-        );
+  const trimmedDefect =
+    newDefect.trim();
 
 
-      dateDiv.className=
-        "daily-date";
+  if(!trimmedDefect){
+
+    showToast(
+      "Reject cannot be empty.",
+      "error"
+    );
+
+    return;
+  }
 
 
-      dateDiv.textContent=
-        date;
+  const newClass =
+    prompt(
+      "Update Defect Class:",
+      row.defect_class || ""
+    );
 
 
-      const defectDiv=
-        document.createElement(
-          "div"
-        );
+  if(newClass === null){
+    return;
+  }
 
 
-      defectDiv.className=
-        "daily-defect";
+  const newOperator =
+    prompt(
+      "Update Badge ID:",
+      row.operator_id || ""
+    );
 
 
-      defectDiv.textContent=
-        top[0];
+  if(newOperator === null){
+    return;
+  }
 
 
-      const qty=
-        document.createElement(
-          "span"
-        );
+  try{
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("rejects")
+      .update({
+
+        defect:trimmedDefect,
+
+        defect_class:newClass.trim(),
+
+        operator_id:newOperator.trim()
+
+      })
+      .eq("id",id)
+      .select()
+      .single();
 
 
-      qty.className=
-        "daily-qty";
-
-
-      qty.textContent=
-        top[1]+
-        " reject(s)";
-
-
-      item.appendChild(
-        dateDiv
-      );
-
-
-      item.appendChild(
-        defectDiv
-      );
-
-
-      item.appendChild(
-        qty
-      );
-
-
-      container.appendChild(
-        item
-      );
-
+    if(error){
+      throw error;
     }
-  );
 
+
+    const index =
+      rows.findIndex(
+        r => String(r.id) === String(id)
+      );
+
+
+    if(index !== -1){
+
+      rows[index] =
+        data;
+    }
+
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderDailyTop();
+
+    renderChart();
+
+    renderRecords();
+
+
+    showToast(
+      "Record updated successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Update failed: " +
+      error.message,
+      "error"
+    );
+  }
+}
+
+
+/* =========================================================
+   DELETE RECORD
+========================================================= */
+
+async function deleteRecord(id){
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const row =
+    rows.find(
+      r => String(r.id) === String(id)
+    );
+
+
+  if(!row){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      `Delete this reject record?\n\nSN: ${row.component_sn}\nReject: ${row.defect}`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const {
+      error
+    } = await supabaseClient
+      .from("rejects")
+      .delete()
+      .eq("id",id);
+
+
+    if(error){
+      throw error;
+    }
+
+
+    rows =
+      rows.filter(
+        r => String(r.id) !== String(id)
+      );
+
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderDailyTop();
+
+    renderChart();
+
+    renderRecords();
+
+
+    showToast(
+      "Record deleted successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Delete failed: " +
+      error.message,
+      "error"
+    );
+  }
+}
+
+
+/* =========================================================
+   CLEAR ALL DATA
+========================================================= */
+
+async function clearAllData(){
+
+  if(!isAdmin()){
+
+    showToast(
+      "Admin access required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const confirmed =
+    prompt(
+      'This will DELETE ALL reject data.\n\nType DELETE to confirm.'
+    );
+
+
+  if(confirmed !== "DELETE"){
+
+    showToast(
+      "Clear All cancelled."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    /*
+      Using neq with a non-empty value is used
+      so Supabase receives a valid delete filter.
+    */
+
+    const {
+      error
+    } = await supabaseClient
+      .from("rejects")
+      .delete()
+      .neq("component_sn","");
+
+
+    if(error){
+      throw error;
+    }
+
+
+    rows = [];
+
+    scannedSNs = [];
+
+    renderBatch();
+
+    populateFilterOptions();
+
+    renderDashboard();
+
+    renderDailyTop();
+
+    renderChart();
+
+    renderRecords();
+
+
+    showToast(
+      "All reject data has been cleared.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Clear All failed: " +
+      error.message,
+      "error"
+    );
+  }
 }
 
 
@@ -4822,68 +3757,68 @@ function renderDailyTopDefect(){
    EXPORT EXCEL
 ========================================================= */
 
-function exportCSV(){
+function exportExcel(){
 
   if(!isAdmin()){
-    alert("Admin access required.");
-    return;
-  }
 
-  if(
-    !filteredRows.length
-  ){
-
-    alert(
-      "No data to export."
+    showToast(
+      "Admin access required.",
+      "error"
     );
 
     return;
-
   }
 
 
-  const exportRows=
-    filteredRows.map(
-      row=>({
+  if(!rows.length){
 
-        "Component SN":
-          row.component_sn,
-
-        "Component PN":
-          row.component_pn,
-
-        "Reject":
-          row.defect,
-
-        "Defect Class":
-          row.defect_class,
-
-        "Badge ID":
-          row.operator_id,
-
-        "Date Time":
-          formatDateTime(
-            row.date_time
-          )
-
-      })
+    showToast(
+      "No data available to export.",
+      "error"
     );
 
+    return;
+  }
 
-  const worksheet=
+
+  const exportData =
+    rows.map(r=>({
+
+      "Component SN":
+        r.component_sn,
+
+      "Component PN":
+        r.component_pn,
+
+      "Reject":
+        r.defect,
+
+      "Defect Class":
+        r.defect_class,
+
+      "Badge ID":
+        r.operator_id,
+
+      "Date Time":
+        formatDateTime(r.date_time)
+
+    }));
+
+
+  const worksheet =
     XLSX.utils.json_to_sheet(
-      exportRows
+      exportData
     );
 
 
-  const workbook=
+  const workbook =
     XLSX.utils.book_new();
 
 
   XLSX.utils.book_append_sheet(
     workbook,
     worksheet,
-    "Reject Data"
+    "Reject Records"
   );
 
 
@@ -4892,317 +3827,493 @@ function exportCSV(){
     "Reject_Trending_Export.xlsx"
   );
 
+
+  showToast(
+    "Excel exported successfully.",
+    "success"
+  );
 }
 
 
 /* =========================================================
-   BACKUP
+   COPY RECORDS
 ========================================================= */
 
+async function copyVisibleRecords(){
 
+  if(!isAdmin()){
 
-/* =========================================================
-   ADMIN LOGIN
-========================================================= */
-
-function openAdminLogin(){
-
-  if(currentAdmin){
-
-    adminLogout();
+    showToast(
+      "Admin access required.",
+      "error"
+    );
 
     return;
-
   }
 
 
-  document
-    .getElementById(
-      "adminModal"
-    )
-    .style.display="flex";
+  if(!recordRows.length){
+
+    showToast(
+      "No visible records to copy.",
+      "error"
+    );
+
+    return;
+  }
 
 
-  document
-    .getElementById(
-      "adminError"
-    )
-    .textContent="";
-
-
-  document
-    .getElementById(
-      "adminEmail"
-    )
-    .value="";
-
-
-  document
-    .getElementById(
-      "adminPassword"
-    )
-    .value="";
-
-
-  setTimeout(
-    function(){
-
-      document
-        .getElementById(
-          "adminEmail"
-        )
-        .focus();
-
-    },
-    100
-  );
-
-}
-
-
-function closeAdminLogin(){
-
-  document
-    .getElementById(
-      "adminModal"
-    )
-    .style.display="none";
-
-}
-
-
-async function adminLogin(){
-
-  const email=
-    document
-      .getElementById(
-        "adminEmail"
+  const text =
+    recordRows
+      .map(r=>
+        [
+          r.component_sn,
+          r.component_pn,
+          r.defect,
+          r.defect_class,
+          r.operator_id,
+          formatDateTime(r.date_time)
+        ].join("\t")
       )
+      .join("\n");
+
+
+  try{
+
+    await navigator.clipboard.writeText(text);
+
+    showToast(
+      "Visible records copied.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Unable to copy records.",
+      "error"
+    );
+  }
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function openLogin(){
+
+  if(currentAdmin){
+
+    logoutAdmin();
+
+    return;
+  }
+
+
+  el("loginEmail").value = "";
+
+  el("loginPassword").value = "";
+
+  el("loginError").style.display =
+    "none";
+
+  el("loginModal")
+    .classList.add("show");
+
+  setTimeout(()=>{
+    el("loginEmail").focus();
+  },100);
+}
+
+
+function closeLogin(){
+
+  el("loginModal")
+    .classList.remove("show");
+}
+
+
+async function loginAdmin(){
+
+  const email =
+    el("loginEmail")
       .value
       .trim();
 
-
-  const password=
-    document
-      .getElementById(
-        "adminPassword"
-      )
+  const password =
+    el("loginPassword")
       .value;
 
 
-  const errorBox=
-    document.getElementById(
-      "adminError"
-    );
+  const errorBox =
+    el("loginError");
 
 
-  errorBox.textContent="";
+  errorBox.style.display =
+    "none";
 
 
-  if(
-    !email||
-    !password
-  ){
+  if(!email || !password){
 
-    errorBox.textContent=
+    errorBox.textContent =
       "Please enter email and password.";
 
-    return;
+    errorBox.style.display =
+      "block";
 
+    return;
   }
 
 
-  const {data,error}=
-    await supabaseClient
-      .auth
-      .signInWithPassword({
+  try{
 
-        email:email,
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.signInWithPassword({
 
-        password:password
+      email,
 
-      });
+      password
+
+    });
 
 
-  if(error){
+    if(error){
+      throw error;
+    }
 
-    errorBox.textContent=
-      error.message;
 
-    return;
+    if(
+      !data.user ||
+      data.user.id !== ADMIN_UID
+    ){
 
+      await supabaseClient.auth.signOut();
+
+      errorBox.textContent =
+        "This account is not authorized as admin.";
+
+      errorBox.style.display =
+        "block";
+
+      return;
+    }
+
+
+    currentAdmin = true;
+
+    updateAdminUI();
+
+    closeLogin();
+
+    showToast(
+      "Admin login successful.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    errorBox.textContent =
+      error.message ||
+      "Login failed.";
+
+    errorBox.style.display =
+      "block";
   }
-
-
-  if(
-    !data.user||
-    data.user.id!==ADMIN_UID
-  ){
-
-    await supabaseClient
-      .auth
-      .signOut();
-
-
-    errorBox.textContent=
-      "This account is not authorised as admin.";
-
-    return;
-
-  }
-
-
-  closeAdminLogin();
-
-  await updateAdminUI(
-    data.user
-  );
-
-
-  renderTable();
-
 }
 
 
-async function adminLogout(){
+async function logoutAdmin(){
 
-  await supabaseClient
-    .auth
-    .signOut();
+  await supabaseClient.auth.signOut();
 
+  currentAdmin = false;
 
-  await updateAdminUI(
-    null
+  updateAdminUI();
+
+  showToast(
+    "Admin logged out."
   );
-
-
-  renderTable();
-
 }
 
 
 /* =========================================================
-   ADMIN CHECK
+   EVENT SETUP
 ========================================================= */
 
-async function checkAdmin(){
+function setupEvents(){
 
-  const {data}=
-    await supabaseClient
-      .auth
-      .getUser();
+  /* Admin */
+
+  el("adminButton")
+    .addEventListener(
+      "click",
+      openLogin
+    );
 
 
-  await updateAdminUI(
-    data.user||null
+  el("logoutButton")
+    .addEventListener(
+      "click",
+      logoutAdmin
+    );
+
+
+  el("cancelLogin")
+    .addEventListener(
+      "click",
+      closeLogin
+    );
+
+
+  el("loginButton")
+    .addEventListener(
+      "click",
+      loginAdmin
+    );
+
+
+  el("loginPassword")
+    .addEventListener(
+      "keydown",
+      event=>{
+
+        if(event.key === "Enter"){
+          loginAdmin();
+        }
+
+      }
+    );
+
+
+  /* Scan */
+
+  el("addSNButton")
+    .addEventListener(
+      "click",
+      addSN
+    );
+
+
+  el("submitRejectButton")
+    .addEventListener(
+      "click",
+      submitReject
+    );
+
+
+  el("clearBatchButton")
+    .addEventListener(
+      "click",
+      ()=>{
+
+        scannedSNs = [];
+
+        renderBatch();
+
+        el("sn").focus();
+
+      }
+    );
+
+
+  el("sn")
+    .addEventListener(
+      "keydown",
+      event=>{
+
+        if(event.key === "Enter"){
+
+          event.preventDefault();
+
+          addSN();
+        }
+
+      }
+    );
+
+
+  /* Import */
+
+  el("importButton")
+    .addEventListener(
+      "click",
+      importExcel
+    );
+
+
+  /* Analytics */
+
+  el("applyAnalytics")
+    .addEventListener(
+      "click",
+      ()=>{
+
+        renderDashboard();
+
+        renderChart();
+
+      }
+    );
+
+
+  el("clearAnalytics")
+    .addEventListener(
+      "click",
+      ()=>{
+
+        el("analyticsDefect").value = "";
+
+        el("analyticsPN").value = "";
+
+        el("analyticsFrom").value = "";
+
+        el("analyticsTo").value = "";
+
+        renderDashboard();
+
+        renderChart();
+
+      }
+    );
+
+
+  /* Records */
+
+  [
+    "recordSearch",
+    "recordDefect",
+    "recordFrom",
+    "recordTo"
+  ].forEach(id=>{
+
+    el(id).addEventListener(
+      "input",
+      renderRecords
+    );
+
+    el(id).addEventListener(
+      "change",
+      renderRecords
+    );
+
+  });
+
+
+  el("clearRecordFilters")
+    .addEventListener(
+      "click",
+      ()=>{
+
+        el("recordSearch").value = "";
+
+        el("recordDefect").value = "";
+
+        el("recordFrom").value = "";
+
+        el("recordTo").value = "";
+
+        renderRecords();
+
+      }
+    );
+
+
+  el("copyVisibleRecords")
+    .addEventListener(
+      "click",
+      copyVisibleRecords
+    );
+
+
+  /* Data management */
+
+  el("clearAllData")
+    .addEventListener(
+      "click",
+      clearAllData
+    );
+
+
+  el("exportExcel")
+    .addEventListener(
+      "click",
+      exportExcel
+    );
+
+
+  /* Chart modal */
+
+  el("closeChartModal")
+    .addEventListener(
+      "click",
+      closeChartModal
+    );
+
+
+  el("closeChartModalBottom")
+    .addEventListener(
+      "click",
+      closeChartModal
+    );
+
+
+  el("chartModal")
+    .addEventListener(
+      "click",
+      event=>{
+
+        if(
+          event.target ===
+          el("chartModal")
+        ){
+
+          closeChartModal();
+
+        }
+
+      }
+    );
+
+
+  el("loginModal")
+    .addEventListener(
+      "click",
+      event=>{
+
+        if(
+          event.target ===
+          el("loginModal")
+        ){
+
+          closeLogin();
+
+        }
+
+      }
+    );
+
+
+  document.addEventListener(
+    "keydown",
+    event=>{
+
+      if(event.key === "Escape"){
+
+        closeChartModal();
+
+        closeLogin();
+
+      }
+
+    }
   );
-
-}
-
-
-function isAdmin(){
-
-  return currentAdmin;
-
-}
-
-
-/* =========================================================
-   ADMIN UI
-========================================================= */
-
-async function updateAdminUI(
-  user=null
-){
-
-  if(!user){
-
-    const result=
-      await supabaseClient
-        .auth
-        .getUser();
-
-
-    user=
-      result.data.user||null;
-
-  }
-
-
-  currentAdmin=
-    !!(
-      user &&
-      user.id===ADMIN_UID
-    );
-
-
-  const icon=
-    document.getElementById(
-      "adminIcon"
-    );
-
-
-  const tooltip=
-    document.getElementById(
-      "adminTooltip"
-    );
-
-
-  const adminSections = [
-    "adminWorkspaceTitle",
-    "scanSection",
-    "importSection",
-    "dashboardStatsSection",
-    "dailyTopSection",
-    "recordsSection",
-    "dataManagement"
-  ];
-
-  adminSections.forEach(function(id){
-    const el=document.getElementById(id);
-    if(el) el.style.display=currentAdmin ? "block" : "none";
-  });
-
-  document.querySelectorAll(".admin-only-button").forEach(function(el){
-    el.style.display=currentAdmin ? "inline-block" : "none";
-  });
-
-  if(currentAdmin){
-
-    icon.textContent="⚙️";
-
-    icon.classList.add(
-      "admin-active"
-    );
-
-    icon.setAttribute(
-      "aria-label",
-      "Logout Admin"
-    );
-
-    tooltip.textContent=
-      "Admin active • Click to logout";
-
-  }else{
-
-    icon.textContent="👤";
-
-    icon.classList.remove(
-      "admin-active"
-    );
-
-    icon.setAttribute(
-      "aria-label",
-      "Admin Login"
-    );
-
-    tooltip.textContent=
-      "Admin Login";
-
-  }
-
-  renderTable();
-
 }
 
 
@@ -5210,22 +4321,31 @@ async function updateAdminUI(
    AUTH STATE
 ========================================================= */
 
-supabaseClient
-  .auth
-  .onAuthStateChange(
-    async function(){
+supabaseClient.auth.onAuthStateChange(
+  async (
+    event,
+    session
+  )=>{
 
-      setTimeout(
-        async function(){
+    if(
+      session &&
+      session.user &&
+      session.user.id === ADMIN_UID
+    ){
 
-          await updateAdminUI();
+      currentAdmin = true;
 
-        },
-        0
-      );
+    }else{
+
+      currentAdmin = false;
 
     }
-  );
+
+
+    updateAdminUI();
+
+  }
+);
 
 
 /* =========================================================
@@ -5233,169 +4353,28 @@ supabaseClient
 ========================================================= */
 
 setInterval(
-  async function(){
-
+  async ()=>{
     await loadRows();
-
   },
   30000
 );
 
 
 /* =========================================================
-   DATE
+   INITIALIZE
 ========================================================= */
 
-function formatDateKey(
-  date
-){
+(async function init(){
 
-  if(
-    !date||
-    isNaN(
-      date.getTime()
-    )
-  )
-    return "Unknown";
+  setupEvents();
 
+  await checkAdminSession();
 
-  return(
-    date.getFullYear()+
-    "-"+
-    String(
-      date.getMonth()+1
-    ).padStart(2,"0")+
-    "-"+
-    String(
-      date.getDate()
-    ).padStart(2,"0")
-  );
+  await loadRows();
 
-}
+  renderBatch();
 
-
-function formatDateTime(
-  value
-){
-
-  const date=
-    new Date(value);
-
-
-  if(
-    isNaN(
-      date.getTime()
-    )
-  )
-    return value||"";
-
-
-  return date.toLocaleString();
-
-}
-
-
-/* =========================================================
-   IMPORT DATE
-========================================================= */
-
-function parseImportDate(
-  value
-){
-
-  if(!value)
-    return new Date().toISOString();
-
-
-  if(
-    typeof value==="number"
-  ){
-
-    const excelEpoch=
-      new Date(
-        Date.UTC(
-          1899,
-          11,
-          30
-        )
-      );
-
-
-    const date=
-      new Date(
-        excelEpoch.getTime()+
-        value*86400000
-      );
-
-
-    return date.toISOString();
-
-  }
-
-
-  if(
-    value instanceof Date
-  ){
-
-    if(
-      !isNaN(
-        value.getTime()
-      )
-    )
-      return value.toISOString();
-
-  }
-
-
-  const text=
-    String(value).trim();
-
-
-  if(!text)
-    return new Date().toISOString();
-
-
-  const date=
-    new Date(text);
-
-
-  if(
-    !isNaN(
-      date.getTime()
-    )
-  )
-    return date.toISOString();
-
-
-  return new Date().toISOString();
-
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-function showMessage(
-  text,
-  color
-){
-
-  const msg=
-    document.getElementById(
-      "msg"
-    );
-
-
-  msg.textContent=text;
-
-
-  msg.style.color=
-    color==="green"
-    ? "#16a34a"
-    : "#dc2626";
-
-}
+})();
 
 </script>
 
