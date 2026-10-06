@@ -1130,6 +1130,21 @@ tr:last-child td{
   display:none;
 }
 
+/* Admin workspace sections are hidden from public viewers. */
+.admin-only-section{
+  display:none;
+}
+
+/* Public view is intentionally limited to analytics filter + chart. */
+.public-dashboard-section{
+  display:block;
+}
+
+.admin-only-button{
+  display:none;
+}
+
+
 #adminModal{
   display:none;
 
@@ -1393,11 +1408,18 @@ Reject Monitoring • Quality Analytics • Daily Performance
 <div class="container">
 
 
+<div id="adminWorkspaceTitle" class="admin-only-section" style="margin-bottom:14px">
+  <div class="card" style="margin-bottom:0;padding:18px 22px">
+    <h2 style="margin:0;color:#71305d">⚙️ Admin Workspace</h2>
+    <div class="card-description">Scan new rejects, import existing data, and manage records.</div>
+  </div>
+</div>
+
 <!-- =====================================================
      SCAN
 ===================================================== -->
 
-<div class="card">
+<div class="card admin-only-section" id="scanSection">
 
 <div class="card-header">
 
@@ -1588,7 +1610,7 @@ aria-live="polite">
      IMPORT
 ===================================================== -->
 
-<div class="card">
+<div class="card admin-only-section" id="importSection">
 
 <div class="card-header">
 
@@ -1649,7 +1671,7 @@ aria-live="polite">
      DASHBOARD
 ===================================================== -->
 
-<div class="card">
+<div class="card admin-only-section" id="dashboardStatsSection">
 
 <div class="card-header">
 
@@ -1735,7 +1757,7 @@ class="summary">
      ANALYTICS FILTER
 ===================================================== -->
 
-<div class="card">
+<div class="card public-dashboard-section" id="analyticsSection">
 
 <div class="card-header">
 
@@ -1813,16 +1835,9 @@ CLEAR FILTER
 
 <button
 type="button"
-class="btn-blue"
+class="btn-blue admin-only-button"
 id="exportButton">
 EXPORT EXCEL
-</button>
-
-<button
-type="button"
-class="btn-purple"
-id="backupButton">
-BACKUP JSON
 </button>
 
 </div>
@@ -1834,7 +1849,7 @@ BACKUP JSON
      CHART
 ===================================================== -->
 
-<div class="card">
+<div class="card public-dashboard-section" id="chartSection">
 
 <div class="card-header">
 
@@ -1875,7 +1890,7 @@ Bold interactive reject trend
      DAILY TOP
 ===================================================== -->
 
-<div class="card">
+<div class="card admin-only-section" id="dailyTopSection">
 
 <div class="card-header">
 
@@ -1903,7 +1918,7 @@ class="daily-grid">
      REJECT RECORDS
 ===================================================== -->
 
-<div class="card">
+<div class="card admin-only-section" id="recordsSection">
 
 <div class="card-header">
 
@@ -2688,6 +2703,11 @@ function removeSN(index){
 ========================================================= */
 
 async function saveReject(){
+
+  if(!isAdmin()){
+    alert("Admin access required.");
+    return;
+  }
 
   const pn=
     document.getElementById(
@@ -4025,6 +4045,11 @@ async function clearAll(){
 
 async function importExcel(){
 
+  if(!isAdmin()){
+    alert("Admin access required.");
+    return;
+  }
+
   const file=
     document
       .getElementById(
@@ -4799,6 +4824,11 @@ function renderDailyTopDefect(){
 
 function exportCSV(){
 
+  if(!isAdmin()){
+    alert("Admin access required.");
+    return;
+  }
+
   if(
     !filteredRows.length
   ){
@@ -4869,51 +4899,6 @@ function exportCSV(){
    BACKUP
 ========================================================= */
 
-function backupJSON(){
-
-  const blob=
-    new Blob(
-      [
-        JSON.stringify(
-          rows,
-          null,
-          2
-        )
-      ],
-      {
-        type:
-          "application/json"
-      }
-    );
-
-
-  const url=
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const a=
-    document.createElement(
-      "a"
-    );
-
-
-  a.href=url;
-
-  a.download=
-    "Reject_Trending_Backup.json";
-
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  URL.revokeObjectURL(url);
-
-}
 
 
 /* =========================================================
@@ -5163,11 +5148,24 @@ async function updateAdminUI(
     );
 
 
-  const management=
-    document.getElementById(
-      "dataManagement"
-    );
+  const adminSections = [
+    "adminWorkspaceTitle",
+    "scanSection",
+    "importSection",
+    "dashboardStatsSection",
+    "dailyTopSection",
+    "recordsSection",
+    "dataManagement"
+  ];
 
+  adminSections.forEach(function(id){
+    const el=document.getElementById(id);
+    if(el) el.style.display=currentAdmin ? "block" : "none";
+  });
+
+  document.querySelectorAll(".admin-only-button").forEach(function(el){
+    el.style.display=currentAdmin ? "inline-block" : "none";
+  });
 
   if(currentAdmin){
 
@@ -5185,10 +5183,6 @@ async function updateAdminUI(
     tooltip.textContent=
       "Admin active • Click to logout";
 
-
-    management.style.display=
-      "block";
-
   }else{
 
     icon.textContent="👤";
@@ -5205,12 +5199,7 @@ async function updateAdminUI(
     tooltip.textContent=
       "Admin Login";
 
-
-    management.style.display=
-      "none";
-
   }
-
 
   renderTable();
 
