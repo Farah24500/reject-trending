@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,9 +12,9 @@
 
 <style>
 
-/* =====================================================
+/* =========================================================
    GLOBAL
-===================================================== */
+========================================================= */
 
 *{
   box-sizing:border-box;
@@ -25,270 +24,196 @@ html{
   scroll-behavior:smooth;
 }
 
-:root{
-
-  --pink:#ff1687;
-  --pink2:#ff3fa0;
-  --magenta:#d946ef;
-
-  --purple:#7c3aed;
-  --purple2:#9333ea;
-
-  --blue:#2563eb;
-  --cyan:#06b6d4;
-
-  --green:#16a34a;
-  --red:#dc2626;
-
-  --dark:#24182f;
-  --text:#30263b;
-  --muted:#817889;
-
-  --white:#ffffff;
-
-  --border:#eee5f3;
-
-  --shadow:
-    0 15px 45px rgba(74,38,92,.10);
-
-  --shadow-hover:
-    0 20px 55px rgba(85,40,110,.17);
-}
-
 body{
-
   margin:0;
-
   font-family:
     Inter,
     "Segoe UI",
     Arial,
     sans-serif;
 
-  color:var(--text);
-
-  min-height:100vh;
+  color:#29233b;
 
   background:
-
     radial-gradient(
-      circle at 0% 0%,
-      rgba(255,22,135,.18),
+      circle at 8% 8%,
+      rgba(255,64,145,.20),
       transparent 28%
     ),
-
     radial-gradient(
-      circle at 100% 5%,
-      rgba(124,58,237,.17),
+      circle at 92% 5%,
+      rgba(124,58,237,.20),
       transparent 30%
     ),
-
     radial-gradient(
       circle at 50% 100%,
-      rgba(37,99,235,.12),
+      rgba(236,72,153,.10),
       transparent 35%
     ),
-
     linear-gradient(
       135deg,
-      #fff6fb 0%,
-      #f7f2ff 48%,
-      #f0f7ff 100%
+      #fff7fb 0%,
+      #f7f4ff 48%,
+      #f8f9ff 100%
     );
+
+  min-height:100vh;
 }
 
-
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 header{
-
   position:relative;
-
   overflow:hidden;
 
-  color:white;
+  background:
+    linear-gradient(
+      120deg,
+      #ff2f88 0%,
+      #e93d9f 35%,
+      #a33fe5 68%,
+      #6048ee 100%
+    );
+
+  color:#fff;
+
+  padding:
+    34px
+    20px
+    42px;
 
   text-align:center;
 
-  padding:38px 20px 42px;
-
-  background:
-
-    linear-gradient(
-      120deg,
-      #ff087f 0%,
-      #df249d 30%,
-      #8b3ff5 65%,
-      #315de8 100%
-    );
-
   box-shadow:
-    0 18px 55px rgba(93,38,126,.28);
+    0 18px 45px rgba(103,45,123,.25);
 }
 
 header::before{
-
   content:"";
 
   position:absolute;
 
-  width:390px;
-  height:390px;
+  width:330px;
+  height:330px;
 
   border-radius:50%;
 
-  top:-240px;
-  left:-100px;
-
   background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.20),
-      transparent 70%
-    );
+    rgba(255,255,255,.10);
+
+  top:-210px;
+  left:-80px;
 }
 
 header::after{
-
   content:"";
 
   position:absolute;
 
-  width:450px;
-  height:450px;
+  width:370px;
+  height:370px;
 
   border-radius:50%;
 
-  right:-170px;
-  bottom:-300px;
-
   background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.16),
-      transparent 70%
-    );
+    rgba(255,255,255,.09);
+
+  right:-140px;
+  bottom:-260px;
 }
 
 .header-content{
-
   position:relative;
-
   z-index:2;
 }
 
 .logo-title{
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  gap:15px;
+  gap:14px;
 }
 
 .logo-mark{
-
-  width:60px;
-  height:60px;
+  width:58px;
+  height:58px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
-  border-radius:19px;
+  border-radius:18px;
 
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.30),
-      rgba(255,255,255,.08)
-    );
+    rgba(255,255,255,.18);
 
   border:
-    1px solid rgba(255,255,255,.38);
+    1px solid
+    rgba(255,255,255,.30);
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,.18);
+    0 10px 30px rgba(0,0,0,.14);
 
-  font-size:29px;
+  font-size:30px;
 
-  backdrop-filter:blur(15px);
-
-  transition:.3s;
-}
-
-.logo-mark:hover{
-
-  transform:
-    rotate(-5deg)
-    scale(1.07);
+  backdrop-filter:blur(12px);
 }
 
 header h1{
-
   margin:0;
 
-  font-size:35px;
+  font-size:34px;
 
   font-weight:950;
 
   letter-spacing:2px;
 
   text-shadow:
-    0 5px 18px rgba(0,0,0,.20);
+    0 4px 15px rgba(0,0,0,.13);
 }
 
 .header-subtitle{
+  margin:10px 0 0;
 
-  margin:11px 0 0;
+  opacity:.93;
 
   font-size:14px;
-
-  opacity:.95;
 
   letter-spacing:1px;
 }
 
-
-/* =====================================================
-   ADMIN BUTTON
-===================================================== */
+/* =========================================================
+   ADMIN ICON
+========================================================= */
 
 .admin-area{
-
   position:absolute;
 
   top:20px;
   right:22px;
 
-  z-index:30;
+  z-index:20;
 }
 
 .admin-icon{
-
-  width:49px;
-  height:49px;
+  width:48px;
+  height:48px;
 
   border-radius:50%;
 
   border:
-    1px solid rgba(255,255,255,.42);
+    1px solid
+    rgba(255,255,255,.35);
 
   background:
     rgba(255,255,255,.16);
 
-  color:white;
+  color:#fff;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   cursor:pointer;
@@ -301,49 +226,38 @@ header h1{
 }
 
 .admin-icon:hover{
-
   transform:
     translateY(-2px)
-    scale(1.08);
+    scale(1.06);
 
   background:
-    rgba(255,255,255,.30);
-
-  box-shadow:
-    0 8px 25px rgba(0,0,0,.15);
+    rgba(255,255,255,.28);
 }
 
 .admin-icon.admin-active{
-
-  background:
-    linear-gradient(
-      135deg,
-      #22c55e,
-      #15803d
-    );
+  background:#22c55e;
 
   border-color:#bbf7d0;
 
   box-shadow:
-    0 7px 25px
-    rgba(34,197,94,.35);
+    0 0 0 5px
+    rgba(34,197,94,.15);
 }
 
 .admin-tooltip{
-
   position:absolute;
 
-  top:59px;
-
+  top:57px;
   right:0;
 
   white-space:nowrap;
 
-  background:#21172c;
+  background:#21182e;
 
   color:white;
 
-  padding:8px 12px;
+  padding:
+    8px 12px;
 
   border-radius:9px;
 
@@ -353,108 +267,64 @@ header h1{
 
   box-shadow:
     0 8px 25px
-    rgba(0,0,0,.20);
+    rgba(0,0,0,.2);
 }
 
 .admin-area:hover .admin-tooltip{
   display:block;
 }
 
-
-/* =====================================================
-   MAIN CONTAINER
-===================================================== */
+/* =========================================================
+   MAIN
+========================================================= */
 
 .container{
-
   width:94%;
 
-  max-width:1500px;
+  max-width:1480px;
 
   margin:
-    30px auto 60px;
+    30px auto
+    55px;
 }
 
-
-/* =====================================================
-   CARDS
-===================================================== */
+/* =========================================================
+   CARD
+========================================================= */
 
 .card{
-
-  position:relative;
-
   background:
-    rgba(255,255,255,.94);
+    rgba(255,255,255,.92);
 
   border:
-    1px solid rgba(255,255,255,.90);
+    1px solid
+    rgba(255,255,255,.95);
 
   border-radius:24px;
 
-  padding:27px;
+  padding:25px;
 
-  margin-bottom:23px;
+  margin-bottom:22px;
 
-  box-shadow:var(--shadow);
+  box-shadow:
+    0 12px 38px
+    rgba(67,42,91,.075);
 
-  backdrop-filter:blur(15px);
+  backdrop-filter:
+    blur(12px);
 
   transition:
-    transform .25s ease,
-    box-shadow .25s ease;
-
-  animation:
-    fadeUp .45s ease both;
+    transform .2s,
+    box-shadow .2s;
 }
 
 .card:hover{
-
   box-shadow:
-    var(--shadow-hover);
-}
-
-.card::before{
-
-  content:"";
-
-  position:absolute;
-
-  left:0;
-
-  top:22px;
-
-  width:4px;
-
-  height:45px;
-
-  border-radius:
-    0 8px 8px 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      var(--pink),
-      var(--purple),
-      var(--blue)
-    );
-}
-
-@keyframes fadeUp{
-
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+    0 16px 45px
+    rgba(67,42,91,.10);
 }
 
 .card-header{
-
   display:flex;
 
   align-items:center;
@@ -463,38 +333,32 @@ header h1{
 
   gap:15px;
 
-  margin-bottom:21px;
+  margin-bottom:20px;
 }
 
 .card h2{
-
   margin:0;
 
-  color:#51255f;
+  color:#71305d;
 
   font-size:20px;
 
   font-weight:900;
-
-  letter-spacing:.2px;
 }
 
 .card-description{
-
-  color:var(--muted);
+  color:#918b9b;
 
   font-size:13px;
 
   margin-top:6px;
 }
 
-
-/* =====================================================
-   GRID / FORM
-===================================================== */
+/* =========================================================
+   FORM
+========================================================= */
 
 .grid{
-
   display:grid;
 
   grid-template-columns:
@@ -503,254 +367,222 @@ header h1{
       minmax(220px,1fr)
     );
 
-  gap:17px;
+  gap:16px;
 }
 
 label{
+  font-weight:800;
 
   display:block;
 
-  margin-bottom:8px;
+  margin-bottom:7px;
 
-  color:#504759;
+  color:#51495e;
 
   font-size:13px;
-
-  font-weight:800;
 }
 
 input,
 select,
 button{
-
   width:100%;
 
-  padding:13px 14px;
+  padding:
+    12px 14px;
 
   border-radius:13px;
 
-  font-family:inherit;
+  border:
+    1px solid
+    #e3dce8;
 
   font-size:14px;
 
-  transition:
-    border-color .2s,
-    box-shadow .2s,
-    transform .2s;
+  font-family:inherit;
 }
 
 input,
 select{
-
-  color:#30283a;
-
   background:#fff;
 
-  border:
-    1px solid #e2d9e8;
+  color:#302b3b;
+
+  transition:.2s;
 }
 
 input:hover,
 select:hover{
-
-  border-color:#cdb8d8;
+  border-color:#d7bfd0;
 }
 
 input:focus,
 select:focus{
-
   outline:none;
 
-  border-color:var(--pink);
+  border-color:#ef3e91;
 
   box-shadow:
     0 0 0 4px
-    rgba(255,22,135,.10),
-    0 5px 15px
-    rgba(255,22,135,.07);
+    rgba(239,62,145,.10);
 }
 
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
 button{
-
   border:none;
 
   cursor:pointer;
 
-  font-weight:900;
+  font-weight:850;
 
-  letter-spacing:.2px;
+  transition:
+    transform .18s,
+    box-shadow .18s,
+    opacity .18s;
 }
 
 button:hover{
+  transform:
+    translateY(-1px);
 
-  transform:translateY(-2px);
-
-  filter:brightness(1.04);
+  opacity:.96;
 }
 
 button:active{
-
   transform:scale(.98);
 }
 
+/* =========================================================
+   BUTTONS
+========================================================= */
+
 .btn-pink{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
-      #ff1687,
-      #e11d74
+      #ff2f8b,
+      #e93682
     );
+
+  color:#fff;
 
   box-shadow:
     0 7px 18px
-    rgba(225,29,116,.25);
+    rgba(239,62,145,.20);
 }
 
 .btn-purple{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
-      #9333ea,
-      #6d28d9
+      #9b5cff,
+      #6838dd
     );
+
+  color:#fff;
 
   box-shadow:
     0 7px 18px
-    rgba(109,40,217,.25);
+    rgba(108,56,221,.18);
 }
 
 .btn-green{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
       #22c55e,
-      #15803d
+      #149447
     );
 
-  box-shadow:
-    0 7px 18px
-    rgba(22,163,74,.23);
+  color:#fff;
 }
 
 .btn-blue{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
-      #3b82f6,
-      #1d4ed8
+      #4285f4,
+      #2459df
     );
 
-  box-shadow:
-    0 7px 18px
-    rgba(29,78,216,.23);
+  color:#fff;
 }
 
 .btn-red{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
-      #f43f5e,
+      #ff5252,
       #dc2626
     );
 
-  box-shadow:
-    0 7px 18px
-    rgba(220,38,38,.23);
+  color:#fff;
 }
 
 .btn-gray{
-
-  color:white;
-
   background:
     linear-gradient(
       135deg,
-      #64748b,
-      #475569
+      #747985,
+      #525660
     );
+
+  color:#fff;
 }
 
-
-/* =====================================================
+/* =========================================================
    SCAN
-===================================================== */
+========================================================= */
 
 .scan-row{
-
   display:grid;
 
   grid-template-columns:
-    1fr 160px;
+    1fr
+    155px;
 
-  gap:13px;
+  gap:12px;
 }
 
 .scan-list{
-
-  margin-top:16px;
+  margin-top:15px;
 
   display:flex;
 
   flex-wrap:wrap;
 
-  gap:9px;
+  gap:8px;
 }
 
 .sn-tag{
-
   display:flex;
 
   align-items:center;
 
-  gap:8px;
+  gap:7px;
 
-  padding:9px 13px;
-
-  border-radius:30px;
+  background:
+    linear-gradient(
+      135deg,
+      #ffe1ef,
+      #fce9f5
+    );
 
   color:#9d174d;
+
+  padding:
+    8px 12px;
+
+  border-radius:30px;
 
   font-size:13px;
 
   font-weight:800;
 
-  background:
-    linear-gradient(
-      135deg,
-      #ffe3f0,
-      #f4e8ff
-    );
-
   border:
-    1px solid #ffd0e5;
-
-  box-shadow:
-    0 4px 12px
-    rgba(157,23,77,.08);
+    1px solid
+    #ffd0e4;
 }
 
 .sn-tag button{
-
   width:23px;
   height:23px;
 
@@ -758,16 +590,15 @@ button:active{
 
   border-radius:50%;
 
-  background:#ffc9df;
+  background:#ffd0e2;
 
-  color:#be123c;
+  color:#dc2626;
 
   font-size:15px;
 }
 
 .batch-info{
-
-  margin-top:13px;
+  margin-top:12px;
 
   color:#777;
 
@@ -775,58 +606,50 @@ button:active{
 }
 
 .batch-number{
-
-  color:var(--pink);
+  color:#d63384;
 
   font-size:18px;
 
   font-weight:950;
 }
 
-
-/* =====================================================
+/* =========================================================
    ACTIONS
-===================================================== */
+========================================================= */
 
 .actions{
-
   display:flex;
 
-  gap:11px;
+  gap:10px;
 
   flex-wrap:wrap;
 
-  margin-top:19px;
+  margin-top:18px;
 }
 
 .actions button{
-
   width:auto;
 
-  min-width:155px;
+  min-width:150px;
 }
 
-
-/* =====================================================
+/* =========================================================
    MESSAGE
-===================================================== */
+========================================================= */
 
 .msg{
+  margin-top:14px;
 
-  margin-top:15px;
+  font-weight:750;
 
-  min-height:21px;
-
-  font-weight:800;
+  min-height:20px;
 }
 
-
-/* =====================================================
+/* =========================================================
    STATISTICS
-===================================================== */
+========================================================= */
 
 .stats{
-
   display:grid;
 
   grid-template-columns:
@@ -835,197 +658,165 @@ button:active{
       minmax(220px,1fr)
     );
 
-  gap:17px;
+  gap:16px;
 }
 
 .stat{
-
   position:relative;
 
   overflow:hidden;
 
   padding:23px;
 
-  min-height:145px;
-
-  border-radius:21px;
+  border-radius:20px;
 
   background:
     linear-gradient(
       135deg,
-      #ffffff,
-      #fff8fc
+      #fff,
+      #fff4fa
     );
 
   border:
-    1px solid #eee2f1;
+    1px solid
+    #f0dfeb;
 
   box-shadow:
-    0 8px 25px
-    rgba(80,45,90,.07);
-
-  transition:.25s;
+    0 7px 22px
+    rgba(84,48,80,.04);
 }
 
-.stat:hover{
-
-  transform:translateY(-5px);
-
-  box-shadow:
-    0 16px 35px
-    rgba(80,45,90,.13);
-}
-
-.stat::before{
-
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  top:0;
-
-  width:100%;
-  height:5px;
-
+.stat:nth-child(2){
   background:
     linear-gradient(
-      90deg,
-      #ff1687,
-      #d946ef,
-      #7c3aed,
-      #2563eb
+      135deg,
+      #fff,
+      #f4f1ff
+    );
+}
+
+.stat:nth-child(3){
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #fff4ef
     );
 }
 
 .stat::after{
-
   content:"";
 
   position:absolute;
 
-  width:120px;
-  height:120px;
+  width:110px;
+  height:110px;
 
   border-radius:50%;
 
-  right:-40px;
-  top:-40px;
+  right:-35px;
+  top:-35px;
 
   background:
-    radial-gradient(
-      circle,
-      rgba(255,22,135,.14),
-      transparent 70%
-    );
+    rgba(255,79,154,.08);
 }
 
 .stat-icon{
-
-  font-size:27px;
+  font-size:25px;
 
   margin-bottom:10px;
 }
 
 .stat-title{
-
-  color:#8a8091;
-
   font-size:11px;
+
+  color:#8b8795;
 
   font-weight:900;
 
-  letter-spacing:1px;
+  letter-spacing:.8px;
 
   text-transform:uppercase;
 }
 
 .stat-value{
+  font-size:27px;
 
-  position:relative;
-
-  z-index:2;
+  font-weight:950;
 
   margin-top:8px;
 
-  color:#572766;
+  color:#7c315f;
 
-  font-size:29px;
+  position:relative;
 
-  font-weight:950;
+  z-index:1;
 
   word-break:break-word;
 }
 
-
-/* =====================================================
+/* =========================================================
    SUMMARY
-===================================================== */
+========================================================= */
 
 .summary{
-
   display:flex;
 
   flex-wrap:wrap;
 
   gap:9px;
 
-  margin-top:20px;
+  margin-top:18px;
 }
 
 .badge{
-
-  padding:10px 14px;
+  padding:
+    9px 13px;
 
   border-radius:30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3e8ff,
+      #fce7f3
+    );
 
   color:#6b21a8;
 
   font-size:12px;
 
-  font-weight:900;
-
-  background:
-    linear-gradient(
-      135deg,
-      #f0e8ff,
-      #ffe4f1
-    );
+  font-weight:800;
 
   border:
-    1px solid #e8d7f4;
-
-  box-shadow:
-    0 4px 12px
-    rgba(107,33,168,.07);
+    1px solid
+    #ead9f8;
 }
 
-
-/* =====================================================
+/* =========================================================
    IMPORT
-===================================================== */
+========================================================= */
 
 .import-box{
-
-  padding:25px;
-
-  text-align:center;
-
   border:
-    2px dashed #e2a0c4;
+    2px dashed
+    #e9a5c8;
 
   border-radius:20px;
 
+  padding:24px;
+
   background:
     linear-gradient(
       135deg,
-      #fff4f9,
-      #f7f1ff
+      #fff6fb,
+      #f8f5ff
     );
+
+  text-align:center;
 }
 
 .import-box p{
-
   margin-top:0;
 
   color:#777;
@@ -1034,30 +825,24 @@ button:active{
 }
 
 .file-input{
+  margin:12px auto;
 
   max-width:500px;
-
-  margin:13px auto;
 }
 
-
-/* =====================================================
+/* =========================================================
    CHART
-===================================================== */
+========================================================= */
 
 .chart-container{
-
   position:relative;
 
   width:100%;
 
   height:440px;
-
-  padding:8px;
 }
 
 .chart-info{
-
   display:flex;
 
   justify-content:space-between;
@@ -1070,35 +855,32 @@ button:active{
 }
 
 .chart-hint{
-
-  padding:9px 13px;
-
-  border-radius:20px;
-
-  color:#665d6c;
-
   font-size:12px;
 
-  font-weight:800;
+  color:#746b7d;
 
   background:
     linear-gradient(
       135deg,
-      #fff0f7,
-      #f2ebff
+      #faf5fb,
+      #f5f2ff
     );
 
+  padding:
+    8px 13px;
+
+  border-radius:20px;
+
   border:
-    1px solid #e8dced;
+    1px solid
+    #eee4f1;
 }
 
-
-/* =====================================================
-   DAILY
-===================================================== */
+/* =========================================================
+   DAILY TOP
+========================================================= */
 
 .daily-grid{
-
   display:grid;
 
   grid-template-columns:
@@ -1107,227 +889,256 @@ button:active{
       minmax(240px,1fr)
     );
 
-  gap:13px;
+  gap:12px;
 }
 
 .daily-item{
-
   padding:17px;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff6fb,
+      #faf6ff
+    );
+
+  border:
+    1px solid
+    #f0e1ed;
+}
+
+.daily-date{
+  color:#8b3d70;
+
+  font-weight:950;
+
+  margin-bottom:7px;
+}
+
+.daily-defect{
+  font-weight:800;
+
+  color:#41394a;
+
+  line-height:1.4;
+}
+
+.daily-qty{
+  display:inline-block;
+
+  margin-top:8px;
+
+  padding:
+    5px 10px;
+
+  border-radius:20px;
+
+  background:#f3e8ff;
+
+  color:#6b21a8;
+
+  font-size:12px;
+
+  font-weight:850;
+}
+
+/* =========================================================
+   RECORD FILTER
+========================================================= */
+
+.record-filter{
+  padding:18px;
 
   border-radius:18px;
 
   background:
     linear-gradient(
       135deg,
-      #fff7fb,
-      #f7f2ff
+      #fff8fb,
+      #f8f5ff
     );
 
   border:
-    1px solid #eee0f1;
+    1px solid
+    #eee2ee;
 
-  transition:.2s;
+  margin-bottom:18px;
 }
 
-.daily-item:hover{
+.record-filter-grid{
+  display:grid;
 
-  transform:translateY(-3px);
+  grid-template-columns:
+    1.6fr
+    1fr
+    1fr
+    1fr;
 
-  box-shadow:
-    0 10px 25px
-    rgba(80,45,100,.09);
+  gap:12px;
 }
 
-.daily-date{
-
-  margin-bottom:7px;
-
-  color:#8b3d70;
-
-  font-weight:950;
+.search-box{
+  position:relative;
 }
 
-.daily-defect{
-
-  color:#41394a;
-
-  font-weight:800;
+.search-box input{
+  padding-left:42px;
 }
 
-.daily-qty{
+.search-icon{
+  position:absolute;
 
-  display:inline-block;
+  left:14px;
 
-  margin-top:9px;
+  top:50%;
 
-  padding:6px 11px;
+  transform:
+    translateY(-50%);
 
-  border-radius:20px;
+  font-size:17px;
 
-  color:#6b21a8;
+  pointer-events:none;
 
-  font-size:12px;
-
-  font-weight:900;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ede9fe,
-      #fce7f3
-    );
+  opacity:.65;
 }
 
+.record-count{
+  display:flex;
 
-/* =====================================================
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:15px;
+
+  color:#777;
+
+  font-size:13px;
+
+  font-weight:700;
+}
+
+.record-count strong{
+  color:#7a315c;
+}
+
+/* =========================================================
    TABLE
-===================================================== */
+========================================================= */
 
 .table-wrap{
-
   overflow:auto;
 
-  border-radius:17px;
+  border-radius:16px;
 
   border:
-    1px solid #eee5f1;
-
-  box-shadow:
-    0 5px 18px
-    rgba(70,35,80,.04);
+    1px solid
+    #eee8ef;
 }
 
 table{
-
   width:100%;
-
-  min-width:1050px;
 
   border-collapse:collapse;
 
-  background:white;
+  min-width:1150px;
 }
 
 th,
 td{
+  padding:13px;
 
-  padding:14px;
+  border-bottom:
+    1px solid
+    #eee;
 
   text-align:left;
 
   font-size:13px;
-
-  border-bottom:
-    1px solid #eee;
 }
 
 th{
+  background:
+    linear-gradient(
+      135deg,
+      #ffeaf4,
+      #f0eaff
+    );
+
+  color:#71305d;
+
+  font-weight:950;
 
   position:sticky;
 
   top:0;
 
   z-index:2;
-
-  color:#692a58;
-
-  font-weight:950;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0f7,
-      #f0eaff
-    );
-
-  border-bottom:
-    2px solid #e6d6ec;
-}
-
-tr{
-
-  transition:.15s;
 }
 
 tr:hover{
-
-  background:
-    linear-gradient(
-      90deg,
-      #fff8fb,
-      #faf7ff
-    );
+  background:#fff8fc;
 }
 
-td:first-child{
-
-  color:#51245f;
-
-  font-weight:800;
+tr:last-child td{
+  border-bottom:none;
 }
 
 .action-cell{
-
   white-space:nowrap;
 
   text-align:center;
 }
 
 .action-btn{
-
   width:auto !important;
 
-  min-width:78px !important;
+  min-width:75px !important;
+
+  padding:
+    8px 11px !important;
 
   margin-right:5px;
 
-  padding:8px 11px !important;
-
-  color:white;
+  color:#fff;
 
   border-radius:9px;
 
-  box-shadow:
-    0 4px 10px
-    rgba(0,0,0,.10);
+  font-size:12px;
 }
 
 .edit-btn{
-
-  background:
-    linear-gradient(
-      135deg,
-      #3b82f6,
-      #2563eb
-    );
+  background:#3b82f6;
 }
 
 .delete-btn{
-
-  background:
-    linear-gradient(
-      135deg,
-      #f43f5e,
-      #dc2626
-    );
+  background:#ef4444;
 }
 
+.highlight{
+  background:
+    #fff1f7 !important;
+}
 
-/* =====================================================
-   ADMIN MODAL
-===================================================== */
+/* =========================================================
+   ADMIN
+========================================================= */
 
 .admin-only{
   display:none;
 }
 
 #adminModal{
-
   display:none;
 
   position:fixed;
 
   inset:0;
+
+  background:
+    rgba(20,12,30,.58);
 
   z-index:9999;
 
@@ -1337,53 +1148,38 @@ td:first-child{
 
   padding:20px;
 
-  background:
-    rgba(28,15,40,.60);
-
-  backdrop-filter:blur(8px);
+  backdrop-filter:
+    blur(7px);
 }
 
 .modal-box{
+  background:#fff;
 
   width:100%;
 
   max-width:420px;
 
-  padding:29px;
+  border-radius:24px;
 
-  border-radius:25px;
-
-  background:white;
+  padding:28px;
 
   box-shadow:
     0 25px 80px
     rgba(0,0,0,.28);
-
-  animation:
-    modalIn .25s ease;
-}
-
-@keyframes modalIn{
-
-  from{
-    opacity:0;
-    transform:
-      scale(.95)
-      translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      scale(1)
-      translateY(0);
-  }
 }
 
 .modal-icon{
+  width:60px;
+  height:60px;
 
-  width:62px;
-  height:62px;
+  border-radius:19px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3e8ff,
+      #ffe4f1
+    );
 
   display:flex;
 
@@ -1391,47 +1187,34 @@ td:first-child{
 
   justify-content:center;
 
-  margin-bottom:16px;
-
-  border-radius:19px;
-
   font-size:28px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #fce7f3,
-      #ede9fe
-    );
+  margin-bottom:15px;
 }
 
 .modal-box h3{
+  color:#73355f;
 
-  margin:0 0 7px;
+  margin:
+    0 0 7px;
 
-  color:#59235f;
-
-  font-size:22px;
-
-  font-weight:950;
+  font-size:21px;
 }
 
 .modal-subtitle{
-
-  margin-bottom:20px;
-
   color:#888;
 
   font-size:13px;
+
+  margin-bottom:20px;
 }
 
 .modal-actions{
-
   display:flex;
 
   gap:10px;
 
-  margin-top:19px;
+  margin-top:18px;
 }
 
 .modal-actions button{
@@ -1439,480 +1222,366 @@ td:first-child{
 }
 
 .admin-error{
+  color:#dc2626;
+
+  font-weight:700;
 
   min-height:20px;
 
   margin-top:10px;
 
-  color:#dc2626;
-
   font-size:13px;
-
-  font-weight:800;
 }
 
-
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 .footer{
-
-  margin-top:35px;
-
-  padding:10px;
-
   text-align:center;
 
-  color:#958b9d;
+  color:#aaa;
 
   font-size:12px;
+
+  margin-top:30px;
 }
 
+/* =========================================================
+   MOBILE
+========================================================= */
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
+@media(max-width:900px){
 
-::-webkit-scrollbar{
+  .record-filter-grid{
+    grid-template-columns:
+      1fr 1fr;
+  }
 
-  width:9px;
-
-  height:9px;
 }
-
-::-webkit-scrollbar-track{
-
-  background:#f4edf8;
-}
-
-::-webkit-scrollbar-thumb{
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ff1687,
-      #7c3aed,
-      #2563eb
-    );
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-  background:
-    linear-gradient(
-      180deg,
-      #e11d74,
-      #5b21b6,
-      #1d4ed8
-    );
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
 
 @media(max-width:700px){
 
   header{
-
     padding:
-      28px 15px 32px;
+      27px
+      15px
+      32px;
   }
 
   header h1{
-
-    font-size:23px;
-
-    letter-spacing:1px;
-  }
-
-  .logo-title{
-    gap:10px;
+    font-size:22px;
   }
 
   .logo-mark{
-
-    width:46px;
-    height:46px;
-
-    border-radius:14px;
+    width:45px;
+    height:45px;
 
     font-size:22px;
   }
 
-  .header-subtitle{
-
-    font-size:12px;
-
-    padding:0 35px;
-  }
-
   .admin-area{
-
     top:12px;
     right:12px;
   }
 
   .admin-icon{
-
-    width:41px;
-    height:41px;
+    width:40px;
+    height:40px;
   }
 
   .container{
-
     width:94%;
-
-    margin-top:20px;
   }
 
   .card{
-
-    padding:19px;
+    padding:18px;
 
     border-radius:19px;
   }
 
-  .card h2{
-
-    font-size:18px;
+  .scan-row{
+    grid-template-columns:1fr;
   }
 
-  .scan-row{
+  .actions button{
+    width:100%;
+  }
+
+  .chart-container{
+    height:350px;
+  }
+
+  .record-filter-grid{
+    grid-template-columns:1fr;
+  }
+
+  .record-filter .actions{
+    display:grid;
 
     grid-template-columns:1fr;
   }
 
-  .actions{
+}
 
-    flex-direction:column;
-  }
+/* =========================================================
+   LOADING
+========================================================= */
 
-  .actions button{
+.loading{
+  color:#8b8795;
 
-    width:100%;
+  text-align:center;
 
-    min-width:0;
-  }
+  padding:25px;
+}
 
-  .chart-container{
+.empty-state{
+  color:#999;
 
-    height:360px;
+  text-align:center;
 
-    padding:0;
-  }
-
-  .chart-info{
-
-    flex-direction:column;
-  }
-
-  .chart-hint{
-
-    width:100%;
-
-    text-align:center;
-  }
-
-  .modal-box{
-
-    padding:23px;
-
-    border-radius:20px;
-  }
+  padding:30px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
 
-  <div class="admin-area">
+<div class="admin-area">
 
-    <button
-      type="button"
-      id="adminIcon"
-      class="admin-icon"
-      aria-label="Admin Login">
+<button
+  type="button"
+  id="adminIcon"
+  class="admin-icon"
+  aria-label="Admin Login">
+  👤
+</button>
 
-      👤
+<div
+  id="adminTooltip"
+  class="admin-tooltip">
+  Admin Login
+</div>
 
-    </button>
+</div>
 
-    <div
-      id="adminTooltip"
-      class="admin-tooltip">
+<div class="header-content">
 
-      Admin Login
+<div class="logo-title">
 
-    </div>
+<div class="logo-mark">
+  📊
+</div>
 
-  </div>
+<h1>REJECT TRENDING</h1>
 
+</div>
 
-  <div class="header-content">
+<p class="header-subtitle">
+Reject Monitoring • Quality Analytics • Daily Performance
+</p>
 
-    <div class="logo-title">
-
-      <div class="logo-mark">
-        📊
-      </div>
-
-      <h1>
-        REJECT TRENDING
-      </h1>
-
-    </div>
-
-    <p class="header-subtitle">
-      Reject Monitoring • Quality Analytics • Daily Performance
-    </p>
-
-  </div>
+</div>
 
 </header>
-
 
 
 <div class="container">
 
 
 <!-- =====================================================
-     SCAN REJECT
+     SCAN
 ===================================================== -->
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        🔎 Scan Reject
-      </h2>
+<h2>🔎 Scan Reject</h2>
 
-      <div class="card-description">
-        Scan Component SN and submit reject information
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="scan-row">
-
-    <div>
-
-      <label>
-        Component SN
-      </label>
-
-      <input
-        id="sn"
-        type="text"
-        placeholder="Scan / enter Component SN"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false">
-
-    </div>
-
-
-    <div style="align-self:end">
-
-      <button
-        type="button"
-        class="btn-pink"
-        id="addSNButton">
-
-        ＋ ADD SN
-
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="batch-info">
-
-    Current Batch:
-
-    <span
-      id="scanCount"
-      class="batch-number">
-
-      0
-
-    </span>
-
-    SN
-
-  </div>
-
-
-  <div
-    id="scanList"
-    class="scan-list">
-  </div>
-
-
-  <div
-    class="grid"
-    style="margin-top:22px">
-
-
-    <div>
-
-      <label>
-        Component PN
-      </label>
-
-      <select id="pn">
-
-        <option value="">
-          -- Select PN --
-        </option>
-
-        <option value="1670826">
-          1670826
-        </option>
-
-        <option value="1649167">
-          1649167
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Reject / Defect
-      </label>
-
-      <select id="defect">
-
-        <option value="">
-          -- Select Reject --
-        </option>
-
-        <option>P2 SHELL ABRASIVE</option>
-        <option>P2 SHELL BENT</option>
-        <option>P2 SHELL DENTED</option>
-        <option>P2 SHELL CONTAM</option>
-        <option>P2 SHELL DAMAGED</option>
-        <option>P2 SHELL BLISTER</option>
-        <option>P2 SHELL EXPOSED COPPER</option>
-        <option>P2 SHELL LINEAR SCRATCHED</option>
-        <option>P2 SHELL PEEL OFF</option>
-        <option>P2 SHELL SCRATCHED</option>
-        <option>P2 SHELL DISCOLORATION</option>
-        <option>P2 MPO CONNECTOR DAMAGE</option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Defect Class
-      </label>
-
-      <select id="defectClass">
-
-        <option value="">
-          -- Select Class --
-        </option>
-
-        <option value="Cosmetic">
-          Cosmetic
-        </option>
-
-        <option value="Eeprom">
-          Eeprom
-        </option>
-
-        <option value="Eefail">
-          Eefail
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label>
-        Badge ID
-      </label>
-
-      <input
-        id="operator"
-        type="text"
-        placeholder="Enter Badge ID"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        name="badge_id">
-
-    </div>
-
-  </div>
-
-
-  <div class="actions">
-
-    <button
-      type="button"
-      class="btn-green"
-      id="saveButton">
-
-      ✓ SUBMIT ALL REJECT
-
-    </button>
-
-
-    <button
-      type="button"
-      class="btn-gray"
-      id="clearButton">
-
-      CLEAR
-
-    </button>
-
-  </div>
-
-
-  <div
-    id="msg"
-    class="msg"
-    aria-live="polite">
-  </div>
+<div class="card-description">
+Scan Component SN and submit reject information
+</div>
 
 </div>
 
+</div>
+
+<div class="scan-row">
+
+<div>
+
+<label>Component SN</label>
+
+<input
+id="sn"
+type="text"
+placeholder="Scan / enter Component SN"
+autocomplete="off"
+autocorrect="off"
+autocapitalize="off"
+spellcheck="false">
+
+</div>
+
+<div style="align-self:end">
+
+<button
+type="button"
+class="btn-pink"
+id="addSNButton">
+＋ ADD SN
+</button>
+
+</div>
+
+</div>
+
+<div class="batch-info">
+
+Current Batch:
+<span
+id="scanCount"
+class="batch-number">
+0
+</span>
+SN
+
+</div>
+
+<div
+id="scanList"
+class="scan-list">
+</div>
+
+<br>
+
+<div class="grid">
+
+<div>
+
+<label>Component PN</label>
+
+<select id="pn">
+
+<option value="">
+-- Select PN --
+</option>
+
+<option value="1670826">
+1670826
+</option>
+
+<option value="1649167">
+1649167
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Reject / Defect</label>
+
+<select id="defect">
+
+<option value="">
+-- Select Reject --
+</option>
+
+<option>P2 SHELL ABRASIVE</option>
+<option>P2 SHELL BENT</option>
+<option>P2 SHELL DENTED</option>
+<option>P2 SHELL CONTAM</option>
+<option>P2 SHELL DAMAGED</option>
+<option>P2 SHELL BLISTER</option>
+<option>P2 SHELL EXPOSED COPPER</option>
+<option>P2 SHELL LINEAR SCRATCHED</option>
+<option>P2 SHELL PEEL OFF</option>
+<option>P2 SHELL SCRATCHED</option>
+<option>P2 SHELL DISCOLORATION</option>
+<option>P2 MPO CONNECTOR DAMAGE</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Defect Class</label>
+
+<select id="defectClass">
+
+<option value="">
+-- Select Class --
+</option>
+
+<option value="Cosmetic">
+Cosmetic
+</option>
+
+<option value="Eeprom">
+Eeprom
+</option>
+
+<option value="Eefail">
+Eefail
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Badge ID</label>
+
+<input
+id="operator"
+type="text"
+placeholder="Enter Badge ID"
+autocomplete="off"
+autocorrect="off"
+autocapitalize="off"
+spellcheck="false"
+name="badge_id">
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="btn-green"
+id="saveButton">
+✓ SUBMIT ALL REJECT
+</button>
+
+<button
+type="button"
+class="btn-gray"
+id="clearButton">
+CLEAR
+</button>
+
+</div>
+
+<div
+id="msg"
+class="msg"
+aria-live="polite">
+</div>
+
+</div>
 
 
 <!-- =====================================================
@@ -1921,71 +1590,59 @@ td:first-child{
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        📥 Import Existing Data
-      </h2>
+<h2>📥 Import Existing Data</h2>
 
-      <div class="card-description">
-        Import previous reject records from Excel or CSV
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="import-box">
-
-    <p>
-
-      Required columns:
-
-      <br>
-
-      <b>
-        Component SN • Component PN • Reject • Defect Class • Badge ID / Operator • Date Time
-      </b>
-
-    </p>
-
-
-    <input
-      class="file-input"
-      id="excelFile"
-      type="file"
-      accept=".xlsx,.xls,.csv">
-
-
-    <div
-      class="actions"
-      style="justify-content:center">
-
-      <button
-        type="button"
-        class="btn-blue"
-        id="importButton">
-
-        📥 IMPORT EXCEL / CSV
-
-      </button>
-
-    </div>
-
-
-    <div
-      id="importMsg"
-      class="msg"
-      aria-live="polite">
-    </div>
-
-  </div>
+<div class="card-description">
+Import previous reject records from Excel or CSV
+</div>
 
 </div>
 
+</div>
+
+<div class="import-box">
+
+<p>
+Required columns:
+<br>
+
+<b>
+Component SN • Component PN • Reject • Defect Class • Badge ID / Operator • Date Time
+</b>
+
+</p>
+
+<input
+class="file-input"
+id="excelFile"
+type="file"
+accept=".xlsx,.xls,.csv">
+
+<div class="actions"
+style="justify-content:center">
+
+<button
+type="button"
+class="btn-blue"
+id="importButton">
+IMPORT EXCEL / CSV
+</button>
+
+</div>
+
+<div
+id="importMsg"
+class="msg"
+aria-live="polite">
+</div>
+
+</div>
+
+</div>
 
 
 <!-- =====================================================
@@ -1994,270 +1651,224 @@ td:first-child{
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        📊 Quality Dashboard
-      </h2>
+<h2>📊 Quality Dashboard</h2>
 
-      <div class="card-description">
-        Live overview of reject performance
-      </div>
+<div class="card-description">
+Live overview of reject performance
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
+<div class="stats">
 
-  <div class="stats">
+<div class="stat">
 
+<div class="stat-icon">
+📦
+</div>
 
-    <div class="stat">
+<div class="stat-title">
+Total Reject
+</div>
 
-      <div class="stat-icon">
-        📦
-      </div>
+<div
+class="stat-value"
+id="total">
+0
+</div>
 
-      <div class="stat-title">
-        Total Reject
-      </div>
+</div>
 
-      <div
-        class="stat-value"
-        id="total">
+<div class="stat">
 
-        0
+<div class="stat-icon">
+📅
+</div>
 
-      </div>
+<div class="stat-title">
+Reject Today
+</div>
 
-    </div>
+<div
+class="stat-value"
+id="qtyToday">
+0
+</div>
 
+</div>
 
-    <div class="stat">
+<div class="stat">
 
-      <div class="stat-icon">
-        📅
-      </div>
+<div class="stat-icon">
+⚠️
+</div>
 
-      <div class="stat-title">
-        Reject Today
-      </div>
+<div class="stat-title">
+Top Reject
+</div>
 
-      <div
-        class="stat-value"
-        id="qtyToday">
+<div
+class="stat-value"
+id="topDefect">
+-
+</div>
 
-        0
+</div>
 
-      </div>
+</div>
 
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        ⚠️
-      </div>
-
-      <div class="stat-title">
-        Top Reject
-      </div>
-
-      <div
-        class="stat-value"
-        id="topDefect">
-
-        -
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-  <div
-    id="summary"
-    class="summary">
-  </div>
+<div
+id="summary"
+class="summary">
+</div>
 
 </div>
 
 
-
 <!-- =====================================================
-     FILTER
+     ANALYTICS FILTER
 ===================================================== -->
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        🎯 Analytics Filter
-      </h2>
+<h2>🎯 Analytics Filter</h2>
 
-      <div class="card-description">
-        Filter chart and reject records
-      </div>
+<div class="card-description">
+Filter chart and daily reject analytics
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
+<div class="grid">
 
-  <div class="grid">
+<div>
 
+<label>From Date</label>
 
-    <div>
+<input
+type="date"
+id="fromDate">
 
-      <label>
-        From Date
-      </label>
+</div>
 
-      <input
-        type="date"
-        id="fromDate">
+<div>
 
-    </div>
+<label>To Date</label>
 
+<input
+type="date"
+id="toDate">
 
-    <div>
+</div>
 
-      <label>
-        To Date
-      </label>
+<div>
 
-      <input
-        type="date"
-        id="toDate">
+<label>Reject Filter</label>
 
-    </div>
+<select id="filterDefect">
 
+<option value="">
+All Rejects
+</option>
 
-    <div>
+<option>P2 SHELL ABRASIVE</option>
+<option>P2 SHELL BENT</option>
+<option>P2 SHELL DENTED</option>
+<option>P2 SHELL CONTAM</option>
+<option>P2 SHELL DAMAGED</option>
+<option>P2 SHELL BLISTER</option>
+<option>P2 SHELL EXPOSED COPPER</option>
+<option>P2 SHELL LINEAR SCRATCHED</option>
+<option>P2 SHELL PEEL OFF</option>
+<option>P2 SHELL SCRATCHED</option>
+<option>P2 SHELL DISCOLORATION</option>
+<option>P2 MPO CONNECTOR DAMAGE</option>
 
-      <label>
-        Reject Filter
-      </label>
+</select>
 
-      <select id="filterDefect">
+</div>
 
-        <option value="">
-          All Rejects
-        </option>
+</div>
 
-        <option>P2 SHELL ABRASIVE</option>
-        <option>P2 SHELL BENT</option>
-        <option>P2 SHELL DENTED</option>
-        <option>P2 SHELL CONTAM</option>
-        <option>P2 SHELL DAMAGED</option>
-        <option>P2 SHELL BLISTER</option>
-        <option>P2 SHELL EXPOSED COPPER</option>
-        <option>P2 SHELL LINEAR SCRATCHED</option>
-        <option>P2 SHELL PEEL OFF</option>
-        <option>P2 SHELL SCRATCHED</option>
-        <option>P2 SHELL DISCOLORATION</option>
-        <option>P2 MPO CONNECTOR DAMAGE</option>
+<div class="actions">
 
-      </select>
+<button
+type="button"
+class="btn-gray"
+id="clearFilterButton">
+CLEAR FILTER
+</button>
 
-    </div>
+<button
+type="button"
+class="btn-blue"
+id="exportButton">
+EXPORT EXCEL
+</button>
 
-  </div>
+<button
+type="button"
+class="btn-purple"
+id="backupButton">
+BACKUP JSON
+</button>
 
-
-  <div class="actions">
-
-    <button
-      type="button"
-      class="btn-gray"
-      id="clearFilterButton">
-
-      CLEAR FILTER
-
-    </button>
-
-
-    <button
-      type="button"
-      class="btn-blue"
-      id="exportButton">
-
-      📊 EXPORT EXCEL
-
-    </button>
-
-
-    <button
-      type="button"
-      class="btn-purple"
-      id="backupButton">
-
-      💾 BACKUP JSON
-
-    </button>
-
-  </div>
+</div>
 
 </div>
 
 
-
 <!-- =====================================================
-     GRAPH
+     CHART
 ===================================================== -->
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        📊 Reject Quantity by Name
-      </h2>
+<h2>📊 Reject Quantity by Name</h2>
 
-      <div class="card-description">
-        Interactive reject analysis
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="chart-info">
-
-    <div class="chart-hint">
-      📌 X-axis = Reject Name
-    </div>
-
-    <div class="chart-hint">
-      🔢 Y-axis = Quantity
-    </div>
-
-    <div class="chart-hint">
-      🖱️ Click bar = View quantity
-    </div>
-
-  </div>
-
-
-  <div class="chart-container">
-
-    <canvas id="trendChart"></canvas>
-
-  </div>
+<div class="card-description">
+Bold interactive reject trend
+</div>
 
 </div>
 
+</div>
+
+<div class="chart-info">
+
+<div class="chart-hint">
+📌 X-axis = Reject Name
+</div>
+
+<div class="chart-hint">
+🔢 Y-axis = Quantity
+</div>
+
+</div>
+
+<div class="chart-container">
+
+<canvas id="trendChart"></canvas>
+
+</div>
+
+</div>
 
 
 <!-- =====================================================
@@ -2266,164 +1877,228 @@ td:first-child{
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        🔍 Daily Top Reject
-      </h2>
+<h2>🔍 Daily Top Reject</h2>
 
-      <div class="card-description">
-        Highest reject quantity for each day
-      </div>
+<div class="card-description">
+Highest reject quantity for each day
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-
-  <div
-    id="dailyTopDefect"
-    class="daily-grid">
-  </div>
+<div
+id="dailyTopDefect"
+class="daily-grid">
+</div>
 
 </div>
 
 
-
 <!-- =====================================================
-     RECORDS
+     REJECT RECORDS
 ===================================================== -->
 
 <div class="card">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        📋 Reject Records
-      </h2>
+<h2>📋 Reject Records</h2>
 
-      <div class="card-description">
-        Latest reject records
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="table-wrap">
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th>
-            Component SN
-          </th>
-
-          <th>
-            Component PN
-          </th>
-
-          <th>
-            Reject
-          </th>
-
-          <th>
-            Defect Class
-          </th>
-
-          <th>
-            Badge ID
-          </th>
-
-          <th>
-            Date Time
-          </th>
-
-          <th
-            id="adminActionHeader"
-            style="display:none">
-
-            Admin Action
-
-          </th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="tbody">
-      </tbody>
-
-    </table>
-
-  </div>
+<div class="card-description">
+Search, filter and manage reject records
+</div>
 
 </div>
 
+</div>
+
+
+<!-- RECORD FILTER -->
+
+<div class="record-filter">
+
+<div class="record-filter-grid">
+
+<div class="search-box">
+
+<label>🔎 Search Component SN</label>
+
+<span class="search-icon">
+⌕
+</span>
+
+<input
+id="recordSearch"
+type="search"
+placeholder="Type Component SN..."
+autocomplete="off">
+
+</div>
+
+
+<div>
+
+<label>Reject</label>
+
+<select id="recordRejectFilter">
+
+<option value="">
+All Rejects
+</option>
+
+<option>P2 SHELL ABRASIVE</option>
+<option>P2 SHELL BENT</option>
+<option>P2 SHELL DENTED</option>
+<option>P2 SHELL CONTAM</option>
+<option>P2 SHELL DAMAGED</option>
+<option>P2 SHELL BLISTER</option>
+<option>P2 SHELL EXPOSED COPPER</option>
+<option>P2 SHELL LINEAR SCRATCHED</option>
+<option>P2 SHELL PEEL OFF</option>
+<option>P2 SHELL SCRATCHED</option>
+<option>P2 SHELL DISCOLORATION</option>
+<option>P2 MPO CONNECTOR DAMAGE</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>From Date</label>
+
+<input
+type="date"
+id="recordFromDate">
+
+</div>
+
+
+<div>
+
+<label>To Date</label>
+
+<input
+type="date"
+id="recordToDate">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+type="button"
+class="btn-gray"
+id="clearRecordFilterButton">
+CLEAR SEARCH
+</button>
+
+<button
+type="button"
+class="btn-blue"
+id="copyRecordsButton">
+📋 COPY VISIBLE RECORDS
+</button>
+
+</div>
+
+
+<div
+id="recordCount"
+class="record-count">
+</div>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Component SN</th>
+<th>Component PN</th>
+<th>Reject</th>
+<th>Defect Class</th>
+<th>Badge ID</th>
+<th>Date Time</th>
+
+<th
+id="adminActionHeader"
+style="display:none">
+Admin Action
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 
 
 <!-- =====================================================
-     ADMIN DATA
+     ADMIN DATA MANAGEMENT
 ===================================================== -->
 
 <div
-  class="card"
-  id="dataManagement"
-  style="display:none">
+class="card"
+id="dataManagement"
+style="display:none">
 
-  <div class="card-header">
+<div class="card-header">
 
-    <div>
+<div>
 
-      <h2>
-        ⚙️ Admin Data Management
-      </h2>
+<h2>⚙️ Admin Data Management</h2>
 
-      <div class="card-description">
-        Restricted administrative controls
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="actions">
-
-    <button
-      type="button"
-      class="btn-red"
-      id="clearAllButton">
-
-      🗑 CLEAR ALL DATA
-
-    </button>
-
-  </div>
+<div class="card-description">
+Restricted administrative controls
+</div>
 
 </div>
 
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="btn-red"
+id="clearAllButton">
+🗑 CLEAR ALL DATA
+</button>
+
+</div>
+
+</div>
 
 
 <div class="footer">
-
-  ✨ Reject Trending Dashboard
-  <br>
-  Quality Monitoring System
-
+Reject Trending Dashboard • Quality Monitoring System
 </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -2432,85 +2107,73 @@ td:first-child{
 
 <div id="adminModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-icon">
-      🔐
-    </div>
+<div class="modal-icon">
+🔐
+</div>
 
-    <h3>
-      Admin Access
-    </h3>
+<h3>Admin Access</h3>
 
-    <div class="modal-subtitle">
-      Sign in to manage reject records.
-    </div>
+<div class="modal-subtitle">
+Sign in to manage reject records.
+</div>
 
+<label>
+Email
+</label>
 
-    <label>
-      Email
-    </label>
+<input
+id="adminEmail"
+type="email"
+placeholder="Admin email"
+autocomplete="off">
 
-    <input
-      id="adminEmail"
-      type="email"
-      placeholder="Admin email"
-      autocomplete="off">
+<br><br>
 
+<label>
+Password
+</label>
 
-    <br><br>
+<input
+id="adminPassword"
+type="password"
+placeholder="Password"
+autocomplete="new-password">
 
+<div
+id="adminError"
+class="admin-error">
+</div>
 
-    <label>
-      Password
-    </label>
+<div class="modal-actions">
 
-    <input
-      id="adminPassword"
-      type="password"
-      placeholder="Password"
-      autocomplete="new-password">
+<button
+type="button"
+class="btn-gray"
+id="cancelAdminButton">
+CANCEL
+</button>
 
+<button
+type="button"
+class="btn-purple"
+id="loginAdminButton">
+LOGIN
+</button>
 
-    <div
-      id="adminError"
-      class="admin-error">
-    </div>
+</div>
 
-
-    <div class="modal-actions">
-
-      <button
-        type="button"
-        class="btn-gray"
-        id="cancelAdminButton">
-
-        CANCEL
-
-      </button>
-
-      <button
-        type="button"
-        class="btn-purple"
-        id="loginAdminButton">
-
-        LOGIN
-
-      </button>
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
 
-
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
 "https://nefsqjxfhvsacsuiwquy.supabase.co";
@@ -2528,48 +2191,49 @@ window.supabase.createClient(
 );
 
 
-/* =====================================================
+/* =========================================================
    GLOBAL
-===================================================== */
+========================================================= */
 
-let rows = [];
+let rows=[];
 
-let scannedSNs = [];
+let scannedSNs=[];
 
-let filteredRows = [];
+let filteredRows=[];
 
-let trendChart = null;
+let recordFilteredRows=[];
 
-let currentAdmin = false;
+let trendChart=null;
+
+let currentAdmin=false;
 
 
-/* =====================================================
+/* =========================================================
    INITIALIZE
-===================================================== */
+========================================================= */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  async function(){
+"DOMContentLoaded",
+async function(){
 
-    setupEvents();
+  setupEvents();
 
-    await checkAdmin();
+  await checkAdmin();
 
-    await loadRows();
+  await loadRows();
 
-    renderScanList();
+  renderScanList();
 
-    document
-      .getElementById("sn")
-      .focus();
+  document
+    .getElementById("sn")
+    .focus();
 
-  }
-);
+});
 
 
-/* =====================================================
+/* =========================================================
    EVENTS
-===================================================== */
+========================================================= */
 
 function setupEvents(){
 
@@ -2579,7 +2243,7 @@ function setupEvents(){
       "keydown",
       function(event){
 
-        if(event.key === "Enter"){
+        if(event.key==="Enter"){
 
           event.preventDefault();
 
@@ -2702,28 +2366,75 @@ function setupEvents(){
       applyFilters
     );
 
+
+  /* NEW RECORD FILTER */
+
+  document
+    .getElementById("recordSearch")
+    .addEventListener(
+      "input",
+      applyRecordFilters
+    );
+
+
+  document
+    .getElementById("recordRejectFilter")
+    .addEventListener(
+      "change",
+      applyRecordFilters
+    );
+
+
+  document
+    .getElementById("recordFromDate")
+    .addEventListener(
+      "change",
+      applyRecordFilters
+    );
+
+
+  document
+    .getElementById("recordToDate")
+    .addEventListener(
+      "change",
+      applyRecordFilters
+    );
+
+
+  document
+    .getElementById("clearRecordFilterButton")
+    .addEventListener(
+      "click",
+      clearRecordFilters
+    );
+
+
+  document
+    .getElementById("copyRecordsButton")
+    .addEventListener(
+      "click",
+      copyVisibleRecords
+    );
+
 }
 
 
-/* =====================================================
-   LOAD DATABASE
-===================================================== */
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
 async function loadRows(){
 
-  let allData = [];
+  let allData=[];
 
-  let from = 0;
+  let from=0;
 
-  const batchSize = 1000;
+  const batchSize=1000;
 
 
   while(true){
 
-    const {
-      data,
-      error
-    } =
+    const {data,error}=
       await supabaseClient
         .from("rejects")
         .select(
@@ -2737,7 +2448,7 @@ async function loadRows(){
         )
         .range(
           from,
-          from + batchSize - 1
+          from+batchSize-1
         );
 
 
@@ -2748,58 +2459,63 @@ async function loadRows(){
         error
       );
 
-      rows = [];
+      rows=[];
 
       showMessage(
-        "Database error: " +
+        "Database error: "+
         error.message,
         "red"
       );
 
       document
         .getElementById("total")
-        .textContent =
-        "ERROR";
+        .textContent="ERROR";
 
       return;
 
     }
 
 
-    if(!data || data.length === 0)
+    if(
+      !data ||
+      data.length===0
+    )
       break;
 
 
-    allData =
+    allData=
       allData.concat(data);
 
 
-    if(data.length < batchSize)
+    if(
+      data.length<
+      batchSize
+    )
       break;
 
 
-    from += batchSize;
+    from+=batchSize;
 
   }
 
 
-  rows = allData;
+  rows=allData;
 
   render();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADD SN
-===================================================== */
+========================================================= */
 
 function addSN(){
 
-  const input =
+  const input=
     document.getElementById("sn");
 
-  const sn =
+  const sn=
     input.value.trim();
 
 
@@ -2815,11 +2531,11 @@ function addSN(){
   }
 
 
-  const existsCurrent =
+  const existsCurrent=
     scannedSNs.some(
       x =>
-        x.toLowerCase() ===
-        sn.toLowerCase()
+      x.toLowerCase()===
+      sn.toLowerCase()
     );
 
 
@@ -2837,15 +2553,15 @@ function addSN(){
   }
 
 
-  const existsSaved =
+  const existsSaved=
     rows.some(
       row =>
-        String(
-          row.component_sn || ""
-        )
-        .trim()
-        .toLowerCase() ===
-        sn.toLowerCase()
+      String(
+        row.component_sn||""
+      )
+      .trim()
+      .toLowerCase()===
+      sn.toLowerCase()
     );
 
 
@@ -2865,7 +2581,7 @@ function addSN(){
 
   scannedSNs.push(sn);
 
-  input.value = "";
+  input.value="";
 
   renderScanList();
 
@@ -2879,57 +2595,58 @@ function addSN(){
 }
 
 
-/* =====================================================
+/* =========================================================
    SCAN LIST
-===================================================== */
+========================================================= */
 
 function renderScanList(){
 
-  const list =
+  const list=
     document.getElementById(
       "scanList"
     );
 
-  const count =
+  const count=
     document.getElementById(
       "scanCount"
     );
 
 
-  count.textContent =
+  count.textContent=
     scannedSNs.length;
 
 
-  list.innerHTML = "";
+  list.innerHTML="";
 
 
   scannedSNs.forEach(
-    (sn,index) => {
+    (sn,index)=>{
 
-      const tag =
+      const tag=
         document.createElement(
           "div"
         );
 
-      tag.className = "sn-tag";
+      tag.className=
+        "sn-tag";
 
 
-      const span =
+      const span=
         document.createElement(
           "span"
         );
 
-      span.textContent = sn;
+      span.textContent=sn;
 
 
-      const button =
+      const button=
         document.createElement(
           "button"
         );
 
-      button.type = "button";
+      button.type="button";
 
-      button.textContent = "×";
+      button.textContent="×";
 
 
       button.addEventListener(
@@ -2966,28 +2683,31 @@ function removeSN(index){
 }
 
 
-/* =====================================================
+/* =========================================================
    SAVE
-===================================================== */
+========================================================= */
 
 async function saveReject(){
 
-  const pn =
+  const pn=
     document.getElementById(
       "pn"
     ).value;
 
-  const defect =
+
+  const defect=
     document.getElementById(
       "defect"
     ).value;
 
-  const defectClass =
+
+  const defectClass=
     document.getElementById(
       "defectClass"
     ).value;
 
-  const operator =
+
+  const operator=
     document
       .getElementById(
         "operator"
@@ -2996,7 +2716,9 @@ async function saveReject(){
       .trim();
 
 
-  if(scannedSNs.length === 0){
+  if(
+    scannedSNs.length===0
+  ){
 
     showMessage(
       "Please scan / add at least one SN.",
@@ -3056,13 +2778,13 @@ async function saveReject(){
   }
 
 
-  const now =
+  const now=
     new Date().toISOString();
 
 
-  const records =
+  const records=
     scannedSNs.map(
-      sn => ({
+      sn=>({
 
         component_sn:sn,
 
@@ -3070,9 +2792,11 @@ async function saveReject(){
 
         defect:defect,
 
-        defect_class:defectClass,
+        defect_class:
+          defectClass,
 
-        operator_id:operator,
+        operator_id:
+          operator,
 
         date_time:now
 
@@ -3080,9 +2804,7 @@ async function saveReject(){
     );
 
 
-  const {
-    error
-  } =
+  const {error}=
     await supabaseClient
       .from("rejects")
       .insert(records);
@@ -3090,7 +2812,9 @@ async function saveReject(){
 
   if(error){
 
-    if(error.code === "23505"){
+    if(
+      error.code==="23505"
+    ){
 
       showMessage(
         "Save failed: one or more SN already exist.",
@@ -3100,7 +2824,7 @@ async function saveReject(){
     }else{
 
       showMessage(
-        "Save failed: " +
+        "Save failed: "+
         error.message,
         "red"
       );
@@ -3115,7 +2839,7 @@ async function saveReject(){
   }
 
 
-  scannedSNs = [];
+  scannedSNs=[];
 
   renderScanList();
 
@@ -3125,45 +2849,49 @@ async function saveReject(){
 
 
   showMessage(
-    "✓ All reject records saved successfully.",
+    "All reject records saved successfully.",
     "green"
   );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CLEAR FORM
-===================================================== */
+========================================================= */
 
 function clearForm(
-  clearBatch = true
+  clearBatch=true
 ){
 
-  document.getElementById(
-    "sn"
-  ).value = "";
+  document
+    .getElementById("sn")
+    .value="";
 
-  document.getElementById(
-    "pn"
-  ).value = "";
 
-  document.getElementById(
-    "defect"
-  ).value = "";
+  document
+    .getElementById("pn")
+    .value="";
 
-  document.getElementById(
-    "defectClass"
-  ).value = "";
 
-  document.getElementById(
-    "operator"
-  ).value = "";
+  document
+    .getElementById("defect")
+    .value="";
+
+
+  document
+    .getElementById("defectClass")
+    .value="";
+
+
+  document
+    .getElementById("operator")
+    .value="";
 
 
   if(clearBatch){
 
-    scannedSNs = [];
+    scannedSNs=[];
 
     renderScanList();
 
@@ -3172,9 +2900,9 @@ function clearForm(
 }
 
 
-/* =====================================================
-   RENDER
-===================================================== */
+/* =========================================================
+   MAIN RENDER
+========================================================= */
 
 function render(){
 
@@ -3182,60 +2910,74 @@ function render(){
 
   applyFilters();
 
+  applyRecordFilters();
+
 }
 
 
-/* =====================================================
-   FILTER
-===================================================== */
+/* =========================================================
+   ANALYTICS FILTER
+========================================================= */
 
 function applyFilters(){
 
-  const from =
+  const from=
     document.getElementById(
       "fromDate"
     ).value;
 
-  const to =
+
+  const to=
     document.getElementById(
       "toDate"
     ).value;
 
-  const defect =
+
+  const defect=
     document.getElementById(
       "filterDefect"
     ).value;
 
 
-  filteredRows =
+  filteredRows=
     rows.filter(
-      row => {
+      row=>{
 
-        const d =
+        const d=
           new Date(
             row.date_time
           );
 
 
-        if(isNaN(d.getTime()))
+        if(
+          isNaN(
+            d.getTime()
+          )
+        )
           return false;
 
 
-        const day =
+        const day=
           formatDateKey(d);
 
 
-        if(from && day < from)
+        if(
+          from &&
+          day<from
+        )
           return false;
 
 
-        if(to && day > to)
+        if(
+          to &&
+          day>to
+        )
           return false;
 
 
         if(
           defect &&
-          row.defect !== defect
+          row.defect!==defect
         )
           return false;
 
@@ -3246,8 +2988,6 @@ function applyFilters(){
     );
 
 
-  renderTable();
-
   renderChart();
 
   renderDailyTopDefect();
@@ -3255,19 +2995,31 @@ function applyFilters(){
 }
 
 
+/* =========================================================
+   CLEAR ANALYTICS FILTER
+========================================================= */
+
 function clearFilters(){
 
-  document.getElementById(
-    "fromDate"
-  ).value = "";
+  document
+    .getElementById(
+      "fromDate"
+    )
+    .value="";
 
-  document.getElementById(
-    "toDate"
-  ).value = "";
 
-  document.getElementById(
-    "filterDefect"
-  ).value = "";
+  document
+    .getElementById(
+      "toDate"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "filterDefect"
+    )
+    .value="";
 
 
   applyFilters();
@@ -3275,101 +3027,113 @@ function clearFilters(){
 }
 
 
-/* =====================================================
+/* =========================================================
    DASHBOARD
-===================================================== */
+========================================================= */
 
 function updateDashboard(){
 
-  document.getElementById(
-    "total"
-  ).textContent =
-    rows.length;
+  document
+    .getElementById(
+      "total"
+    )
+    .textContent=
+      rows.length;
 
 
-  const today =
+  const today=
     new Date();
 
-  const todayKey =
-    formatDateKey(today);
 
-
-  const todayRows =
-    rows.filter(
-      row =>
-        formatDateKey(
-          new Date(
-            row.date_time
-          )
-        ) === todayKey
+  const todayKey=
+    formatDateKey(
+      today
     );
 
 
-  document.getElementById(
-    "qtyToday"
-  ).textContent =
-    todayRows.length;
+  const todayRows=
+    rows.filter(
+      row =>
+      formatDateKey(
+        new Date(
+          row.date_time
+        )
+      )===
+      todayKey
+    );
 
 
-  const counts = {};
+  document
+    .getElementById(
+      "qtyToday"
+    )
+    .textContent=
+      todayRows.length;
+
+
+  const counts={};
 
 
   rows.forEach(
-    row => {
+    row=>{
 
-      const defect =
-        row.defect ||
+      const defect=
+        row.defect||
         "Unknown";
 
 
-      counts[defect] =
-        (counts[defect] || 0) + 1;
+      counts[defect]=
+        (
+          counts[defect]||0
+        )+1;
 
     }
   );
 
 
-  const sorted =
+  const sorted=
     Object.entries(counts)
       .sort(
-        (a,b) =>
-          b[1] - a[1]
+        (a,b)=>b[1]-a[1]
       );
 
 
-  document.getElementById(
-    "topDefect"
-  ).textContent =
-    sorted.length
+  document
+    .getElementById(
+      "topDefect"
+    )
+    .textContent=
+      sorted.length
       ? sorted[0][0]
       : "-";
 
 
-  const summary =
+  const summary=
     document.getElementById(
       "summary"
     );
 
 
-  summary.innerHTML = "";
+  summary.innerHTML="";
 
 
   sorted
     .slice(0,10)
     .forEach(
-      ([defect,count]) => {
+      ([defect,count])=>{
 
-        const badge =
+        const badge=
           document.createElement(
             "div"
           );
 
-        badge.className = "badge";
+        badge.className=
+          "badge";
 
-        badge.textContent =
-          defect +
-          " • " +
-          count +
+        badge.textContent=
+          defect+
+          " • "+
+          count+
           " pcs";
 
         summary.appendChild(
@@ -3382,139 +3146,378 @@ function updateDashboard(){
 }
 
 
-/* =====================================================
+/* =========================================================
+   RECORD FILTER
+========================================================= */
+
+function applyRecordFilters(){
+
+  const search=
+    document
+      .getElementById(
+        "recordSearch"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const defect=
+    document
+      .getElementById(
+        "recordRejectFilter"
+      )
+      .value;
+
+
+  const from=
+    document
+      .getElementById(
+        "recordFromDate"
+      )
+      .value;
+
+
+  const to=
+    document
+      .getElementById(
+        "recordToDate"
+      )
+      .value;
+
+
+  recordFilteredRows=
+    rows.filter(
+      row=>{
+
+        const sn=
+          String(
+            row.component_sn||""
+          )
+          .toLowerCase();
+
+
+        if(
+          search &&
+          !sn.includes(search)
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          defect &&
+          row.defect!==defect
+        ){
+
+          return false;
+
+        }
+
+
+        const date=
+          new Date(
+            row.date_time
+          );
+
+
+        if(
+          isNaN(
+            date.getTime()
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        const dateKey=
+          formatDateKey(date);
+
+
+        if(
+          from &&
+          dateKey<from
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          to &&
+          dateKey>to
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  renderTable();
+
+}
+
+
+/* =========================================================
+   CLEAR RECORD FILTER
+========================================================= */
+
+function clearRecordFilters(){
+
+  document
+    .getElementById(
+      "recordSearch"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "recordRejectFilter"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "recordFromDate"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "recordToDate"
+    )
+    .value="";
+
+
+  applyRecordFilters();
+
+}
+
+
+/* =========================================================
    TABLE
-===================================================== */
+========================================================= */
 
 function renderTable(){
 
-  const tbody =
+  const tbody=
     document.getElementById(
       "tbody"
     );
 
-  const header =
+
+  const header=
     document.getElementById(
       "adminActionHeader"
     );
 
 
-  tbody.innerHTML = "";
+  const count=
+    document.getElementById(
+      "recordCount"
+    );
+
+
+  tbody.innerHTML="";
 
 
   if(currentAdmin){
 
-    header.style.display =
+    header.style.display=
       "table-cell";
 
   }else{
 
-    header.style.display =
+    header.style.display=
       "none";
 
   }
 
 
-  filteredRows.forEach(
-    row => {
+  count.innerHTML=
+    `
+      📊 Showing
+      <strong>
+        ${recordFilteredRows.length}
+      </strong>
+      of
+      <strong>
+        ${rows.length}
+      </strong>
+      records
+    `;
 
-      const tr =
+
+  if(
+    !recordFilteredRows.length
+  ){
+
+    const tr=
+      document.createElement(
+        "tr"
+      );
+
+
+    const td=
+      document.createElement(
+        "td"
+      );
+
+
+    td.colSpan=
+      currentAdmin
+      ? 7
+      : 6;
+
+
+    td.className=
+      "empty-state";
+
+
+    td.textContent=
+      "No reject records found.";
+
+
+    tr.appendChild(td);
+
+    tbody.appendChild(tr);
+
+    return;
+
+  }
+
+
+  recordFilteredRows.forEach(
+    row=>{
+
+      const tr=
         document.createElement(
           "tr"
         );
 
 
-      const snCell =
+      const snCell=
         document.createElement(
           "td"
         );
 
-      snCell.textContent =
-        row.component_sn || "";
+      snCell.textContent=
+        row.component_sn||"";
 
 
-      const pnCell =
+      const pnCell=
         document.createElement(
           "td"
         );
 
-      pnCell.textContent =
-        row.component_pn || "";
+      pnCell.textContent=
+        row.component_pn||"";
 
 
-      const defectCell =
+      const defectCell=
         document.createElement(
           "td"
         );
 
-      defectCell.textContent =
-        row.defect || "";
+      defectCell.textContent=
+        row.defect||"";
 
 
-      const classCell =
+      const classCell=
         document.createElement(
           "td"
         );
 
-      classCell.textContent =
-        row.defect_class || "";
+      classCell.textContent=
+        row.defect_class||"";
 
 
-      const operatorCell =
+      const operatorCell=
         document.createElement(
           "td"
         );
 
-      operatorCell.textContent =
-        row.operator_id || "";
+      operatorCell.textContent=
+        row.operator_id||"";
 
 
-      const dateCell =
+      const dateCell=
         document.createElement(
           "td"
         );
 
-      dateCell.textContent =
+      dateCell.textContent=
         formatDateTime(
           row.date_time
         );
 
 
-      tr.appendChild(snCell);
+      tr.appendChild(
+        snCell
+      );
 
-      tr.appendChild(pnCell);
+      tr.appendChild(
+        pnCell
+      );
 
-      tr.appendChild(defectCell);
+      tr.appendChild(
+        defectCell
+      );
 
-      tr.appendChild(classCell);
+      tr.appendChild(
+        classCell
+      );
 
-      tr.appendChild(operatorCell);
+      tr.appendChild(
+        operatorCell
+      );
 
-      tr.appendChild(dateCell);
+      tr.appendChild(
+        dateCell
+      );
 
 
       if(currentAdmin){
 
-        const actionCell =
+        const actionCell=
           document.createElement(
             "td"
           );
 
-        actionCell.className =
+
+        actionCell.className=
           "action-cell";
 
 
-        const editButton =
+        const editButton=
           document.createElement(
             "button"
           );
 
-        editButton.type = "button";
 
-        editButton.className =
+        editButton.type=
+          "button";
+
+
+        editButton.className=
           "action-btn edit-btn";
 
-        editButton.textContent =
+
+        editButton.textContent=
           "✏️ EDIT";
 
 
@@ -3528,17 +3531,21 @@ function renderTable(){
         );
 
 
-        const deleteButton =
+        const deleteButton=
           document.createElement(
             "button"
           );
 
-        deleteButton.type = "button";
 
-        deleteButton.className =
+        deleteButton.type=
+          "button";
+
+
+        deleteButton.className=
           "action-btn delete-btn";
 
-        deleteButton.textContent =
+
+        deleteButton.textContent=
           "🗑️ DELETE";
 
 
@@ -3555,6 +3562,7 @@ function renderTable(){
         actionCell.appendChild(
           editButton
         );
+
 
         actionCell.appendChild(
           deleteButton
@@ -3576,9 +3584,139 @@ function renderTable(){
 }
 
 
-/* =====================================================
+/* =========================================================
+   COPY VISIBLE RECORDS
+========================================================= */
+
+async function copyVisibleRecords(){
+
+  if(
+    !recordFilteredRows.length
+  ){
+
+    alert(
+      "No visible records to copy."
+    );
+
+    return;
+
+  }
+
+
+  const header=[
+    "Component SN",
+    "Component PN",
+    "Reject",
+    "Defect Class",
+    "Badge ID",
+    "Date Time"
+  ];
+
+
+  const lines=[];
+
+
+  lines.push(
+    header.join("\t")
+  );
+
+
+  recordFilteredRows.forEach(
+    row=>{
+
+      const values=[
+
+        row.component_sn||"",
+
+        row.component_pn||"",
+
+        row.defect||"",
+
+        row.defect_class||"",
+
+        row.operator_id||"",
+
+        formatDateTime(
+          row.date_time
+        )
+
+      ];
+
+
+      lines.push(
+        values
+          .map(
+            value =>
+            String(value)
+              .replace(
+                /\t/g,
+                " "
+              )
+              .replace(
+                /\r?\n/g,
+                " "
+              )
+          )
+          .join("\t")
+      );
+
+    }
+  );
+
+
+  const text=
+    lines.join("\n");
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      text
+    );
+
+
+    alert(
+      recordFilteredRows.length+
+      " records copied successfully.\n\n"+
+      "You can paste directly into Excel."
+    );
+
+  }catch(error){
+
+    const textarea=
+      document.createElement(
+        "textarea"
+      );
+
+
+    textarea.value=text;
+
+    document.body.appendChild(
+      textarea
+    );
+
+    textarea.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    textarea.remove();
+
+
+    alert(
+      recordFilteredRows.length+
+      " records copied successfully."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    EDIT
-===================================================== */
+========================================================= */
 
 async function editRow(id){
 
@@ -3593,11 +3731,11 @@ async function editRow(id){
   }
 
 
-  const row =
+  const row=
     rows.find(
       x =>
-        String(x.id) ===
-        String(id)
+      String(x.id)===
+      String(id)
     );
 
 
@@ -3605,58 +3743,62 @@ async function editRow(id){
     return;
 
 
-  const sn =
+  const sn=
     prompt(
       "Component SN:",
-      row.component_sn || ""
+      row.component_sn||""
     );
 
 
-  if(sn === null)
+  if(sn===null)
     return;
 
 
-  const pn =
+  const pn=
     prompt(
       "Component PN:",
-      row.component_pn || ""
+      row.component_pn||""
     );
 
 
-  if(pn === null)
+  if(pn===null)
     return;
 
 
-  const defect =
+  const defect=
     prompt(
       "Reject / Defect:",
-      row.defect || ""
+      row.defect||""
     );
 
 
-  if(defect === null)
+  if(defect===null)
     return;
 
 
-  const defectClass =
+  const defectClass=
     prompt(
       "Defect Class:",
-      row.defect_class || ""
+      row.defect_class||""
     );
 
 
-  if(defectClass === null)
+  if(
+    defectClass===null
+  )
     return;
 
 
-  const operator =
+  const operator=
     prompt(
       "Badge ID:",
-      row.operator_id || ""
+      row.operator_id||""
     );
 
 
-  if(operator === null)
+  if(
+    operator===null
+  )
     return;
 
 
@@ -3671,9 +3813,7 @@ async function editRow(id){
   }
 
 
-  const {
-    error
-  } =
+  const {error}=
     await supabaseClient
       .from("rejects")
       .update({
@@ -3694,12 +3834,17 @@ async function editRow(id){
           operator.trim()
 
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
 
-    if(error.code === "23505"){
+    if(
+      error.code==="23505"
+    ){
 
       alert(
         "Cannot update. This Component SN already exists."
@@ -3708,7 +3853,7 @@ async function editRow(id){
     }else{
 
       alert(
-        "Update failed: " +
+        "Update failed: "+
         error.message
       );
 
@@ -3729,9 +3874,9 @@ async function editRow(id){
 }
 
 
-/* =====================================================
+/* =========================================================
    DELETE
-===================================================== */
+========================================================= */
 
 async function deleteRow(id){
 
@@ -3746,11 +3891,11 @@ async function deleteRow(id){
   }
 
 
-  const row =
+  const row=
     rows.find(
       x =>
-        String(x.id) ===
-        String(id)
+      String(x.id)===
+      String(id)
     );
 
 
@@ -3765,13 +3910,13 @@ async function deleteRow(id){
   }
 
 
-  const ok =
+  const ok=
     confirm(
-      "DELETE THIS RECORD?\n\n" +
-      "Component SN: " +
-      row.component_sn +
-      "\nReject: " +
-      row.defect +
+      "DELETE THIS RECORD?\n\n"+
+      "Component SN: "+
+      row.component_sn+
+      "\nReject: "+
+      row.defect+
       "\n\nThis action cannot be undone."
     );
 
@@ -3780,19 +3925,20 @@ async function deleteRow(id){
     return;
 
 
-  const {
-    error
-  } =
+  const {error}=
     await supabaseClient
       .from("rejects")
       .delete()
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
 
     alert(
-      "Delete failed: " +
+      "Delete failed: "+
       error.message
     );
 
@@ -3811,9 +3957,9 @@ async function deleteRow(id){
 }
 
 
-/* =====================================================
+/* =========================================================
    CLEAR ALL
-===================================================== */
+========================================================= */
 
 async function clearAll(){
 
@@ -3828,10 +3974,10 @@ async function clearAll(){
   }
 
 
-  const ok =
+  const ok=
     confirm(
-      "WARNING!\n\n" +
-      "Delete ALL reject data?\n\n" +
+      "WARNING!\n\n"+
+      "Delete ALL reject data?\n\n"+
       "This cannot be undone."
     );
 
@@ -3840,9 +3986,7 @@ async function clearAll(){
     return;
 
 
-  const {
-    error
-  } =
+  const {error}=
     await supabaseClient
       .from("rejects")
       .delete()
@@ -3856,7 +4000,7 @@ async function clearAll(){
   if(error){
 
     alert(
-      "Clear All failed: " +
+      "Clear All failed: "+
       error.message
     );
 
@@ -3875,13 +4019,13 @@ async function clearAll(){
 }
 
 
-/* =====================================================
-   IMPORT EXCEL
-===================================================== */
+/* =========================================================
+   IMPORT
+========================================================= */
 
 async function importExcel(){
 
-  const file =
+  const file=
     document
       .getElementById(
         "excelFile"
@@ -3889,7 +4033,7 @@ async function importExcel(){
       .files[0];
 
 
-  const msg =
+  const msg=
     document.getElementById(
       "importMsg"
     );
@@ -3897,9 +4041,9 @@ async function importExcel(){
 
   if(!file){
 
-    msg.style.color = "red";
+    msg.style.color="red";
 
-    msg.textContent =
+    msg.textContent=
       "Please select Excel / CSV file.";
 
     return;
@@ -3907,19 +4051,19 @@ async function importExcel(){
   }
 
 
-  msg.style.color = "#555";
+  msg.style.color="#555";
 
-  msg.textContent =
+  msg.textContent=
     "Importing data...";
 
 
   try{
 
-    const buffer =
+    const buffer=
       await file.arrayBuffer();
 
 
-    const workbook =
+    const workbook=
       XLSX.read(
         buffer,
         {
@@ -3930,7 +4074,7 @@ async function importExcel(){
 
 
     if(
-      !workbook.SheetNames ||
+      !workbook.SheetNames||
       !workbook.SheetNames.length
     ){
 
@@ -3941,13 +4085,13 @@ async function importExcel(){
     }
 
 
-    const sheet =
+    const sheet=
       workbook.Sheets[
         workbook.SheetNames[0]
       ];
 
 
-    const data =
+    const data=
       XLSX.utils.sheet_to_json(
         sheet,
         {
@@ -3966,17 +4110,18 @@ async function importExcel(){
     }
 
 
-    const records = [];
+    const records=[];
 
-    const duplicateSNs = [];
+    const duplicateSNs=[];
 
-    const fileSNs = new Set();
+    const fileSNs=
+      new Set();
 
 
     data.forEach(
-      row => {
+      row=>{
 
-        const sn =
+        const sn=
           String(
             row["Component SN"] ??
             row["component_sn"] ??
@@ -3990,11 +4135,13 @@ async function importExcel(){
           return;
 
 
-        const snKey =
+        const snKey=
           sn.toLowerCase();
 
 
-        if(fileSNs.has(snKey)){
+        if(
+          fileSNs.has(snKey)
+        ){
 
           duplicateSNs.push(sn);
 
@@ -4006,7 +4153,7 @@ async function importExcel(){
         fileSNs.add(snKey);
 
 
-        const badgeID =
+        const badgeID=
           String(
             row["Badge ID"] ??
             row["badge_id"] ??
@@ -4066,7 +4213,9 @@ async function importExcel(){
     );
 
 
-    if(!records.length){
+    if(
+      !records.length
+    ){
 
       throw new Error(
         "No valid Component SN found."
@@ -4075,24 +4224,24 @@ async function importExcel(){
     }
 
 
-    const existingSNs =
+    const existingSNs=
       new Set(
         rows.map(
           row =>
-            String(
-              row.component_sn || ""
-            )
-            .trim()
-            .toLowerCase()
+          String(
+            row.component_sn||""
+          )
+          .trim()
+          .toLowerCase()
         )
       );
 
 
-    const newRecords =
+    const newRecords=
       records.filter(
-        record => {
+        record=>{
 
-          const key =
+          const key=
             String(
               record.component_sn
             )
@@ -4106,12 +4255,14 @@ async function importExcel(){
       );
 
 
-    const existingCount =
-      records.length -
+    const existingCount=
+      records.length-
       newRecords.length;
 
 
-    if(!newRecords.length){
+    if(
+      !newRecords.length
+    ){
 
       throw new Error(
         "All SN in this file already exist in the database."
@@ -4120,9 +4271,7 @@ async function importExcel(){
     }
 
 
-    const {
-      error
-    } =
+    const {error}=
       await supabaseClient
         .from("rejects")
         .insert(newRecords);
@@ -4131,42 +4280,43 @@ async function importExcel(){
     if(error){
 
       throw new Error(
-        error.message ||
+        error.message||
         "Database insert failed."
       );
 
     }
 
 
-    let successMessage =
-      newRecords.length +
+    let successMessage=
+      newRecords.length+
       " records imported successfully.";
 
 
-    if(existingCount > 0){
+    if(existingCount>0){
 
-      successMessage +=
-        " " +
-        existingCount +
+      successMessage+=
+        " "+
+        existingCount+
         " duplicate SN skipped.";
 
     }
 
 
-    if(duplicateSNs.length > 0){
+    if(
+      duplicateSNs.length>0
+    ){
 
-      successMessage +=
-        " " +
-        duplicateSNs.length +
+      successMessage+=
+        " "+
+        duplicateSNs.length+
         " duplicate SN inside file skipped.";
 
     }
 
 
-    msg.style.color = "green";
+    msg.style.color="green";
 
-    msg.textContent =
-      "✓ " +
+    msg.textContent=
       successMessage;
 
 
@@ -4174,7 +4324,7 @@ async function importExcel(){
       .getElementById(
         "excelFile"
       )
-      .value = "";
+      .value="";
 
 
     await loadRows();
@@ -4184,12 +4334,12 @@ async function importExcel(){
 
     console.error(error);
 
-    msg.style.color = "red";
+    msg.style.color="red";
 
-    msg.textContent =
-      "Import failed: " +
+    msg.textContent=
+      "Import failed: "+
       (
-        error.message ||
+        error.message||
         "Unknown error"
       );
 
@@ -4198,53 +4348,52 @@ async function importExcel(){
 }
 
 
-/* =====================================================
+/* =========================================================
    BAR CHART
-===================================================== */
+========================================================= */
 
 function renderChart(){
 
-  const counts = {};
+  const counts={};
 
 
   filteredRows.forEach(
-    row => {
+    row=>{
 
-      const defect =
-        row.defect ||
+      const defect=
+        row.defect||
         "Unknown";
 
 
-      counts[defect] =
-        (counts[defect] || 0) + 1;
+      counts[defect]=
+        (
+          counts[defect]||0
+        )+1;
 
     }
   );
 
 
-  const sorted =
+  const sorted=
     Object.entries(counts)
       .sort(
-        (a,b) =>
-          b[1] - a[1]
+        (a,b)=>b[1]-a[1]
       );
 
 
-  const labels =
+  const labels=
     sorted.map(
-      item =>
-        item[0]
+      item=>item[0]
     );
 
 
-  const values =
+  const values=
     sorted.map(
-      item =>
-        item[1]
+      item=>item[1]
     );
 
 
-  const ctx =
+  const ctx=
     document
       .getElementById(
         "trendChart"
@@ -4259,46 +4408,44 @@ function renderChart(){
   }
 
 
-  /* =================================================
-     BOLD GRADIENT
-  ================================================= */
+  /*
+     BOLD MULTI-COLOR GRADIENT
+  */
 
-  const gradient =
+  const gradient=
     ctx.createLinearGradient(
       0,
       0,
       0,
-      440
+      430
     );
 
 
   gradient.addColorStop(
     0,
-    "#ff006e"
+    "#ff1f7a"
   );
 
-  gradient.addColorStop(
-    0.25,
-    "#e100ff"
-  );
 
   gradient.addColorStop(
-    0.55,
-    "#8b2cff"
+    .28,
+    "#ff3d9a"
   );
 
+
   gradient.addColorStop(
-    0.80,
-    "#5b5cff"
+    .58,
+    "#a855f7"
   );
+
 
   gradient.addColorStop(
     1,
-    "#2563eb"
+    "#5b3fd3"
   );
 
 
-  trendChart =
+  trendChart=
     new Chart(
       ctx,
       {
@@ -4320,28 +4467,22 @@ function renderChart(){
               gradient,
 
             borderColor:
-              "#b000d4",
+              "#7c2d8f",
 
             borderWidth:2,
 
-            borderRadius:12,
+            borderRadius:10,
 
             borderSkipped:false,
 
-            maxBarThickness:65,
+            maxBarThickness:62,
 
             hoverBackgroundColor:
-              "#ff1687",
-
-            hoverBorderColor:
-              "#7c3aed",
-
-            hoverBorderWidth:3
+              "#ff197f"
 
           }]
 
         },
-
 
         options:{
 
@@ -4349,53 +4490,33 @@ function renderChart(){
 
           maintainAspectRatio:false,
 
-
-          animation:{
-
-            duration:900,
-
-            easing:"easeOutQuart"
-
-          },
-
-
           interaction:{
-
             mode:"index",
-
             intersect:false
-
           },
-
 
           plugins:{
 
             legend:{
-
               display:false
-
             },
-
 
             tooltip:{
 
               backgroundColor:
-                "#21172c",
+                "#21182e",
 
-              titleColor:"#fff",
+              titleColor:
+                "#fff",
 
-              bodyColor:"#fff",
+              bodyColor:
+                "#fff",
 
-              borderColor:
-                "rgba(255,255,255,.15)",
-
-              borderWidth:1,
-
-              padding:14,
-
-              displayColors:false,
+              padding:13,
 
               cornerRadius:10,
+
+              displayColors:false,
 
               callbacks:{
 
@@ -4404,8 +4525,8 @@ function renderChart(){
                 ){
 
                   return(
-                    " Quantity: " +
-                    context.raw +
+                    " Quantity: "+
+                    context.raw+
                     " reject(s)"
                   );
 
@@ -4417,27 +4538,21 @@ function renderChart(){
 
           },
 
-
           scales:{
 
             x:{
 
               grid:{
-
                 display:false
-
               },
 
               ticks:{
 
-                color:"#5e5667",
+                color:"#62596c",
 
                 font:{
-
                   size:11,
-
                   weight:"800"
-
                 },
 
                 maxRotation:35,
@@ -4448,7 +4563,6 @@ function renderChart(){
 
             },
 
-
             y:{
 
               beginAtZero:true,
@@ -4457,12 +4571,10 @@ function renderChart(){
 
                 precision:0,
 
-                color:"#5e5667",
+                color:"#62596c",
 
                 font:{
-
                   weight:"700"
-
                 }
 
               },
@@ -4470,9 +4582,7 @@ function renderChart(){
               grid:{
 
                 color:
-                  "rgba(100,70,120,.09)",
-
-                drawBorder:false
+                  "rgba(100,80,110,.10)"
 
               }
 
@@ -4480,32 +4590,33 @@ function renderChart(){
 
           },
 
-
           onClick:function(
             event,
             elements
           ){
 
-            if(!elements.length)
+            if(
+              !elements.length
+            )
               return;
 
 
-            const index =
+            const index=
               elements[0].index;
 
 
-            const defect =
+            const defect=
               labels[index];
 
 
-            const qty =
+            const qty=
               values[index];
 
 
             alert(
-              defect +
-              "\n\nQuantity: " +
-              qty +
+              defect+
+              "\n\nQuantity: "+
+              qty+
               " reject(s)"
             );
 
@@ -4519,25 +4630,25 @@ function renderChart(){
 }
 
 
-/* =====================================================
+/* =========================================================
    DAILY TOP
-===================================================== */
+========================================================= */
 
 function renderDailyTopDefect(){
 
-  const container =
+  const container=
     document.getElementById(
       "dailyTopDefect"
     );
 
 
-  const dates = {};
+  const dates={};
 
 
   filteredRows.forEach(
-    row => {
+    row=>{
 
-      const date =
+      const date=
         formatDateKey(
           new Date(
             row.date_time
@@ -4545,104 +4656,115 @@ function renderDailyTopDefect(){
         );
 
 
-      if(!dates[date])
-        dates[date] = {};
+      if(
+        !dates[date]
+      )
+        dates[date]={};
 
 
-      const defect =
-        row.defect ||
+      const defect=
+        row.defect||
         "Unknown";
 
 
-      dates[date][defect] =
+      dates[date][defect]=
         (
-          dates[date][defect] ||
-          0
-        ) + 1;
+          dates[date][defect]||0
+        )+1;
 
     }
   );
 
 
-  const dateKeys =
+  const dateKeys=
     Object.keys(dates)
       .sort()
       .reverse();
 
 
-  if(!dateKeys.length){
+  if(
+    !dateKeys.length
+  ){
 
-    container.innerHTML =
-      "<p>No data available.</p>";
+    container.innerHTML=
+      `<div class="empty-state">
+        No data available.
+      </div>`;
 
     return;
 
   }
 
 
-  container.innerHTML = "";
+  container.innerHTML="";
 
 
   dateKeys.forEach(
-    date => {
+    date=>{
 
-      const sorted =
+      const sorted=
         Object.entries(
           dates[date]
         )
         .sort(
-          (a,b) =>
-            b[1] - a[1]
+          (a,b)=>b[1]-a[1]
         );
 
 
-      const top =
+      const top=
         sorted[0];
 
 
-      const item =
+      const item=
         document.createElement(
           "div"
         );
 
-      item.className =
+
+      item.className=
         "daily-item";
 
 
-      const dateDiv =
+      const dateDiv=
         document.createElement(
           "div"
         );
 
-      dateDiv.className =
+
+      dateDiv.className=
         "daily-date";
 
-      dateDiv.textContent =
+
+      dateDiv.textContent=
         date;
 
 
-      const defectDiv =
+      const defectDiv=
         document.createElement(
           "div"
         );
 
-      defectDiv.className =
+
+      defectDiv.className=
         "daily-defect";
 
-      defectDiv.textContent =
+
+      defectDiv.textContent=
         top[0];
 
 
-      const qty =
+      const qty=
         document.createElement(
           "span"
         );
 
-      qty.className =
+
+      qty.className=
         "daily-qty";
 
-      qty.textContent =
-        top[1] +
+
+      qty.textContent=
+        top[1]+
         " reject(s)";
 
 
@@ -4650,9 +4772,11 @@ function renderDailyTopDefect(){
         dateDiv
       );
 
+
       item.appendChild(
         defectDiv
       );
+
 
       item.appendChild(
         qty
@@ -4669,13 +4793,15 @@ function renderDailyTopDefect(){
 }
 
 
-/* =====================================================
+/* =========================================================
    EXPORT EXCEL
-===================================================== */
+========================================================= */
 
 function exportCSV(){
 
-  if(!filteredRows.length){
+  if(
+    !filteredRows.length
+  ){
 
     alert(
       "No data to export."
@@ -4686,9 +4812,9 @@ function exportCSV(){
   }
 
 
-  const exportRows =
+  const exportRows=
     filteredRows.map(
-      row => ({
+      row=>({
 
         "Component SN":
           row.component_sn,
@@ -4714,13 +4840,13 @@ function exportCSV(){
     );
 
 
-  const worksheet =
+  const worksheet=
     XLSX.utils.json_to_sheet(
       exportRows
     );
 
 
-  const workbook =
+  const workbook=
     XLSX.utils.book_new();
 
 
@@ -4739,13 +4865,13 @@ function exportCSV(){
 }
 
 
-/* =====================================================
-   BACKUP JSON
-===================================================== */
+/* =========================================================
+   BACKUP
+========================================================= */
 
 function backupJSON(){
 
-  const blob =
+  const blob=
     new Blob(
       [
         JSON.stringify(
@@ -4761,21 +4887,21 @@ function backupJSON(){
     );
 
 
-  const url =
+  const url=
     URL.createObjectURL(
       blob
     );
 
 
-  const a =
+  const a=
     document.createElement(
       "a"
     );
 
 
-  a.href = url;
+  a.href=url;
 
-  a.download =
+  a.download=
     "Reject_Trending_Backup.json";
 
 
@@ -4790,9 +4916,9 @@ function backupJSON(){
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN LOGIN
-===================================================== */
+========================================================= */
 
 function openAdminLogin(){
 
@@ -4805,25 +4931,32 @@ function openAdminLogin(){
   }
 
 
-  document.getElementById(
-    "adminModal"
-  ).style.display =
-    "flex";
+  document
+    .getElementById(
+      "adminModal"
+    )
+    .style.display="flex";
 
 
-  document.getElementById(
-    "adminError"
-  ).textContent = "";
+  document
+    .getElementById(
+      "adminError"
+    )
+    .textContent="";
 
 
-  document.getElementById(
-    "adminEmail"
-  ).value = "";
+  document
+    .getElementById(
+      "adminEmail"
+    )
+    .value="";
 
 
-  document.getElementById(
-    "adminPassword"
-  ).value = "";
+  document
+    .getElementById(
+      "adminPassword"
+    )
+    .value="";
 
 
   setTimeout(
@@ -4844,17 +4977,18 @@ function openAdminLogin(){
 
 function closeAdminLogin(){
 
-  document.getElementById(
-    "adminModal"
-  ).style.display =
-    "none";
+  document
+    .getElementById(
+      "adminModal"
+    )
+    .style.display="none";
 
 }
 
 
 async function adminLogin(){
 
-  const email =
+  const email=
     document
       .getElementById(
         "adminEmail"
@@ -4863,7 +4997,7 @@ async function adminLogin(){
       .trim();
 
 
-  const password =
+  const password=
     document
       .getElementById(
         "adminPassword"
@@ -4871,18 +5005,21 @@ async function adminLogin(){
       .value;
 
 
-  const errorBox =
+  const errorBox=
     document.getElementById(
       "adminError"
     );
 
 
-  errorBox.textContent = "";
+  errorBox.textContent="";
 
 
-  if(!email || !password){
+  if(
+    !email||
+    !password
+  ){
 
-    errorBox.textContent =
+    errorBox.textContent=
       "Please enter email and password.";
 
     return;
@@ -4890,10 +5027,7 @@ async function adminLogin(){
   }
 
 
-  const {
-    data,
-    error
-  } =
+  const {data,error}=
     await supabaseClient
       .auth
       .signInWithPassword({
@@ -4907,7 +5041,7 @@ async function adminLogin(){
 
   if(error){
 
-    errorBox.textContent =
+    errorBox.textContent=
       error.message;
 
     return;
@@ -4916,8 +5050,8 @@ async function adminLogin(){
 
 
   if(
-    !data.user ||
-    data.user.id !== ADMIN_UID
+    !data.user||
+    data.user.id!==ADMIN_UID
   ){
 
     await supabaseClient
@@ -4925,7 +5059,7 @@ async function adminLogin(){
       .signOut();
 
 
-    errorBox.textContent =
+    errorBox.textContent=
       "This account is not authorised as admin.";
 
     return;
@@ -4938,6 +5072,7 @@ async function adminLogin(){
   await updateAdminUI(
     data.user
   );
+
 
   renderTable();
 
@@ -4961,22 +5096,20 @@ async function adminLogout(){
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN CHECK
-===================================================== */
+========================================================= */
 
 async function checkAdmin(){
 
-  const {
-    data
-  } =
+  const {data}=
     await supabaseClient
       .auth
       .getUser();
 
 
   await updateAdminUI(
-    data.user || null
+    data.user||null
   );
 
 }
@@ -4989,48 +5122,48 @@ function isAdmin(){
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN UI
-===================================================== */
+========================================================= */
 
 async function updateAdminUI(
-  user = null
+  user=null
 ){
 
   if(!user){
 
-    const result =
+    const result=
       await supabaseClient
         .auth
         .getUser();
 
 
-    user =
-      result.data.user || null;
+    user=
+      result.data.user||null;
 
   }
 
 
-  currentAdmin =
+  currentAdmin=
     !!(
       user &&
-      user.id === ADMIN_UID
+      user.id===ADMIN_UID
     );
 
 
-  const icon =
+  const icon=
     document.getElementById(
       "adminIcon"
     );
 
 
-  const tooltip =
+  const tooltip=
     document.getElementById(
       "adminTooltip"
     );
 
 
-  const management =
+  const management=
     document.getElementById(
       "dataManagement"
     );
@@ -5038,8 +5171,7 @@ async function updateAdminUI(
 
   if(currentAdmin){
 
-    icon.textContent =
-      "⚙️";
+    icon.textContent="⚙️";
 
     icon.classList.add(
       "admin-active"
@@ -5050,17 +5182,16 @@ async function updateAdminUI(
       "Logout Admin"
     );
 
-    tooltip.textContent =
+    tooltip.textContent=
       "Admin active • Click to logout";
 
 
-    management.style.display =
+    management.style.display=
       "block";
 
   }else{
 
-    icon.textContent =
-      "👤";
+    icon.textContent="👤";
 
     icon.classList.remove(
       "admin-active"
@@ -5071,11 +5202,11 @@ async function updateAdminUI(
       "Admin Login"
     );
 
-    tooltip.textContent =
+    tooltip.textContent=
       "Admin Login";
 
 
-    management.style.display =
+    management.style.display=
       "none";
 
   }
@@ -5086,9 +5217,9 @@ async function updateAdminUI(
 }
 
 
-/* =====================================================
+/* =========================================================
    AUTH STATE
-===================================================== */
+========================================================= */
 
 supabaseClient
   .auth
@@ -5108,9 +5239,9 @@ supabaseClient
   );
 
 
-/* =====================================================
+/* =========================================================
    AUTO REFRESH
-===================================================== */
+========================================================= */
 
 setInterval(
   async function(){
@@ -5122,14 +5253,16 @@ setInterval(
 );
 
 
-/* =====================================================
+/* =========================================================
    DATE
-===================================================== */
+========================================================= */
 
-function formatDateKey(date){
+function formatDateKey(
+  date
+){
 
   if(
-    !date ||
+    !date||
     isNaN(
       date.getTime()
     )
@@ -5138,12 +5271,12 @@ function formatDateKey(date){
 
 
   return(
-    date.getFullYear() +
-    "-" +
+    date.getFullYear()+
+    "-"+
     String(
-      date.getMonth() + 1
-    ).padStart(2,"0") +
-    "-" +
+      date.getMonth()+1
+    ).padStart(2,"0")+
+    "-"+
     String(
       date.getDate()
     ).padStart(2,"0")
@@ -5152,9 +5285,11 @@ function formatDateKey(date){
 }
 
 
-function formatDateTime(value){
+function formatDateTime(
+  value
+){
 
-  const date =
+  const date=
     new Date(value);
 
 
@@ -5163,7 +5298,7 @@ function formatDateTime(value){
       date.getTime()
     )
   )
-    return value || "";
+    return value||"";
 
 
   return date.toLocaleString();
@@ -5171,19 +5306,23 @@ function formatDateTime(value){
 }
 
 
-/* =====================================================
+/* =========================================================
    IMPORT DATE
-===================================================== */
+========================================================= */
 
-function parseImportDate(value){
+function parseImportDate(
+  value
+){
 
   if(!value)
     return new Date().toISOString();
 
 
-  if(typeof value === "number"){
+  if(
+    typeof value==="number"
+  ){
 
-    const excelEpoch =
+    const excelEpoch=
       new Date(
         Date.UTC(
           1899,
@@ -5193,10 +5332,10 @@ function parseImportDate(value){
       );
 
 
-    const date =
+    const date=
       new Date(
-        excelEpoch.getTime() +
-        value * 86400000
+        excelEpoch.getTime()+
+        value*86400000
       );
 
 
@@ -5205,7 +5344,9 @@ function parseImportDate(value){
   }
 
 
-  if(value instanceof Date){
+  if(
+    value instanceof Date
+  ){
 
     if(
       !isNaN(
@@ -5217,7 +5358,7 @@ function parseImportDate(value){
   }
 
 
-  const text =
+  const text=
     String(value).trim();
 
 
@@ -5225,7 +5366,7 @@ function parseImportDate(value){
     return new Date().toISOString();
 
 
-  const date =
+  const date=
     new Date(text);
 
 
@@ -5242,29 +5383,28 @@ function parseImportDate(value){
 }
 
 
-/* =====================================================
+/* =========================================================
    MESSAGE
-===================================================== */
+========================================================= */
 
 function showMessage(
   text,
   color
 ){
 
-  const msg =
+  const msg=
     document.getElementById(
       "msg"
     );
 
 
-  msg.textContent =
-    text;
+  msg.textContent=text;
 
 
-  msg.style.color =
-    color === "green"
-      ? "#16a34a"
-      : "#dc2626";
+  msg.style.color=
+    color==="green"
+    ? "#16a34a"
+    : "#dc2626";
 
 }
 
