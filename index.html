@@ -5544,23 +5544,24 @@ function escapeHtml(value){
 
 }
 
-
 /* =====================================================
    AUTH STATE
 ===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
-    async (
-        event,
-        session
-    )=>{
+    (event, session) => {
 
         currentSession = session;
 
-
         if(session){
 
-            await checkAdmin();
+            setTimeout(async () => {
+
+                await checkAdmin();
+
+                renderRecords();
+
+            }, 0);
 
         }else{
 
@@ -5568,10 +5569,9 @@ supabaseClient.auth.onAuthStateChange(
 
             updateAdminUI();
 
+            renderRecords();
+
         }
-
-
-        renderRecords();
 
     }
 );
