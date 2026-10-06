@@ -2148,7 +2148,21 @@ function showToast(
 
 
 function normalizeSN(sn){
+function displayOperator(value){
 
+    if(!value){
+        return "-";
+    }
+
+    const text = String(value).trim();
+
+    // Jangan paparkan email admin
+    if(text.includes("@")){
+        return "Admin";
+    }
+
+    return text;
+}
     return String(sn || "")
         .trim()
         .toUpperCase();
