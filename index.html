@@ -12,20 +12,27 @@
 
 <style>
 
+/* ============================================================
+   SOFT DARK THEME
+============================================================ */
+
 :root{
-    --bg:#07111f;
-    --panel:#0d1b2d;
-    --panel2:#10243a;
-    --border:#1e3853;
-    --text:#f3f7fb;
-    --muted:#9fb1c5;
-    --cyan:#22d3ee;
-    --blue:#3b82f6;
-    --purple:#8b5cf6;
-    --green:#22c55e;
-    --red:#ef4444;
-    --orange:#f59e0b;
-    --shadow:0 18px 45px rgba(0,0,0,.25);
+    --bg:#101923;
+    --panel:#182532;
+    --panel2:#1d2d3b;
+    --border:#304352;
+
+    --text:#e8eef2;
+    --muted:#a8b6c0;
+
+    --cyan:#72c8d3;
+    --blue:#7ea8d8;
+    --purple:#9c91c9;
+    --green:#82b99a;
+    --red:#d98b8b;
+    --orange:#d8ae76;
+
+    --shadow:0 16px 40px rgba(0,0,0,.20);
 }
 
 *{
@@ -35,10 +42,20 @@
 body{
     margin:0;
     font-family:Inter,Segoe UI,Arial,sans-serif;
+
     background:
-        radial-gradient(circle at top right,rgba(59,130,246,.12),transparent 30%),
-        radial-gradient(circle at top left,rgba(34,211,238,.08),transparent 28%),
+        radial-gradient(
+            circle at top right,
+            rgba(126,168,216,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at top left,
+            rgba(114,200,211,.05),
+            transparent 28%
+        ),
         var(--bg);
+
     color:var(--text);
 }
 
@@ -57,22 +74,30 @@ button{
     margin:auto;
 }
 
-/* ================= HEADER ================= */
+
+/* ============================================================
+   HEADER
+============================================================ */
 
 header{
     position:sticky;
     top:0;
     z-index:100;
+
     backdrop-filter:blur(18px);
-    background:rgba(7,17,31,.88);
+
+    background:rgba(16,25,35,.90);
+
     border-bottom:1px solid var(--border);
 }
 
 .header-inner{
     min-height:78px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:20px;
 }
 
@@ -85,13 +110,26 @@ header{
 .logo{
     width:45px;
     height:45px;
+
     border-radius:14px;
+
     display:grid;
     place-items:center;
+
     font-size:22px;
     font-weight:800;
-    background:linear-gradient(135deg,var(--blue),var(--cyan));
-    box-shadow:0 8px 25px rgba(34,211,238,.22);
+
+    background:
+        linear-gradient(
+            135deg,
+            #718eb5,
+            #6bb8c0
+        );
+
+    color:#eef6f8;
+
+    box-shadow:
+        0 7px 20px rgba(96,155,173,.16);
 }
 
 .logo-title{
@@ -108,19 +146,28 @@ header{
 
 .admin-btn{
     border:1px solid var(--border);
-    background:var(--panel);
-    color:white;
+
+    background:#1b2a37;
+
+    color:var(--text);
+
     padding:10px 15px;
+
     border-radius:12px;
+
     transition:.2s;
 }
 
 .admin-btn:hover{
-    border-color:var(--cyan);
+    border-color:#6fabb7;
+    background:#20313f;
     transform:translateY(-1px);
 }
 
-/* ================= HERO ================= */
+
+/* ============================================================
+   HERO
+============================================================ */
 
 .hero{
     padding:35px 0 22px;
@@ -128,16 +175,22 @@ header{
 
 .hero h1{
     margin:0;
+
     font-size:34px;
+
     letter-spacing:-.8px;
 }
 
 .hero p{
     color:var(--muted);
+
     margin:8px 0 0;
 }
 
-/* ================= CARDS ================= */
+
+/* ============================================================
+   SECTION
+============================================================ */
 
 .section{
     margin:24px 0;
@@ -147,7 +200,9 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     gap:12px;
+
     margin-bottom:14px;
 }
 
@@ -161,67 +216,113 @@ header{
     font-size:12px;
 }
 
+
+/* ============================================================
+   CARDS
+============================================================ */
+
 .card{
-    background:linear-gradient(145deg,rgba(16,36,58,.95),rgba(10,25,42,.95));
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29,45,59,.96),
+            rgba(22,35,47,.96)
+        );
+
     border:1px solid var(--border);
+
     border-radius:18px;
+
     box-shadow:var(--shadow);
+
     padding:20px;
 }
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:15px;
 }
 
 .stat{
     min-height:125px;
+
     position:relative;
+
     overflow:hidden;
 }
 
 .stat::after{
+
     content:"";
+
     position:absolute;
+
     right:-35px;
     top:-35px;
+
     width:100px;
     height:100px;
+
     border-radius:50%;
-    background:rgba(34,211,238,.07);
+
+    background:
+        rgba(114,200,211,.045);
 }
 
 .stat-label{
     color:var(--muted);
+
     font-size:13px;
 }
 
 .stat-value{
     margin-top:13px;
+
     font-size:32px;
+
     font-weight:800;
 }
 
 .stat-small{
     margin-top:5px;
+
     color:var(--muted);
+
     font-size:12px;
 }
 
-/* ================= ADMIN ================= */
+
+/* ============================================================
+   ADMIN
+============================================================ */
 
 .admin-panel{
-    border:1px solid rgba(139,92,246,.45);
+
+    border:1px solid rgba(156,145,201,.32);
+
     background:
-        linear-gradient(145deg,rgba(44,30,78,.65),rgba(13,27,45,.95));
+        linear-gradient(
+            145deg,
+            rgba(48,43,67,.58),
+            rgba(22,35,47,.96)
+        );
 }
 
 .admin-head{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:20px;
+
     margin-bottom:20px;
 }
 
@@ -230,27 +331,41 @@ header{
 }
 
 .admin-user{
-    color:#c4b5fd;
+    color:#b9b1d8;
     font-size:13px;
 }
 
 .admin-grid{
+
     display:grid;
-    grid-template-columns:1.2fr .8fr;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
     gap:18px;
 }
 
-/* ================= FORM ================= */
+
+/* ============================================================
+   FORM
+============================================================ */
 
 .form-grid{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap:14px;
 }
 
 .field{
+
     display:flex;
+
     flex-direction:column;
+
     gap:7px;
 }
 
@@ -259,124 +374,230 @@ header{
 }
 
 .field label{
-    color:#b8c8d9;
+
+    color:#b5c1c9;
+
     font-size:12px;
+
     font-weight:600;
 }
 
 input,
 select{
+
     width:100%;
-    background:#081726;
-    color:white;
-    border:1px solid #25435f;
+
+    background:#172632;
+
+    color:var(--text);
+
+    border:1px solid #3a4d5a;
+
     border-radius:10px;
+
     padding:11px 12px;
+
     outline:none;
+
+}
+
+input::placeholder{
+    color:#71818c;
 }
 
 input:focus,
 select:focus{
+
     border-color:var(--cyan);
-    box-shadow:0 0 0 3px rgba(34,211,238,.08);
+
+    box-shadow:
+        0 0 0 3px rgba(114,200,211,.10);
 }
 
 input[readonly]{
-    opacity:.75;
+    opacity:.78;
 }
 
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
 .btn-row{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:10px;
+
     margin-top:15px;
 }
 
 .btn{
+
     border:none;
+
     border-radius:10px;
+
     padding:11px 15px;
+
     font-weight:700;
-    color:white;
+
+    color:#edf3f5;
+
     transition:.2s;
 }
 
 .btn:hover{
+
     transform:translateY(-1px);
-    filter:brightness(1.08);
+
+    filter:brightness(1.05);
 }
 
 .btn-primary{
-    background:linear-gradient(135deg,var(--blue),#2563eb);
+
+    background:
+        linear-gradient(
+            135deg,
+            #617da3,
+            #718db5
+        );
 }
 
 .btn-cyan{
-    background:linear-gradient(135deg,#0891b2,var(--cyan));
-    color:#00141c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5a9ea8,
+            #70b9c2
+        );
+
+    color:#edf7f8;
 }
 
 .btn-green{
-    background:linear-gradient(135deg,#16a34a,var(--green));
+
+    background:
+        linear-gradient(
+            135deg,
+            #668f78,
+            #7eaf92
+        );
 }
 
 .btn-red{
-    background:linear-gradient(135deg,#dc2626,var(--red));
+
+    background:
+        linear-gradient(
+            135deg,
+            #a86d70,
+            #c18181
+        );
 }
 
 .btn-purple{
-    background:linear-gradient(135deg,#7c3aed,var(--purple));
+
+    background:
+        linear-gradient(
+            135deg,
+            #756c9a,
+            #968cbf
+        );
 }
 
 .btn-dark{
-    background:#13283d;
-    border:1px solid #27445f;
+
+    background:#1b2b38;
+
+    border:1px solid #3b4e5b;
+
+    color:#dce5ea;
 }
 
 .btn-orange{
-    background:linear-gradient(135deg,#d97706,var(--orange));
-    color:#211000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a98355,
+            #c4a06b
+        );
+
+    color:#fff6e9;
 }
 
 .small-note{
+
     color:var(--muted);
+
     font-size:12px;
+
     line-height:1.5;
 }
 
-/* ================= BATCH ================= */
+
+/* ============================================================
+   BATCH
+============================================================ */
 
 .batch-box{
+
     margin-top:15px;
-    border:1px dashed #2d526e;
+
+    border:
+        1px dashed #405866;
+
     border-radius:12px;
+
     padding:14px;
-    background:rgba(0,0,0,.12);
+
+    background:
+        rgba(10,20,28,.28);
 }
 
 .batch-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     margin-bottom:10px;
 }
 
 .batch-count{
+
     font-size:13px;
+
     font-weight:700;
+
     color:var(--cyan);
 }
 
 .batch-list{
+
     max-height:180px;
+
     overflow:auto;
 }
 
 .batch-item{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:10px;
+
     padding:8px 0;
-    border-bottom:1px solid rgba(255,255,255,.05);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+
     font-size:12px;
 }
 
@@ -385,17 +606,27 @@ input[readonly]{
 }
 
 .batch-remove{
+
     border:none;
+
     background:none;
-    color:#fca5a5;
+
+    color:#d59b9b;
+
     cursor:pointer;
 }
 
-/* ================= IMPORT ================= */
+
+/* ============================================================
+   IMPORT
+============================================================ */
 
 .import-box{
+
     display:flex;
+
     flex-direction:column;
+
     gap:12px;
 }
 
@@ -403,155 +634,258 @@ input[readonly]{
     padding:10px;
 }
 
-/* ================= FILTER ================= */
+
+/* ============================================================
+   FILTER
+============================================================ */
 
 .filter-grid{
+
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+
+    grid-template-columns:
+        repeat(5,1fr);
+
     gap:12px;
 }
 
 .filter-actions{
+
     display:flex;
+
     gap:9px;
+
     align-items:end;
 }
 
-/* ================= CHART ================= */
+
+/* ============================================================
+   CHART
+============================================================ */
 
 .chart-wrap{
+
     position:relative;
+
     height:420px;
 }
 
 .chart-info{
+
     color:var(--muted);
+
     font-size:12px;
+
     margin-top:10px;
 }
 
 .chart-click{
-    color:#67e8f9;
+    color:#82c3cb;
 }
 
-/* ================= DAILY TOP ================= */
+
+/* ============================================================
+   DAILY TOP
+============================================================ */
 
 .daily-grid{
+
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+
+    grid-template-columns:
+        repeat(auto-fill,minmax(190px,1fr));
+
     gap:12px;
 }
 
 .day-card{
+
     border:1px solid var(--border);
+
     border-radius:14px;
+
     padding:15px;
-    background:#0a1929;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b2b38,
+            #172631
+        );
 }
 
 .day-date{
+
     color:var(--muted);
+
     font-size:12px;
 }
 
 .day-reject{
+
     margin-top:9px;
+
     font-weight:800;
 }
 
 .day-qty{
+
     color:var(--cyan);
+
     font-size:24px;
+
     font-weight:800;
+
     margin-top:4px;
 }
 
-/* ================= RECORDS ================= */
+
+/* ============================================================
+   RECORDS
+============================================================ */
 
 .table-wrap{
+
     overflow:auto;
+
     border:1px solid var(--border);
+
     border-radius:14px;
 }
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
+
     min-width:1150px;
 }
 
 th,
 td{
+
     padding:11px 12px;
-    border-bottom:1px solid rgba(255,255,255,.06);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.055);
+
     text-align:left;
+
     font-size:12px;
+
     white-space:nowrap;
 }
 
 th{
-    background:#0b1d30;
-    color:#b9cce0;
+
+    background:#1a2b38;
+
+    color:#b9c6ce;
+
     position:sticky;
+
     top:0;
+
     z-index:2;
 }
 
 td{
-    color:#e5edf5;
+    color:#dce5e9;
 }
 
 tr:hover td{
-    background:rgba(34,211,238,.025);
+
+    background:
+        rgba(114,200,211,.025);
 }
 
+
+/* ============================================================
+   TAGS
+============================================================ */
+
 .tag{
+
     display:inline-flex;
+
     padding:4px 8px;
+
     border-radius:999px;
+
     font-size:10px;
+
     font-weight:800;
 }
 
 .tag-debug{
-    background:rgba(59,130,246,.14);
-    color:#93c5fd;
+
+    background:
+        rgba(126,168,216,.12);
+
+    color:#a7c2df;
 }
 
 .tag-maint{
-    background:rgba(245,158,11,.14);
-    color:#fcd34d;
+
+    background:
+        rgba(216,174,118,.12);
+
+    color:#d9bb91;
 }
 
 .tag-cosmetic{
-    background:rgba(139,92,246,.14);
-    color:#c4b5fd;
+
+    background:
+        rgba(156,145,201,.13);
+
+    color:#c1b9dc;
 }
 
 .tag-eaoi{
-    background:rgba(34,197,94,.14);
-    color:#86efac;
+
+    background:
+        rgba(130,185,154,.13);
+
+    color:#a7cfb5;
 }
 
+
+/* ============================================================
+   ACTION BUTTON
+============================================================ */
+
 .action-btn{
+
     border:none;
+
     border-radius:7px;
+
     padding:6px 9px;
+
     margin-right:4px;
+
     color:white;
+
     font-size:11px;
+
     cursor:pointer;
 }
 
 .edit-btn{
-    background:#2563eb;
+
+    background:#647fa7;
 }
 
 .delete-btn{
-    background:#dc2626;
+
+    background:#a96e70;
 }
 
-/* ================= PUBLIC / ADMIN VISIBILITY ================= */
+
+/* ============================================================
+   VISIBILITY
+============================================================ */
 
 .admin-only{
     display:none;
@@ -573,17 +907,30 @@ body.admin-mode .public-only{
     display:none!important;
 }
 
-/* ================= MODAL ================= */
+
+/* ============================================================
+   MODAL
+============================================================ */
 
 .modal-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
+
+    background:
+        rgba(5,10,15,.76);
+
+    backdrop-filter:blur(9px);
+
     z-index:500;
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
 }
 
@@ -592,32 +939,60 @@ body.admin-mode .public-only{
 }
 
 .modal{
+
     width:min(720px,95vw);
+
     max-height:90vh;
+
     overflow:auto;
-    background:linear-gradient(145deg,#10243a,#081726);
-    border:1px solid #31516d;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d2d3b,
+            #14222e
+        );
+
+    border:1px solid #3a505e;
+
     border-radius:20px;
-    box-shadow:0 30px 100px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.48);
+
     animation:modalIn .2s ease;
 }
 
 @keyframes modalIn{
+
     from{
+
         opacity:0;
-        transform:translateY(15px) scale(.98);
+
+        transform:
+            translateY(15px)
+            scale(.98);
     }
+
     to{
+
         opacity:1;
+
         transform:none;
     }
 }
 
 .modal-head{
+
     padding:18px 20px;
-    border-bottom:1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
     display:flex;
+
     justify-content:space-between;
+
     gap:15px;
 }
 
@@ -626,13 +1001,24 @@ body.admin-mode .public-only{
 }
 
 .modal-close{
+
     border:none;
-    background:#172d43;
-    color:white;
+
+    background:#253744;
+
+    color:#e6edf0;
+
     width:34px;
+
     height:34px;
+
     border-radius:9px;
+
     font-size:18px;
+}
+
+.modal-close:hover{
+    background:#304652;
 }
 
 .modal-body{
@@ -640,91 +1026,148 @@ body.admin-mode .public-only{
 }
 
 .modal-summary{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:10px;
+
     margin-bottom:15px;
 }
 
 .modal-stat{
+
     padding:13px;
+
     border:1px solid var(--border);
+
     border-radius:12px;
-    background:#0a1929;
+
+    background:#182832;
 }
 
 .modal-stat-label{
+
     color:var(--muted);
+
     font-size:11px;
 }
 
 .modal-stat-value{
+
     margin-top:5px;
+
     font-size:20px;
+
     font-weight:800;
 }
 
 .modal-table{
+
     max-height:340px;
+
     overflow:auto;
 }
 
-/* ================= TOAST ================= */
+
+/* ============================================================
+   TOAST
+============================================================ */
 
 .toast{
+
     position:fixed;
+
     right:20px;
+
     bottom:20px;
+
     z-index:1000;
+
     min-width:280px;
+
     max-width:420px;
+
     padding:14px 16px;
+
     border-radius:12px;
-    background:#10243a;
-    border:1px solid #31516d;
-    box-shadow:0 15px 45px rgba(0,0,0,.35);
+
+    background:#1c2d3a;
+
+    border:1px solid #405562;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.30);
+
     transform:translateY(20px);
+
     opacity:0;
+
     pointer-events:none;
+
     transition:.25s;
 }
 
 .toast.show{
+
     transform:none;
+
     opacity:1;
 }
 
 .toast.success{
-    border-color:#166534;
+    border-color:#567b66;
 }
 
 .toast.error{
-    border-color:#991b1b;
+    border-color:#895d5d;
 }
 
-/* ================= LOGIN ================= */
+
+/* ============================================================
+   LOGIN
+============================================================ */
 
 .login-modal .modal{
     width:min(430px,95vw);
 }
 
 .login-logo{
+
     width:55px;
+
     height:55px;
+
     border-radius:16px;
+
     display:grid;
+
     place-items:center;
+
     margin:0 auto 15px;
-    background:linear-gradient(135deg,var(--purple),var(--blue));
+
+    background:
+        linear-gradient(
+            135deg,
+            #756c9a,
+            #647fa7
+        );
+
     font-size:25px;
 }
 
-/* ================= RESPONSIVE ================= */
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
 
 @media(max-width:1100px){
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .admin-grid{
@@ -732,7 +1175,8 @@ body.admin-mode .public-only{
     }
 
     .filter-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
 }
@@ -772,869 +1216,1059 @@ body.admin-mode .public-only{
 <body>
 
 <header>
-    <div class="container header-inner">
 
-        <div class="logo-wrap">
+<div class="container header-inner">
 
-            <div class="logo">RT</div>
+    <div class="logo-wrap">
 
-            <div>
-                <div class="logo-title">REJECT TRENDING</div>
-                <div class="logo-subtitle">
-                    Reject monitoring & daily trend analysis
-                </div>
+        <div class="logo">
+            RT
+        </div>
+
+        <div>
+
+            <div class="logo-title">
+                REJECT TRENDING
+            </div>
+
+            <div class="logo-subtitle">
+                Reject monitoring & daily trend analysis
             </div>
 
         </div>
 
-        <button class="admin-btn" id="adminLoginButton">
-            🔐 Admin
-        </button>
-
     </div>
+
+
+    <button
+        class="admin-btn"
+        id="adminLoginButton"
+    >
+        🔐 Admin
+    </button>
+
+</div>
+
 </header>
 
 
 <main class="container">
 
-    <section class="hero">
 
-        <h1>Quality Reject Dashboard</h1>
+<!-- =====================================================
+     HERO
+====================================================== -->
 
-        <p>
-            Monitor reject quantity, process trends, defect classification
-            and daily reject performance.
-        </p>
+<section class="hero">
 
-    </section>
+    <h1>
+        Quality Reject Dashboard
+    </h1>
 
+    <p>
+        Monitor reject quantity, process trends,
+        defect classification and daily reject performance.
+    </p>
 
-    <!-- =====================================================
-         ADMIN WORKSPACE
-    ====================================================== -->
+</section>
 
-    <section class="section admin-only" id="adminWorkspace">
 
-        <div class="card admin-panel">
+<!-- =====================================================
+     ADMIN WORKSPACE
+====================================================== -->
 
-            <div class="admin-head">
+<section
+    class="section admin-only"
+    id="adminWorkspace"
+>
 
-                <div>
-                    <h2>🔐 Admin Workspace</h2>
-                    <div class="admin-user" id="adminEmailDisplay">
-                        Not logged in
-                    </div>
-                </div>
+<div class="card admin-panel">
 
-                <button class="btn btn-dark" id="logoutButton">
-                    Logout
-                </button>
+<div class="admin-head">
 
-            </div>
+    <div>
 
-
-            <!-- ADMIN SETTINGS -->
-
-            <div class="card" style="margin-bottom:18px;">
-
-                <div class="section-title">
-                    <h2>⚙️ Admin Settings</h2>
-                    <span>Only admin can modify</span>
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Admin Email</label>
-                        <input
-                            id="adminEmail"
-                            type="email"
-                            readonly
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Admin Badge ID</label>
-                        <input
-                            id="adminBadgeId"
-                            type="text"
-                            placeholder="Enter your badge ID"
-                        >
-                    </div>
-
-                </div>
-
-                <div class="btn-row">
-
-                    <button
-                        class="btn btn-purple"
-                        id="saveBadgeButton"
-                    >
-                        💾 Save Badge ID
-                    </button>
-
-                </div>
-
-                <div class="small-note" style="margin-top:8px;">
-                    Badge ID ini akan digunakan secara automatik untuk
-                    scan reject selepas disimpan.
-                </div>
-
-            </div>
-
-
-            <div class="admin-grid">
-
-                <!-- SCAN -->
-
-                <div class="card">
-
-                    <div class="section-title">
-                        <h2>📷 Scan Reject</h2>
-                        <span>Admin only</span>
-                    </div>
-
-                    <div class="form-grid">
-
-                        <div class="field full">
-
-                            <label>
-                                Component Serial Number
-                            </label>
-
-                            <input
-                                id="sn"
-                                type="text"
-                                autofocus
-                                placeholder="Scan barcode here"
-                            >
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>Process</label>
-
-                            <select id="process">
-
-                                <option value="">
-                                    Choose Process
-                                </option>
-
-                                <option value="DEBUG">
-                                    DEBUG
-                                </option>
-
-                                <option value="MAINTENANCE">
-                                    MAINTENANCE
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>Component Part Number</label>
-
-                            <select id="pn">
-
-                                <option value="">
-                                    Choose Part Number
-                                </option>
-
-                                <option value="1670826">
-                                    1670826
-                                </option>
-
-                                <option value="1649167">
-                                    1649167
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>Reject</label>
-
-                            <select id="defect">
-
-                                <option value="">
-                                    Choose Reject
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>Defect Class</label>
-
-                            <select id="defectClass">
-
-                                <option value="">
-                                    Choose Defect Class
-                                </option>
-
-                                <option value="Cosmetic">
-                                    Cosmetic
-                                </option>
-
-                                <option value="EAOI Reject">
-                                    EAOI Reject
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>Badge ID</label>
-
-                            <input
-                                id="operator"
-                                type="text"
-                                readonly
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="btn-row">
-
-                        <button
-                            class="btn btn-cyan"
-                            id="addSNButton"
-                        >
-                            ＋ Add SN
-                        </button>
-
-                        <button
-                            class="btn btn-green"
-                            id="submitRejectButton"
-                        >
-                            ✓ Submit All Reject
-                        </button>
-
-                        <button
-                            class="btn btn-dark"
-                            id="clearBatchButton"
-                        >
-                            Clear
-                        </button>
-
-                    </div>
-
-
-                    <div class="batch-box">
-
-                        <div class="batch-header">
-
-                            <strong>
-                                Scanned SN
-                            </strong>
-
-                            <span
-                                class="batch-count"
-                                id="scanCount"
-                            >
-                                0
-                            </span>
-
-                        </div>
-
-                        <div
-                            class="batch-list"
-                            id="batchList"
-                        >
-                            No SN added.
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- IMPORT -->
-
-                <div class="card">
-
-                    <div class="section-title">
-                        <h2>📥 Import Existing Data</h2>
-                        <span>Excel</span>
-                    </div>
-
-                    <div class="import-box">
-
-                        <div class="small-note">
-
-                            Import existing reject records from Excel.
-                            Duplicate Component SN will be rejected.
-
-                        </div>
-
-                        <input
-                            class="file-input"
-                            id="excelFile"
-                            type="file"
-                            accept=".xlsx,.xls,.csv"
-                        >
-
-                        <button
-                            class="btn btn-primary"
-                            id="importButton"
-                        >
-                            📥 Import Excel
-                        </button>
-
-                        <div class="small-note">
-
-                            Recommended columns:
-
-                            <br><br>
-
-                            Component SN,
-                            Component PN,
-                            Process,
-                            Reject,
-                            Defect Class,
-                            Badge ID,
-                            Date Time
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DASHBOARD
-    ====================================================== -->
-
-    <section class="section" id="dashboardStatsSection">
-
-        <div class="section-title">
-            <h2>📊 Quality Dashboard</h2>
-            <span>Live data</span>
-        </div>
-
-        <div class="stats">
-
-            <div class="card stat">
-
-                <div class="stat-label">
-                    Total Reject
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="totalReject"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    All recorded reject
-                </div>
-
-            </div>
-
-
-            <div class="card stat">
-
-                <div class="stat-label">
-                    Reject Today
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="rejectToday"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    Current date
-                </div>
-
-            </div>
-
-
-            <div class="card stat">
-
-                <div class="stat-label">
-                    Top Reject
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="topReject"
-                    style="font-size:20px;"
-                >
-                    -
-                </div>
-
-                <div
-                    class="stat-small"
-                    id="topRejectQty"
-                >
-                    0 qty
-                </div>
-
-            </div>
-
-
-            <div class="card stat">
-
-                <div class="stat-label">
-                    Total Component SN
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="totalSN"
-                >
-                    0
-                </div>
-
-                <div class="stat-small">
-                    Unique SN
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         ANALYTICS FILTER
-    ====================================================== -->
-
-    <section class="section" id="analyticsSection">
-
-        <div class="section-title">
-
-            <h2>🔎 Analytics Filter</h2>
-
-            <span>
-                Filter dashboard & graph
-            </span>
-
-        </div>
-
-        <div class="card">
-
-            <div class="filter-grid">
-
-                <div class="field">
-
-                    <label>Process</label>
-
-                    <select id="analyticsProcess">
-
-                        <option value="">
-                            All Process
-                        </option>
-
-                        <option value="DEBUG">
-                            DEBUG
-                        </option>
-
-                        <option value="MAINTENANCE">
-                            MAINTENANCE
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Reject</label>
-
-                    <select id="analyticsDefect">
-
-                        <option value="">
-                            All Reject
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Defect Class</label>
-
-                    <select id="analyticsDefectClass">
-
-                        <option value="">
-                            All Defect Class
-                        </option>
-
-                        <option value="Cosmetic">
-                            Cosmetic
-                        </option>
-
-                        <option value="EAOI Reject">
-                            EAOI Reject
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Part Number</label>
-
-                    <select id="analyticsPN">
-
-                        <option value="">
-                            All Part Number
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>From Date</label>
-
-                    <input
-                        id="analyticsFrom"
-                        type="date"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>To Date</label>
-
-                    <input
-                        id="analyticsTo"
-                        type="date"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="btn-row">
-
-                <button
-                    class="btn btn-primary"
-                    id="applyAnalytics"
-                >
-                    Apply Filter
-                </button>
-
-                <button
-                    class="btn btn-dark"
-                    id="clearAnalytics"
-                >
-                    Clear Filter
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         REJECT GRAPH
-    ====================================================== -->
-
-    <section class="section" id="chartSection">
-
-        <div class="section-title">
-
-            <h2>📈 Reject Quantity by Name</h2>
-
-            <span>
-                Click bar for details
-            </span>
-
-        </div>
-
-        <div class="card">
-
-            <div class="chart-wrap">
-
-                <canvas id="rejectChart"></canvas>
-
-            </div>
-
-            <div class="chart-info">
-
-                Graph includes <span class="chart-click">
-                DEBUG + MAINTENANCE
-                </span>
-                and all Defect Class.
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DAILY TOP
-    ====================================================== -->
-
-    <section class="section" id="dailyTopSection">
-
-        <div class="section-title">
-
-            <h2>🔥 Daily Top Reject</h2>
-
-            <span>
-                Highest reject each day
-            </span>
-
-        </div>
+        <h2>
+            🔐 Admin Workspace
+        </h2>
 
         <div
-            class="daily-grid"
-            id="dailyTopGrid"
+            class="admin-user"
+            id="adminEmailDisplay"
         >
+            Not logged in
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- =====================================================
-         RECORDS
-    ====================================================== -->
+    <button
+        class="btn btn-dark"
+        id="logoutButton"
+    >
+        Logout
+    </button>
 
-    <section class="section" id="recordsSection">
-
-        <div class="section-title">
-
-            <h2>📋 Reject Records</h2>
-
-            <span id="recordsCount">
-                0 records
-            </span>
-
-        </div>
+</div>
 
 
-        <div class="card">
+<!-- ADMIN SETTINGS -->
 
-            <div class="filter-grid">
+<div
+    class="card"
+    style="margin-bottom:18px;"
+>
 
-                <div class="field">
+<div class="section-title">
 
-                    <label>Search SN</label>
+    <h2>
+        ⚙️ Admin Settings
+    </h2>
 
-                    <input
-                        id="recordSearch"
-                        placeholder="Search Component SN"
-                    >
+    <span>
+        Only admin can modify
+    </span>
 
-                </div>
-
-
-                <div class="field">
-
-                    <label>Process</label>
-
-                    <select id="recordProcess">
-
-                        <option value="">
-                            All Process
-                        </option>
-
-                        <option value="DEBUG">
-                            DEBUG
-                        </option>
-
-                        <option value="MAINTENANCE">
-                            MAINTENANCE
-                        </option>
-
-                    </select>
-
-                </div>
+</div>
 
 
-                <div class="field">
+<div class="form-grid">
 
-                    <label>Reject</label>
+<div class="field">
 
-                    <select id="recordDefect">
+    <label>
+        Admin Email
+    </label>
 
-                        <option value="">
-                            All Reject
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>From Date</label>
-
-                    <input
-                        id="recordFrom"
-                        type="date"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>To Date</label>
-
-                    <input
-                        id="recordTo"
-                        type="date"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="btn-row">
-
-                <button
-                    class="btn btn-dark"
-                    id="clearRecordFilters"
-                >
-                    Clear Filters
-                </button>
-
-                <button
-                    class="btn btn-cyan"
-                    id="copyVisibleRecords"
-                >
-                    📋 Copy Visible Records
-                </button>
-
-            </div>
-
-
-            <div class="table-wrap" style="margin-top:15px;">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Component SN</th>
-                            <th>Component PN</th>
-                            <th>Process</th>
-                            <th>Reject</th>
-                            <th>Defect Class</th>
-                            <th>Badge ID</th>
-                            <th>Date Time</th>
-
-                            <th
-                                class="admin-only"
-                                id="adminActionHeader"
-                            >
-                                Action
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="recordsBody">
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DATA MANAGEMENT
-    ====================================================== -->
-
-    <section
-        class="section admin-only"
-        id="dataManagement"
+    <input
+        id="adminEmail"
+        type="email"
+        readonly
     >
 
-        <div class="section-title">
+</div>
 
-            <h2>🛡️ Data Management</h2>
 
-            <span>
-                Admin only
-            </span>
+<div class="field">
 
-        </div>
+    <label>
+        Admin Badge ID
+    </label>
 
-        <div class="card">
+    <input
+        id="adminBadgeId"
+        type="text"
+        placeholder="Enter your badge ID"
+    >
 
-            <div class="small-note">
-                These actions modify or export the database.
-            </div>
+</div>
 
-            <div class="btn-row">
+</div>
 
-                <button
-                    class="btn btn-green"
-                    id="exportExcel"
-                >
-                    📤 Export Excel
-                </button>
 
-                <button
-                    class="btn btn-red"
-                    id="clearAllData"
-                >
-                    🗑️ Clear All Data
-                </button>
+<div class="btn-row">
 
-            </div>
+<button
+    class="btn btn-purple"
+    id="saveBadgeButton"
+>
+    💾 Save Badge ID
+</button>
 
-        </div>
+</div>
 
-    </section>
+
+<div
+    class="small-note"
+    style="margin-top:8px;"
+>
+    Badge ID ini akan digunakan secara automatik
+    untuk scan reject selepas disimpan.
+</div>
+
+</div>
+
+
+<div class="admin-grid">
+
+
+<!-- SCAN -->
+
+<div class="card">
+
+<div class="section-title">
+
+    <h2>
+        📷 Scan Reject
+    </h2>
+
+    <span>
+        Admin only
+    </span>
+
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field full">
+
+<label>
+    Component Serial Number
+</label>
+
+<input
+    id="sn"
+    type="text"
+    autofocus
+    placeholder="Scan barcode here"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Process
+</label>
+
+<select id="process">
+
+<option value="">
+    Choose Process
+</option>
+
+<option value="DEBUG">
+    DEBUG
+</option>
+
+<option value="MAINTENANCE">
+    MAINTENANCE
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Component Part Number
+</label>
+
+<select id="pn">
+
+<option value="">
+    Choose Part Number
+</option>
+
+<option value="1670826">
+    1670826
+</option>
+
+<option value="1649167">
+    1649167
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Reject
+</label>
+
+<select id="defect">
+
+<option value="">
+    Choose Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Defect Class
+</label>
+
+<select id="defectClass">
+
+<option value="">
+    Choose Defect Class
+</option>
+
+<option value="Cosmetic">
+    Cosmetic
+</option>
+
+<option value="EAOI Reject">
+    EAOI Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Badge ID
+</label>
+
+<input
+    id="operator"
+    type="text"
+    readonly
+>
+
+</div>
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-cyan"
+    id="addSNButton"
+>
+    ＋ Add SN
+</button>
+
+
+<button
+    class="btn btn-green"
+    id="submitRejectButton"
+>
+    ✓ Submit All Reject
+</button>
+
+
+<button
+    class="btn btn-dark"
+    id="clearBatchButton"
+>
+    Clear
+</button>
+
+</div>
+
+
+<div class="batch-box">
+
+<div class="batch-header">
+
+<strong>
+    Scanned SN
+</strong>
+
+<span
+    class="batch-count"
+    id="scanCount"
+>
+    0
+</span>
+
+</div>
+
+
+<div
+    class="batch-list"
+    id="batchList"
+>
+    No SN added.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- IMPORT -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+    📥 Import Existing Data
+</h2>
+
+<span>
+    Excel
+</span>
+
+</div>
+
+
+<div class="import-box">
+
+<div class="small-note">
+
+Import existing reject records from Excel.
+Duplicate Component SN will be rejected.
+
+</div>
+
+
+<input
+    class="file-input"
+    id="excelFile"
+    type="file"
+    accept=".xlsx,.xls,.csv"
+>
+
+
+<button
+    class="btn btn-primary"
+    id="importButton"
+>
+    📥 Import Excel
+</button>
+
+
+<div class="small-note">
+
+Recommended columns:
+
+<br><br>
+
+Component SN,
+Component PN,
+Process,
+Reject,
+Defect Class,
+Badge ID,
+Date Time
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section
+    class="section"
+    id="dashboardStatsSection"
+>
+
+<div class="section-title">
+
+<h2>
+    📊 Quality Dashboard
+</h2>
+
+<span>
+    Live data
+</span>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="card stat">
+
+<div class="stat-label">
+    Total Reject
+</div>
+
+<div
+    class="stat-value"
+    id="totalReject"
+>
+    0
+</div>
+
+<div class="stat-small">
+    All recorded reject
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="stat-label">
+    Reject Today
+</div>
+
+<div
+    class="stat-value"
+    id="rejectToday"
+>
+    0
+</div>
+
+<div class="stat-small">
+    Current date
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="stat-label">
+    Top Reject
+</div>
+
+<div
+    class="stat-value"
+    id="topReject"
+    style="font-size:20px;"
+>
+    -
+</div>
+
+<div
+    class="stat-small"
+    id="topRejectQty"
+>
+    0 qty
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="stat-label">
+    Total Component SN
+</div>
+
+<div
+    class="stat-value"
+    id="totalSN"
+>
+    0
+</div>
+
+<div class="stat-small">
+    Unique SN
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ANALYTICS FILTER
+====================================================== -->
+
+<section
+    class="section"
+    id="analyticsSection"
+>
+
+<div class="section-title">
+
+<h2>
+    🔎 Analytics Filter
+</h2>
+
+<span>
+    Filter dashboard & graph
+</span>
+
+</div>
+
+
+<div class="card">
+
+<div class="filter-grid">
+
+
+<div class="field">
+
+<label>
+    Process
+</label>
+
+<select id="analyticsProcess">
+
+<option value="">
+    All Process
+</option>
+
+<option value="DEBUG">
+    DEBUG
+</option>
+
+<option value="MAINTENANCE">
+    MAINTENANCE
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Reject
+</label>
+
+<select id="analyticsDefect">
+
+<option value="">
+    All Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Defect Class
+</label>
+
+<select id="analyticsDefectClass">
+
+<option value="">
+    All Defect Class
+</option>
+
+<option value="Cosmetic">
+    Cosmetic
+</option>
+
+<option value="EAOI Reject">
+    EAOI Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Part Number
+</label>
+
+<select id="analyticsPN">
+
+<option value="">
+    All Part Number
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    From Date
+</label>
+
+<input
+    id="analyticsFrom"
+    type="date"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    To Date
+</label>
+
+<input
+    id="analyticsTo"
+    type="date"
+>
+
+</div>
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-primary"
+    id="applyAnalytics"
+>
+    Apply Filter
+</button>
+
+
+<button
+    class="btn btn-dark"
+    id="clearAnalytics"
+>
+    Clear Filter
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     REJECT GRAPH
+====================================================== -->
+
+<section
+    class="section"
+    id="chartSection"
+>
+
+<div class="section-title">
+
+<h2>
+    📈 Reject Quantity by Name
+</h2>
+
+<span>
+    Click bar for details
+</span>
+
+</div>
+
+
+<div class="card">
+
+<div class="chart-wrap">
+
+<canvas id="rejectChart"></canvas>
+
+</div>
+
+
+<div class="chart-info">
+
+Graph includes
+<span class="chart-click">
+DEBUG + MAINTENANCE
+</span>
+and all Defect Class.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DAILY TOP
+====================================================== -->
+
+<section
+    class="section"
+    id="dailyTopSection"
+>
+
+<div class="section-title">
+
+<h2>
+    🔥 Daily Top Reject
+</h2>
+
+<span>
+    Highest reject each day
+</span>
+
+</div>
+
+
+<div
+    class="daily-grid"
+    id="dailyTopGrid"
+>
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RECORDS
+====================================================== -->
+
+<section
+    class="section"
+    id="recordsSection"
+>
+
+<div class="section-title">
+
+<h2>
+    📋 Reject Records
+</h2>
+
+<span id="recordsCount">
+    0 records
+</span>
+
+</div>
+
+
+<div class="card">
+
+<div class="filter-grid">
+
+
+<div class="field">
+
+<label>
+    Search SN
+</label>
+
+<input
+    id="recordSearch"
+    placeholder="Search Component SN"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Process
+</label>
+
+<select id="recordProcess">
+
+<option value="">
+    All Process
+</option>
+
+<option value="DEBUG">
+    DEBUG
+</option>
+
+<option value="MAINTENANCE">
+    MAINTENANCE
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Reject
+</label>
+
+<select id="recordDefect">
+
+<option value="">
+    All Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    From Date
+</label>
+
+<input
+    id="recordFrom"
+    type="date"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    To Date
+</label>
+
+<input
+    id="recordTo"
+    type="date"
+>
+
+</div>
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-dark"
+    id="clearRecordFilters"
+>
+    Clear Filters
+</button>
+
+
+<button
+    class="btn btn-cyan"
+    id="copyVisibleRecords"
+>
+    📋 Copy Visible Records
+</button>
+
+</div>
+
+
+<div
+    class="table-wrap"
+    style="margin-top:15px;"
+>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+    Component SN
+</th>
+
+<th>
+    Component PN
+</th>
+
+<th>
+    Process
+</th>
+
+<th>
+    Reject
+</th>
+
+<th>
+    Defect Class
+</th>
+
+<th>
+    Badge ID
+</th>
+
+<th>
+    Date Time
+</th>
+
+<th
+    class="admin-only"
+    id="adminActionHeader"
+>
+    Action
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="recordsBody">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DATA MANAGEMENT
+====================================================== -->
+
+<section
+    class="section admin-only"
+    id="dataManagement"
+>
+
+<div class="section-title">
+
+<h2>
+    🛡️ Data Management
+</h2>
+
+<span>
+    Admin only
+</span>
+
+</div>
+
+
+<div class="card">
+
+<div class="small-note">
+
+These actions modify or export the database.
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-green"
+    id="exportExcel"
+>
+    📤 Export Excel
+</button>
+
+
+<button
+    class="btn btn-red"
+    id="clearAllData"
+>
+    🗑️ Clear All Data
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
@@ -1648,86 +2282,104 @@ body.admin-mode .public-only{
     id="loginModal"
 >
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-body">
+<div class="modal-body">
 
-            <div class="login-logo">
-                🔐
-            </div>
-
-            <h2 style="text-align:center;margin:0;">
-                Admin Login
-            </h2>
-
-            <p
-                class="small-note"
-                style="text-align:center;margin-bottom:20px;"
-            >
-                Login required to manage reject data.
-            </p>
+<div class="login-logo">
+    🔐
+</div>
 
 
-            <div class="field">
-
-                <label>Email</label>
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    placeholder="Admin email"
-                >
-
-            </div>
+<h2
+    style="
+        text-align:center;
+        margin:0;
+    "
+>
+    Admin Login
+</h2>
 
 
-            <div class="field" style="margin-top:12px;">
-
-                <label>Password</label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    placeholder="Password"
-                >
-
-            </div>
+<p
+    class="small-note"
+    style="
+        text-align:center;
+        margin-bottom:20px;
+    "
+>
+    Login required to manage reject data.
+</p>
 
 
-            <div
-                id="loginError"
-                style="
-                    display:none;
-                    color:#fca5a5;
-                    font-size:12px;
-                    margin-top:12px;
-                "
-            >
-            </div>
+<div class="field">
+
+<label>
+    Email
+</label>
+
+<input
+    id="loginEmail"
+    type="email"
+    placeholder="Admin email"
+>
+
+</div>
 
 
-            <div class="btn-row">
+<div
+    class="field"
+    style="margin-top:12px;"
+>
 
-                <button
-                    class="btn btn-primary"
-                    id="loginButton"
-                    style="flex:1;"
-                >
-                    Login
-                </button>
+<label>
+    Password
+</label>
 
-                <button
-                    class="btn btn-dark"
-                    id="cancelLogin"
-                >
-                    Cancel
-                </button>
+<input
+    id="loginPassword"
+    type="password"
+    placeholder="Password"
+>
 
-            </div>
+</div>
 
-        </div>
 
-    </div>
+<div
+    id="loginError"
+    style="
+        display:none;
+        color:#d99a9a;
+        font-size:12px;
+        margin-top:12px;
+    "
+>
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-primary"
+    id="loginButton"
+    style="flex:1;"
+>
+    Login
+</button>
+
+
+<button
+    class="btn btn-dark"
+    id="cancelLogin"
+>
+    Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1741,127 +2393,132 @@ body.admin-mode .public-only{
     id="chartModal"
 >
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-head">
+<div class="modal-head">
 
-            <div>
+<div>
 
-                <h3 id="chartModalTitle">
-                    Reject Details
-                </h3>
+<h3 id="chartModalTitle">
+    Reject Details
+</h3>
 
-                <div
-                    class="small-note"
-                    id="chartModalSubtitle"
-                >
-                </div>
+<div
+    class="small-note"
+    id="chartModalSubtitle"
+>
+</div>
 
-            </div>
-
-            <button
-                class="modal-close"
-                id="closeChartModal"
-            >
-                ×
-            </button>
-
-        </div>
+</div>
 
 
-        <div class="modal-body">
+<button
+    class="modal-close"
+    id="closeChartModal"
+>
+    ×
+</button>
 
-            <div class="modal-summary">
-
-                <div class="modal-stat">
-
-                    <div class="modal-stat-label">
-                        Reject
-                    </div>
-
-                    <div
-                        class="modal-stat-value"
-                        id="modalRejectName"
-                    >
-                        -
-                    </div>
-
-                </div>
+</div>
 
 
-                <div class="modal-stat">
+<div class="modal-body">
 
-                    <div class="modal-stat-label">
-                        Quantity
-                    </div>
-
-                    <div
-                        class="modal-stat-value"
-                        id="modalRejectQty"
-                    >
-                        0
-                    </div>
-
-                </div>
+<div class="modal-summary">
 
 
-                <div class="modal-stat">
+<div class="modal-stat">
 
-                    <div class="modal-stat-label">
-                        Records
-                    </div>
+<div class="modal-stat-label">
+    Reject
+</div>
 
-                    <div
-                        class="modal-stat-value"
-                        id="modalRecordCount"
-                    >
-                        0
-                    </div>
+<div
+    class="modal-stat-value"
+    id="modalRejectName"
+>
+    -
+</div>
 
-                </div>
-
-            </div>
+</div>
 
 
-            <div class="modal-table">
+<div class="modal-stat">
 
-                <table>
+<div class="modal-stat-label">
+    Quantity
+</div>
 
-                    <thead>
+<div
+    class="modal-stat-value"
+    id="modalRejectQty"
+>
+    0
+</div>
 
-                        <tr>
-                            <th>SN</th>
-                            <th>Process</th>
-                            <th>PN</th>
-                            <th>Defect Class</th>
-                            <th>Badge ID</th>
-                            <th>Date Time</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="modalRecords">
-                    </tbody>
-
-                </table>
-
-            </div>
+</div>
 
 
-            <div class="btn-row">
+<div class="modal-stat">
 
-                <button
-                    class="btn btn-dark"
-                    id="closeChartModalBottom"
-                >
-                    Close
-                </button>
+<div class="modal-stat-label">
+    Records
+</div>
 
-            </div>
+<div
+    class="modal-stat-value"
+    id="modalRecordCount"
+>
+    0
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
+
+
+<div class="modal-table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>SN</th>
+<th>Process</th>
+<th>PN</th>
+<th>Defect Class</th>
+<th>Badge ID</th>
+<th>Date Time</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="modalRecords">
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-dark"
+    id="closeChartModalBottom"
+>
+    Close
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1875,156 +2532,176 @@ body.admin-mode .public-only{
     id="editModal"
 >
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-head">
+<div class="modal-head">
 
-            <h3>✏️ Edit Reject Record</h3>
-
-            <button
-                class="modal-close"
-                id="closeEditModal"
-            >
-                ×
-            </button>
-
-        </div>
+<h3>
+    ✏️ Edit Reject Record
+</h3>
 
 
-        <div class="modal-body">
+<button
+    class="modal-close"
+    id="closeEditModal"
+>
+    ×
+</button>
 
-            <input
-                type="hidden"
-                id="editId"
-            >
-
-            <div class="form-grid">
-
-                <div class="field">
-
-                    <label>Component SN</label>
-
-                    <input
-                        id="editSN"
-                        readonly
-                    >
-
-                </div>
+</div>
 
 
-                <div class="field">
+<div class="modal-body">
 
-                    <label>Component PN</label>
-
-                    <select id="editPN">
-
-                        <option value="1670826">
-                            1670826
-                        </option>
-
-                        <option value="1649167">
-                            1649167
-                        </option>
-
-                    </select>
-
-                </div>
+<input
+    type="hidden"
+    id="editId"
+>
 
 
-                <div class="field">
-
-                    <label>Process</label>
-
-                    <select id="editProcess">
-
-                        <option value="DEBUG">
-                            DEBUG
-                        </option>
-
-                        <option value="MAINTENANCE">
-                            MAINTENANCE
-                        </option>
-
-                    </select>
-
-                </div>
+<div class="form-grid">
 
 
-                <div class="field">
+<div class="field">
 
-                    <label>Reject</label>
+<label>
+    Component SN
+</label>
 
-                    <select id="editDefect">
-                    </select>
+<input
+    id="editSN"
+    readonly
+>
 
-                </div>
-
-
-                <div class="field">
-
-                    <label>Defect Class</label>
-
-                    <select id="editDefectClass">
-
-                        <option value="Cosmetic">
-                            Cosmetic
-                        </option>
-
-                        <option value="EAOI Reject">
-                            EAOI Reject
-                        </option>
-
-                    </select>
-
-                </div>
+</div>
 
 
-                <div class="field">
+<div class="field">
 
-                    <label>Badge ID</label>
+<label>
+    Component PN
+</label>
 
-                    <input
-                        id="editOperator"
-                    >
+<select id="editPN">
 
-                </div>
+<option value="1670826">
+    1670826
+</option>
 
+<option value="1649167">
+    1649167
+</option>
 
-                <div class="field full">
+</select>
 
-                    <label>Date Time</label>
-
-                    <input
-                        id="editDateTime"
-                        type="datetime-local"
-                    >
-
-                </div>
-
-            </div>
+</div>
 
 
-            <div class="btn-row">
+<div class="field">
 
-                <button
-                    class="btn btn-green"
-                    id="saveEditButton"
-                >
-                    Save Changes
-                </button>
+<label>
+    Process
+</label>
 
-                <button
-                    class="btn btn-dark"
-                    id="cancelEditButton"
-                >
-                    Cancel
-                </button>
+<select id="editProcess">
 
-            </div>
+<option value="DEBUG">
+    DEBUG
+</option>
 
-        </div>
+<option value="MAINTENANCE">
+    MAINTENANCE
+</option>
 
-    </div>
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Reject
+</label>
+
+<select id="editDefect">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Defect Class
+</label>
+
+<select id="editDefectClass">
+
+<option value="Cosmetic">
+    Cosmetic
+</option>
+
+<option value="EAOI Reject">
+    EAOI Reject
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Badge ID
+</label>
+
+<input
+    id="editOperator"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+    Date Time
+</label>
+
+<input
+    id="editDateTime"
+    type="datetime-local"
+>
+
+</div>
+
+</div>
+
+
+<div class="btn-row">
+
+<button
+    class="btn btn-green"
+    id="saveEditButton"
+>
+    Save Changes
+</button>
+
+
+<button
+    class="btn btn-dark"
+    id="cancelEditButton"
+>
+    Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -2078,7 +2755,7 @@ let currentSession = null;
 
 const processRejects = {
 
-    DEBUG: [
+    DEBUG:[
 
         "P2 SHELL ABRASIVE",
         "P2 SHELL BENT",
@@ -2095,7 +2772,7 @@ const processRejects = {
 
     ],
 
-    MAINTENANCE: [
+    MAINTENANCE:[
 
         "P2 MPO CONTAM 1",
         "P2 MPO CONTAM 2"
@@ -2111,11 +2788,15 @@ const processRejects = {
 
 function escapeHtml(value){
 
-    if(value === null || value === undefined){
+    if(
+        value === null ||
+        value === undefined
+    ){
         return "";
     }
 
     return String(value)
+
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2125,44 +2806,72 @@ function escapeHtml(value){
 }
 
 
-function showToast(
-    message,
-    type = "success"
-){
+/*
+   Display Badge ID safely.
 
-    const toast =
-        document.getElementById("toast");
+   If old records contain admin email,
+   public records will show "Admin"
+   instead of exposing the email.
+*/
 
-    toast.textContent = message;
-
-    toast.className =
-        `toast show ${type}`;
-
-    setTimeout(() => {
-
-        toast.className = "toast";
-
-    },3500);
-
-}
-
-
-function normalizeSN(sn){
 function displayOperator(value){
 
     if(!value){
         return "-";
     }
 
-    const text = String(value).trim();
+    const text =
+        String(value).trim();
 
-    // Jangan paparkan email admin
-    if(text.includes("@")){
+    /*
+       Detect email-like values.
+    */
+
+    if(
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(text)
+    ){
+
         return "Admin";
+
     }
 
     return text;
+
 }
+
+
+function showToast(
+    message,
+    type="success"
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.className =
+        `toast show ${type}`;
+
+    setTimeout(
+        () => {
+
+            toast.className =
+                "toast";
+
+        },
+        3500
+    );
+
+}
+
+
+function normalizeSN(sn){
+
     return String(sn || "")
         .trim()
         .toUpperCase();
@@ -2176,10 +2885,17 @@ function formatDateTime(value){
         return "-";
     }
 
-    const d = new Date(value);
+    const d =
+        new Date(value);
 
-    if(Number.isNaN(d.getTime())){
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
         return value;
+
     }
 
     return d.toLocaleString(
@@ -2199,14 +2915,22 @@ function toDateInputValue(value){
         return "";
     }
 
-    const d = new Date(value);
+    const d =
+        new Date(value);
 
-    if(Number.isNaN(d.getTime())){
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
         return "";
+
     }
 
     const pad =
-        n => String(n).padStart(2,"0");
+        n =>
+        String(n).padStart(2,"0");
 
     return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 
@@ -2219,14 +2943,22 @@ function toDateTimeLocalValue(value){
         return "";
     }
 
-    const d = new Date(value);
+    const d =
+        new Date(value);
 
-    if(Number.isNaN(d.getTime())){
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
         return "";
+
     }
 
     const pad =
-        n => String(n).padStart(2,"0");
+        n =>
+        String(n).padStart(2,"0");
 
     return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 
@@ -2239,14 +2971,22 @@ function dateOnly(value){
         return "";
     }
 
-    const d = new Date(value);
+    const d =
+        new Date(value);
 
-    if(Number.isNaN(d.getTime())){
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
         return "";
+
     }
 
     const pad =
-        n => String(n).padStart(2,"0");
+        n =>
+        String(n).padStart(2,"0");
 
     return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 
@@ -2279,6 +3019,7 @@ function updateAdminUI(){
     const email =
         currentSession?.user?.email || "";
 
+
     document.getElementById(
         "adminEmailDisplay"
     ).textContent =
@@ -2301,12 +3042,14 @@ function updateAdminUI(){
 
     document.getElementById(
         "adminBadgeId"
-    ).value = badge;
+    ).value =
+        badge;
 
 
     document.getElementById(
         "operator"
-    ).value = badge;
+    ).value =
+        badge;
 
 
     if(!isAdmin()){
@@ -2353,6 +3096,7 @@ async function loginAdmin(){
             "loginEmail"
         ).value.trim();
 
+
     const password =
         document.getElementById(
             "loginPassword"
@@ -2369,7 +3113,10 @@ async function loginAdmin(){
         "none";
 
 
-    if(!email || !password){
+    if(
+        !email ||
+        !password
+    ){
 
         errorBox.textContent =
             "Please enter email and password.";
@@ -2386,10 +3133,12 @@ async function loginAdmin(){
         data,
         error
     } =
-        await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
+        await supabaseClient
+            .auth
+            .signInWithPassword({
+                email,
+                password
+            });
 
 
     if(error){
@@ -2410,7 +3159,9 @@ async function loginAdmin(){
         data.session.user.id !== ADMIN_UID
     ){
 
-        await supabaseClient.auth.signOut();
+        await supabaseClient
+            .auth
+            .signOut();
 
         errorBox.textContent =
             "This account is not authorized as admin.";
@@ -2439,6 +3190,7 @@ async function loginAdmin(){
 
     updateAdminUI();
 
+
     showToast(
         "Admin login successful."
     );
@@ -2452,9 +3204,13 @@ async function logoutAdmin(){
         .auth
         .signOut();
 
-    currentSession = null;
+
+    currentSession =
+        null;
+
 
     updateAdminUI();
+
 
     showToast(
         "Logged out."
@@ -2507,7 +3263,8 @@ function saveAdminBadge(){
 
     document.getElementById(
         "operator"
-    ).value = badge;
+    ).value =
+        badge;
 
 
     showToast(
@@ -2524,7 +3281,7 @@ function saveAdminBadge(){
 function populateRejectSelect(
     selectId,
     process,
-    selected = ""
+    selected=""
 ){
 
     const select =
@@ -2535,41 +3292,60 @@ function populateRejectSelect(
 
     select.innerHTML = "";
 
+
     const first =
-        document.createElement("option");
+        document.createElement(
+            "option"
+        );
+
 
     first.value = "";
 
     first.textContent =
         "Choose Reject";
 
-    select.appendChild(first);
+
+    select.appendChild(
+        first
+    );
 
 
     const list =
         processRejects[process] || [];
 
 
-    list.forEach(defect => {
+    list.forEach(
+        defect => {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value =
-            defect;
 
-        option.textContent =
-            defect;
+            option.value =
+                defect;
 
-        if(defect === selected){
+            option.textContent =
+                defect;
 
-            option.selected = true;
+
+            if(
+                defect === selected
+            ){
+
+                option.selected =
+                    true;
+
+            }
+
+
+            select.appendChild(
+                option
+            );
 
         }
-
-        select.appendChild(option);
-
-    });
+    );
 
 }
 
@@ -2579,6 +3355,7 @@ function populateAllRejectFilters(){
     const all = [
 
         ...processRejects.DEBUG,
+
         ...processRejects.MAINTENANCE
 
     ];
@@ -2591,31 +3368,45 @@ function populateAllRejectFilters(){
     [
         "analyticsDefect",
         "recordDefect"
-    ].forEach(id => {
 
-        const select =
-            document.getElementById(id);
+    ].forEach(
+        id => {
 
-        select.innerHTML =
-            `<option value="">All Reject</option>`;
+            const select =
+                document.getElementById(
+                    id
+                );
 
 
-        unique.forEach(defect => {
+            select.innerHTML =
+                `<option value="">All Reject</option>`;
 
-            const option =
-                document.createElement("option");
 
-            option.value =
-                defect;
+            unique.forEach(
+                defect => {
 
-            option.textContent =
-                defect;
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
 
-            select.appendChild(option);
 
-        });
+                    option.value =
+                        defect;
 
-    });
+                    option.textContent =
+                        defect;
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
 
@@ -2679,11 +3470,13 @@ async function loadRows(){
 
         console.error(error);
 
+
         showToast(
             "Failed to load data: " +
             error.message,
             "error"
         );
+
 
         return;
 
@@ -2720,11 +3513,16 @@ function populateFilterOptions(){
 
 
     const pns =
-        [...new Set(
-            rows
-                .map(r => r.component_pn)
-                .filter(Boolean)
-        )]
+        [
+            ...new Set(
+                rows
+                    .map(
+                        r =>
+                        r.component_pn
+                    )
+                    .filter(Boolean)
+            )
+        ]
         .sort();
 
 
@@ -2732,20 +3530,28 @@ function populateFilterOptions(){
         `<option value="">All Part Number</option>`;
 
 
-    pns.forEach(pn => {
+    pns.forEach(
+        pn => {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value =
-            pn;
 
-        option.textContent =
-            pn;
+            option.value =
+                pn;
 
-        pnSelect.appendChild(option);
+            option.textContent =
+                pn;
 
-    });
+
+            pnSelect.appendChild(
+                option
+            );
+
+        }
+    );
 
 
     if(
@@ -2761,7 +3567,7 @@ function populateFilterOptions(){
 
 
 /* ============================================================
-   ANALYTICS FILTER
+   ANALYTICS
 ============================================================ */
 
 function getAnalyticsRows(){
@@ -2802,63 +3608,80 @@ function getAnalyticsRows(){
         ).value;
 
 
-    return rows.filter(row => {
+    return rows.filter(
+        row => {
 
-        if(
-            process &&
-            row.process !== process
-        ){
-            return false;
+            if(
+                process &&
+                row.process !== process
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                defect &&
+                row.defect !== defect
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                defectClass &&
+                row.defect_class !== defectClass
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                pn &&
+                String(row.component_pn) !==
+                String(pn)
+            ){
+
+                return false;
+
+            }
+
+
+            const d =
+                dateOnly(
+                    row.date_time
+                );
+
+
+            if(
+                from &&
+                d < from
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                to &&
+                d > to
+            ){
+
+                return false;
+
+            }
+
+
+            return true;
+
         }
-
-
-        if(
-            defect &&
-            row.defect !== defect
-        ){
-            return false;
-        }
-
-
-        if(
-            defectClass &&
-            row.defect_class !== defectClass
-        ){
-            return false;
-        }
-
-
-        if(
-            pn &&
-            String(row.component_pn) !== String(pn)
-        ){
-            return false;
-        }
-
-
-        const d =
-            dateOnly(row.date_time);
-
-
-        if(
-            from &&
-            d < from
-        ){
-            return false;
-        }
-
-
-        if(
-            to &&
-            d > to
-        ){
-            return false;
-        }
-
-
-        return true;
-
-    });
+    );
 
 }
 
@@ -2928,13 +3751,16 @@ function renderDashboard(){
 
 
     const today =
-        dateOnly(new Date());
+        dateOnly(
+            new Date()
+        );
 
 
     const todayRows =
         filtered.filter(
             r =>
-                dateOnly(r.date_time) === today
+            dateOnly(r.date_time) ===
+            today
         );
 
 
@@ -2947,22 +3773,32 @@ function renderDashboard(){
     const defectCounts = {};
 
 
-    filtered.forEach(row => {
+    filtered.forEach(
+        row => {
 
-        const defect =
-            row.defect || "Unknown";
+            const defect =
+                row.defect ||
+                "Unknown";
 
-        defectCounts[defect] =
-            (defectCounts[defect] || 0) + 1;
 
-    });
+            defectCounts[defect] =
+                (
+                    defectCounts[defect] ||
+                    0
+                ) + 1;
+
+        }
+    );
 
 
     const sorted =
-        Object.entries(defectCounts)
-            .sort(
-                (a,b) => b[1] - a[1]
-            );
+        Object.entries(
+            defectCounts
+        )
+        .sort(
+            (a,b) =>
+                b[1] - a[1]
+        );
 
 
     if(sorted.length){
@@ -2985,6 +3821,7 @@ function renderDashboard(){
         ).textContent =
             "-";
 
+
         document.getElementById(
             "topRejectQty"
         ).textContent =
@@ -2996,7 +3833,10 @@ function renderDashboard(){
     const uniqueSN =
         new Set(
             filtered.map(
-                r => normalizeSN(r.component_sn)
+                r =>
+                normalizeSN(
+                    r.component_sn
+                )
             )
         );
 
@@ -3018,8 +3858,7 @@ function renderSummaryBadges(
     counts
 ){
 
-    // kept intentionally lightweight;
-    // top reject is shown in dashboard card
+    /* Intentionally lightweight */
 
 }
 
@@ -3037,30 +3876,44 @@ function renderChart(){
     const counts = {};
 
 
-    filtered.forEach(row => {
+    filtered.forEach(
+        row => {
 
-        const defect =
-            row.defect || "Unknown";
+            const defect =
+                row.defect ||
+                "Unknown";
 
-        counts[defect] =
-            (counts[defect] || 0) + 1;
 
-    });
+            counts[defect] =
+                (
+                    counts[defect] ||
+                    0
+                ) + 1;
+
+        }
+    );
 
 
     const sorted =
-        Object.entries(counts)
-            .sort(
-                (a,b) => b[1] - a[1]
-            );
+        Object.entries(
+            counts
+        )
+        .sort(
+            (a,b) =>
+                b[1] - a[1]
+        );
 
 
     const labels =
-        sorted.map(x => x[0]);
+        sorted.map(
+            x => x[0]
+        );
 
 
     const values =
-        sorted.map(x => x[1]);
+        sorted.map(
+            x => x[1]
+        );
 
 
     const ctx =
@@ -3080,21 +3933,38 @@ function renderChart(){
         new Chart(
             ctx,
             {
+
                 type:"bar",
 
                 data:{
+
                     labels,
 
                     datasets:[
 
                         {
-                            label:"Reject Quantity",
-                            data:values,
-                            borderRadius:7
+
+                            label:
+                                "Reject Quantity",
+
+                            data:
+                                values,
+
+                            borderRadius:
+                                7,
+
+                            backgroundColor:
+                                "#789fb0",
+
+                            hoverBackgroundColor:
+                                "#8bbac3"
+
                         }
 
                     ]
+
                 },
+
 
                 options:{
 
@@ -3102,48 +3972,83 @@ function renderChart(){
 
                     maintainAspectRatio:false,
 
+
                     plugins:{
 
                         legend:{
                             display:false
                         },
 
+
                         tooltip:{
+
+                            backgroundColor:
+                                "#1b2b38",
+
+                            titleColor:
+                                "#e5edf0",
+
+                            bodyColor:
+                                "#c6d2d8",
+
+                            borderColor:
+                                "#405562",
+
+                            borderWidth:
+                                1,
+
                             callbacks:{
+
                                 label:
                                     context =>
                                     ` ${context.raw} reject`
+
                             }
+
                         }
 
                     },
+
 
                     scales:{
 
                         x:{
+
                             ticks:{
-                                color:"#b8c8d9"
+                                color:"#aebbc3"
                             },
 
                             grid:{
-                                color:"rgba(255,255,255,.05)"
+                                color:
+                                    "rgba(255,255,255,.045)"
                             }
+
                         },
 
+
                         y:{
+
                             beginAtZero:true,
 
                             ticks:{
+
                                 precision:0,
-                                color:"#b8c8d9"
+
+                                color:"#aebbc3"
+
                             },
 
                             grid:{
-                                color:"rgba(255,255,255,.05)"
+
+                                color:
+                                    "rgba(255,255,255,.045)"
+
                             }
+
                         }
 
                     },
+
 
                     onClick:function(
                         event,
@@ -3153,7 +4058,9 @@ function renderChart(){
                         if(
                             !elements.length
                         ){
+
                             return;
+
                         }
 
 
@@ -3191,7 +4098,8 @@ function openChartModal(
 
     const defectRows =
         sourceRows.filter(
-            r => r.defect === defect
+            r =>
+            r.defect === defect
         );
 
 
@@ -3202,11 +4110,15 @@ function openChartModal(
 
 
     const processSet =
-        [...new Set(
-            defectRows
-                .map(r => r.process)
-                .filter(Boolean)
-        )];
+        [
+            ...new Set(
+                defectRows
+                    .map(
+                        r => r.process
+                    )
+                    .filter(Boolean)
+            )
+        ];
 
 
     document.getElementById(
@@ -3244,44 +4156,64 @@ function openChartModal(
     body.innerHTML = "";
 
 
-    defectRows.forEach(row => {
+    defectRows.forEach(
+        row => {
 
-        const tr =
-            document.createElement("tr");
-
-
-        tr.innerHTML = `
-
-            <td>
-                ${escapeHtml(row.component_sn)}
-            </td>
-
-            <td>
-                ${escapeHtml(row.process)}
-            </td>
-
-            <td>
-                ${escapeHtml(row.component_pn)}
-            </td>
-
-            <td>
-                ${escapeHtml(row.defect_class)}
-            </td>
-
-            <td>
-                ${escapeHtml(row.operator_id)}
-            </td>
-
-            <td>
-                ${escapeHtml(formatDateTime(row.date_time))}
-            </td>
-
-        `;
+            const tr =
+                document.createElement(
+                    "tr"
+                );
 
 
-        body.appendChild(tr);
+            tr.innerHTML = `
 
-    });
+                <td>
+                    ${escapeHtml(
+                        row.component_sn
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        row.process
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        row.component_pn
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        row.defect_class
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        displayOperator(
+                            row.operator_id
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        formatDateTime(
+                            row.date_time
+                        )
+                    )}
+                </td>
+
+            `;
+
+
+            body.appendChild(tr);
+
+        }
+    );
 
 
     document.getElementById(
@@ -3313,30 +4245,38 @@ function renderDailyTop(){
     const days = {};
 
 
-    filtered.forEach(row => {
+    filtered.forEach(
+        row => {
 
-        const day =
-            dateOnly(row.date_time);
+            const day =
+                dateOnly(
+                    row.date_time
+                );
 
 
-        if(!day){
-            return;
+            if(!day){
+                return;
+            }
+
+
+            if(!days[day]){
+                days[day] = {};
+            }
+
+
+            const defect =
+                row.defect ||
+                "Unknown";
+
+
+            days[day][defect] =
+                (
+                    days[day][defect] ||
+                    0
+                ) + 1;
+
         }
-
-
-        if(!days[day]){
-            days[day] = {};
-        }
-
-
-        const defect =
-            row.defect || "Unknown";
-
-
-        days[day][defect] =
-            (days[day][defect] || 0) + 1;
-
-    });
+    );
 
 
     const sortedDays =
@@ -3357,58 +4297,67 @@ function renderDailyTop(){
     if(!sortedDays.length){
 
         grid.innerHTML =
-            `<div class="small-note">No data available.</div>`;
+            `<div class="small-note">
+                No data available.
+            </div>`;
 
         return;
 
     }
 
 
-    sortedDays.forEach(day => {
+    sortedDays.forEach(
+        day => {
 
-        const defectCounts =
-            days[day];
+            const defectCounts =
+                days[day];
 
 
-        const top =
-            Object.entries(defectCounts)
+            const top =
+                Object.entries(
+                    defectCounts
+                )
                 .sort(
-                    (a,b) => b[1] - a[1]
+                    (a,b) =>
+                        b[1] - a[1]
                 )[0];
 
 
-        const card =
-            document.createElement("div");
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        card.className =
-            "day-card";
+            card.className =
+                "day-card";
 
 
-        card.innerHTML = `
+            card.innerHTML = `
 
-            <div class="day-date">
-                ${escapeHtml(day)}
-            </div>
+                <div class="day-date">
+                    ${escapeHtml(day)}
+                </div>
 
-            <div class="day-reject">
-                ${escapeHtml(top[0])}
-            </div>
+                <div class="day-reject">
+                    ${escapeHtml(top[0])}
+                </div>
 
-            <div class="day-qty">
-                ${top[1]}
-            </div>
+                <div class="day-qty">
+                    ${top[1]}
+                </div>
 
-            <div class="small-note">
-                reject
-            </div>
+                <div class="small-note">
+                    reject
+                </div>
 
-        `;
+            `;
 
 
-        grid.appendChild(card);
+            grid.appendChild(card);
 
-    });
+        }
+    );
 
 }
 
@@ -3432,11 +4381,15 @@ function addSN(){
 
 
     const snInput =
-        document.getElementById("sn");
+        document.getElementById(
+            "sn"
+        );
 
 
     const sn =
-        normalizeSN(snInput.value);
+        normalizeSN(
+            snInput.value
+        );
 
 
     if(!sn){
@@ -3546,7 +4499,9 @@ function addSN(){
     const duplicateBatch =
         scannedSNs.some(
             item =>
-                normalizeSN(item.sn) === sn
+            normalizeSN(
+                item.sn
+            ) === sn
         );
 
 
@@ -3556,6 +4511,7 @@ function addSN(){
             `Duplicate SN in current batch: ${sn}`,
             "error"
         );
+
 
         snInput.value = "";
 
@@ -3569,9 +4525,9 @@ function addSN(){
     const existing =
         rows.some(
             row =>
-                normalizeSN(
-                    row.component_sn
-                ) === sn
+            normalizeSN(
+                row.component_sn
+            ) === sn
         );
 
 
@@ -3581,6 +4537,7 @@ function addSN(){
             `SN already exists in database: ${sn}`,
             "error"
         );
+
 
         snInput.value = "";
 
@@ -3594,11 +4551,18 @@ function addSN(){
     scannedSNs.push({
 
         sn,
+
         process,
+
         pn,
+
         defect,
-        defect_class:defectClass,
-        operator:badge
+
+        defect_class:
+            defectClass,
+
+        operator:
+            badge
 
     });
 
@@ -3644,7 +4608,9 @@ function renderBatch(){
         (item,index) => {
 
             const div =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             div.className =
@@ -3656,18 +4622,33 @@ function renderBatch(){
                 <div>
 
                     <strong>
-                        ${escapeHtml(item.sn)}
+                        ${escapeHtml(
+                            item.sn
+                        )}
                     </strong>
 
                     <div class="small-note">
-                        ${escapeHtml(item.process)}
+
+                        ${escapeHtml(
+                            item.process
+                        )}
+
                         ·
-                        ${escapeHtml(item.defect)}
+
+                        ${escapeHtml(
+                            item.defect
+                        )}
+
                         ·
-                        ${escapeHtml(item.defect_class)}
+
+                        ${escapeHtml(
+                            item.defect_class
+                        )}
+
                     </div>
 
                 </div>
+
 
                 <button
                     class="batch-remove"
@@ -3679,7 +4660,9 @@ function renderBatch(){
             `;
 
 
-            list.appendChild(div);
+            list.appendChild(
+                div
+            );
 
         }
     );
@@ -3694,6 +4677,7 @@ function removeBatchItem(index){
         1
     );
 
+
     renderBatch();
 
 }
@@ -3703,7 +4687,9 @@ function clearBatch(){
 
     scannedSNs = [];
 
+
     renderBatch();
+
 
     document.getElementById(
         "sn"
@@ -3743,17 +4729,33 @@ async function submitReject(){
 
 
     const payload =
-        scannedSNs.map(item => ({
+        scannedSNs.map(
+            item => ({
 
-            component_sn:item.sn,
-            component_pn:item.pn,
-            process:item.process,
-            defect:item.defect,
-            defect_class:item.defect_class,
-            operator_id:item.operator,
-            date_time:new Date().toISOString()
+                component_sn:
+                    item.sn,
 
-        }));
+                component_pn:
+                    item.pn,
+
+                process:
+                    item.process,
+
+                defect:
+                    item.defect,
+
+                defect_class:
+                    item.defect_class,
+
+                operator_id:
+                    item.operator,
+
+                date_time:
+                    new Date()
+                        .toISOString()
+
+            })
+        );
 
 
     const {
@@ -3770,7 +4772,10 @@ async function submitReject(){
 
         console.error(error);
 
-        if(error.code === "23505"){
+
+        if(
+            error.code === "23505"
+        ){
 
             showToast(
                 "Duplicate Component SN detected. Nothing was added.",
@@ -3787,6 +4792,7 @@ async function submitReject(){
 
         }
 
+
         await loadRows();
 
         return;
@@ -3801,6 +4807,7 @@ async function submitReject(){
 
 
     scannedSNs = [];
+
 
     renderBatch();
 
@@ -3840,28 +4847,33 @@ function findColumn(
         Object.keys(obj);
 
 
-    for(const wanted of names){
+    for(
+        const wanted of names
+    ){
 
         const exact =
             keys.find(
                 key =>
-                    key
-                        .trim()
-                        .toLowerCase() ===
-                    wanted
-                        .trim()
-                        .toLowerCase()
+                key
+                    .trim()
+                    .toLowerCase() ===
+                wanted
+                    .trim()
+                    .toLowerCase()
             );
 
 
         if(exact){
+
             return obj[exact];
+
         }
 
     }
 
 
     return "";
+
 }
 
 
@@ -3944,9 +4956,9 @@ async function importExcel(){
             new Set(
                 rows.map(
                     r =>
-                        normalizeSN(
-                            r.component_sn
-                        )
+                    normalizeSN(
+                        r.component_sn
+                    )
                 )
             );
 
@@ -3960,7 +4972,9 @@ async function importExcel(){
         const skipped = [];
 
 
-        for(const item of data){
+        for(
+            const item of data
+        ){
 
             const sn =
                 normalizeSN(
@@ -4059,7 +5073,9 @@ async function importExcel(){
             }
 
 
-            if(existingSNs.has(sn)){
+            if(
+                existingSNs.has(sn)
+            ){
 
                 skipped.push(
                     `${sn} - duplicate existing SN`
@@ -4070,7 +5086,9 @@ async function importExcel(){
             }
 
 
-            if(importSNs.has(sn)){
+            if(
+                importSNs.has(sn)
+            ){
 
                 skipped.push(
                     `${sn} - duplicate inside Excel`
@@ -4082,8 +5100,10 @@ async function importExcel(){
 
 
             if(
-                !["DEBUG","MAINTENANCE"]
-                    .includes(process)
+                ![
+                    "DEBUG",
+                    "MAINTENANCE"
+                ].includes(process)
             ){
 
                 skipped.push(
@@ -4112,10 +5132,14 @@ async function importExcel(){
 
 
             if(
-                !["Cosmetic","EAOI Reject"]
-                    .includes(
-                        String(defectClass).trim()
-                    )
+                ![
+                    "Cosmetic",
+                    "EAOI Reject"
+                ].includes(
+                    String(
+                        defectClass
+                    ).trim()
+                )
             ){
 
                 skipped.push(
@@ -4138,10 +5162,15 @@ async function importExcel(){
                 dateTime =
                     dateValue;
 
-            }else if(dateValue){
+            }else if(
+                dateValue
+            ){
 
                 const parsed =
-                    new Date(dateValue);
+                    new Date(
+                        dateValue
+                    );
+
 
                 if(
                     !Number.isNaN(
@@ -4162,7 +5191,8 @@ async function importExcel(){
 
             payload.push({
 
-                component_sn:sn,
+                component_sn:
+                    sn,
 
                 component_pn:
                     String(pn).trim(),
@@ -4173,10 +5203,14 @@ async function importExcel(){
                     String(defect).trim(),
 
                 defect_class:
-                    String(defectClass).trim(),
+                    String(
+                        defectClass
+                    ).trim(),
 
                 operator_id:
-                    String(operator).trim(),
+                    String(
+                        operator
+                    ).trim(),
 
                 date_time:
                     dateTime.toISOString()
@@ -4193,10 +5227,12 @@ async function importExcel(){
                 "error"
             );
 
+
             console.log(
                 "Skipped:",
                 skipped
             );
+
 
             return;
 
@@ -4216,6 +5252,7 @@ async function importExcel(){
         if(error){
 
             console.error(error);
+
 
             showToast(
                 "Import failed: " +
@@ -4249,10 +5286,13 @@ async function importExcel(){
             `${inserted.length} record(s) imported.`;
 
 
-        if(skipped.length){
+        if(
+            skipped.length
+        ){
 
             message +=
                 ` ${skipped.length} skipped.`;
+
 
             console.log(
                 "Skipped rows:",
@@ -4262,7 +5302,9 @@ async function importExcel(){
         }
 
 
-        showToast(message);
+        showToast(
+            message
+        );
 
 
         document.getElementById(
@@ -4273,6 +5315,7 @@ async function importExcel(){
     }catch(error){
 
         console.error(error);
+
 
         showToast(
             "Could not read Excel file.",
@@ -4322,67 +5365,71 @@ function getFilteredRecords(){
         ).value;
 
 
-    return rows.filter(row => {
+    return rows.filter(
+        row => {
 
-        if(
-            search &&
-            !normalizeSN(
-                row.component_sn
-            ).includes(search)
-        ){
+            if(
+                search &&
+                !normalizeSN(
+                    row.component_sn
+                ).includes(search)
+            ){
 
-            return false;
+                return false;
+
+            }
+
+
+            if(
+                process &&
+                row.process !== process
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                defect &&
+                row.defect !== defect
+            ){
+
+                return false;
+
+            }
+
+
+            const d =
+                dateOnly(
+                    row.date_time
+                );
+
+
+            if(
+                from &&
+                d < from
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                to &&
+                d > to
+            ){
+
+                return false;
+
+            }
+
+
+            return true;
 
         }
-
-
-        if(
-            process &&
-            row.process !== process
-        ){
-
-            return false;
-
-        }
-
-
-        if(
-            defect &&
-            row.defect !== defect
-        ){
-
-            return false;
-
-        }
-
-
-        const d =
-            dateOnly(row.date_time);
-
-
-        if(
-            from &&
-            d < from
-        ){
-
-            return false;
-
-        }
-
-
-        if(
-            to &&
-            d > to
-        ){
-
-            return false;
-
-        }
-
-
-        return true;
-
-    });
+    );
 
 }
 
@@ -4418,12 +5465,11 @@ function renderRecords(){
                     colspan="8"
                     style="
                         text-align:center;
-                        color:#8fa4b8;
+                        color:#91a1ab;
                         padding:30px;
                     "
                 >
                     No records found.
-
                 </td>
 
             </tr>
@@ -4435,94 +5481,127 @@ function renderRecords(){
     }
 
 
-    filtered.forEach(row => {
+    filtered.forEach(
+        row => {
 
-        const tr =
-            document.createElement("tr");
-
-
-        const processClass =
-            row.process === "DEBUG"
-                ? "tag-debug"
-                : "tag-maint";
+            const tr =
+                document.createElement(
+                    "tr"
+                );
 
 
-        const classClass =
-            row.defect_class === "Cosmetic"
-                ? "tag-cosmetic"
-                : "tag-eaoi";
+            const processClass =
+                row.process === "DEBUG"
+                    ? "tag-debug"
+                    : "tag-maint";
 
 
-        const action =
-            isAdmin()
-                ? `
+            const classClass =
+                row.defect_class === "Cosmetic"
+                    ? "tag-cosmetic"
+                    : "tag-eaoi";
 
-                    <td>
 
-                        <button
-                            class="action-btn edit-btn"
-                            onclick="editRecord('${row.id}')"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            class="action-btn delete-btn"
-                            onclick="deleteRecord('${row.id}')"
-                        >
-                            Delete
-                        </button>
-
-                    </td>
+            const action =
+                isAdmin()
+                    ?
 
                 `
-                : "";
+
+                <td>
+
+                    <button
+                        class="action-btn edit-btn"
+                        onclick="editRecord('${row.id}')"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        class="action-btn delete-btn"
+                        onclick="deleteRecord('${row.id}')"
+                    >
+                        Delete
+                    </button>
+
+                </td>
+
+                `
+
+                    : "";
 
 
-        tr.innerHTML = `
+            tr.innerHTML = `
 
-            <td>
-                ${escapeHtml(row.component_sn)}
-            </td>
+                <td>
+                    ${escapeHtml(
+                        row.component_sn
+                    )}
+                </td>
 
-            <td>
-                ${escapeHtml(row.component_pn)}
-            </td>
+                <td>
+                    ${escapeHtml(
+                        row.component_pn
+                    )}
+                </td>
 
-            <td>
-                <span class="tag ${processClass}">
-                    ${escapeHtml(row.process || "-")}
-                </span>
-            </td>
+                <td>
 
-            <td>
-                ${escapeHtml(row.defect)}
-            </td>
+                    <span
+                        class="tag ${processClass}"
+                    >
+                        ${escapeHtml(
+                            row.process || "-"
+                        )}
+                    </span>
 
-            <td>
-                <span class="tag ${classClass}">
-                    ${escapeHtml(row.defect_class || "-")}
-                </span>
-            </td>
+                </td>
 
-            <td>
-                ${escapeHtml(row.operator_id)}
-            </td>
+                <td>
+                    ${escapeHtml(
+                        row.defect
+                    )}
+                </td>
 
-            <td>
-                ${escapeHtml(
-                    formatDateTime(row.date_time)
-                )}
-            </td>
+                <td>
 
-            ${action}
+                    <span
+                        class="tag ${classClass}"
+                    >
+                        ${escapeHtml(
+                            row.defect_class || "-"
+                        )}
+                    </span>
 
-        `;
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        displayOperator(
+                            row.operator_id
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        formatDateTime(
+                            row.date_time
+                        )
+                    )}
+                </td>
+
+                ${action}
+
+            `;
 
 
-        body.appendChild(tr);
+            body.appendChild(
+                tr
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -4581,32 +5660,44 @@ async function copyVisibleRecords(){
     }
 
 
-    const header =
-        [
-            "Component SN",
-            "Component PN",
-            "Process",
-            "Reject",
-            "Defect Class",
-            "Badge ID",
-            "Date Time"
-        ];
+    const header = [
+
+        "Component SN",
+        "Component PN",
+        "Process",
+        "Reject",
+        "Defect Class",
+        "Badge ID",
+        "Date Time"
+
+    ];
 
 
     const lines = [
 
         header.join("\t"),
 
-        ...filtered.map(row =>
-            [
+
+        ...filtered.map(
+            row => [
 
                 row.component_sn,
+
                 row.component_pn,
+
                 row.process,
+
                 row.defect,
+
                 row.defect_class,
-                row.operator_id,
-                formatDateTime(row.date_time)
+
+                displayOperator(
+                    row.operator_id
+                ),
+
+                formatDateTime(
+                    row.date_time
+                )
 
             ].join("\t")
         )
@@ -4624,6 +5715,7 @@ async function copyVisibleRecords(){
         showToast(
             `${filtered.length} record(s) copied.`
         );
+
 
     }catch(error){
 
@@ -4657,14 +5749,14 @@ function editRecord(id){
 
     const row =
         rows.find(
-            r => String(r.id) === String(id)
+            r =>
+            String(r.id) ===
+            String(id)
         );
 
 
     if(!row){
-
         return;
-
     }
 
 
@@ -4818,18 +5910,23 @@ async function saveEdit(){
             .from("rejects")
             .update({
 
-                component_pn:pn,
+                component_pn:
+                    pn,
 
                 process,
 
                 defect,
 
-                defect_class:defectClass,
+                defect_class:
+                    defectClass,
 
-                operator_id:operator,
+                operator_id:
+                    operator,
 
                 date_time:
-                    new Date(dateTime).toISOString()
+                    new Date(
+                        dateTime
+                    ).toISOString()
 
             })
             .eq("id",id)
@@ -4853,8 +5950,8 @@ async function saveEdit(){
     const index =
         rows.findIndex(
             r =>
-                String(r.id) ===
-                String(id)
+            String(r.id) ===
+            String(id)
         );
 
 
@@ -4906,14 +6003,14 @@ async function deleteRecord(id){
 
     const row =
         rows.find(
-            r => String(r.id) === String(id)
+            r =>
+            String(r.id) ===
+            String(id)
         );
 
 
     if(!row){
-
         return;
-
     }
 
 
@@ -4924,9 +6021,7 @@ async function deleteRecord(id){
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
@@ -4955,8 +6050,8 @@ async function deleteRecord(id){
     rows =
         rows.filter(
             r =>
-                String(r.id) !==
-                String(id)
+            String(r.id) !==
+            String(id)
         );
 
 
@@ -5003,9 +6098,7 @@ async function clearAllData(){
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
@@ -5015,7 +6108,10 @@ async function clearAllData(){
         );
 
 
-    if(second !== "DELETE ALL"){
+    if(
+        second !==
+        "DELETE ALL"
+    ){
 
         showToast(
             "Clear All cancelled.",
@@ -5026,13 +6122,6 @@ async function clearAllData(){
 
     }
 
-
-    /*
-      We use a condition based on component_sn.
-      If your table contains rows with empty SN,
-      tell me and I can change this to your exact
-      primary-key type.
-    */
 
     const {
         error
@@ -5111,30 +6200,36 @@ function exportExcel(){
 
 
     const exportData =
-        rows.map(row => ({
+        rows.map(
+            row => ({
 
-            "Component SN":
-                row.component_sn,
+                "Component SN":
+                    row.component_sn,
 
-            "Component PN":
-                row.component_pn,
+                "Component PN":
+                    row.component_pn,
 
-            "Process":
-                row.process,
+                "Process":
+                    row.process,
 
-            "Reject":
-                row.defect,
+                "Reject":
+                    row.defect,
 
-            "Defect Class":
-                row.defect_class,
+                "Defect Class":
+                    row.defect_class,
 
-            "Badge ID":
-                row.operator_id,
+                "Badge ID":
+                    displayOperator(
+                        row.operator_id
+                    ),
 
-            "Date Time":
-                formatDateTime(row.date_time)
+                "Date Time":
+                    formatDateTime(
+                        row.date_time
+                    )
 
-        }));
+            })
+        );
 
 
     const worksheet =
@@ -5404,8 +6499,8 @@ function setupEvents(){
 
 
     /*
-       Barcode scanners usually behave like keyboard input
-       and send Enter after scanning.
+       Barcode scanner:
+       scanner biasanya hantar Enter selepas scan.
     */
 
     document.getElementById(
@@ -5414,7 +6509,9 @@ function setupEvents(){
         "keydown",
         event => {
 
-            if(event.key === "Enter"){
+            if(
+                event.key === "Enter"
+            ){
 
                 event.preventDefault();
 
@@ -5427,7 +6524,8 @@ function setupEvents(){
 
 
     /*
-       Close modals by clicking outside.
+       Close graph modal
+       bila click luar modal.
     */
 
     document.getElementById(
@@ -5449,6 +6547,10 @@ function setupEvents(){
     );
 
 
+    /*
+       Close edit modal
+    */
+
     document.getElementById(
         "editModal"
     ).addEventListener(
@@ -5468,6 +6570,10 @@ function setupEvents(){
     );
 
 
+    /*
+       Close login modal
+    */
+
     document.getElementById(
         "loginModal"
     ).addEventListener(
@@ -5481,7 +6587,9 @@ function setupEvents(){
 
                 document.getElementById(
                     "loginModal"
-                ).classList.remove("show");
+                ).classList.remove(
+                    "show"
+                );
 
             }
 
@@ -5499,6 +6607,7 @@ function setupRealtime(){
 
     supabaseClient
         .channel("rejects-live")
+
         .on(
             "postgres_changes",
             {
@@ -5506,12 +6615,15 @@ function setupRealtime(){
                 schema:"public",
                 table:"rejects"
             },
+
             async () => {
 
                 await loadRows();
 
             }
+
         )
+
         .subscribe();
 
 }
@@ -5521,17 +6633,22 @@ function setupRealtime(){
    AUTH STATE
 ============================================================ */
 
-supabaseClient.auth.onAuthStateChange(
-    async (event, session) => {
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        async (
+            event,
+            session
+        ) => {
 
-        currentSession =
-            session;
+            currentSession =
+                session;
 
 
-        updateAdminUI();
+            updateAdminUI();
 
-    }
-);
+        }
+    );
 
 
 /* ============================================================
