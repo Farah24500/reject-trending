@@ -364,12 +364,10 @@ body{
 ========================= */
 
 .section{
-
     display:none;
 }
 
 .section.active{
-
     display:block;
 }
 
@@ -989,7 +987,6 @@ tbody tr:hover{
 ========================= */
 
 .admin-only{
-
     display:none;
 }
 
@@ -1040,7 +1037,6 @@ tbody tr:hover{
 }
 
 .modal.show{
-
     display:flex;
 }
 
@@ -1110,7 +1106,6 @@ tbody tr:hover{
 ========================= */
 
 .login-box{
-
     width:min(420px,100%);
 }
 
@@ -1596,6 +1591,7 @@ tbody tr:hover{
                     </label>
 
                     <select id="filterProcess">
+
                         <option value="">
                             All Process
                         </option>
@@ -2186,9 +2182,13 @@ tbody tr:hover{
 
                 <div class="button-row">
 
-                    <button class="btn btn-cyan" onclick="addSN()" id="addSnBtn">
-    + ADD SN
-</button>
+                    <button
+                        class="btn btn-cyan"
+                        onclick="addSN()"
+                        id="addSnBtn"
+                    >
+                        + ADD SN
+                    </button>
 
                     <button
                         class="btn btn-primary"
@@ -4162,86 +4162,6 @@ snInput.addEventListener(
 
 
 /* =====================================================
-   AUTO ADD SN WHEN SCANNED
-===================================================== */
-
-let scanTimer = null;
-
-const snInput =
-    document.getElementById("sn");
-
-
-snInput.addEventListener(
-    "input",
-    function(){
-
-        clearTimeout(scanTimer);
-
-
-        const value =
-            this.value.trim();
-
-
-        if(!value)
-            return;
-
-
-        /*
-         * Scanner normally enters the barcode
-         * very quickly.
-         * Wait briefly after the last character,
-         * then automatically trigger ADD SN.
-         */
-
-        scanTimer = setTimeout(
-            function(){
-
-                const currentValue =
-                    snInput.value.trim();
-
-
-                if(!currentValue)
-                    return;
-
-
-                document
-                    .getElementById("addSnBtn")
-                    .click();
-
-            },
-            150
-        );
-
-    }
-);
-
-
-/*
- * Also support scanners that send ENTER
- * after the barcode.
- */
-
-snInput.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Enter"){
-
-            event.preventDefault();
-
-            clearTimeout(scanTimer);
-
-            document
-                .getElementById("addSnBtn")
-                .click();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
    RENDER SCAN LIST
 ===================================================== */
 
@@ -5697,6 +5617,7 @@ function escapeHtml(value){
 
 }
 
+
 /* =====================================================
    AUTH STATE
 ===================================================== */
@@ -5729,10 +5650,6 @@ supabaseClient.auth.onAuthStateChange(
     }
 );
 
-
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
 
 /* =====================================================
    INITIAL LOAD
