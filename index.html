@@ -3967,15 +3967,18 @@ async function addSN(){
             .getElementById("process")
             .value;
 
+
     const pn =
         document
             .getElementById("pn")
             .value;
 
+
     const defect =
         document
             .getElementById("defect")
             .value;
+
 
     const defectClass =
         document
@@ -4075,6 +4078,7 @@ async function addSN(){
 
     renderScanList();
 
+
     document
         .getElementById("sn")
         .focus();
@@ -4083,6 +4087,30 @@ async function addSN(){
     toast("SN added.");
 
 }
+
+
+/* =====================================================
+   AUTO ADD SN WHEN SCANNER SENDS ENTER
+===================================================== */
+
+document
+    .getElementById("sn")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                event.preventDefault();
+
+                document
+                    .getElementById("addSnBtn")
+                    .click();
+
+            }
+
+        }
+    );
 
 
 /* =====================================================
