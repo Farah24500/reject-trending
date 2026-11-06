@@ -750,6 +750,12 @@ select option{
     color:#fdba74;
 }
 
+.badge-bonepile{
+    background:rgba(34,211,238,.15);
+    color:#67e8f9;
+}
+
+
 .tag-cosmetic{
 
     background:rgba(236,72,153,.14);
@@ -1603,6 +1609,8 @@ tbody tr:hover{
                         <option value="MAINTENANCE">
                             MAINTENANCE
                         </option>
+        <option value="BONEPILE">BONEPILE</option>
+
 
                     </select>
 
@@ -2091,6 +2099,8 @@ tbody tr:hover{
                             <option value="MAINTENANCE">
                                 MAINTENANCE
                             </option>
+            <option value="BONEPILE">BONEPILE</option>
+
 
                         </select>
 
@@ -2538,6 +2548,8 @@ tbody tr:hover{
                     <option value="MAINTENANCE">
                         MAINTENANCE
                     </option>
+        <option value="BONEPILE">BONEPILE</option>
+
 
                 </select>
 
@@ -3516,164 +3528,186 @@ function clearAnalytics(){
 
 function renderChart(){
 
-    const data =
-        getAnalyticsRows();
+    const data = getAnalyticsRows();
+    const processes = ["DEBUG", "MAINTENANCE", "BONEPILE"];
+    const dailyCounts = {};
 
+    data.forEach(row => {
+        if (!row.date_time) return;
 
-    const counts = {};
+        const process = String(row.process || "").trim().toUpperCase();
+        if (!processes.includes(process)) return;
 
-
-    data.forEach(row=>{
-
-        const defect =
-            row.defect || "Unknown";
-
-        counts[defect] =
-            (counts[defect] || 0) + 1;
-
+        const date = new Date(row.date_time).toISOString().slice(0, 10);
+        if (!dailyCounts[date]) {
+            dailyCounts[date] = { DEBUG: 0, MAINTENANCE: 0, BONEPILE: 0 };
+        }
+        dailyCounts[date][process]++;
     });
 
+    const labels = Object.keys(dailyCounts).sort();
+    const processColors = {
+        DEBUG: "#8b5cf6",
+        MAINTENANCE: "#f97316",
+        BONEPILE: "#0891b2"
+    };
 
-    const sorted =
-        Object.entries(counts)
-            .sort((a,b)=>b[1]-a[1]);
+    const datasets = processes.map(process => ({
+        label: process,
+        data: labels.map(date => dailyCounts[date][process] || 0),
+        borderColor: processColors[process],
+        backgroundColor: processColors[process],
+        borderWidth: 3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: "#ffffff",
+        pointBorderWidth: 2,
+        tension: 0.25,
+        fill: false
+    }));
 
+    const ctx = document.getElementById("rejectChart").getContext("2d");
 
-    const labels =
-        sorted.map(item=>item[0]);
-
-    const values =
-        sorted.map(item=>item[1]);
-
-
-    const ctx =
-        document
-            .getElementById("rejectChart")
-            .getContext("2d");
-
-
-    if(rejectChart){
-
+    if (rejectChart) {
         rejectChart.destroy();
-
     }
 
+    // Keep the chart canvas white without changing the dashboard theme.
+    const whiteChartBackground = {
+        id: "whiteChartBackground",
+        beforeDraw(chart) {
+            const { ctx, width, height } = chart;
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-over";
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, width, height);
+            ctx.restore();
+        }
+    };
 
-    rejectChart =
-        new Chart(
-            ctx,
-            {
-
-                type:"bar",
-
-                data:{
-
-                    labels,
-
-                    datasets:[{
-
-                        label:"Reject Quantity",
-
-                        data:values,
-
-                        backgroundColor:
-                            "rgba(139,92,246,.75)",
-
-                        borderColor:
-                            "#a855f7",
-
-                        borderWidth:1,
-
-                        borderRadius:8
-
-                    }]
-
-                },
-
-                options:{
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    plugins:{
-
-                        legend:{
-                            display:false
-                        }
-
-                    },
-
-                    scales:{
-
-                        x:{
-
-                            ticks:{
-                                color:"#9ca8c7",
-                                font:{
-                                    size:9
-                                }
-                            },
-
-                            grid:{
-                                color:
-                                    "rgba(255,255,255,.04)"
-                            }
-
-                        },
-
-                        y:{
-
-                            beginAtZero:true,
-
-                            ticks:{
-                                color:"#9ca8c7",
-                                precision:0
-                            },
-
-                            grid:{
-                                color:
-                                    "rgba(255,255,255,.06)"
-                            }
-
-                        }
-
-                    },
-
-                    onClick:function(
-                        event,
-                        elements
-                    ){
-
-                        if(!elements.length)
-                            return;
-
-
-                        const index =
-                            elements[0].index;
-
-                        const defect =
-                            labels[index];
-
-
-                        showDefectDetails(
-                            defect,
-                            data
-                        );
-
+    rejectChart = new Chart(ctx, {
+        type: "line",
+        data: { labels, datasets },
+        plugins: [whiteChartBackground],
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: "nearest",
+                intersect: true
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top",
+                    labels: {
+                        color: "#334155",
+                        usePointStyle: true,
+                        boxWidth: 8,
+                        font: { size: 11, weight: "bold" }
                     }
-
+                },
+                tooltip: {
+                    callbacks: {
+                        label(context) {
+                            return `${context.dataset.label}: ${context.parsed.y} reject(s)`;
+                        }
+                    }
                 }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: "Date",
+                        color: "#334155",
+                        font: { weight: "bold" }
+                    },
+                    ticks: {
+                        color: "#475569",
+                        font: { size: 10 }
+                    },
+                    grid: { color: "#e2e8f0" }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Reject Quantity",
+                        color: "#334155",
+                        font: { weight: "bold" }
+                    },
+                    ticks: {
+                        color: "#475569",
+                        precision: 0,
+                        stepSize: 1
+                    },
+                    grid: { color: "#e2e8f0" }
+                }
+            },
+            onClick(event, elements) {
+                if (!elements.length) return;
 
+                const point = elements[0];
+                const date = labels[point.index];
+                const process = processes[point.datasetIndex];
+                showProcessDateDetails(process, date, data);
             }
-        );
-
+        }
+    });
 }
 
 
 /* =====================================================
    GRAPH DETAIL
 ===================================================== */
+
+function showProcessDateDetails(process, date, sourceRows){
+
+    const detailRows = sourceRows.filter(row => {
+        if (String(row.process || "").trim().toUpperCase() !== process) return false;
+        if (!row.date_time) return false;
+        return new Date(row.date_time).toISOString().slice(0, 10) === date;
+    });
+
+    const content = document.getElementById("detailContent");
+    content.innerHTML = `
+        <div style="margin-bottom:15px;padding:15px;border-radius:12px;background:#10162d;border:1px solid #293354;">
+            <div style="color:#8f9aba;font-size:10px;margin-bottom:5px;">PROCESS / DATE</div>
+            <div style="color:#67e8f9;font-size:17px;font-weight:900;">${escapeHtml(process)}</div>
+            <div style="color:#cbd5e1;font-size:12px;margin-top:6px;">${escapeHtml(date)} · ${detailRows.length} record(s)</div>
+        </div>
+        <div class="table-wrap">
+            <table style="min-width:700px;">
+                <thead>
+                    <tr>
+                        <th>Component SN</th>
+                        <th>PN</th>
+                        <th>Reject</th>
+                        <th>Defect Class</th>
+                        <th>Badge</th>
+                        <th>Date Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${detailRows.map(row => `
+                        <tr>
+                            <td>${escapeHtml(row.component_sn || "")}</td>
+                            <td>${escapeHtml(row.component_pn || "")}</td>
+                            <td>${escapeHtml(row.defect || "")}</td>
+                            <td>${escapeHtml(row.defect_class || "")}</td>
+                            <td>${escapeHtml(displayOperator(row.operator_id))}</td>
+                            <td>${formatDate(row.date_time)}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    document.getElementById("detailModal").classList.add("show");
+}
+
 
 function showDefectDetails(
     defect,
@@ -4827,7 +4861,9 @@ function renderRecords(){
         const processBadge =
             row.process === "DEBUG"
                 ? "badge-debug"
-                : "badge-maintenance";
+                : row.process === "BONEPILE"
+                    ? "badge-bonepile"
+                    : "badge-maintenance";
 
 
         const classTag =
