@@ -1818,6 +1818,10 @@ tbody tr:hover{
                             MAINTENANCE
                         </option>
 
+                        <option value="BONEPILE">
+                            BONEPILE
+                        </option>
+
                     </select>
 
                 </div>
@@ -2702,7 +2706,8 @@ const processRejects = {
       "P2 SHELL PEEL OFF",
       "P2 SHELL SCRATCHED",
       "P2 SHELL DISCOLORATION",
-      "P2 MPO CONNECTOR DAMAGE"
+      "P2 MPO CONNECTOR DAMAGE",
+      "MPO CONTAM"
     ],
     MAINTENANCE: [
       "P2 MPO CONTAM 1",
@@ -4394,345 +4399,318 @@ function clearScan(){
 async function importExcel(){
 
     if(!currentIsAdmin){
-
         toast("Admin access required.");
-
         return;
-
     }
 
-
-    const file =
-        document
-            .getElementById("excelFile")
-            .files[0];
-
+    const file = document.getElementById("excelFile").files[0];
 
     if(!file){
-
-        toast(
-            "Please select Excel file."
-        );
-
+        toast("Please select Excel file.");
         return;
-
     }
 
-
-    const reader =
-        new FileReader();
-
+    const reader = new FileReader();
 
     reader.onload = async function(event){
 
         try{
 
-            const workbook =
-                XLSX.read(
-                    event.target.result,
-                    {
-                        type:"array"
-                    }
-                );
+            const workbook = XLSX.read(event.target.result, {
+                type:"array",
+                cellDates:true
+            });
 
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
-            const sheet =
-                workbook.Sheets[
-                    workbook.SheetNames[0]
-                ];
+            if(!sheet){
+                toast("Excel worksheet not found.");
+                return;
+            }
 
+            const data = XLSX.utils.sheet_to_json(sheet, {
+                defval:"",
+                raw:true
+            });
 
-            const data =
-                XLSX.utils.sheet_to_json(
-                    sheet,
-                    {
-                        defval:""
-                    }
-                );
+            if(!data.length){
+                toast("Excel file has no data rows.");
+                return;
+            }
 
+            // Match column names even if Excel uses different spacing/capitalization.
+            const normalizeHeader = value =>
+                String(value || "")
+                    .trim()
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, "");
 
-            const existing =
-                new Set(
-                    rows.map(
-                        row =>
-                            String(
-                                row.component_sn
-                            )
-                            .trim()
-                            .toUpperCase()
-                    )
-                );
+            const getCell = (item, aliases) => {
+                const keys = Object.keys(item);
+                for(const alias of aliases){
+                    const wanted = normalizeHeader(alias);
+                    const found = keys.find(key => normalizeHeader(key) === wanted);
+                    if(found !== undefined) return item[found];
+                }
+                return "";
+            };
 
-
-            const importRows = [];
-
-            let skipped = 0;
-
-
-            data.forEach(item=>{
-
-                const sn =
-                    String(
-                        item["Component SN"] || ""
-                    ).trim();
-
-
-                const pn =
-                    String(
-                        item["Component PN"] || ""
-                    ).trim();
-
-
-                const process =
-                    String(
-                        item["Process"] || ""
-                    ).trim()
+            const normalizeText = value =>
+                String(value ?? "")
+                    .trim()
+                    .replace(/\s+/g, " ")
                     .toUpperCase();
 
+            // Excel reject names -> the exact reject labels used by this dashboard.
+            const rejectMapping = {
+                "SHELL DENTED": "P2 SHELL DENTED",
+                "P2 SHELL DENTED": "P2 SHELL DENTED",
 
-                const defect =
-                    String(
-                        item["Reject"] || ""
-                    ).trim();
+                "SHELL SCRATCHED": "P2 SHELL SCRATCHED",
+                "P2 SHELL SCRATCHED": "P2 SHELL SCRATCHED",
 
+                "MPO CONNECTOR DAMAGED": "P2 MPO CONNECTOR DAMAGE",
+                "P2 MPO CONNECTOR DAMAGED": "P2 MPO CONNECTOR DAMAGE",
+                "P2 MPO CONNECTOR DAMAGE": "P2 MPO CONNECTOR DAMAGE",
+
+                // Keep this as MPO CONTAM; do not convert it to Maintenance 1 or 2.
+                "MPO CONTAM": "MPO CONTAM",
+
+                "SHELL EXPOSED COPPER": "P2 SHELL EXPOSED COPPER",
+                "P2 SHELL EXPOSED COPPER": "P2 SHELL EXPOSED COPPER",
+
+                "SHELL BENT": "P2 SHELL BENT",
+                "P2 SHELL BENT": "P2 SHELL BENT"
+            };
+
+            const parseExcelDate = value => {
+
+                if(value instanceof Date && !isNaN(value.getTime())){
+                    return value.toISOString();
+                }
+
+                // Excel stores dates as serial numbers in some workbooks.
+                if(typeof value === "number" && Number.isFinite(value)){
+                    const parts = XLSX.SSF.parse_date_code(value);
+                    if(parts){
+                        return new Date(Date.UTC(
+                            parts.y,
+                            parts.m - 1,
+                            parts.d,
+                            parts.H || 0,
+                            parts.M || 0,
+                            Math.floor(parts.S || 0)
+                        )).toISOString();
+                    }
+                    return null;
+                }
+
+                const text = String(value ?? "").trim();
+                if(!text) return null;
+
+                // Malaysian Excel date text is commonly DD/MM/YYYY.
+                const dmy = text.match(
+                    /^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+                );
+
+                if(dmy){
+                    const day = Number(dmy[1]);
+                    const month = Number(dmy[2]);
+                    const year = Number(dmy[3]);
+                    const hour = Number(dmy[4] || 0);
+                    const minute = Number(dmy[5] || 0);
+                    const second = Number(dmy[6] || 0);
+
+                    const parsed = new Date(Date.UTC(
+                        year, month - 1, day, hour, minute, second
+                    ));
+
+                    if(
+                        parsed.getUTCFullYear() === year &&
+                        parsed.getUTCMonth() === month - 1 &&
+                        parsed.getUTCDate() === day
+                    ){
+                        return parsed.toISOString();
+                    }
+                    return null;
+                }
+
+                const parsed = new Date(text);
+                return isNaN(parsed.getTime()) ? null : parsed.toISOString();
+            };
+
+            const existing = new Set(
+                rows.map(row =>
+                    String(row.component_sn || "")
+                        .trim()
+                        .toUpperCase()
+                )
+            );
+
+            const importRows = [];
+            const batchSNs = new Set();
+            let skipped = 0;
+            const issues = [];
+
+            data.forEach((item, index) => {
+
+                const sn = String(getCell(item, [
+                    "Component SN", "Component Serial Number", "SN", "Serial Number"
+                ]) ?? "").trim();
+
+                const pn = String(getCell(item, [
+                    "Component PN", "Part Number", "PN"
+                ]) ?? "").trim();
+
+                const process = normalizeText(getCell(item, [
+                    "Process", "Line"
+                ]));
+
+                const rawDefect = normalizeText(getCell(item, [
+                    "Reject", "Defect", "Reject Name"
+                ]));
+
+                const defect = rejectMapping[rawDefect] || rawDefect;
+
+                const rawClass = normalizeText(getCell(item, [
+                    "Defect Class", "Class"
+                ]));
 
                 const defectClass =
-                    String(
-                        item["Defect Class"] || ""
-                    ).trim();
+                    rawClass === "COSMETIC" ? "Cosmetic" :
+                    rawClass === "EAOI REJECT" ? "EAOI Reject" :
+                    "";
 
+                const badge = String(getCell(item, [
+                    "Badge ID", "Badge", "Operator ID", "Operator"
+                ]) ?? "").trim();
 
-                const badge =
-                    String(
-                        item["Badge ID"] || ""
-                    ).trim();
+                const dateValue = getCell(item, [
+                    "Date Time", "DateTime", "Date", "Reject Date"
+                ]);
 
-
-                const dateValue =
-                    item["Date Time"];
-
+                const normalizedSN = sn.toUpperCase();
 
                 if(!sn){
-
                     skipped++;
-
+                    issues.push(`Row ${index + 2}: missing Component SN`);
                     return;
-
                 }
 
-
-                const normalized =
-                    sn
-                        .trim()
-                        .toUpperCase();
-
-
-                if(
-                    existing.has(
-                        normalized
-                    )
-                ){
-
+                if(existing.has(normalizedSN) || batchSNs.has(normalizedSN)){
                     skipped++;
-
                     return;
-
                 }
 
-
-                if(
-                    importRows.some(
-                        row =>
-                            String(
-                                row.component_sn
-                            )
-                            .trim()
-                            .toUpperCase()
-                            === normalized
-                    )
-                ){
-
+                if(!["DEBUG", "MAINTENANCE", "BONEPILE"].includes(process)){
                     skipped++;
-
+                    issues.push(`Row ${index + 2}: unsupported Process "${process}"`);
                     return;
-
                 }
 
-
-                if(
-                    ![
-                        "DEBUG",
-                        "MAINTENANCE"
-                    ].includes(process)
-                ){
-
+                if(!processRejects[process] || !processRejects[process].includes(defect)){
                     skipped++;
-
+                    issues.push(`Row ${index + 2}: reject "${rawDefect}" is not listed for ${process}`);
                     return;
-
                 }
 
-
-                if(
-                    !processRejects[process]
-                        .includes(defect)
-                ){
-
+                if(!defectClass){
                     skipped++;
-
+                    issues.push(`Row ${index + 2}: invalid Defect Class "${rawClass}"`);
                     return;
-
                 }
 
+                const dateTime = parseExcelDate(dateValue);
 
-                if(
-                    ![
-                        "Cosmetic",
-                        "EAOI Reject"
-                    ].includes(
-                        defectClass
-                    )
-                ){
-
+                if(!dateTime){
                     skipped++;
-
+                    issues.push(`Row ${index + 2}: invalid or missing Date Time`);
                     return;
-
                 }
-
-
-                let dateTime;
-
-
-                if(
-                    dateValue
-                    instanceof Date
-                ){
-
-                    dateTime =
-                        dateValue.toISOString();
-
-                }else if(dateValue){
-
-                    const parsed =
-                        new Date(dateValue);
-
-                    dateTime =
-                        isNaN(
-                            parsed.getTime()
-                        )
-                            ? new Date()
-                                .toISOString()
-                            : parsed.toISOString();
-
-                }else{
-
-                    dateTime =
-                        new Date()
-                            .toISOString();
-
-                }
-
 
                 importRows.push({
-
-                    component_sn:sn,
-
-                    component_pn:pn,
-
-                    process:process,
-
-                    defect:defect,
-
-                    defect_class:
-                        defectClass,
-
-                    operator_id:badge,
-
-                    date_time:dateTime
-
+                    component_sn: sn,
+                    component_pn: pn,
+                    process: process,
+                    defect: defect,
+                    defect_class: defectClass,
+                    operator_id: badge,
+                    date_time: dateTime
                 });
+
+                batchSNs.add(normalizedSN);
 
             });
 
-
             if(!importRows.length){
-
+                const detail = issues.slice(0, 3).join("; ");
                 toast(
-                    `No new valid records. Skipped: ${skipped}`
+                    `No new valid records. Skipped: ${skipped}` +
+                    (detail ? ` | ${detail}` : "")
                 );
-
+                console.warn("Excel import validation issues:", issues);
                 return;
-
             }
-
 
             const {
                 data:inserted,
                 error
-            } =
-                await supabaseClient
-                    .from("rejects")
-                    .insert(importRows)
-                    .select();
-
+            } = await supabaseClient
+                .from("rejects")
+                .insert(importRows)
+                .select();
 
             if(error){
-
-                toast(
-                    "Import failed: " +
-                    error.message
-                );
-
+                console.error("Supabase import error:", error);
+                toast("Import failed: " + error.message);
                 return;
-
             }
 
-
             rows = [
-                ...inserted,
+                ...(inserted || []),
                 ...rows
             ];
 
-
             updateDashboard();
-
             populatePNFilters();
-
             renderChart();
-
             renderRecords();
-
             renderDailyTop();
 
+            document.getElementById("excelFile").value = "";
 
-            document
-                .getElementById("excelFile")
-                .value = "";
-
+            const issueText = issues.length
+                ? ` Check skipped rows in console (${issues.length} issue(s)).`
+                : "";
 
             toast(
-                `Imported ${inserted.length} record(s). Skipped ${skipped}.`
+                `Imported ${(inserted || []).length} record(s). Skipped ${skipped}.${issueText}`
             );
+
+            console.info("Excel import summary:", {
+                sourceRows: data.length,
+                imported: (inserted || []).length,
+                skipped,
+                issues
+            });
 
         }
         catch(error){
 
-            console.error(error);
-
-            toast(
-                "Unable to read Excel file."
-            );
+            console.error("Excel import error:", error);
+            toast("Unable to read Excel file: " + error.message);
 
         }
 
     };
 
+    reader.onerror = function(){
+        toast("Unable to read the selected Excel file.");
+    };
 
     reader.readAsArrayBuffer(file);
 
 }
-
 
 /* =====================================================
    RECORD FILTER
