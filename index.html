@@ -1304,6 +1304,113 @@ tbody tr:hover{
     }
 }
 
+
+/* =========================
+   SOFT PASTEL INTERFACE THEME
+   ========================= */
+:root{
+    --bg:#f4f2fb;
+    --bg2:#eeecf8;
+    --panel:#ffffff;
+    --panel2:#f8f7fd;
+    --border:#e3def2;
+    --purple:#7654d6;
+    --purple2:#8b68e8;
+    --cyan:#3b9eae;
+    --pink:#d96b9c;
+    --orange:#d98a52;
+    --green:#269b72;
+    --red:#d95768;
+    --text:#292640;
+    --muted:#77738f;
+}
+body{
+    background:
+        radial-gradient(circle at 12% 8%,rgba(139,104,232,.13),transparent 30%),
+        radial-gradient(circle at 90% 18%,rgba(59,158,174,.12),transparent 28%),
+        var(--bg);
+    color:var(--text);
+}
+.sidebar{
+    background:linear-gradient(180deg,#30284d 0%,#211d39 100%);
+    border-right:1px solid #3c345c;
+}
+.logo-text h2,.page-title h1,.panel-title h2{color:#302b49;}
+.logo-text h2{color:#fff;}
+.logo-text span{color:#a9e1e5;}
+.nav-title{color:#b8afd4;}
+.nav-btn{color:#e0dcef;}
+.nav-btn:hover{background:rgba(255,255,255,.10);color:#fff;}
+.nav-btn.active{
+    color:#fff;
+    background:linear-gradient(90deg,rgba(139,104,232,.48),rgba(59,158,174,.22));
+    border:1px solid rgba(205,190,255,.35);
+    box-shadow:0 5px 18px rgba(15,10,35,.18);
+}
+.system-status{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);}
+.system-status small{color:#c8c2dc;}
+.page-title p,.panel-title span{color:#817b98;}
+.stat-card{
+    background:linear-gradient(145deg,#fff 0%,#f7f5fd 100%);
+    border-color:#e5e0f1;
+    box-shadow:0 8px 24px rgba(48,39,82,.06);
+}
+.stat-label{color:#817b98;}
+.panel{
+    background:linear-gradient(145deg,#fff 0%,#fbfaff 100%);
+    border-color:#e5e0f1;
+    box-shadow:0 8px 24px rgba(48,39,82,.055);
+}
+input,select{
+    background:#f8f7fc;
+    border:1px solid #ded9ed;
+    color:#302b49;
+}
+input:focus,select:focus{
+    border-color:var(--purple2);
+    box-shadow:0 0 0 3px rgba(139,104,232,.13);
+}
+input::placeholder{color:#aaa4bd;}
+select option{background:#fff;color:#302b49;}
+.field label{color:#77718f;}
+.btn-dark{background:#e9e5f4;color:#51496d;}
+.btn-cyan{background:linear-gradient(135deg,#65bdc7,#a1dce0);color:#183e45;}
+.btn-pink{background:linear-gradient(135deg,#d96b9c,#eea3c2);color:#fff;}
+.btn-orange{background:linear-gradient(135deg,#cf7945,#efb27e);color:#fff;}
+.btn-primary{background:linear-gradient(135deg,#7654d6,#9a7bed);}
+.btn-danger{background:linear-gradient(135deg,#cf5364,#e9828e);}
+.badge-debug{background:#eee8ff;color:#684bbd;}
+.badge-maintenance{background:#fff0df;color:#a96325;}
+.badge-bonepile{background:#e1f5f5;color:#247b87;}
+.badge-rtv{background:#ffe8e1;color:#b94f38;}
+.tag-cosmetic{background:#fce8f1;color:#b84f83;}
+.tag-eaoi{background:#e1f4f7;color:#287b8c;}
+.scan-chip{background:#f0edfa;border-color:#ddd5f1;color:#40395d;}
+.scan-chip button{color:#c64f72;}
+.table-wrap{border-color:#e5e0f1;}
+th{background:#eeeaf7;color:#716b89;}
+td{border-top:1px solid #eeeaf5;color:#45405e;}
+tbody tr:hover{background:#f7f5fc;}
+.daily-card{background:#f8f7fc;border-color:#e5e0f1;}
+.daily-date{color:#318c9b;}
+.daily-reject{color:#39334f;}
+.daily-count{color:#817b98;}
+.admin-card{background:linear-gradient(145deg,#f6f2ff,#eef8f8);border-color:#ded4f5;}
+.admin-email{color:#318c9b;}
+.modal{background:rgba(35,29,56,.48);}
+.modal-box{
+    background:linear-gradient(145deg,#fff,#f7f5fc);
+    border-color:#ded8ed;
+    color:#302b49;
+    box-shadow:0 25px 70px rgba(37,29,62,.25);
+}
+.modal-head h2{color:#302b49;}
+.close{background:#eeeaf7;color:#51496d;}
+.login-title p{color:#817b98;}
+.toast{background:#30284d;border-color:#514574;color:#fff;}
+.edit-btn{background:#e6f3f7;color:#287b8c;}
+.delete-btn{background:#fce8ed;color:#b94d68;}
+
 </style>
 
 </head>
@@ -1369,6 +1476,18 @@ tbody tr:hover{
         <span class="nav-icon">📋</span>
 
         <span>Reject Records</span>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="showSection('rtvCompleted',this)"
+    >
+
+        <span class="nav-icon">📦</span>
+
+        <span>RTV Completed</span>
 
     </button>
 
@@ -1610,6 +1729,7 @@ tbody tr:hover{
                             MAINTENANCE
                         </option>
         <option value="BONEPILE">BONEPILE</option>
+                        <option value="RTV COMPLETED">RTV COMPLETED</option>
 
 
                     </select>
@@ -1821,6 +1941,9 @@ tbody tr:hover{
                         <option value="BONEPILE">
                             BONEPILE
                         </option>
+                        <option value="RTV COMPLETED">
+                            RTV COMPLETED
+                        </option>
 
                     </select>
 
@@ -1949,6 +2072,56 @@ tbody tr:hover{
                     </thead>
 
                     <tbody id="recordsBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RTV COMPLETED
+    ========================= -->
+
+    <section
+        id="rtvCompleted"
+        class="section"
+    >
+
+        <div class="panel">
+
+            <div class="panel-title">
+
+                <h2>📦 RTV Completed</h2>
+
+                <span>Records with process status RTV COMPLETED</span>
+
+            </div>
+
+            <div class="button-row" style="justify-content:space-between;align-items:center;">
+                <span id="rtvCompletedCount" style="font-size:12px;color:#697594;">0 completed records</span>
+                <button class="btn btn-dark" onclick="renderRTVCompleted()">REFRESH</button>
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Component SN</th>
+                            <th>Component PN</th>
+                            <th>Reject</th>
+                            <th>Defect Class</th>
+                            <th>Badge ID</th>
+                            <th>Date Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="rtvCompletedBody"></tbody>
 
                 </table>
 
@@ -2104,6 +2277,7 @@ tbody tr:hover{
                                 MAINTENANCE
                             </option>
             <option value="BONEPILE">BONEPILE</option>
+                        <option value="RTV COMPLETED">RTV COMPLETED</option>
 
 
                         </select>
@@ -2556,6 +2730,7 @@ tbody tr:hover{
                         MAINTENANCE
                     </option>
         <option value="BONEPILE">BONEPILE</option>
+                        <option value="RTV COMPLETED">RTV COMPLETED</option>
 
 
                 </select>
@@ -2709,10 +2884,7 @@ const processRejects = {
       "P2 MPO CONNECTOR DAMAGE",
       "MPO CONTAM"
     ],
-    MAINTENANCE: [
-      "P2 MPO CONTAM 1",
-      "P2 MPO CONTAM 2"
-    ],
+    MAINTENANCE: [],
     BONEPILE: [
       "P2 SHELL ABRASIVE",
       "P2 SHELL BENT",
@@ -2725,7 +2897,23 @@ const processRejects = {
       "P2 SHELL PEEL OFF",
       "P2 SHELL SCRATCHED",
       "P2 SHELL DISCOLORATION",
-      "P2 MPO CONNECTOR DAMAGE"
+      "P2 MPO CONNECTOR DAMAGE",
+      "MPO CONTAM"
+    ],
+    "RTV COMPLETED": [
+      "P2 SHELL ABRASIVE",
+      "P2 SHELL BENT",
+      "P2 SHELL DENTED",
+      "P2 SHELL CONTAM",
+      "P2 SHELL DAMAGED",
+      "P2 SHELL BLISTER",
+      "P2 SHELL EXPOSED COPPER",
+      "P2 SHELL LINEAR SCRATCHED",
+      "P2 SHELL PEEL OFF",
+      "P2 SHELL SCRATCHED",
+      "P2 SHELL DISCOLORATION",
+      "P2 MPO CONNECTOR DAMAGE",
+      "MPO CONTAM"
     ]
 };
 
@@ -3547,7 +3735,7 @@ function clearAnalytics(){
 function renderChart(){
 
     const data = getAnalyticsRows();
-    const processes = ["DEBUG", "MAINTENANCE", "BONEPILE"];
+    const processes = ["DEBUG", "MAINTENANCE", "BONEPILE", "RTV COMPLETED"];
     const dailyCounts = {};
 
     data.forEach(row => {
@@ -3558,7 +3746,7 @@ function renderChart(){
 
         const date = new Date(row.date_time).toISOString().slice(0, 10);
         if (!dailyCounts[date]) {
-            dailyCounts[date] = { DEBUG: 0, MAINTENANCE: 0, BONEPILE: 0 };
+            dailyCounts[date] = { DEBUG: 0, MAINTENANCE: 0, BONEPILE: 0, "RTV COMPLETED": 0 };
         }
         dailyCounts[date][process]++;
     });
@@ -3567,7 +3755,8 @@ function renderChart(){
     const processColors = {
         DEBUG: "#8b5cf6",
         MAINTENANCE: "#f97316",
-        BONEPILE: "#0891b2"
+        BONEPILE: "#0891b2",
+        "RTV COMPLETED": "#e8795b"
     };
 
     const datasets = processes.map(process => ({
@@ -4602,7 +4791,7 @@ async function importExcel(){
                     return;
                 }
 
-                if(!["DEBUG", "MAINTENANCE", "BONEPILE"].includes(process)){
+                if(!["DEBUG", "MAINTENANCE", "BONEPILE", "RTV COMPLETED"].includes(process)){
                     skipped++;
                     issues.push(`Row ${index + 2}: unsupported Process "${process}"`);
                     return;
@@ -4829,6 +5018,40 @@ function clearRecordFilters(){
 
 
 /* =====================================================
+   RTV COMPLETED RECORDS
+===================================================== */
+
+function renderRTVCompleted(){
+
+    const body = document.getElementById("rtvCompletedBody");
+    const count = document.getElementById("rtvCompletedCount");
+    if(!body || !count) return;
+
+    const completedRows = rows.filter(row => row.process === "RTV COMPLETED");
+    count.textContent = `${completedRows.length} completed record${completedRows.length === 1 ? "" : "s"}`;
+    body.innerHTML = "";
+
+    completedRows.forEach(row => {
+        const tr = document.createElement("tr");
+        const classTag = row.defect_class === "Cosmetic" ? "tag-cosmetic" : "tag-eaoi";
+        tr.innerHTML = `
+            <td>${escapeHtml(row.component_sn || "")}</td>
+            <td>${escapeHtml(row.component_pn || "")}</td>
+            <td>${escapeHtml(row.defect || "")}</td>
+            <td><span class="badge ${classTag}">${escapeHtml(row.defect_class || "")}</span></td>
+            <td>${escapeHtml(displayOperator(row.operator_id))}</td>
+            <td>${formatDate(row.date_time)}</td>
+        `;
+        body.appendChild(tr);
+    });
+
+    if(!completedRows.length){
+        body.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:#65718f;">No RTV completed records found.</td></tr>`;
+    }
+}
+
+
+/* =====================================================
    RENDER RECORDS
 ===================================================== */
 
@@ -4854,7 +5077,9 @@ function renderRecords(){
                 ? "badge-debug"
                 : row.process === "BONEPILE"
                     ? "badge-bonepile"
-                    : "badge-maintenance";
+                    : row.process === "RTV COMPLETED"
+                        ? "badge-rtv"
+                        : "badge-maintenance";
 
 
         const classTag =
@@ -4980,6 +5205,8 @@ function renderRecords(){
         `;
 
     }
+
+    renderRTVCompleted();
 
 }
 
